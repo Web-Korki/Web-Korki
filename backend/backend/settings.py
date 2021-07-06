@@ -60,8 +60,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'backend',
-    'backend.accounts',
-    'backend.houses',
+    'accounts',
+    'houses',
     'multiselectfield'
 ]
 
