@@ -59,9 +59,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
 
-    'backend',
-    'accounts',
-    'houses',
+    'backend.backend',
+    'backend.accounts',
+    'backend.houses',
     'multiselectfield'
 ]
 
