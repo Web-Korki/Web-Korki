@@ -1,4 +1,4 @@
-release: python backend/manage.py makemigrations
-release: python backend/manage.py migrate
-web: python backend/manage.py collectstatic --noinput
-web: gunicorn backend.backend.wsgi --log-file -
+release: python manage.py makemigrations
+release: python manage.py migrate
+web: python manage.py collectstatic --noinput
+web: gunicorn backend.wsgi --log-file -
