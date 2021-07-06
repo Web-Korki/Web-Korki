@@ -5,6 +5,7 @@ cffi==1.14.5
 chardet==4.0.0
 cryptography==3.4.7
 defusedxml==0.7.1
+dj-database-url==0.5.0
 Django==3.2.5
 django-allauth==0.44.0
 django-bootstrap4==3.0.1
@@ -25,3 +26,11 @@ six==1.16.0
 soupsieve==2.2.1
 sqlparse==0.4.1
 urllib3==1.26.6
+
+pip~=20.2.3
+tornado~=6.1
+psycopg2~=2.8.6
+colorama~=0.4.4
+Jinja2~=2.11.2
+setuptools~=49.2.1
+Pygments~=2.7.2
