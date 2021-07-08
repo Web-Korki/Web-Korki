@@ -34,7 +34,8 @@ psycopg2~=2.8.6
 colorama~=0.4.4
 Jinja2~=2.11.2
 setuptools~=49.2.1
-Pygments~=2.7.2asgiref==3.4.1
+Pygments~=2.7.2
+asgiref==3.4.1
 beautifulsoup4==4.9.3
 certifi==2021.5.30
 cffi==1.14.5
