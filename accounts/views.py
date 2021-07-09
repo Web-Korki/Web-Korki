@@ -5,7 +5,6 @@ from .serializers import CustomUserListSerializer
 
 class CustomUserViewSet(viewsets.ModelViewSet):
 
-    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = CustomUserListSerializer
 
     def get_queryset(self):

@@ -5,7 +5,7 @@ from .serializers import HouseSerializer
 
 class HouseViewSet(viewsets.ModelViewSet):
 
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = HouseSerializer
 
     def get_queryset(self):
