@@ -10,7 +10,9 @@ export const UserMenu = () => {
                 <div className="row">
                     <div className="col-2 d-flex justify-content-center align-items-center menu-text">Menu</div>
                     <div className="col-7 d-flex justify-content-center align-items-center"></div>
-                    <div className="col-2 d-flex justify-content-center align-items-center"><StyledLogout>wyloguj się</StyledLogout></div>
+                    <div className="col-2 d-flex justify-content-center align-items-center"><NavLink to='/login_form'>
+                        <StyledLogout>wyloguj się</StyledLogout>
+                    </NavLink></div>
                 </div>
                 <div className="row buttons_wrapper">
                     <div className="col-md-6 d-flex justify-content-center align-items-center">
