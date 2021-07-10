@@ -9,8 +9,12 @@ body{
     font-family: 'Sen', sans-serif;
 }
 
+h1{
+    font-size: clamp(30px, 5vw, 42px);
+}
+
 /* UserMenu Start */
-.rootDiv{
+.userMenu{
     height: 100vh;
 }
 
@@ -27,3 +31,18 @@ body{
     margin-left: 15px;
 }
 /* UserMenu End */
+
+/* InactiveReplacement Start */
+.inactiveReplacementWrapper{
+    height: 100vh;
+}
+
+.inactiveReplacementInnerWrapper{
+    width: 650px;
+    height: 500px;
+}
+
+.sorryMessage{
+    color: #427E90; 
+}
+/* InactiveReplacement End */

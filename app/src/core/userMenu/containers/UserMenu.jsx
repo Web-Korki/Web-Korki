@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 export const UserMenu = () => {
     return (
         <>
-        <div className="rootDiv d-flex align-items-center justify-content-center">
+        <div className="userMenu d-flex align-items-center justify-content-center">
             <div className="wrapper">
                 <div className="row">
                     <div className="col-2 d-flex justify-content-center align-items-center menu-text">Menu</div>
