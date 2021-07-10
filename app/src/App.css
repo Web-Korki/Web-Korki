@@ -46,3 +46,18 @@ h1{
     color: #427E90; 
 }
 /* InactiveReplacement End */
+
+/* LectureAnalysis Start */
+.lectureAnalysisWrapper{
+    height: 100vh;
+}
+
+.lectureAnalysisInnerWrapper{
+    width: 800px;
+    height: 650px;
+}
+
+.lectureAnalysisTitle{
+    color: #427E90;
+}
+/* LectureAnalysis End */
