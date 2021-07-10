@@ -15,11 +15,15 @@ body{
 }
 
 .wrapper{
-    max-width: 500px;
+    max-width: 650px;
+    height: 500px;
+    flex-wrap: wrap;
+    color: #427E90;
 }
 
 .menu-text{
-    font-weight: 700;
+    font-weight: 400;
     font-size: 42px;
+    margin-left: 15px;
 }
 /* UserMenu End */
