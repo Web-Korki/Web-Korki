@@ -1,0 +1,1 @@
+export { default as StyledBoxLectureAnalysis } from './StyledBoxLectureAnalysis';
