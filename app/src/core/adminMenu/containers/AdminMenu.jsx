@@ -26,7 +26,7 @@ export const AdminMenu = () => {
               </NavLink>
             </div>
             <div className="col-auto p-0 d-flex justify-content-end">
-              <NavLink className="nav-link p-0" to="/classes_analysis">
+              <NavLink className="nav-link p-0" to="/lecture_analysis">
                 <StyledBox>Analiza - zajęcia</StyledBox>
               </NavLink>
             </div>
