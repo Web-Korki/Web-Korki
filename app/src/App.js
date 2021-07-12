@@ -8,6 +8,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { Route, Switch } from 'react-router';
 import { LectureAnalysis } from './core/lectureAnalysis/containers/LectureAnalysis';
+import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/VolunteerAnalysis';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login_form" component={LoginForm} />
           <Route path="/inactive_replacement" component={InactiveReplacement} />
           <Route path="/lecture_analysis" component={LectureAnalysis} />
+          <Route path="/volunteer_analysis" component={VolunteerAnalysis} />
         </Switch>
       </MainContainer>
     </>

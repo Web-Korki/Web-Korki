@@ -37,7 +37,7 @@ h1 {
   height: 100vh;
   margin: 15vh 0 0 0;
 }
-/* UserMenu End */
+/* AdminMenu End */
 
 /* InactiveReplacement Start */
 .inactiveReplacementWrapper {
@@ -68,3 +68,18 @@ h1 {
   color: #427e90;
 }
 /* LectureAnalysis End */
+
+/* VolunteerAnalysis Start */
+.volunteerAnalysisWrapper {
+  height: 100vh;
+}
+
+.volunteerAnalysisInnerWrapper {
+  width: 1024px;
+  height: 650px;
+}
+
+.volunteerAnalysisTitle {
+  color: #427e90;
+}
+/* VolunteerAnalysis End */
