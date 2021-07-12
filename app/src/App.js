@@ -15,7 +15,7 @@ function App() {
       <MainContainer>
         <Switch>
           <Route exact path="/UserMenu" component={UserMenu} />
-          <Route path="/AdminMenu" component={AdminMenu} />
+          <Route path="/admin_menu" component={AdminMenu} />
           <Route path="/login_form" component={LoginForm} />
           <Route path="/inactive_replacement" component={InactiveReplacement} />
           <Route path="/lecture_analysis" component={LectureAnalysis} />
