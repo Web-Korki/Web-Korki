@@ -1,5 +1,9 @@
 import React from 'react';
-import { StyledBox, StyledLogout } from '../styledComponents/index';
+import { StyledBox } from '../styledComponents/index';
+import {
+  StyledBlueButton,
+  StyledGreyButton,
+} from '../../sharedComponents/styledComponents';
 import { Link, NavLink } from 'react-router-dom';
 
 export const UserMenu = () => {
@@ -11,7 +15,7 @@ export const UserMenu = () => {
             <div className="col-md-auto menu-text">Menu</div>
             <div className="col-md d-flex align-items-center justify-content-end">
               <NavLink to="/login_form">
-                <StyledLogout>wyloguj się</StyledLogout>
+                <StyledGreyButton>wyloguj się</StyledGreyButton>
               </NavLink>
             </div>
           </div>

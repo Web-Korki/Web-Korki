@@ -1,4 +1,8 @@
-import { StyledBox, StyledLogout } from '../../userMenu/styledComponents/index';
+import { StyledBox } from '../../userMenu/styledComponents/index';
+import {
+  StyledBlueButton,
+  StyledGreyButton,
+} from '../../sharedComponents/styledComponents/index';
 import { NavLink } from 'react-router-dom';
 
 export const AdminMenu = () => {
@@ -10,7 +14,7 @@ export const AdminMenu = () => {
             <div className="col-md-auto menu-text">Panel administratora</div>
             <div className="col-md d-flex align-items-center justify-content-end">
               <NavLink to="/login_form">
-                <StyledLogout>wyloguj się</StyledLogout>
+                <StyledGreyButton>wyloguj się</StyledGreyButton>
               </NavLink>
             </div>
           </div>
