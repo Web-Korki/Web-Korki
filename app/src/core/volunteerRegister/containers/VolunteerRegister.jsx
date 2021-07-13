@@ -1,5 +1,6 @@
 import { StyledVolunteerRegister } from '../styledComponents/index';
-import { BackButton } from '../../backButton/containers/BackButton';
+import { BackButton } from '../../sharedComponents/containers/BackButton';
+import { StyledBlueButton } from '../../sharedComponents/styledComponents';
 
 export const VolunteerRegister = () => {
   return (
@@ -7,7 +8,7 @@ export const VolunteerRegister = () => {
       <div className="volunteerRegisterWrapper d-flex align-items-center justify-content-center">
         <div className="row">
           <div className="d-flex justify-content-center mb-5">
-            <BackButton></BackButton>
+            <BackButton />
             <div className="col-auto p-0 menu-text volunteerRegisterTitle justify-content-end">
               Zarejestruj korepetytora
             </div>

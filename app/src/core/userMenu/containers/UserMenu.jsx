@@ -1,9 +1,6 @@
 import React from 'react';
 import { StyledBox } from '../styledComponents/index';
-import {
-  StyledBlueButton,
-  StyledGreyButton,
-} from '../../sharedComponents/styledComponents';
+import { StyledGreyButton } from '../../sharedComponents/styledComponents';
 import { Link, NavLink } from 'react-router-dom';
 
 export const UserMenu = () => {

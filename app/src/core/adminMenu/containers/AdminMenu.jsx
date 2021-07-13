@@ -1,8 +1,5 @@
 import { StyledBox } from '../../userMenu/styledComponents/index';
-import {
-  StyledBlueButton,
-  StyledGreyButton,
-} from '../../sharedComponents/styledComponents/index';
+import { StyledGreyButton } from '../../sharedComponents/styledComponents/index';
 import { NavLink } from 'react-router-dom';
 
 export const AdminMenu = () => {
