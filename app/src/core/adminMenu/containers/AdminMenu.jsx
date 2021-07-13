@@ -1,5 +1,5 @@
 import { StyledBox, StyledLogout } from '../../userMenu/styledComponents/index';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const AdminMenu = () => {
   return (
