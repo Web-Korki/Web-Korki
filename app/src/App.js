@@ -9,6 +9,7 @@ import './App.css';
 import { Route, Switch } from 'react-router';
 import { LectureAnalysis } from './core/lectureAnalysis/containers/LectureAnalysis';
 import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/VolunteerAnalysis';
+import { VolunteerRegister } from './core/volunteerRegister/containers/VolunteerRegister';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/inactive_replacement" component={InactiveReplacement} />
           <Route path="/lecture_analysis" component={LectureAnalysis} />
           <Route path="/volunteer_analysis" component={VolunteerAnalysis} />
+          <Route path="/volunteer_register" component={VolunteerRegister} />
         </Switch>
       </MainContainer>
     </>

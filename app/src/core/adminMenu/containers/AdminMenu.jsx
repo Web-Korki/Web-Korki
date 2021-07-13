@@ -16,7 +16,7 @@ export const AdminMenu = () => {
           </div>
           <div className="row justify-content-center">
             <div className="col-auto p-0 d-flex justify-content-end">
-              <NavLink className="nav-link p-0" to="/tutor_register">
+              <NavLink className="nav-link p-0" to="/volunteer_register">
                 <StyledBox>Zarejestruj korepetytora</StyledBox>
               </NavLink>
             </div>
