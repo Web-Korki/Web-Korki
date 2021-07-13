@@ -1,14 +1,14 @@
 import React from 'react';
-import { StyledBoxLectureAnalysis } from '../styledComponents/index';
+import { StyledBoxLectureAnalysis } from '../../lectureAnalysis/styledComponents/index';
 
-export const LectureAnalysis = () => {
+export const VolunteerAnalysis = () => {
   return (
     <>
-      <div className="lectureAnalysisWrapper d-flex align-items-center justify-content-center">
-        <div className="lectureAnalysisInnerWrapper">
+      <div className="volunteerAnalysisWrapper d-flex align-items-center justify-content-center">
+        <div className="volunteerAnalysisInnerWrapper">
           <div className="row">
-            <div className="lectureAnalysisTitle text-center col-12">
-              <h1>Analiza - zajęcia</h1>
+            <div className="volunteerAnalysisTitle text-center col-12">
+              <h1>Analiza - wolontariusze</h1>
             </div>
           </div>
           <div className="row mt-5">
