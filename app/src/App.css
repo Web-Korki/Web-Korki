@@ -1,64 +1,86 @@
 @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
 
-html{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-    background-color: #DFF2FB;
-    font-family: 'Sen', sans-serif;
+body {
+  background-color: #dff2fb;
+  font-family: 'Sen', sans-serif;
 }
 
-h1{
-    font-size: clamp(30px, 5vw, 42px);
+h1 {
+  font-size: clamp(30px, 5vw, 42px);
 }
 
 /* UserMenu Start */
-.userMenu{
-    height: 100vh;
-    margin: 15vh 0 0 0;
+.userMenu {
+  height: 100vh;
+  margin: 15vh 0 0 0;
 }
 
-.wrapper{
-    max-width: 650px;
-    height: 500px;
-    flex-wrap: wrap;
-    color: #427E90;
+.wrapper {
+  max-width: 800px;
+  height: 500px;
+  flex-wrap: wrap;
+  color: #427e90;
 }
 
-.menu-text{
-    font-weight: 400;
-    font-size: 42px;
-    margin-left: 15px;
+.menu-text {
+  font-weight: 400;
+  font-size: 42px;
+  margin-left: 15px;
 }
 /* UserMenu End */
 
+/* AdminMenu Start */
+.adminMenu {
+  height: 100vh;
+  margin: 15vh 0 0 0;
+}
+/* AdminMenu End */
+
 /* InactiveReplacement Start */
-.inactiveReplacementWrapper{
-    height: 100vh;
+.inactiveReplacementWrapper {
+  height: 100vh;
 }
 
-.inactiveReplacementInnerWrapper{
-    width: 650px;
-    height: 500px;
+.inactiveReplacementInnerWrapper {
+  width: 650px;
+  height: 500px;
 }
 
-.sorryMessage{
-    color: #427E90; 
+.sorryMessage {
+  color: #427e90;
 }
 /* InactiveReplacement End */
 
 /* LectureAnalysis Start */
-.lectureAnalysisWrapper{
-    height: 100vh;
+.lectureAnalysisWrapper {
+  height: 100vh;
 }
 
-.lectureAnalysisInnerWrapper{
-    width: 800px;
-    height: 650px;
+.lectureAnalysisInnerWrapper {
+  width: 1024px;
+  height: 650px;
 }
 
-.lectureAnalysisTitle{
-    color: #427E90;
+.lectureAnalysisTitle {
+  color: #427e90;
 }
 /* LectureAnalysis End */
+
+/* VolunteerAnalysis Start */
+.volunteerAnalysisWrapper {
+  height: 100vh;
+}
+
+.volunteerAnalysisInnerWrapper {
+  width: 1024px;
+  height: 650px;
+}
+
+.volunteerAnalysisTitle {
+  color: #427e90;
+}
+/* VolunteerAnalysis End */
