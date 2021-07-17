@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledLogout = styled.button`
+const StyledGreyButton = styled.button`
   min-width: 150px;
   background: #fbfcfd;
   border: 1px solid #ebeff1;
@@ -15,4 +15,4 @@ const StyledLogout = styled.button`
   }
 `;
 
-export default StyledLogout;
+export default StyledGreyButton;
