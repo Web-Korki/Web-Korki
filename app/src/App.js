@@ -9,18 +9,22 @@ import './App.css';
 import { Route, Switch } from 'react-router';
 import { LectureAnalysis } from './core/lectureAnalysis/containers/LectureAnalysis';
 import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/VolunteerAnalysis';
+import { Whoops404 } from './core/Whoops404/containers/Whoops404'
+import { Home } from './core/Home/containers/Home';
 
 function App() {
   return (
     <>
       <MainContainer>
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route exact path="/UserMenu" component={UserMenu} />
-          <Route path="/admin_menu" component={AdminMenu} />
-          <Route path="/login_form" component={LoginForm} />
-          <Route path="/inactive_replacement" component={InactiveReplacement} />
-          <Route path="/lecture_analysis" component={LectureAnalysis} />
-          <Route path="/volunteer_analysis" component={VolunteerAnalysis} />
+          <Route exact path="/admin_menu" component={AdminMenu} />
+          <Route exact path="/login_form" component={LoginForm} />
+          <Route exact path="/inactive_replacement" component={InactiveReplacement} />
+          <Route exact path="/lecture_analysis" component={LectureAnalysis} />
+          <Route exact path="/volunteer_analysis" component={VolunteerAnalysis} />
+          <Route path="*" component={Whoops404}/>
         </Switch>
       </MainContainer>
     </>
