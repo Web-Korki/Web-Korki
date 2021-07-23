@@ -29,8 +29,26 @@ export function Whoops404() {
 				<div className='page page-left page-left-bottom-nine'></div>
 				<div className='page page-left page-left-bottom-ten'></div>
 
-				<div className='page page-right-top'></div>
-				<div className='page page-right-middle'></div>
+				<div className='page page-right-top'>
+					<div className='page scrap scrap-1'></div>
+				</div>
+				<div className='page page-right-middle'>
+					<div className='page scrap scrap-2'></div>
+					<div className='page scrap scrap-3'></div>
+					<div className='page scrap scrap-4'></div>
+					<div className='page scrap scrap-5'></div>
+					<div className='page scrap scrap-6'></div>
+					<div className='page scrap scrap-7'></div>
+					<div className='page scrap scrap-8'></div>
+					<div className='page scrap scrap-9'></div>
+					<div className='page scrap scrap-10'></div>
+					<div className='page scrap scrap-11'></div>
+					<div className='page scrap scrap-12'></div>
+					<div className='page scrap scrap-13'></div>
+					<div className='page scrap scrap-14'></div>
+					<div className='page scrap scrap-15'></div>
+					<div className='page scrap scrap-16'></div>
+				</div>
 				<div className='page page-right page-right-bottom'></div>
 				<div className='page page-right page-right-bottom-two'></div>
 				<div className='page page-right page-right-bottom-three'></div>
@@ -42,7 +60,7 @@ export function Whoops404() {
 				<div className='page page-right page-right-bottom-nine'></div>
 				<div className='page page-right page-right-bottom-ten'></div>
 			</StyledBook>
-			<p>The content you are looking for does not exist</p>
+			<p>We can't find the page you are looking for :/</p>
 			<StyledGoBack onClick={() => goBack()}>Go back</StyledGoBack>
 		</div>
 	);
