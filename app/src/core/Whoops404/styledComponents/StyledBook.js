@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+// scaling: https://css-tricks.com/scaled-proportional-blocks-with-css-and-javascript/
+
 const StyledBook = styled.div`
 	background-color: transparent;
 	width: 500px;
