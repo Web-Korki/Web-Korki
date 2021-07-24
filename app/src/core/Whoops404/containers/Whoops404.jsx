@@ -12,10 +12,10 @@ export function Whoops404() {
 
 	return (
 		<div
-			className='d-flex justify-content-center align-items-center flex-column'
+			className='d-flex justify-content-center align-items-center flex-column scalable-wrapper'
 			style={{ height: '100vh' }}>
 			<h1>Sorry</h1>
-			<StyledBook>
+			<StyledBook className='book-container'>
 				<div className='page page-left-top'></div>
 				<div className='page page-left-middle'></div>
 				<div className='page page-left page-left-bottom'></div>

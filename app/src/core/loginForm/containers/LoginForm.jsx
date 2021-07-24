@@ -3,38 +3,24 @@ import content from '../../constans/loginFormIndex';
 import { useForm } from 'react-hook-form';
 
 export const LoginForm = () => {
-	const { register, handleSubmit, errors } = useForm('');
-
-	const onSubmit = (data) => console.log(data);
-
 	return (
 		<div
 			className='d-flex justify-content-center align-items-center flex-column'
 			style={{ height: '100vh' }}>
-			<h1 className='mb-5'>Sign In</h1>
-			<form onSubmit={() => handleSubmit(onSubmit)}>
-				{content.inputs.map((input, key) => {
-					return (
-						<div key={key}>
-							<p>
-								<label className='login-label'>{input.label}</label>
-							</p>
-							<p>
-								<input
-									className='login-input'
-									name={input.name}
-									type={input.type}
-									ref={register}
-									placeholder={input.placeholder}
-								/>
-							</p>
-						</div>
-					);
-				})}
-				<button className='login-btn' type='submit'>
-					submit
+			<div className='login-wrapper d-flex justify-content-center flex-column'>
+				<h1 className='align-self-center'>Login</h1>
+				<label htmlFor='username'>Username</label>
+				<input type='text' name='username' placeholder='username' />
+				<label htmlFor='password'>Password</label>
+				<input
+					type='password'
+					name='password'
+					placeholder='enter your password'
+				/>
+				<button type='submit' className='mt-2'>
+					Log in
 				</button>
-			</form>
+			</div>
 		</div>
 	);
 };

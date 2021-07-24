@@ -29,7 +29,7 @@ const StyledBook = styled.div`
 		height: 0;
 	}
 	.scrap-1 {
-		top: 22.5px;
+		top: 24px;
 		border-top: 20px solid transparent;
 		border-bottom: 20px solid transparent;
 		border-left: 20px solid black;
@@ -39,7 +39,7 @@ const StyledBook = styled.div`
 		top: -10px;
 		border-top: 15px solid transparent;
 		border-bottom: 25px solid transparent;
-		border-left: 30px solid black;
+		border-left: 28px solid black;
 		border-right: 10px solid transparent;
 	}
 	.scrap-3 {
