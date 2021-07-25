@@ -17,7 +17,9 @@ export const LoginForm = () => {
 				<h1 className='mt-5'>Logowanie do platformy</h1>
 				<StyledInput type='text' placeholder='login' className='mt-5 mb-4' />
 				<StyledInput type='password' placeholder='hasło' />
-				<StyledSubmitButton className='mt-4'>zaloguj się</StyledSubmitButton>
+				<StyledSubmitButton type='submit' className='mt-4'>
+					zaloguj się
+				</StyledSubmitButton>
 			</StyledLoginBox>
 		</div>
 	);

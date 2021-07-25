@@ -20,6 +20,11 @@ const StyledInput = styled.input`
 	&::-ms-input-placeholder {
 		color: #eeeeee;
 	}
+
+	&:focus {
+		outline: none;
+		box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.3);
+	}
 `;
 
 export default StyledInput;
