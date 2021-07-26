@@ -8,5 +8,9 @@ const StyledGoBack = styled.button`
 	width: 309px;
 	height: 50px;
 	font-size: clamp(20px, 2.5vw, 25px);
+
+	&:hover {
+		background-color: #f2f2f2;
+	}
 `;
 export default StyledGoBack;
