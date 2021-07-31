@@ -84,3 +84,14 @@ h1 {
   color: #427e90;
 }
 /* VolunteerAnalysis End */
+
+/* VolunteerRegister Start */
+.volunteerRegisterWrapper {
+  height: 100vh;
+  min-width: 650px;
+}
+
+.volunteerRegisterTitle {
+  color: #427e90;
+}
+/* VolunteerRegister End */
