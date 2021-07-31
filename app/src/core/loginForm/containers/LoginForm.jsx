@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { StyledLoginBox, StyledInput } from '../styledComponents/index';
 
-import { StyledBlueButton } from '../../sharedComponents/index';
+import { StyledBlueButton } from '../../sharedComponents/styledComponents';
 
 export const LoginForm = () => {
 	return (
