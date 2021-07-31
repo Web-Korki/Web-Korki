@@ -95,14 +95,13 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASE_URL = os.environ['DATABASE_URL']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nujgoizadmin',
-        'USER': 'nujgoizadmin',
-        'PASSWORD': 'SokRiviva23',
-        'HOST': 'nujgoizadmin.mysql.db',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ['DB_HOST'],
     }
 }
 
@@ -186,4 +185,4 @@ CORS_ORIGIN_WHITELIST = [
     'http://nujgoiz.cluster024.hosting.ovh.net'
 ]
 
-APPEND_SLASH=False
+APPEND_SLASH = False
