@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { StyledLoginBox, StyledInput } from '../styledComponents/index';
 
-import { StyledBlueBtn } from '../../ReusableComponents/index';
+import { StyledBlueButton } from '../../sharedComponents/index';
 
 export const LoginForm = () => {
 	return (
@@ -13,9 +13,9 @@ export const LoginForm = () => {
 				<h1 className='mt-md-5'>Logowanie do platformy</h1>
 				<StyledInput type='text' placeholder='login' className='mt-md-5 mb-4' />
 				<StyledInput type='password' placeholder='hasło' />
-				<StyledBlueBtn type='submit' className='mt-4'>
+				<StyledBlueButton type='submit' className='mt-4'>
 					zaloguj się
-				</StyledBlueBtn>
+				</StyledBlueButton>
 			</StyledLoginBox>
 		</div>
 	);

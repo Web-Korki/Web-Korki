@@ -85,6 +85,7 @@ h1 {
 }
 /* VolunteerAnalysis End */
 
+<<<<<<< HEAD
 .loginForm{
   height: 100vh;
 }
@@ -96,3 +97,15 @@ h1 {
 .Whoops404{
   height: 100vh;
 }
+=======
+/* VolunteerRegister Start */
+.volunteerRegisterWrapper {
+  height: 100vh;
+  min-width: 650px;
+}
+
+.volunteerRegisterTitle {
+  color: #427e90;
+}
+/* VolunteerRegister End */
+>>>>>>> master
