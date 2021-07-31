@@ -19,7 +19,21 @@ app/build
 .env.test.local
 .env.production.local
 db.sqlite3
+.idea
+.bash_history
+.platform.app.yaml
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#caching
+**/__pychache__
+*.pyc
+
+#migrations
+**/migrations
+
+#staticfiles
+myapp/staticfiles
+
