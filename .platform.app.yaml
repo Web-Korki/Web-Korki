@@ -1,0 +1,30 @@
+name: web-korki
+type: python:3.9
+
+web:
+  commands:
+    start: "gunicorn -b $PORT backend.wsgi:backend"
+  locations:
+    "/":
+      root: ""
+      passthru: true
+      allow: false
+    "/static":
+      root: "static/"
+      allow: true
+
+hooks:
+  build: |
+    pip install -r requirements.txt
+    pip install -e .
+    pip install gunicorn
+
+mounts:
+   tmp:
+       source: local
+       source_path: tmp
+   logs:
+       source: local
+       source_path: logs
+
+disk: 512
