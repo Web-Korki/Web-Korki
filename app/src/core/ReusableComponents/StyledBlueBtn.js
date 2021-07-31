@@ -9,8 +9,10 @@ const StyledBlueBtn = styled.button`
 	border-radius: 28px;
 	color: #427e90;
 
-	&:hover {
-		background: #c2eafc;
+	@media (hover: hover) {
+		&:hover {
+			background: #c2eafc;
+		}
 	}
 `;
 
