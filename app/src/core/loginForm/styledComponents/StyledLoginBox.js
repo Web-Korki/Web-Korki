@@ -8,6 +8,18 @@ const StyledLoginBox = styled.div`
 	background: #fbfcfd;
 	border-radius: 10px;
 	color: #427e90;
+
+	@media (max-width: 767px) {
+		width: 95vw;
+		height: 50vh;
+		padding-bottom: 20px;
+
+		h1 {
+			margin-top: 20px;
+			text-align: center;
+			width: 200px;
+		}
+	}
 `;
 
 export default StyledLoginBox;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledSubmitButton = styled.button`
+const StyledBlueBtn = styled.button`
 	width: 309px;
 	height: 50px;
 	background: #dff2fb;
@@ -14,4 +14,4 @@ const StyledSubmitButton = styled.button`
 	}
 `;
 
-export default StyledSubmitButton;
+export default StyledBlueBtn;

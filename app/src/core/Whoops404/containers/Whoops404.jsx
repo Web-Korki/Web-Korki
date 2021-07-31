@@ -11,9 +11,7 @@ export function Whoops404() {
 	};
 
 	return (
-		<div
-			className='d-flex justify-content-center align-items-center flex-column scalable-wrapper'
-			style={{ height: '100vh' }}>
+		<div className='d-flex justify-content-center align-items-center flex-column scalable-wrapper Whoops404'>
 			<h1>Sorry</h1>
 			<BookImage />
 			<p>We can't find the page you are looking for :/</p>
