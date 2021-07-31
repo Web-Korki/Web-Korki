@@ -1,0 +1,40 @@
+.Main{
+    width: 50vw;
+    max-height: 50vh;
+}
+.svgImage{
+    width: 100%;
+    height: 100%;
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    stroke-linejoin: round;
+    stroke-miterlimit: 2;
+}
+
+.firstPath{
+    fill:#fbfcfd;
+}
+
+.secondPath{
+    fill:#c2b280;
+}
+
+.thirdPath{
+    fill:#808080;
+}
+
+.fourthPath{
+    fill:#fbfcfd;
+}
+
+.fifthPath{
+    fill:#c2b280;
+}
+
+.sixthPath{
+    fill:#808080;
+}
+
+.seventhPath{
+    fill:#fafbfc;
+}

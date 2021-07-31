@@ -9,6 +9,8 @@ import './App.css';
 import { Route, Switch } from 'react-router';
 import { LectureAnalysis } from './core/lectureAnalysis/containers/LectureAnalysis';
 import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/VolunteerAnalysis';
+import { Whoops404 } from './core/Whoops404/containers/Whoops404'
+import { Home } from './core/Home/containers/Home';
 import { VolunteerRegister } from './core/volunteerRegister/containers/VolunteerRegister';
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
     <>
       <MainContainer>
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route exact path="/UserMenu" component={UserMenu} />
           <Route path="/admin_menu" component={AdminMenu} />
           <Route path="/login_form" component={LoginForm} />
