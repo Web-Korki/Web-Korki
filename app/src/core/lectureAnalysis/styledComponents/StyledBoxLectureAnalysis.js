@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const StyledBoxLectureAnalysis = styled.button`
-	padding: 40px;
+	/* padding: 40px; */
 	box-sizing: border-box;
 	min-width: 240px;
 	min-height: 120px;
-	font-size: 24px;
+	font-size: clamp(15px, 24px, 4vw);
 	line-height: 29px;
 	margin: 10px;
 	background: #fbfcfd;
@@ -24,6 +24,11 @@ const StyledBoxLectureAnalysis = styled.button`
 		min-width: 45vw;
 		align-content: center;
 		justify-content: center;
+	}
+
+	@media (max-width: 576px) {
+		width: 168px;
+		height: 50px;
 	}
 `;
 
