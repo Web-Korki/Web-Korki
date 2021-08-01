@@ -29,8 +29,10 @@ DEBUG = False
 
 if 'DEVELOP_DEBUG' in os.environ:
     DEBUG = True
+else:
+    WSGI_APPLICATION = 'myapp.wsgi.application'
 
-ALLOWED_HOSTS = ['nujgoiz.cluster024.hosting.ovh.net']
+ALLOWED_HOSTS = ["127.0.0.1", 'nujgoiz.cluster024.hosting.ovh.net']
 
 
 # Application definition
@@ -89,21 +91,30 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'myapp.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': os.environ['DB_HOST'],
+if 'DEVELOP_DEBUG' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['DB_NAME'],
+            'USER': os.environ['DB_USER'],
+            'PASSWORD': os.environ['DB_PASSWORD'],
+            'HOST': os.environ['DB_HOST'],
+        }
+    }
+
+
 
 
 # Password validation
@@ -184,5 +195,4 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:3000',
     'http://nujgoiz.cluster024.hosting.ovh.net'
 ]
-
-APPEND_SLASH = False
+#APPEND_SLASH=False
