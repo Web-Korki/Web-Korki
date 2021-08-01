@@ -63,6 +63,7 @@ h1 {
 .lectureAnalysisInnerWrapper {
   width: 1024px;
   height: 650px;
+  margin: 0 auto;
 }
 
 .lectureAnalysisTitle {
