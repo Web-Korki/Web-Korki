@@ -1,0 +1,25 @@
+.logout-lg{
+    display: block;
+}
+
+.logout-sm{
+    display: none;
+}
+
+@media (max-width: 414px){
+    .menu-text p{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .logout-lg{
+        display: none;
+    }
+    .logout-sm{
+        display: block;
+        position: absolute;
+        bottom: -50px;
+        right: 10px;
+    }
+}
