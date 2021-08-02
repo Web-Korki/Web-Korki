@@ -20,7 +20,7 @@ h1 {
 }
 
 .wrapper {
-  max-width: 800px;
+  width: 800px;
   height: 500px;
   flex-wrap: wrap;
   color: #427e90;
@@ -63,6 +63,7 @@ h1 {
 .lectureAnalysisInnerWrapper {
   width: 1024px;
   height: 650px;
+  margin: 0 auto;
 }
 
 .lectureAnalysisTitle {
