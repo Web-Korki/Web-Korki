@@ -5,7 +5,7 @@ from .serializers import LessonSerializer
 
 class LessonViewSet(viewsets.ModelViewSet):
 
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = LessonSerializer
 
     def get_queryset(self):
