@@ -15,7 +15,9 @@ export const VolunteerRegister = () => {
           </div>
           <div className="d-flex justify-content-center">
             <div>
-              <StyledVolunteerRegister></StyledVolunteerRegister>
+              <StyledVolunteerRegister>
+                <StyledBlueButton>zarejestruj</StyledBlueButton>
+              </StyledVolunteerRegister>
             </div>
           </div>
         </div>
