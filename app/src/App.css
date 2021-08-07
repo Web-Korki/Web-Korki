@@ -13,6 +13,12 @@ h1 {
   font-size: clamp(25px, 5vw, 42px);
 }
 
+.title {
+  color: #427e90;
+  font-weight: 400;
+  font-size: 42px;
+}
+
 /* UserMenu Start */
 .userMenu {
   height: 100vh;
@@ -75,35 +81,25 @@ h1 {
 .volunteerAnalysisWrapper {
   height: 100vh;
 }
-
-.volunteerAnalysisInnerWrapper {
-  width: 1024px;
-  height: 650px;
-}
-
-.volunteerAnalysisTitle {
-  color: #427e90;
-}
 /* VolunteerAnalysis End */
 
-.loginForm{
+.loginForm {
   height: 100vh;
 }
 
-.Home{
+.Home {
   height: 100vh;
 }
 
-.Whoops404{
+.Whoops404 {
   height: 100vh;
 }
 /* VolunteerRegister Start */
 .volunteerRegisterWrapper {
   height: 100vh;
-  min-width: 650px;
-}
-
-.volunteerRegisterTitle {
-  color: #427e90;
 }
 /* VolunteerRegister End */
+
+.grid-gap {
+  grid-gap: 20px;
+}

@@ -1,53 +1,45 @@
 import React from 'react';
-import { StyledBoxLectureAnalysis } from '../../lectureAnalysis/styledComponents/index';
+import { StyledBoxMonths } from '../../sharedComponents/styledComponents/index';
 
 export const VolunteerAnalysis = () => {
   return (
     <>
       <div className="volunteerAnalysisWrapper d-flex align-items-center justify-content-center">
-        <div className="volunteerAnalysisInnerWrapper">
-          <div className="row">
-            <div className="volunteerAnalysisTitle text-center col-12">
-              <h1>Analiza - wolontariusze</h1>
-            </div>
+        <div className="container">
+          <div className="d-flex justify-content-center align-items-center mb-5">
+            <h1 className="title">Analiza - wolontariusze</h1>
           </div>
-          <div className="row mt-5">
+          <div className="row row-cols-4 justify-content-center">
             <div className="col p-0">
-              <StyledBoxLectureAnalysis>Wrzesień</StyledBoxLectureAnalysis>
+              <StyledBoxMonths>Wrzesień</StyledBoxMonths>
             </div>
             <div className="col p-0">
-              <StyledBoxLectureAnalysis>Październik</StyledBoxLectureAnalysis>
+              <StyledBoxMonths>Październik</StyledBoxMonths>
             </div>
             <div className="col p-0">
-              <StyledBoxLectureAnalysis>Listopad</StyledBoxLectureAnalysis>
+              <StyledBoxMonths>Listopad</StyledBoxMonths>
             </div>
             <div className="col p-0">
-              <StyledBoxLectureAnalysis>Grudzień</StyledBoxLectureAnalysis>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col p-0">
-              <StyledBoxLectureAnalysis>Styczeń</StyledBoxLectureAnalysis>
+              <StyledBoxMonths>Grudzień</StyledBoxMonths>
             </div>
             <div className="col p-0">
-              <StyledBoxLectureAnalysis>Luty</StyledBoxLectureAnalysis>
+              <StyledBoxMonths>Styczeń</StyledBoxMonths>
             </div>
             <div className="col p-0">
-              <StyledBoxLectureAnalysis>Marzec</StyledBoxLectureAnalysis>
+              <StyledBoxMonths>Luty</StyledBoxMonths>
             </div>
             <div className="col p-0">
-              <StyledBoxLectureAnalysis>Kwiecień</StyledBoxLectureAnalysis>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col"></div>
-            <div className="col p-0">
-              <StyledBoxLectureAnalysis>Maj</StyledBoxLectureAnalysis>
+              <StyledBoxMonths>Marzec</StyledBoxMonths>
             </div>
             <div className="col p-0">
-              <StyledBoxLectureAnalysis>Czerwiec</StyledBoxLectureAnalysis>
+              <StyledBoxMonths>Kwiecień</StyledBoxMonths>
             </div>
-            <div className="col"></div>
+            <div className="col p-0">
+              <StyledBoxMonths>Maj</StyledBoxMonths>
+            </div>
+            <div className="col p-0">
+              <StyledBoxMonths>Czerwiec</StyledBoxMonths>
+            </div>
           </div>
         </div>
       </div>
