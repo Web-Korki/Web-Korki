@@ -1,35 +1,25 @@
-from rest_framework import status, permissions, viewsets
-from rest_framework.decorators import action
+from rest_framework import status, permissions
+from rest_framework.views import APIView, Response, ViewSet
+from rest_framework.generics import (
+    RetrieveUpdateDestroyAPIView,
+    ListAPIView,
+    CreateAPIView,
+)
 from .models import CustomUser
-from .serializers import CustomUserListSerializer
+from .serializers import CustomUserSerializer, CustomUserListSerializer
 
-class CustomUserViewSet(viewsets.ModelViewSet):
 
-    serializer_class = CustomUserListSerializer
-
-    def get_queryset(self):
-        return CustomUser.objects.all()
-
-    @action(detail=True, url_path=r'users/?P<user_id>.*/$', url_name='user-detail')
-    def get_user(self, request, user_id=None):
-        return CustomUser.objects.filter(id=user_id)
-
-# class CustomUserCreate(APIView):
-#     permission_classes = (permissions.AllowAny,)
+# class CustomUserView(RetrieveUpdateDestroyAPIView):
+#     permission_classes = (permissions.IsAuthenticated,)
 #
-#     def post(self, request):
-#         serializer = CustomUserSerializer(data=request.data)
-#         if serializer.is_valid():
-#             user = serializer.save()
-#             if user:
-#                 json = serializer.data
-#                 return Response(json, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def get(self, request, *args):
+#         user = CustomUser.objects.get(id=args)
+#         serializer = CustomUserSerializer(user)
+#         json = serializer.data
+#         return Response(json, status=status.HTTP_200_OK)
 #
-# class CustomUserUpdate(APIView):
-#
-#     def update(self, request, pk):
-#         user = CustomUser.objects.get(id=pk)
+#     def update(self, request, *args):
+#         user = CustomUser.objects.get(id=args)
 #         serializer = CustomUserSerializer(instance=user, data=request.data)
 #         if serializer.is_valid():
 #             user = serializer.save()
@@ -38,10 +28,34 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 #                 return Response(json, status=status.HTTP_200_OK)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #
-# class CustomUserDelete(APIView):
+#     def delete(self, request, *args):
+#         user = CustomUser.objects.get(id=args)
+#         serializer = CustomUserSerializer(instance=user, data=request.data)
+#         if serializer.is_valid():
+#             user.delete()
+#             return Response("User deleted", status=status.HTTP_200_OK)
+#         else:
+#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #
-#     def delete(self, request, pk):
-#         user = CustomUser.objects.get(id=pk)
-#         user.delete()
-#         return Response("Deleted")
-
+#
+# class CustomUserList(ListAPIView):
+#     permission_classes = (permissions.IsAuthenticated,)
+#
+#     def get(self, request, *args):
+#         users_list = CustomUser.objects.all()
+#         serializer = CustomUserListSerializer(users_list, many=True)
+#         json = serializer.data
+#         return Response(json)
+#
+#
+# class CustomUserCreate(CreateAPIView):
+#     permission_classes = (permissions.AllowAny,)
+#
+#     def post(self, request, *args):
+#         serializer = CustomUserSerializer(data=request.data)
+#         if serializer.is_valid():
+#             user = serializer.save()
+#             if user:
+#                 json = serializer.data
+#                 return Response(json, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

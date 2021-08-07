@@ -28,9 +28,18 @@ LEVEL_CHOICES = (
     ("5tech", "1. klasa tech"),
 )
 
+CANCEL_REASONS = (
+    ("cancel_house", "Odwołano przez dom dziecka"),
+    ("cancel_project", "Odwołano przez projekt/nauczyciela"),
+)
+
 # Create your models here.
+
+
 class Lesson(models.Model):
-    teacher = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='teacher')
+    teacher = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name="teacher", null=True, blank=True
+    )
     house = models.ForeignKey(House, on_delete=models.CASCADE)
     student_level = MultiSelectField(choices=LEVEL_CHOICES)
     date = models.DateField()
@@ -38,11 +47,18 @@ class Lesson(models.Model):
     subject = MultiSelectField(choices=SUBJECT_CHOICES)
     last_topics = models.TextField(max_length=300, null=True, blank=True)
     planned_topics = models.TextField(max_length=300, null=True, blank=True)
-    need_substitution = models.BooleanField(null=True, blank=True)
-    substitute_teacher = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True,
-                                           related_name='substitute_teacher')
+    is_canceled = models.BooleanField(null=True, blank=True)
+    cancel_reason = MultiSelectField(null=True, blank=True, choices=CANCEL_REASONS)
+    substitution = models.ForeignKey(
+        "models.Lesson", null=True, blank=True, on_delete=models.CASCADE
+    )
 
     def __str__(self):
-        return "Lekcja dn., " + str(self.date.strftime("%d.%m.%Y") + " " + "godz. " + str(self.time.strftime("%H:%M"))
-                                    + " w " + self.house.name)
-
+        return "Lekcja dn., " + str(
+            self.date.strftime("%d.%m.%Y")
+            + " "
+            + "godz. "
+            + str(self.time.strftime("%H:%M"))
+            + " w "
+            + self.house.name
+        )
