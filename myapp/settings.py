@@ -54,9 +54,7 @@ INSTALLED_APPS = [
 
     #Local apps
     'myapp',
-    'accounts',
-    'houses',
-    'lessons'
+    'backend'
 ]
 
 MIDDLEWARE = [
@@ -165,7 +163,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID=1
 
 # Custom user model
-AUTH_USER_MODEL = "accounts.CustomUser"
+AUTH_USER_MODEL = "backend.CustomUser"
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
