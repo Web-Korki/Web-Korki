@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
-const StyledBoxMonths = styled.button`
+const StyledBox = styled.button`
+  padding: 42px;
   box-sizing: border-box;
-  width: clamp(100%, 40vw, 240px);
-  height: min(120px, 15vw);
-  font-size: clamp(15px, 24px, 4vw);
-  line-height: 29px;
+  width: 100%;
+  min-height: 120px;
+  font-size: clamp(24px, 5vw, 36px);
+  line-height: 51px;
   background: #fbfcfd;
   border: 2px solid #ebf3f8;
   box-shadow: 4px 4px 15px 4px rgba(7, 93, 172, 0.1);
@@ -18,4 +19,4 @@ const StyledBoxMonths = styled.button`
     }
   }
 `;
-export default StyledBoxMonths;
+export default StyledBox;

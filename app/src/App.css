@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -6,7 +6,7 @@ html {
 
 body {
   background-color: #dff2fb;
-  font-family: 'Sen', sans-serif;
+  font-family: "Sen", sans-serif;
 }
 
 h1 {
@@ -16,13 +16,14 @@ h1 {
 .title {
   color: #427e90;
   font-weight: 400;
-  font-size: 42px;
+  font-size: clamp(24px, 5vw, 42px);
+  margin: 0;
 }
 
 /* UserMenu Start */
 .userMenu {
   height: 100vh;
-  margin: 15vh 0 0 0;
+  margin: 15vh 0;
 }
 
 .wrapper {
@@ -42,7 +43,7 @@ h1 {
 /* AdminMenu Start */
 .adminMenu {
   height: 100vh;
-  margin: 15vh 0 0 0;
+  margin: 15vh 0;
 }
 /* AdminMenu End */
 
@@ -99,7 +100,3 @@ h1 {
   height: 100vh;
 }
 /* VolunteerRegister End */
-
-.grid-gap {
-  grid-gap: 20px;
-}

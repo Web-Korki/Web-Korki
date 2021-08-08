@@ -1,6 +1,6 @@
-import { StyledVolunteerRegister } from '../styledComponents/index';
-import { BackButton } from '../../sharedComponents/containers/BackButton';
-import { StyledBlueButton } from '../../sharedComponents/styledComponents';
+import { StyledVolunteerRegister } from "../styledComponents/index";
+import { BackButton } from "../../sharedComponents/containers/BackButton";
+import { StyledBlueButton } from "../../sharedComponents/styledComponents";
 
 export const VolunteerRegister = () => {
   return (
@@ -9,7 +9,7 @@ export const VolunteerRegister = () => {
         <div className="row justify-content-center">
           <div className="d-flex justify-content-center mb-5">
             <BackButton />
-            <div className="col-auto p-0 title justify-content-end">
+            <div className="col-auto ml-2 p-0 title justify-content-end">
               Zarejestruj korepetytora
             </div>
           </div>
