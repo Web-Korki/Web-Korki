@@ -41,7 +41,7 @@ export const AdminMenu = () => {
               </NavLink>
             </div>
             <div className="col-12 col-lg-auto p-lg-2 p-1">
-              <NavLink to="/inactive_replacement">
+              <NavLink to="/active_replacements">
                 <StyledBox>Aktywne zastępstwa</StyledBox>
               </NavLink>
             </div>
