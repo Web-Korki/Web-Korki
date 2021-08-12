@@ -5,7 +5,7 @@ from .serializers import *
 from .notifications import *
 
 
-class CustomUserViewSet(viewsets.ModelViewSet):
+class TeacherViewSet(viewsets.ModelViewSet):
 
     serializer_class = TeacherListSerializer
     http_method_names = ["put", "patch", "delete"]
