@@ -197,7 +197,7 @@ CORS_ORIGIN_WHITELIST = [
 #APPEND_SLASH=False
 
 # Emails
-EMAIL_HOST = 'ssl0.ovh.net'
+EMAIL_HOST = 'localhost'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'notifications@web-korki.edu.pl'
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PWD']
