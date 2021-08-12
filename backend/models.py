@@ -29,16 +29,16 @@ LEVEL_CHOICES = (
 )
 
 CANCEL_REASONS = (
-    ("cancel_house", "Odwołano przez dom dziecka"),
-    ("cancel_project", "Odwołano przez projekt/nauczyciela"),
+    ("by_house", "Odwołano przez dom dziecka"),
+    ("by_project", "Odwołano przez projekt/nauczyciela"),
 )
 
 
 # Create your models here.
-class CustomUser(AbstractUser):
+class Teacher(AbstractUser):
     subjects = MultiSelectField(choices=SUBJECT_CHOICES)
-    lessons_taken = models.IntegerField(null=True)
-    lessons_cancelled = models.IntegerField(null=True)
+    lessons_done = models.IntegerField(null=True)
+    lessons_canceled = models.IntegerField(null=True)
 
     def __str__(self):
         return self.username
@@ -47,6 +47,8 @@ class CustomUser(AbstractUser):
 class House(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250)
+    lessons_done = models.IntegerField(null=True)
+    lessons_canceled = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name
@@ -63,7 +65,7 @@ class Student(models.Model):
 
 class Lesson(models.Model):
     teacher = models.ForeignKey(
-        CustomUser,
+        Teacher,
         on_delete=models.CASCADE,
         related_name="teacher",
         null=True,
@@ -72,7 +74,6 @@ class Lesson(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     level = MultiSelectField(choices=LEVEL_CHOICES)
     datetime = models.DateTimeField()
-    duration = models.DurationField()
     subject = MultiSelectField(choices=SUBJECT_CHOICES)
     last_topics = models.TextField(max_length=300, null=True, blank=True)
     planned_topics = models.TextField(max_length=300, null=True, blank=True)
