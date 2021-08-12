@@ -51,12 +51,11 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'drf_yasg',
+    
 
     #Local apps
     'myapp',
-    'accounts',
-    'houses',
-    'lessons'
+    'backend'
 ]
 
 MIDDLEWARE = [
@@ -141,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -165,7 +164,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID=1
 
 # Custom user model
-AUTH_USER_MODEL = "accounts.CustomUser"
+AUTH_USER_MODEL = "backend.Teacher"
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -179,7 +178,7 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': False,
+    'BLACKLIST_AFTER_ROTATION': True,
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
@@ -196,3 +195,12 @@ CORS_ORIGIN_WHITELIST = [
     'http://nujgoiz.cluster024.hosting.ovh.net'
 ]
 #APPEND_SLASH=False
+
+# Emails
+EMAIL_HOST = 'ssl0.ovh.net'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'notifications@web-korki.edu.pl'
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PWD']
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
