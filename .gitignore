@@ -21,7 +21,6 @@ app/build
 .env.test.local
 .env.production.local
 db.sqlite3
-app.py
 
 #migrations and cache
 **/migrations
