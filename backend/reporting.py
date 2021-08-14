@@ -13,10 +13,11 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 
 from backend.models import House, Lesson, Student
+from backend.models import CANCEL_REASON_HOUSE, CANCEL_REASON_PROJECT
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 
-# call it like this ?year=2021&house_id=2&month=7
+# call it like this URL?year=2021&house_id=2&month=7
 # TODO Add Polish signs
 
 # PDF Params
@@ -32,8 +33,9 @@ PStyle.alignment = TA_CENTER
 #     If the user is logged in, execute the view normally. The view code is free to assume the user is logged in.
 # If the raise_exception parameter is given, the decorator will raise PermissionDenied, prompting the 403 (HTTP Forbidden) view instead of redirecting to the login page.
 
+
 @login_required
-@permission_required('backend.reading_reports', raise_exception=True)
+@permission_required("backend.reading_reports", raise_exception=True)
 def generate_report(request):
     """
     Report is generated for whole month.
@@ -42,9 +44,9 @@ def generate_report(request):
     """
 
     # Params
-    month = request.GET.get('month')
-    year = request.GET.get('year')
-    house_id = request.GET.get('house_id')
+    month = request.GET.get("month")
+    year = request.GET.get("year")
+    house_id = request.GET.get("house_id")
 
     error = False
     if not month or not year or not house_id:
@@ -59,7 +61,7 @@ def generate_report(request):
         except ValueError:
             error = "Month and year have to be integers"
     if error:
-        response = JsonResponse({'error': error})
+        response = JsonResponse({"error": error})
         return response
 
     # Models
@@ -68,17 +70,20 @@ def generate_report(request):
         students = Student.objects.filter(house=house)
     except House.DoesNotExist:
         error = "There is no house with that id!"
-        return JsonResponse({'error': error})
+        return JsonResponse({"error": error})
 
     # Report constants
     month_name = get_month_name(month)
     last_day_of_month = calendar.monthrange(year, month)[1]
-    start_date, end_date = datetime(year, month, 1), datetime(year, month, last_day_of_month) # Whole month
+    start_date, end_date = datetime(year, month, 1), datetime(
+        year, month, last_day_of_month
+    )  # Whole month
 
     house_name = house.name
     house_name_grammar = house_name.replace("Dom", "Domu")
     title = 'Miesieczne zestawienie ilosci korepetycji przeprowadzonych w ramach projektu spolecznego "WEB KORKI" w {}.'.format(
-        house_name_grammar)
+        house_name_grammar
+    )
     date = "{} {} r.".format(month_name.upper(), year)
     weeks = calculate_week_headers(last_day_of_month)
 
@@ -86,7 +91,9 @@ def generate_report(request):
     col_size = (width - 2 * margin_x) / cols_n
 
     # Data DO CALCULATIONS HERE
-    data = generate_data(students, start_date, end_date, weeks, year, month, last_day_of_month)
+    data = generate_data(
+        students, start_date, end_date, weeks, year, month, last_day_of_month
+    )
 
     # Create Table
     headers = create_header(weeks)
@@ -115,7 +122,7 @@ def generate_report(request):
 
     if len(data_non_empty) == 0:
         error = "There is not data for this set of parameters!"
-        response = JsonResponse({'error': error})
+        response = JsonResponse({"error": error})
         return response
 
     # Generate PDF
@@ -127,11 +134,11 @@ def generate_report(request):
         topMargin=12,
         bottomMargin=6,
         page=A4,
-        title="Raport {} {}".format(date, house_name)
+        title="Raport {} {}".format(date, house_name),
     ).build(document)
 
     # Send response
-    response = HttpResponse(content_type='application/pdf')
+    response = HttpResponse(content_type="application/pdf")
     response.write(buffer.getvalue())
     # pdf_name = "Raport WEBKORKI {} {}".format(house_name, date)
     # response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name # This will convert pdf to attachment
@@ -141,9 +148,23 @@ def generate_report(request):
 
 # Helper functions
 
+
 def get_month_name(idx):
-    months = ["", "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień",
-              "Październik", "Listopad", "Grudzień"]
+    months = [
+        "",
+        "Styczeń",
+        "Luty",
+        "Marzec",
+        "Kwiecień",
+        "Maj",
+        "Czerwiec",
+        "Lipiec",
+        "Sierpień",
+        "Wrzesień",
+        "Październik",
+        "Listopad",
+        "Grudzień",
+    ]
     return months[idx]
 
 
@@ -154,15 +175,19 @@ def calculate_week_headers(last_day_of_month):
         last_week_head = "29"
 
     if last_day_of_month > 28:
-        weeks = ['01-07', "08-14", "15-21", "22-28", last_week_head]
+        weeks = ["01-07", "08-14", "15-21", "22-28", last_week_head]
     else:
-        weeks = ['01-07', "08-14", "15-21", "22-28"]  # For February 28
+        weeks = ["01-07", "08-14", "15-21", "22-28"]  # For February 28
 
     return weeks
 
 
 def create_header(weeks):
-    headers_top_row = ['Imie', 'Przedmiot', 'Liczba godzin w tygodniu'] + [""] * (len(weeks) - 1) + ['Suma']
+    headers_top_row = (
+        ["Imie", "Przedmiot", "Liczba godzin w tygodniu"]
+        + [""] * (len(weeks) - 1)
+        + ["Suma"]
+    )
     headers_bottom_row = ["", ""] + weeks + [""]
     headers = [
         headers_top_row,
@@ -175,35 +200,36 @@ def add_table_head_styles(table_head, weeks, data):
     week_span_from = 2
     week_span_to = week_span_from + len(weeks) - 1
     header_styles = [
-        # Header
-        ('SPAN', (week_span_from, 0), (week_span_to, 0)),  # span for weeks
-        ('SPAN', (0, 0), (0, 1)),
-        ('SPAN', (1, 0), (1, 1)),
-        ('SPAN', (-1, 0), (-1, 1)),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-        ('LINEBEFORE', (0, 0), (-1, -1), 1, colors.black),
-        ('LINEAFTER', (-1, 0), (-1, -1), 1, colors.black),
-        ('LINEABOVE', (0, 0), (-1, -1), 1, colors.black),
-        ('BACKGROUND', (0, 0), (-1, -1), colors.whitesmoke)
+        ("SPAN", (week_span_from, 0), (week_span_to, 0)),  # span for weeks
+        ("SPAN", (0, 0), (0, 1)),
+        ("SPAN", (1, 0), (1, 1)),
+        ("SPAN", (-1, 0), (-1, 1)),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LINEBEFORE", (0, 0), (-1, -1), 1, colors.black),
+        ("LINEAFTER", (-1, 0), (-1, -1), 1, colors.black),
+        ("LINEABOVE", (0, 0), (-1, -1), 1, colors.black),
+        ("BACKGROUND", (0, 0), (-1, -1), colors.whitesmoke),
     ]
     # Add bottom line if there's no data - not necessary anymore because pdf will not be generated
     if len(data) == 0:
-        styles.append(('LINEBELOW', (0, -1), (-1, -1), 1, colors.black))
+        styles.append(("LINEBELOW", (0, -1), (-1, -1), 1, colors.black))
     table_head.setStyle(TableStyle(header_styles))
 
 
-def generate_data(students, start_date, end_date, weeks, year, month, last_day_of_month):
+def generate_data(
+    students, start_date, end_date, weeks, year, month, last_day_of_month
+):
     data = {}
     for i, student in enumerate(students):
-        print(student)
         name = "{} {}".format(student.first_name, student.alias)
         data[name] = []
         # Lessons for each student for current month
-        lessons = Lesson.objects.all().filter(student=student, datetime__range=(start_date, end_date))
-        # print(lessons)
+        lessons = Lesson.objects.all().filter(
+            student=student, datetime__range=(start_date, end_date)
+        )
         # All subjects the student has taken part
-        subjects = set([lesson.subject[0] for lesson in lessons]) # Get keys
+        subjects = set([lesson.subject[0] for lesson in lessons])  # Get keys
 
         for subject in subjects:
             # Example row for July [math, 1, 2, 3, 4, 5, 15]
@@ -212,29 +238,39 @@ def generate_data(students, start_date, end_date, weeks, year, month, last_day_o
             # Iterate weeks
             start, end = 1, 7
             sum_for_row = 0
-
             for week in range(len(weeks)):
-                week_start, week_end = datetime(year, month, start), datetime(year, month, end)
+                week_start, week_end = datetime(year, month, start), datetime(
+                    year, month, end
+                )
                 lessons_in_week = 0
                 canceled_cell = False
 
                 # Lessons for student, subject and time range
                 # WE ASSUME THAT THERE CAN BE ONLY ONE LESSON CANCELED IN ONE WEEK FOR ONE SUBJECT
-                cur_lessons = lessons.filter(datetime__range=(week_start, week_end), subject__contains = subject)
+                cur_lessons = lessons.filter(
+                    datetime__range=(week_start, week_end), subject__contains=subject
+                )
                 for l in cur_lessons:
                     if l.is_canceled:
-                        if l.cancel_reason[0] == "cancel_house":
+                        print(l.cancel_reason[0])
+                        if l.cancel_reason[0] == CANCEL_REASON_HOUSE:
                             canceled_cell = "0 (P)"
-                        else:
+                        elif l.cancel_reason[0] == CANCEL_REASON_PROJECT:
                             canceled_cell = "0 (W)"
+                        else:
+                            canceled_cell = "0 (U)"  # Undefined - it should not happen
                     else:
                         lessons_in_week += 1
 
+                # PRINT FINAL VALUE IN CELL
+                # If there was any lesson - add count
                 if lessons_in_week > 0:
                     row.append(lessons_in_week)
                     sum_for_row += lessons_in_week
+                # If there were no lessons and one was canceled - add canceled reason
                 elif canceled_cell:
                     row.append(canceled_cell)
+                # If there was no planned lesson - add 0
                 else:
                     row.append(0)
 
@@ -253,17 +289,17 @@ def add_student_table(document, data, col_size, color=colors.white, last=False):
     table_user = Table(data, colWidths=col_size)
     styles = [
         # Header
-        ('SPAN', (0, 0), (0, -1)),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-        ('LINEBEFORE', (0, 0), (-1, -1), 1, colors.black),
-        ('LINEAFTER', (-1, 0), (-1, -1), 1, colors.black),
-        ('LINEABOVE', (0, 0), (-1, -1), 1, colors.black),
-        ('BACKGROUND', (0, 0), (-1, -1), color)
+        ("SPAN", (0, 0), (0, -1)),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LINEBEFORE", (0, 0), (-1, -1), 1, colors.black),
+        ("LINEAFTER", (-1, 0), (-1, -1), 1, colors.black),
+        ("LINEABOVE", (0, 0), (-1, -1), 1, colors.black),
+        ("BACKGROUND", (0, 0), (-1, -1), color),
     ]
 
     if last:
-        styles.append(('LINEBELOW', (0, -1), (-1, -1), 1, colors.black))
+        styles.append(("LINEBELOW", (0, -1), (-1, -1), 1, colors.black))
 
     table_user.setStyle(TableStyle(styles))
     document.append(table_user)
@@ -271,51 +307,75 @@ def add_student_table(document, data, col_size, color=colors.white, last=False):
 
 def add_summary_table(document, data_non_empty, weeks, col_size):
     cols_n = len(weeks) + 3
-    data = [[""]*(cols_n - 2)]
-    sum_ = sum([item[-1] for elem in data_non_empty.values() for item in elem]) # Covert to 1d list and get sums
-    data[0].append("SUMA")
-    data[0].append(sum_)
+    data_sum = [[""] * (cols_n - 2)]
+    sum_ = sum(
+        [item[-1] for elem in data_non_empty.values() for item in elem]
+    )  # Covert to 1d list and get sums
+    data_sum[0].append("SUMA")
+    data_sum[0].append(sum_)
 
-    canceled_by_house = len([v for elem in data_non_empty.values() for item in elem for v in item[1:] if v == '0 (P)'])
-    canceled_by_project = len([v for elem in data_non_empty.values() for item in elem for v in item[1:] if v == '0 (W)'])
+    canceled_by_house = len(
+        [
+            v
+            for elem in data_non_empty.values()
+            for item in elem
+            for v in item[1:]
+            if v == "0 (P)"
+        ]
+    )
+    canceled_by_project = len(
+        [
+            v
+            for elem in data_non_empty.values()
+            for item in elem
+            for v in item[1:]
+            if v == "0 (W)"
+        ]
+    )
 
-    data2 = [
-        ["Liczba lekcji odwolanych przez placowke"] + [""]*3 + [str(canceled_by_house)] + [""]*(cols_n - 5),
-        ["Liczba lekcji odwolanych przez projekt"] + [""]*3 + [str(canceled_by_project)] + [""]*(cols_n - 5),
+    data_canceled = [
+        ["Liczba lekcji odwolanych przez placowke (P)"]
+        + [""] * 3
+        + [str(canceled_by_house)]
+        + [""] * (cols_n - 5),
+        ["Liczba lekcji odwolanych przez projekt (W)"]
+        + [""] * 3
+        + [str(canceled_by_project)]
+        + [""] * (cols_n - 5),
     ]
 
+    summary_table = Table(data_sum, colWidths=col_size)
+    summary_table2 = Table(data_canceled, colWidths=col_size)
 
-
-    summary_table = Table(data, colWidths=col_size)
-    summary_table2 = Table(data2, colWidths=col_size)
-
-    styles = [
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-        ('LINEBEFORE', (-2, 0), (-2, 0), 1, colors.black),
-        ('LINEABOVE', (-2, 0), (-1, 0), 1, colors.black),
-        ('LINEAFTER', (-2, 0), (-1, 0), 1, colors.black),
-        ('LINEBELOW', (-2, 0), (-1, 0), 1, colors.black),
-        ('BACKGROUND', (-2, 0), (-1, 0), colors.whitesmoke)
+    styles_sum = [
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("LINEBEFORE", (-2, 0), (-2, 0), 1, colors.black),
+        ("LINEABOVE", (-2, 0), (-1, 0), 1, colors.black),
+        ("LINEAFTER", (-2, 0), (-1, 0), 1, colors.black),
+        ("LINEBELOW", (-2, 0), (-1, 0), 1, colors.black),
+        ("BACKGROUND", (-2, 0), (-1, 0), colors.whitesmoke),
     ]
 
-    styles2 = [
-        ('SPAN', (0, 0), (3, 0)),
-        ('SPAN', (0, 1), (3, 1)),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('ALIGN', (0, 0), (0, -1), 'LEFT'),
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-        ('GRID', (0, 0), (4, -1), 1, colors.black)
+    styles_canceled = [
+        ("SPAN", (0, 0), (3, 0)),
+        ("SPAN", (0, 1), (3, 1)),
+        ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+        ("ALIGN", (0, 0), (0, -1), "LEFT"),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("GRID", (0, 0), (4, -1), 1, colors.black),
     ]
 
-    summary_table.setStyle(TableStyle(styles))
-    summary_table2.setStyle(TableStyle(styles2))
+    summary_table.setStyle(TableStyle(styles_sum))
+    summary_table2.setStyle(TableStyle(styles_canceled))
 
     document.append(summary_table)
     document.append(Spacer(1, 5))
     document.append(summary_table2)
 
+
 # Table functions
+
 
 def addTitle(doc, title):
     doc.append(Spacer(1, 20))
@@ -327,7 +387,7 @@ def addTitle(doc, title):
 
 def addDate(doc, date):
     # doc.append(Spacer(1, 5))
-    doc.append(Paragraph('''<b>{}</b>'''.format(date), PStyle))
+    doc.append(Paragraph("""<b>{}</b>""".format(date), PStyle))
     doc.append(Spacer(1, 5))
     return doc
 
@@ -336,6 +396,6 @@ def addSignatureField(doc):
     doc.append(Spacer(1, 30))
     styleRight = copy(PStyle)
     styleRight.alignment = TA_RIGHT
-    doc.append(Paragraph("."*25, styleRight))
+    doc.append(Paragraph("." * 25, styleRight))
     doc.append(Paragraph("(Podpis i data)", styleRight))
     return doc
