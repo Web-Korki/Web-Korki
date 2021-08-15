@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 import { StyledLoginBox, StyledInput } from '../styledComponents/index';
 
 import { StyledBlueButton } from '../../sharedComponents/styledComponents';
+import axios from 'axios';
 
 export const LoginForm = () => {
 	const [email, setEmail] = useState('');
