@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
 
 *{
   box-sizing: border-box;
@@ -10,17 +10,24 @@ html {
 
 body {
   background-color: #dff2fb;
-  font-family: 'Sen', sans-serif;
+  font-family: "Sen", sans-serif;
 }
 
 h1 {
   font-size: clamp(25px, 5vw, 42px);
 }
 
+.title {
+  color: #427e90;
+  font-weight: 400;
+  font-size: clamp(24px, 5vw, 42px);
+  margin: 0;
+}
+
 /* UserMenu Start */
 .userMenu {
   height: 100vh;
-  margin: 15vh 0 0 0;
+  margin: 15vh 0;
 }
 
 .wrapper {
@@ -40,7 +47,7 @@ h1 {
 /* AdminMenu Start */
 .adminMenu {
   height: 100vh;
-  margin: 15vh 0 0 0;
+  margin: 15vh 0;
 }
 /* AdminMenu End */
 
@@ -79,35 +86,21 @@ h1 {
 .volunteerAnalysisWrapper {
   height: 100vh;
 }
-
-.volunteerAnalysisInnerWrapper {
-  width: 1024px;
-  height: 650px;
-}
-
-.volunteerAnalysisTitle {
-  color: #427e90;
-}
 /* VolunteerAnalysis End */
 
-.loginForm{
+.loginForm {
   height: 100vh;
 }
 
-.Home{
+.Home {
   height: 100vh;
 }
 
-.Whoops404{
+.Whoops404 {
   height: 100vh;
 }
 /* VolunteerRegister Start */
 .volunteerRegisterWrapper {
   height: 100vh;
-  min-width: 650px;
-}
-
-.volunteerRegisterTitle {
-  color: #427e90;
 }
 /* VolunteerRegister End */

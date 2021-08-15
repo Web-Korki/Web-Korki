@@ -12,9 +12,10 @@ import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/Volunteer
 import { Whoops404 } from './core/Whoops404/containers/Whoops404'
 import { Home } from './core/Home/containers/Home';
 import { VolunteerRegister } from './core/volunteerRegister/containers/VolunteerRegister';
+import { DummyComponent } from './core/sandbox/dummyComponent/components/DummyComponent';
 
 function App() {
-  return (
+	return (
 		<>
 			<MainContainer>
 				<Switch>
@@ -26,6 +27,7 @@ function App() {
 					<Route path='/lecture_analysis' component={LectureAnalysis} />
 					<Route path='/volunteer_analysis' component={VolunteerAnalysis} />
 					<Route path='/volunteer_register' component={VolunteerRegister} />
+					<Route path='/DummyComponent' component={DummyComponent} />
 					<Route path='*' component={Whoops404} />
 				</Switch>
 			</MainContainer>
