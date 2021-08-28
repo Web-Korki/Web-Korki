@@ -1,6 +1,6 @@
-import React from "react";
-import { StyledBoxMonths } from "../../sharedComponents/styledComponents/index";
-import { BackButton } from "../../sharedComponents/containers/BackButton";
+import React from 'react';
+import { StyledBoxMonths } from '../../sharedComponents/styledComponents/index';
+import { BackButton } from '../../sharedComponents/containers/BackButton';
 
 export const VolunteerAnalysis = () => {
   return (
@@ -13,7 +13,7 @@ export const VolunteerAnalysis = () => {
           </div>
           <div className="row justify-content-center">
             <div className="col-lg-3 col-6 p-lg-2 p-1">
-              <StyledBoxMonths>Wrzesień</StyledBoxMonths>
+              <StyledBoxMonths month="september">Wrzesień</StyledBoxMonths>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <StyledBoxMonths>Październik</StyledBoxMonths>
