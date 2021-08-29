@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MainContainer } from './core/MainContainer';
 import { UserMenu } from './core/userMenu/containers/UserMenu';
 import { AdminMenu } from './core/adminMenu/containers/AdminMenu';
@@ -15,7 +15,15 @@ import { Home } from './core/Home/containers/Home';
 import PrivateRoute from './core/common/PrivateRoute';
 // import { VolunteerRegister } from './core/volunteerRegister/containers/VolunteerRegister';
 
+//API
+import store from './store';
+import { loadUser } from './redux/actions/auth';
+
 function App() {
+	useEffect(() => {
+		store.dispatch(loadUser());
+	}, []);
+
 	return (
 		<>
 			<MainContainer>
