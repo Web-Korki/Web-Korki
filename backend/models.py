@@ -36,6 +36,11 @@ CANCEL_REASONS = (
 
 # Create your models here.
 class Teacher(AbstractUser):
+    class Meta:
+        permissions = [
+            ("reading_reports", "Can read_reports"),
+        ]
+
     subjects = MultiSelectField(choices=SUBJECT_CHOICES)
     lessons_done = models.IntegerField(null=True)
     lessons_canceled = models.IntegerField(null=True)

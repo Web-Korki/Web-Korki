@@ -23,23 +23,27 @@ class RegisterViewSet(viewsets.ModelViewSet):
     def generate_tokens(self, user):
         refresh = RefreshToken.for_user(user)
         return {
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
         }
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
-            #send_mail(subject, text, sender, recipients, fail_silently=False)
-            return Response({
-                "user": TeacherSerializer(user, context=self.get_serializer_context()).data,
-                "tokens": self.generate_tokens(user)
-            }, status=status.HTTP_201_CREATED)
+            # send_mail(subject, text, sender, recipients, fail_silently=False)
+            return Response(
+                {
+                    "user": TeacherSerializer(
+                        user, context=self.get_serializer_context()
+                    ).data,
+                    "tokens": self.generate_tokens(user),
+                },
+                status=status.HTTP_201_CREATED,
+            )
         else:
-            return Response({
-                "error": serializer.errors
-            })
+            return Response({"error": serializer.errors})
+
 
 # Login
 class LoginView(viewsets.ModelViewSet):
@@ -50,18 +54,21 @@ class LoginView(viewsets.ModelViewSet):
     def generate_tokens(self, user):
         refresh = RefreshToken.for_user(user)
         return {
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
         }
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
-        return Response({
-            "user": TeacherSerializer(user).data,
-            "tokens": self.generate_tokens(user)
-        }, status=status.HTTP_200_OK)
+        return Response(
+            {
+                "user": TeacherSerializer(user).data,
+                "tokens": self.generate_tokens(user),
+            },
+            status=status.HTTP_200_OK,
+        )
 
 
 class HouseViewSet(viewsets.ModelViewSet):

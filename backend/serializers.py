@@ -7,7 +7,7 @@ from .models import Teacher, House, Lesson, Student
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = '__all__'
+        fields = "__all__"
 
 
 class TeacherListSerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Teacher
-        fields = ['email', 'username', 'password', 'subjects']
+        fields = ["email", "username", "password", "subjects"]
 
     def create(self, validated_data):
         user = Teacher.objects.create_user(
