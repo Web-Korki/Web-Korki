@@ -1,13 +1,22 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Loader from 'react-loader-spinner';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
 	<Route
 		{...rest}
 		render={(props) => {
 			if (auth.isLoading) {
-				return <h2>isLoading...</h2>; //implement loader
+				return (
+					<Loader
+						type='Puff'
+						color='#00BFFF'
+						height={100}
+						width={100}
+						timeout={3000} //3 secs
+					/>
+				); //implement loader
 			} else if (!auth.isAuthenticated) {
 				return <Redirect to='/login_form' />;
 			} else {
