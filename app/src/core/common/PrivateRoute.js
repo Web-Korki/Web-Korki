@@ -8,15 +8,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
 		{...rest}
 		render={(props) => {
 			if (auth.isLoading) {
-				return (
-					<Loader
-						type='Puff'
-						color='#00BFFF'
-						height={100}
-						width={100}
-						timeout={3000} //3 secs
-					/>
-				); //implement loader
+				return <Loader type='Grid' color='#00BFFF' height={80} width={80} />;
 			} else if (!auth.isAuthenticated) {
 				return <Redirect to='/login_form' />;
 			} else {
