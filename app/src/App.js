@@ -22,7 +22,7 @@ import { loadUser } from './redux/actions/auth';
 function App() {
 	useEffect(() => {
 		store.dispatch(loadUser());
-	}, []);
+	});
 
 	return (
 		<>
