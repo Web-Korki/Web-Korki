@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-
 import { StyledLoginBox, StyledInput } from '../styledComponents/index';
-
 import { StyledBlueButton } from '../../sharedComponents/styledComponents';
-import axios from 'axios';
 
 // https://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example
 // https://www.youtube.com/watch?v=Fia-GGgHpK0
@@ -16,35 +13,6 @@ export const LoginForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(email, password);
-
-		// axios
-		// 	.post('http://nujgoiz.cluster024.hosting.ovh.net/token/obtain/', {
-		// 		username: email,
-		// 		password: password,
-		// 	})
-		// 	.then((res) => {
-		// 		console.log(res);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 	});
-		axios
-			.post(
-				'http://nujgoiz.cluster024.hosting.ovh.net/api/auth/login/',
-				{},
-				{
-					auth: {
-						username: email,
-						password: password,
-					},
-				}
-			)
-			.then((res) => {
-				console.log(res);
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
 	};
 
 	return (
