@@ -1,11 +1,10 @@
 //**import all reducers here**
+import login from './login';
 
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-    // all reducers will be here named as follows:
-    // name: nameReducer
-    // isLogged: loggedReducer
-})
+	login,
+});
 
 export default rootReducer;

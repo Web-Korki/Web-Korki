@@ -6,7 +6,7 @@ import { LoginForm } from './core/loginForm/containers/LoginForm';
 import { InactiveReplacement } from './core/inactiveReplacement/containers/InactiveReplacement';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import { LectureAnalysis } from './core/lectureAnalysis/containers/LectureAnalysis';
 import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/VolunteerAnalysis';
 import { Whoops404 } from './core/Whoops404/containers/Whoops404'
@@ -14,7 +14,7 @@ import { Home } from './core/Home/containers/Home';
 import { VolunteerRegister } from './core/volunteerRegister/containers/VolunteerRegister';
 
 function App() {
-  return (
+	return (
 		<>
 			<MainContainer>
 				<Switch>
