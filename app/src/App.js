@@ -12,7 +12,8 @@ import { LectureAnalysis } from './core/lectureAnalysis/containers/LectureAnalys
 import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/VolunteerAnalysis';
 import { Whoops404 } from './core/Whoops404/containers/Whoops404';
 import { Home } from './core/Home/containers/Home';
-import { VolunteerRegister } from './core/volunteerRegister/containers/VolunteerRegister';
+import PrivateRoute from './core/common/PrivateRoute';
+// import { VolunteerRegister } from './core/volunteerRegister/containers/VolunteerRegister';
 
 function App() {
 	return (
@@ -20,14 +21,20 @@ function App() {
 			<MainContainer>
 				<Switch>
 					<Route exact path='/' component={Home} />
-					<Route exact path='/UserMenu' component={UserMenu} />
-					<Route path='/admin_menu' component={AdminMenu} />
+					<PrivateRoute exact path='/UserMenu' component={UserMenu} />
+					<PrivateRoute path='/admin_menu' component={AdminMenu} />
 					<Route path='/login_form' component={LoginForm} />
-					<Route path='/register_form' component={RegisterForm} />
-					<Route path='/inactive_replacement' component={InactiveReplacement} />
-					<Route path='/lecture_analysis' component={LectureAnalysis} />
-					<Route path='/volunteer_analysis' component={VolunteerAnalysis} />
-					{/* <Route path='/volunteer_register' component={VolunteerRegister} /> */}
+					<PrivateRoute path='/register_form' component={RegisterForm} />
+					<PrivateRoute
+						path='/inactive_replacement'
+						component={InactiveReplacement}
+					/>
+					<PrivateRoute path='/lecture_analysis' component={LectureAnalysis} />
+					<PrivateRoute
+						path='/volunteer_analysis'
+						component={VolunteerAnalysis}
+					/>
+					{/* <PrivateRoute path='/volunteer_register' component={VolunteerRegister} /> */}
 					<Route path='*' component={Whoops404} />
 				</Switch>
 			</MainContainer>

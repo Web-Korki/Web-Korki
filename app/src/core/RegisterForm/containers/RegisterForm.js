@@ -17,7 +17,7 @@ export const RegisterForm = () => {
 		<div className='d-flex justify-content-center align-items-center flex-column registerForm'>
 			<form onSubmit={handleSubmit}>
 				<StyledLoginBox className='d-flex align-items-center flex-column'>
-					<h1 className='mt-md-5 mb-1'>Zarejestruj wolontariusza</h1>
+					<h1 className='mt-md-4 mb-1 p-2'>Zarejestruj wolontariusza</h1>
 					<StyledInput
 						id='name'
 						type='text'
