@@ -1,2 +1,2 @@
-export { default as StyledLoginBox } from './StyledLoginBox';
-export { default as StyledInput } from './StyledInput';
+export { default as StyledLoginBox } from '../../sharedComponents/styledComponents/StyledLoginBox';
+export { default as StyledInput } from '../../sharedComponents/styledComponents/StyledInput';

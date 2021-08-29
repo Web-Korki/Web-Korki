@@ -17,28 +17,29 @@ export const LoginForm = () => {
 
 	return (
 		<div className='d-flex justify-content-center align-items-center flex-column loginForm'>
-			<StyledLoginBox className='d-flex align-items-center flex-column'>
-				<h1 className='mt-md-5 mb-3'>Logowanie do platformy</h1>
-				<StyledInput
-					id='name'
-					type='text'
-					placeholder='login'
-					className='mt-md-5 mt-4 mb-4'
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-				<StyledInput
-					id='password'
-					type='password'
-					placeholder='hasło'
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<StyledBlueButton
-					type='submit'
-					className='mt-4 px-5 py-2'
-					onClick={handleSubmit}>
-					zaloguj się
-				</StyledBlueButton>
-			</StyledLoginBox>
+			<form onSubmit={handleSubmit}>
+				<StyledLoginBox className='d-flex align-items-center flex-column'>
+					<h1 className='mt-md-5 mb-3'>Logowanie do platformy</h1>
+					<StyledInput
+						id='name'
+						type='text'
+						placeholder='login'
+						className='mt-md-5 mt-4 mb-4'
+						onChange={(e) => setEmail(e.target.value)}
+						value={email}
+					/>
+					<StyledInput
+						id='password'
+						type='password'
+						placeholder='hasło'
+						onChange={(e) => setPassword(e.target.value)}
+						value={password}
+					/>
+					<StyledBlueButton type='submit' className='mt-4 px-5 py-2'>
+						zaloguj się
+					</StyledBlueButton>
+				</StyledLoginBox>
+			</form>
 		</div>
 	);
 };
