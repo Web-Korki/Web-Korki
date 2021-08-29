@@ -5,7 +5,7 @@ import { BackButton } from '../../sharedComponents/containers/BackButton';
 export const VolunteerAnalysis = () => {
   return (
     <>
-      <div className="volunteerAnalysisWrapper d-flex align-items-center justify-content-center">
+      <div className="volunteerAnalysisWrapper justify-content-center">
         <div className="container">
           <div className="d-flex justify-content-center align-items-center mb-5">
             <BackButton />

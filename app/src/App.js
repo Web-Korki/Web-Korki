@@ -39,10 +39,7 @@ function App() {
             component={InactiveReplacement}
           />
           <PrivateRoute path="/lecture_analysis" component={LectureAnalysis} />
-          <PrivateRoute
-            path="/volunteer_analysis"
-            component={VolunteerAnalysis}
-          />
+          <Route path="/volunteer_analysis" component={VolunteerAnalysis} />
           <PrivateRoute
             path="/volunteer_analysis_detail"
             component={VolunteerAnalysisDetail}
