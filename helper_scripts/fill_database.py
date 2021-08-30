@@ -1,4 +1,4 @@
-# usage: python helper_scripts/fill_database.py int
+# usage: python helper_scripts/fill_database.py (int)
 # As the models are changing frequently under development, bo prepare to make changes in this script.
 
 import sys, os, django
@@ -8,7 +8,7 @@ from string import ascii_lowercase
 from django.utils import timezone
 import pytz
 
-project_path = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
+project_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, project_path)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myapp.settings")
 django.setup()
@@ -18,8 +18,39 @@ from backend.models import SUBJECT_CHOICES, LEVEL_CHOICES, CANCEL_REASONS
 
 # random.seed(1) # Change or comment it for different results
 
-names = ["Maciek", "Patryk", "Justyna", "Wojtek", "Alicja", "Basia", "Antek", "Alicja", "Basia", "Antek", "Kacper", "Grzesiu", "Weronika", "Kasia", "Anotni", "Marysia", "Klaudia", "Mateusz"]
-cities = ["Warszawie", "Poznaniu", "Szczecinie", 'Gdańsku', 'Krakowie', 'Lublinie', 'Gdyni', 'Sopocie', 'Toruniu', 'Bydgoszczy', 'Przemyślu']
+names = [
+    "Maciek",
+    "Patryk",
+    "Justyna",
+    "Wojtek",
+    "Alicja",
+    "Basia",
+    "Antek",
+    "Alicja",
+    "Basia",
+    "Antek",
+    "Kacper",
+    "Grzesiu",
+    "Weronika",
+    "Kasia",
+    "Anotni",
+    "Marysia",
+    "Klaudia",
+    "Mateusz",
+]
+cities = [
+    "Warszawie",
+    "Poznaniu",
+    "Szczecinie",
+    "Gdańsku",
+    "Krakowie",
+    "Lublinie",
+    "Gdyni",
+    "Sopocie",
+    "Toruniu",
+    "Bydgoszczy",
+    "Przemyślu",
+]
 subjects = [item[0] for item in SUBJECT_CHOICES]
 levels = [item[0] for item in LEVEL_CHOICES]
 cancel_reasons = [item[0] for item in CANCEL_REASONS]
@@ -56,7 +87,9 @@ def add_random_houses(n=1):
     print("adding {} houses...".format(n))
 
     for _ in range(n):
-        name = "Dom dziecka numer {} w {}".format(random.randint(1, 10000), random.choice(cities))
+        name = "Dom dziecka numer {} w {}".format(
+            random.randint(1, 10000), random.choice(cities)
+        )
         h = House(name=name)
         h.save()
 
@@ -64,9 +97,9 @@ def add_random_houses(n=1):
 def add_students(n=1, house=False):
     print("adding {} students...".format(n))
 
-    house_random=False
+    house_random = False
     if not house:
-        house_random=True
+        house_random = True
 
     for _ in range(n):
         if house_random:
@@ -96,7 +129,11 @@ def add_teachers(n=1):
 
 
 def add_lessons(n=1, start_date=dt.datetime(2021, 1, 1), end_date=dt.datetime.today()):
-    print("adding {} lessons in interval from {} to {}...".format(n, start_date.strftime("%Y.%m.%d"), end_date.strftime("%Y.%m.%d")))
+    print(
+        "adding {} lessons in interval from {} to {}...".format(
+            n, start_date.strftime("%Y.%m.%d"), end_date.strftime("%Y.%m.%d")
+        )
+    )
     for i in range(n):
         teacher = get_random_from_model(Teacher)
         student = get_random_from_model(Student)
@@ -110,17 +147,19 @@ def add_lessons(n=1, start_date=dt.datetime(2021, 1, 1), end_date=dt.datetime.to
         if is_canceled:
             cancel_reason = random.choice(cancel_reasons)
 
-        l = Lesson(teacher=teacher,
-                   student=student,
-                   level=lvl,
-                   datetime=date,
-                   subject=subject,
-                   is_canceled=is_canceled,
-                   cancel_reason=cancel_reason)
+        l = Lesson(
+            teacher=teacher,
+            student=student,
+            level=lvl,
+            datetime=date,
+            subject=subject,
+            is_canceled=is_canceled,
+            cancel_reason=cancel_reason,
+        )
         l.save()
 
         if i > 0 and i % 1000 == 0:
-            print("{} lessons added from {} - {}%".format(i, n, i/n*100))
+            print("{} lessons added from {} - {}%".format(i, n, i / n * 100))
 
 
 def add_batch(n=1):
