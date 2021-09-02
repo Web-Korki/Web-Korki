@@ -1,11 +1,8 @@
 from rest_framework import routers
 from backend.views import *
-#from knox import views as knox_views
+
 
 router = routers.SimpleRouter()
-router.register(r'auth/register', RegisterViewSet, basename='register')
-router.register(r'auth/login', LoginView, basename='login')
-#router.register(r'auth/logout', knox_views.LogoutView, basename='logout')
 router.register(r'users', TeacherViewSet, basename='users')
 router.register(r'lessons', LessonViewSet, basename='lessons')
 router.register(r'lessons/create_substitution/<canceled_lesson_id>', SubstitutionViewSet, basename='substitution')

@@ -32,7 +32,7 @@ if 'DEVELOP_DEBUG' in os.environ:
 else:
     WSGI_APPLICATION = 'myapp.wsgi.application'
 
-ALLOWED_HOSTS = ["127.0.0.1", 'nujgoiz.cluster024.hosting.ovh.net']
+ALLOWED_HOSTS = ['localhost', "127.0.0.1", 'nujgoiz.cluster024.hosting.ovh.net']
 
 
 # Application definition
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'drf_yasg',
+    'djoser',
     
 
     #Local apps
@@ -197,10 +198,28 @@ CORS_ORIGIN_WHITELIST = [
 #APPEND_SLASH=False
 
 # Emails
-EMAIL_HOST = 'localhost'
+EMAIL_HOST = 'ssl0.ovh.net'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'notifications@web-korki.edu.pl'
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PWD']
 EMAIL_USE_SSL = True
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
+EMAIL_USE_TLS = False
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
+
+DJOSER = {
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION_EMAIL': True,
+    'SEND_ACTIVATION_EMAIL': True,
+    'SET_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'EMAIL': {
+        'activation': 'backend.notifications.ActivationEmail'
+    },
+    'SERIALIZERS': {
+        'user_create': 'backend.serializers.UserRegisterSerializer',
+        'user': 'backend.serializers.UserRegisterSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer'
+    },
+}
