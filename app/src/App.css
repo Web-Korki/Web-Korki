@@ -68,17 +68,7 @@ h1 {
 
 /* LectureAnalysis Start */
 .lectureAnalysisWrapper {
-  height: 100vh;
-}
-
-.lectureAnalysisInnerWrapper {
-  width: 1024px;
-  height: 650px;
-  margin: 0 auto;
-}
-
-.lectureAnalysisTitle {
-  color: #427e90;
+  padding: 15vw 0 10vw 0;
 }
 /* LectureAnalysis End */
 
@@ -109,3 +99,8 @@ h1 {
   height: 100vh;
 }
 /* VolunteerRegister End */
+
+.card {
+  overflow: visible !important;
+  word-wrap: normal;
+}

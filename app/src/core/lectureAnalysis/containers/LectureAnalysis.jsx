@@ -1,56 +1,49 @@
-import React from 'react';
-import { StyledBoxLectureAnalysis } from '../styledComponents/index';
+import { StyledBoxMonths } from '../../sharedComponents/styledComponents/index';
+import { BackButton } from '../../sharedComponents/containers/BackButton';
 
 export const LectureAnalysis = () => {
   return (
-		<>
-			<div className='lectureAnalysisWrapper d-flex align-items-center justify-content-center'>
-				<div className='lectureAnalysisInnerWrapper'>
-					<div className='row'>
-						<div className='lectureAnalysisTitle text-center col-12'>
-							<h1>Analiza - zajęcia</h1>
-						</div>
-					</div>
-					<div className='row mt-md-5 mx-2'>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Wrzesień</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Październik</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Listopad</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Grudzień</StyledBoxLectureAnalysis>
-						</div>
-					</div>
-					<div className='row mx-2'>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Styczeń</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Luty</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Marzec</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Kwiecień</StyledBoxLectureAnalysis>
-						</div>
-					</div>
-					<div className='row mx-2'>
-						<div className='col-lg-3 col-0 p-0'></div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Maj</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Czerwiec</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-0 p-0'></div>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+    <>
+      <div className="lectureAnalysisWrapper justify-content-center">
+        <div className="container">
+          <div className="d-flex justify-content-center align-items-center mb-5">
+            <BackButton />
+            <h1 className="title ml-2">Analiza - zajęcia</h1>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths month="september">Wrzesień</StyledBoxMonths>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths>Październik</StyledBoxMonths>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths>Listopad</StyledBoxMonths>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths>Grudzień</StyledBoxMonths>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths>Styczeń</StyledBoxMonths>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths>Luty</StyledBoxMonths>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths>Marzec</StyledBoxMonths>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths>Kwiecień</StyledBoxMonths>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths>Maj</StyledBoxMonths>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <StyledBoxMonths>Czerwiec</StyledBoxMonths>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };

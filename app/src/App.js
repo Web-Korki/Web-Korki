@@ -9,6 +9,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import { Route, Switch, Redirect } from 'react-router';
 import { LectureAnalysis } from './core/lectureAnalysis/containers/LectureAnalysis';
+import { LectureAnalysisDetail } from './core/lectureAnalysis/containers/LectureAnalysisDetail';
 import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/VolunteerAnalysis';
 import { VolunteerAnalysisDetail } from './core/volunteerAnalysis/containers/VolunteerAnalysisDetail';
 import { Whoops404 } from './core/Whoops404/containers/Whoops404';
@@ -38,9 +39,15 @@ function App() {
             path="/inactive_replacement"
             component={InactiveReplacement}
           />
-          <PrivateRoute path="/lecture_analysis" component={LectureAnalysis} />
+          {/* na czas budowania */}
+          <Route path="/lecture_analysis" component={LectureAnalysis} />
+          <Route
+            path="/lecture_analysis_detail"
+            component={LectureAnalysisDetail}
+          />
+          {/* na czas budowania */}
           <Route path="/volunteer_analysis" component={VolunteerAnalysis} />
-          <PrivateRoute
+          <Route
             path="/volunteer_analysis_detail"
             component={VolunteerAnalysisDetail}
           />

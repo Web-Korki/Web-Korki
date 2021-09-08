@@ -2,6 +2,8 @@ import { BackButton } from '../../sharedComponents/containers/BackButton';
 import { Container } from '../../sharedComponents/styledComponents/index';
 import { VolunteerAnalysisData } from './VolunteerAnalysisData';
 
+const baseURL = 'http://nujgoiz.cluster024.hosting.ovh.net';
+
 export const VolunteerAnalysisDetail = (month) => {
   return (
     <>

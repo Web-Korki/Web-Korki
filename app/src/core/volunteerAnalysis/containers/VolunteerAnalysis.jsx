@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledBoxMonths } from '../../sharedComponents/styledComponents/index';
 import { BackButton } from '../../sharedComponents/containers/BackButton';
 
