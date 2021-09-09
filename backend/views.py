@@ -1,45 +1,34 @@
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status, permissions, viewsets
 from rest_framework.views import Response
+from django.contrib.auth import authenticate, login
 from .serializers import *
 from .notifications import *
 
+from djoser.views import UserViewSet
+from rest_framework.response import Response
 
-class CustomUserViewSet(viewsets.ModelViewSet):
+
+class ActivateUser(UserViewSet):
+    def get_serializer(self, *args, **kwargs):
+        serializer_class = self.get_serializer_class()
+        kwargs.setdefault('context', self.get_serializer_context())
+
+        # this line is the only change from the base implementation.
+        kwargs['data'] = {"uid": self.kwargs['uid'], "token": self.kwargs['token']}
+
+        return serializer_class(*args, **kwargs)
+
+    def activation(self, request, uid, token, *args, **kwargs):
+        super().activation(request, *args, **kwargs)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class TeacherViewSet(viewsets.ModelViewSet):
 
     serializer_class = TeacherListSerializer
-    http_method_names = ["put", "patch", "delete"]
 
     def get_queryset(self):
         return Teacher.objects.all()
-
-
-# Registration
-class RegisterViewSet(viewsets.ModelViewSet):
-    serializer_class = RegistrationSerializer
-    http_method_names = ["post"]
-    permission_classes = (permissions.AllowAny,)
-
-    def generate_tokens(self, user):
-        refresh = RefreshToken.for_user(user)
-        return {
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-        }
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            user = serializer.save()
-            #send_mail(subject, text, sender, recipients, fail_silently=False)
-            return Response({
-                "user": TeacherSerializer(user, context=self.get_serializer_context()).data,
-                "tokens": self.generate_tokens(user)
-            }, status=status.HTTP_201_CREATED)
-        else:
-            return Response({
-                "error": serializer.errors
-            })
 
 # Login
 class LoginView(viewsets.ModelViewSet):
@@ -57,9 +46,11 @@ class LoginView(viewsets.ModelViewSet):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        print(serializer)
         user = serializer.validated_data
+        login(request, user)
         return Response({
-            "user": TeacherSerializer(user).data,
+            "user": TeacherSerializer(user, context=self.get_serializer_context()).data,
             "tokens": self.generate_tokens(user)
         }, status=status.HTTP_200_OK)
 
