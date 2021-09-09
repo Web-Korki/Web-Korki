@@ -1,4 +1,4 @@
-# usage: python helper_scripts/fill_database.py int
+# usage: python helper_scripts/fill_database.py (int)
 # As the models are changing frequently under development, bo prepare to make changes in this script.
 
 import sys, os, django

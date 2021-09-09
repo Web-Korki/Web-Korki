@@ -28,9 +28,12 @@ LEVEL_CHOICES = (
     ("5tech", "1. klasa tech"),
 )
 
+CANCEL_REASON_HOUSE = "by_house"
+CANCEL_REASON_PROJECT = "by_project"
+
 CANCEL_REASONS = (
-    ("by_house", "Odwołano przez dom dziecka"),
-    ("by_project", "Odwołano przez projekt/nauczyciela"),
+    (CANCEL_REASON_HOUSE, "Odwołano przez dom dziecka"),
+    (CANCEL_REASON_PROJECT, "Odwołano przez projekt/nauczyciela"),
 )
 
 

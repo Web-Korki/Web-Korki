@@ -13,10 +13,11 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 
 from backend.models import House, Lesson, Student
+from backend.models import CANCEL_REASON_HOUSE, CANCEL_REASON_PROJECT
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 
-# call it like this ?year=2021&house_id=2&month=7
+# call it like this URL?year=2021&house_id=2&month=7
 # TODO Add Polish signs
 
 # PDF Params
@@ -199,7 +200,6 @@ def add_table_head_styles(table_head, weeks, data):
     week_span_from = 2
     week_span_to = week_span_from + len(weeks) - 1
     header_styles = [
-        # Header
         ("SPAN", (week_span_from, 0), (week_span_to, 0)),  # span for weeks
         ("SPAN", (0, 0), (0, 1)),
         ("SPAN", (1, 0), (1, 1)),
@@ -222,14 +222,12 @@ def generate_data(
 ):
     data = {}
     for i, student in enumerate(students):
-        print(student)
         name = "{} {}".format(student.first_name, student.alias)
         data[name] = []
         # Lessons for each student for current month
         lessons = Lesson.objects.all().filter(
             student=student, datetime__range=(start_date, end_date)
         )
-        # print(lessons)
         # All subjects the student has taken part
         subjects = set([lesson.subject[0] for lesson in lessons])  # Get keys
 
@@ -240,7 +238,6 @@ def generate_data(
             # Iterate weeks
             start, end = 1, 7
             sum_for_row = 0
-
             for week in range(len(weeks)):
                 week_start, week_end = datetime(year, month, start), datetime(
                     year, month, end
@@ -255,18 +252,25 @@ def generate_data(
                 )
                 for l in cur_lessons:
                     if l.is_canceled:
-                        if l.cancel_reason[0] == "cancel_house":
+                        print(l.cancel_reason[0])
+                        if l.cancel_reason[0] == CANCEL_REASON_HOUSE:
                             canceled_cell = "0 (P)"
-                        else:
+                        elif l.cancel_reason[0] == CANCEL_REASON_PROJECT:
                             canceled_cell = "0 (W)"
+                        else:
+                            canceled_cell = "0 (U)"  # Undefined - it should not happen
                     else:
                         lessons_in_week += 1
 
+                # PRINT FINAL VALUE IN CELL
+                # If there was any lesson - add count
                 if lessons_in_week > 0:
                     row.append(lessons_in_week)
                     sum_for_row += lessons_in_week
+                # If there were no lessons and one was canceled - add canceled reason
                 elif canceled_cell:
                     row.append(canceled_cell)
+                # If there was no planned lesson - add 0
                 else:
                     row.append(0)
 
@@ -303,12 +307,12 @@ def add_student_table(document, data, col_size, color=colors.white, last=False):
 
 def add_summary_table(document, data_non_empty, weeks, col_size):
     cols_n = len(weeks) + 3
-    data = [[""] * (cols_n - 2)]
+    data_sum = [[""] * (cols_n - 2)]
     sum_ = sum(
         [item[-1] for elem in data_non_empty.values() for item in elem]
     )  # Covert to 1d list and get sums
-    data[0].append("SUMA")
-    data[0].append(sum_)
+    data_sum[0].append("SUMA")
+    data_sum[0].append(sum_)
 
     canceled_by_house = len(
         [
@@ -329,21 +333,21 @@ def add_summary_table(document, data_non_empty, weeks, col_size):
         ]
     )
 
-    data2 = [
-        ["Liczba lekcji odwolanych przez placowke"]
+    data_canceled = [
+        ["Liczba lekcji odwolanych przez placowke (P)"]
         + [""] * 3
         + [str(canceled_by_house)]
         + [""] * (cols_n - 5),
-        ["Liczba lekcji odwolanych przez projekt"]
+        ["Liczba lekcji odwolanych przez projekt (W)"]
         + [""] * 3
         + [str(canceled_by_project)]
         + [""] * (cols_n - 5),
     ]
 
-    summary_table = Table(data, colWidths=col_size)
-    summary_table2 = Table(data2, colWidths=col_size)
+    summary_table = Table(data_sum, colWidths=col_size)
+    summary_table2 = Table(data_canceled, colWidths=col_size)
 
-    styles = [
+    styles_sum = [
         ("ALIGN", (0, 0), (-1, -1), "CENTER"),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
         ("LINEBEFORE", (-2, 0), (-2, 0), 1, colors.black),
@@ -353,7 +357,7 @@ def add_summary_table(document, data_non_empty, weeks, col_size):
         ("BACKGROUND", (-2, 0), (-1, 0), colors.whitesmoke),
     ]
 
-    styles2 = [
+    styles_canceled = [
         ("SPAN", (0, 0), (3, 0)),
         ("SPAN", (0, 1), (3, 1)),
         ("ALIGN", (0, 0), (-1, -1), "CENTER"),
@@ -362,8 +366,8 @@ def add_summary_table(document, data_non_empty, weeks, col_size):
         ("GRID", (0, 0), (4, -1), 1, colors.black),
     ]
 
-    summary_table.setStyle(TableStyle(styles))
-    summary_table2.setStyle(TableStyle(styles2))
+    summary_table.setStyle(TableStyle(styles_sum))
+    summary_table2.setStyle(TableStyle(styles_canceled))
 
     document.append(summary_table)
     document.append(Spacer(1, 5))
