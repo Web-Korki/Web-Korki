@@ -204,6 +204,3 @@ EMAIL_HOST_PASSWORD = os.environ['EMAIL_PWD']
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
-
-# We have to set login url. This is just placeholder
-LOGIN_URL = "/login"
