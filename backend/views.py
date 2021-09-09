@@ -26,7 +26,6 @@ class ActivateUser(UserViewSet):
 class TeacherViewSet(viewsets.ModelViewSet):
 
     serializer_class = TeacherListSerializer
-    http_method_names = ["put", "patch", "delete"]
 
     def get_queryset(self):
         return Teacher.objects.all()
