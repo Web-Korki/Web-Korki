@@ -203,15 +203,13 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'notifications@web-korki.edu.pl'
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PWD']
 EMAIL_USE_SSL = True
-<<<<<<<<< Temporary merge branch 1
-EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
+EMAIL_USE_TLS = False
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
 
 # We have to set login url. This is just placeholder
 LOGIN_URL = "/login"
-=========
-EMAIL_USE_TLS = False
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
+
+
 
 DJOSER = {
     'USER_CREATE_PASSWORD_RETYPE': True,
@@ -230,4 +228,3 @@ DJOSER = {
         'user_delete': 'djoser.serializers.UserDeleteSerializer'
     },
 }
->>>>>>>>> Temporary merge branch 2
