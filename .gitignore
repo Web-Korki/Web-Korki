@@ -5,6 +5,7 @@ app/.pnp
 .pnp.js
 venv
 venv35
+venv35.rar
 
 # testing
 app/coverage
