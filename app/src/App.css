@@ -101,6 +101,5 @@ h1 {
 /* VolunteerRegister End */
 
 .card {
-  overflow: visible !important;
   word-wrap: normal;
 }
