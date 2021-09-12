@@ -40,15 +40,19 @@ function App() {
             component={InactiveReplacement}
           />
           {/* na czas budowania */}
-          <Route path="/lecture_analysis" component={LectureAnalysis} />
+          <Route path="/lecture_analysis" exact component={LectureAnalysis} />
           <Route
-            path="/lecture_analysis_detail"
+            path="/lecture_analysis/:month"
             component={LectureAnalysisDetail}
           />
           {/* na czas budowania */}
-          <Route path="/volunteer_analysis" component={VolunteerAnalysis} />
           <Route
-            path="/volunteer_analysis_detail"
+            path="/volunteer_analysis"
+            exact
+            component={VolunteerAnalysis}
+          />
+          <Route
+            path="/volunteer_analysis/:month"
             component={VolunteerAnalysisDetail}
           />
           {/* <PrivateRoute path='/volunteer_register' component={VolunteerRegister} /> */}
