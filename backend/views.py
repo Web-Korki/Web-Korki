@@ -1,9 +1,7 @@
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status, permissions, viewsets
-from rest_framework.views import Response
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
 from .serializers import *
-from .notifications import *
 
 from djoser.views import UserViewSet
 from rest_framework.response import Response
@@ -12,10 +10,10 @@ from rest_framework.response import Response
 class ActivateUser(UserViewSet):
     def get_serializer(self, *args, **kwargs):
         serializer_class = self.get_serializer_class()
-        kwargs.setdefault('context', self.get_serializer_context())
+        kwargs.setdefault("context", self.get_serializer_context())
 
         # this line is the only change from the base implementation.
-        kwargs['data'] = {"uid": self.kwargs['uid'], "token": self.kwargs['token']}
+        kwargs["data"] = {"uid": self.kwargs["uid"], "token": self.kwargs["token"]}
 
         return serializer_class(*args, **kwargs)
 
@@ -23,12 +21,14 @@ class ActivateUser(UserViewSet):
         super().activation(request, *args, **kwargs)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class TeacherViewSet(viewsets.ModelViewSet):
 
     serializer_class = TeacherListSerializer
 
     def get_queryset(self):
         return Teacher.objects.all()
+
 
 # Login
 class LoginView(viewsets.ModelViewSet):
@@ -39,8 +39,8 @@ class LoginView(viewsets.ModelViewSet):
     def generate_tokens(self, user):
         refresh = RefreshToken.for_user(user)
         return {
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
         }
 
     def post(self, request, *args, **kwargs):
@@ -49,10 +49,15 @@ class LoginView(viewsets.ModelViewSet):
         print(serializer)
         user = serializer.validated_data
         login(request, user)
-        return Response({
-            "user": TeacherSerializer(user, context=self.get_serializer_context()).data,
-            "tokens": self.generate_tokens(user)
-        }, status=status.HTTP_200_OK)
+        return Response(
+            {
+                "user": TeacherSerializer(
+                    user, context=self.get_serializer_context()
+                ).data,
+                "tokens": self.generate_tokens(user),
+            },
+            status=status.HTTP_200_OK,
+        )
 
 
 class HouseViewSet(viewsets.ModelViewSet):
@@ -77,19 +82,20 @@ class LessonViewSet(viewsets.ModelViewSet):
     #     return Lesson.objects.filter(id=lesson_id)
 
 
-class SubstitutionViewSet(viewsets.ModelViewSet):
-
+class CancelLessonViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = AddSubstitutionSerializer
-    http_method_names = ["post"]
+    serializer_class = UpdateSubstitutionSerializer
+    http_method_names = ["patch"]
 
-    def update_stats(self, reason, canc_teacher_id, canc_house_id):
-        if reason == "by_project":
-            teacher = Teacher.objects.get(id=canc_teacher_id)
+    def update_stats(self, request, lesson_id):
+        if request.reason == "by_project":
+            teacher = Teacher.objects.get(
+                id=Lesson.objects.get(id=lesson_id).teacher.id
+            )
             teacher["lessons_canceled"] = +1
             teacher.save()
         else:
-            house = House.objects.get(id=canc_house_id)
+            house = House.objects.get(id=Lesson.objects.get(id=lesson_id).house.id)
             house["lessons_canceled"] = +1
             house.save()
 
@@ -102,18 +108,19 @@ class SubstitutionViewSet(viewsets.ModelViewSet):
             partial=True,
             instance=lesson_serializer,
         )
-        self.update_stats(
-            reason=updated.data["cancel_reason"],
-            canc_teacher_id=canc_lesson_id.teacher__id,
-            canc_house_id=canc_lesson_id.house__id,
-        )
 
-    def create(self, request, canceled_lesson_id=None, **kwargs):
+
+class SubstitutionViewSet(viewsets.ModelViewSet):
+
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = AddSubstitutionSerializer
+    http_method_names = ["post"]
+
+    def create(self, request, *args):
         substitution = AddSubstitutionSerializer(data=request.data)
         substitution.is_valid(raise_exception=True)
         self.perform_create(substitution)
         headers = self.get_success_headers(substitution.data)
-        self.update_canceled_lesson(canceled_lesson_id, substitution.data)
 
         return Response(
             substitution.data, status=status.HTTP_201_CREATED, headers=headers

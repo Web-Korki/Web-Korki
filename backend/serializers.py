@@ -5,21 +5,24 @@ from djoser.serializers import UserCreateSerializer
 
 Teacher = get_user_model()
 
+
 class UserRegisterSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = Teacher
-        fields = ('email', 'username', 'password', 'subjects')
+        fields = ("email", "username", "password", "subjects")
+
 
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = '__all__'
+        fields = "__all__"
 
 
 class TeacherListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
         fields = "__all__"
+
 
 class LoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField()
@@ -30,8 +33,8 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ["username", "password"]
 
     def validate(self, data):
-        username=data.get("username", None)
-        password=data.get("password", None)
+        username = data.get("username", None)
+        password = data.get("password", None)
         user = authenticate(username=username, password=password)
         if user and user.is_active:
             return user
