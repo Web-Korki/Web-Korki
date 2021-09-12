@@ -3,44 +3,10 @@ import { ContainerSmall } from '../../sharedComponents/styledComponents/index';
 import { LectureAnalysisData } from './LectureAnalysisData';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { WhichMonthFunc } from '../../sharedComponents/containers/WhichMonthFunc';
 
 export const LectureAnalysisDetail = (link) => {
   const link_prop = link.match.params.month;
-  let month;
-  switch (link_prop) {
-    case 'january':
-      month = 'Styczeń';
-      break;
-    case 'february':
-      month = 'Luty';
-      break;
-    case 'march':
-      month = 'Marzec';
-      break;
-    case 'april':
-      month = 'Kwiecień';
-      break;
-    case 'may':
-      month = 'Maj';
-      break;
-    case 'june':
-      month = 'Czerwiec';
-      break;
-    case 'september':
-      month = 'Wrzesień';
-      break;
-    case 'october':
-      month = 'Październik';
-      break;
-    case 'november':
-      month = 'Listopad';
-      break;
-    case 'december':
-      month = 'Grudzień';
-      break;
-    default:
-      month = 'Miesiąc nieznany';
-  }
 
   const baseURL = 'https://web-korki.edu.pl';
   const token = localStorage.getItem('token');
@@ -52,12 +18,17 @@ export const LectureAnalysisDetail = (link) => {
   };
 
   const getHouses = async () => {
-    await axios.get(`${baseURL}/api/houses`, config);
+    const houses = await axios
+      .get(`${baseURL}/api/houses`, config)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log('Error', err));
   };
 
   useEffect(() => {
     getHouses();
-  }, {});
+  }, []);
 
   return (
     <>
@@ -68,7 +39,7 @@ export const LectureAnalysisDetail = (link) => {
               <BackButton className="col" />
               <h1 className="col title ml-2">Analiza - zajęcia</h1>
             </div>
-            <h1 className="title">{month}</h1>
+            <WhichMonthFunc month={link_prop} />
           </div>
           <div className="card-columns" style={{ columnCount: 2 }}>
             <ContainerSmall className="card mb-3">
