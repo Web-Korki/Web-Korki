@@ -1,0 +1,40 @@
+.svgImage{
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    stroke-linejoin: round;
+    stroke-miterlimit: 2;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.firstPath{
+    fill:rgb(0,99,149);
+}
+
+.secondPath{
+    fill:rgb(0,99,149);
+}
+
+.thirdPath{
+    fill:rgb(0,99,149);
+}
+
+.fourthPath{
+    fill:rgb(0,99,149);
+}
+
+.fifthPath{
+    fill:rgb(0,99,149);
+}
+
+.sixthPath{
+    fill:rgb(3,70,104);
+}
+
+.seventhPath{
+    fill:rgb(0,99,149);
+}
+
+.eightPath{
+    fill:rgb(3,70,104);
+}
