@@ -18,6 +18,8 @@ import PrivateRoute from './core/common/PrivateRoute';
 //API
 import store from './store';
 import { loadUser } from './redux/actions/auth';
+import { ActivateAccount } from './core/ActivateAccount/containers/ActivateAccount';
+import { PasswordReset } from './core/PasswordReset/containers/PasswordReset';
 
 function App() {
 	useEffect(() => {
@@ -43,6 +45,8 @@ function App() {
 						component={VolunteerAnalysis}
 					/>
 					{/* <PrivateRoute path='/volunteer_register' component={VolunteerRegister} /> */}
+					<Route path='/activate/{uid}/{token}' component={ActivateAccount} />
+					<Route path='/password/reset/confirm/{uid}/{token}' component={PasswordReset} />
 					<Route path='*' component={Whoops404} />
 				</Switch>
 			</MainContainer>
