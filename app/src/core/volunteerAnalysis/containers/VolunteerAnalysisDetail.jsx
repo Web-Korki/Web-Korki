@@ -3,7 +3,7 @@ import { Container } from '../../sharedComponents/styledComponents/index';
 import { VolunteerAnalysisData } from './VolunteerAnalysisData';
 import { WhichMonthFunc } from '../../sharedComponents/containers/WhichMonthFunc';
 
-const baseURL = 'http://nujgoiz.cluster024.hosting.ovh.net';
+const baseURL = 'https://web-korki.edu.pl';
 
 export const VolunteerAnalysisDetail = (link) => {
   const link_prop = link.match.params.month;
