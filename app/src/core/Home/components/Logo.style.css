@@ -7,34 +7,37 @@
     max-height: 300px;
 }
 
-.firstPath{
+.firstStyle{
     fill:rgb(0,99,149);
 }
 
-.secondPath{
+.secondStyle{
     fill:rgb(0,99,149);
 }
 
-.thirdPath{
+.thirdStyle{
     fill:rgb(0,99,149);
 }
 
-.fourthPath{
+.fourthStyle{
     fill:rgb(0,99,149);
 }
 
-.fifthPath{
+.fifthStyle{
     fill:rgb(0,99,149);
 }
 
-.sixthPath{
+.sixthStyle{
     fill:rgb(3,70,104);
 }
 
-.seventhPath{
+.seventhStyle{
     fill:rgb(0,99,149);
 }
 
-.eightPath{
+.eightStyle{
     fill:rgb(3,70,104);
 }
+
+/* described paths styles as numberStyle instead of numberPath because of conflict in styles of bookImage.svg
+It should be investigated further */

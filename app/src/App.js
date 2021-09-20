@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { MainContainer } from './core/MainContainer';
 import { UserMenu } from './core/userMenu/containers/UserMenu';
 import { AdminMenu } from './core/adminMenu/containers/AdminMenu';
-import { LoginForm } from './core/loginForm/containers/LoginForm';
+import LoginForm from './core/loginForm/containers/LoginForm';
 import { RegisterForm } from './core/RegisterForm/containers/RegisterForm';
 import { InactiveReplacement } from './core/inactiveReplacement/containers/InactiveReplacement';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -19,7 +19,8 @@ import PrivateRoute from './core/common/PrivateRoute';
 import store from './store';
 import { loadUser } from './redux/actions/auth';
 import { ActivateAccount } from './core/ActivateAccount/containers/ActivateAccount';
-import { PasswordReset } from './core/PasswordReset/containers/PasswordReset';
+import {ResetPassword} from './core/ResetPassword/containers/ResetPassword'
+import { PasswordResetConfirm } from './core/PasswordResetConfirm/containers/PasswordResetConfirm'
 
 function App() {
 	useEffect(() => {
@@ -46,7 +47,8 @@ function App() {
 					/>
 					{/* <PrivateRoute path='/volunteer_register' component={VolunteerRegister} /> */}
 					<Route path='/activate/{uid}/{token}' component={ActivateAccount} />
-					<Route path='/password/reset/confirm/{uid}/{token}' component={PasswordReset} />
+					<Route path='/reset-password' component={ResetPassword} />
+					<Route path='/password/reset/confirm/{uid}/{token}' component={PasswordResetConfirm} />
 					<Route path='*' component={Whoops404} />
 				</Switch>
 			</MainContainer>
