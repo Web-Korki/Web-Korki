@@ -8,27 +8,27 @@ import { WhichMonthFunc } from '../../sharedComponents/containers/WhichMonthFunc
 export const LectureAnalysisDetail = (link) => {
   const link_prop = link.match.params.month;
 
-  const baseURL = 'https://web-korki.edu.pl';
-  const token = localStorage.getItem('token');
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Token ${token}`,
-    },
-  };
+  // const baseURL = 'https://web-korki.edu.pl';
+  // const token = localStorage.getItem('token');
+  // const config = {
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Token ${token}`,
+  //   },
+  // };
 
-  const getHouses = async () => {
-    const houses = await axios
-      .get(`${baseURL}/api/houses`, config)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.log('Error', err));
-  };
+  // const getHouses = async () => {
+  //   const houses = await axios
+  //     .get(`${baseURL}/api/houses`, config)
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((err) => console.log('Error', err));
+  // };
 
-  useEffect(() => {
-    getHouses();
-  }, []);
+  // useEffect(() => {
+  //   getHouses();
+  // }, []);
 
   return (
     <>
