@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
 	const { type, payload } = action;
 	switch (type) {
 		case LOGIN_SUCCESS:
-			localStorage.setItem('access', payload.access)
+			localStorage.setItem('access', payload.access);
 			return {
 				...state,
 				isAuthenticated: true,
@@ -35,8 +35,8 @@ export default function(state = initialState, action) {
 				user: null
 			}
 		case LOGIN_FAIL:
-			localStorage.removeItem('access'),
-			localStorage.removeItem('refresh')
+			localStorage.removeItem('access');
+			localStorage.removeItem('refresh');
 			return{
 				...state,
 				access: null,

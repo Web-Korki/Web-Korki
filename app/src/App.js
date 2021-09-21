@@ -23,9 +23,9 @@ import {ResetPassword} from './core/ResetPassword/containers/ResetPassword'
 import { PasswordResetConfirm } from './core/PasswordResetConfirm/containers/PasswordResetConfirm'
 
 function App() {
-	useEffect(() => {
-		store.dispatch(loadUser());
-	});
+	// useEffect(() => {
+	// 	store.dispatch(loadUser());
+	// });
 
 	return (
 		<>

@@ -3,25 +3,26 @@ import { StyledLoginBox, StyledInput } from '../styledComponents/index';
 import { StyledBlueButton } from '../../sharedComponents/styledComponents';
 import { Link, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
+import { login } from '../../../redux/actions/auth';
 
 // https://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example
 // https://www.youtube.com/watch?v=Fia-GGgHpK0
 // https://github.com/axios/axios
 
-const LoginForm = () => {
+const LoginForm = ({ login }) => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: ''
 	})
 
-	const {email, password} = formData;
+	const { email, password } = formData;
 	
-	const onChange = (e) => setFormData({...formData, [e.target.name]: e.target.value})
+	const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 	
-	const onSubmit = (e) => {
+	const onSubmit = e => {
 		e.preventDefault();
-		console.log(email, password);
-		//login(email, password)
+		
+		login(email, password)
 	};
 
 	//Is the user authenticated? => redirect to home page
@@ -36,16 +37,18 @@ const LoginForm = () => {
 						type='text'
 						placeholder='login'
 						className='mt-md-5 mt-4 mb-4'
-						onChange={e => onChange(e)}
+						name='email'
 						value={email}
+						onChange={e => onChange(e)}
 						required
 					/>
 					<StyledInput
 						id='password'
 						type='password'
 						placeholder='hasło'
-						onChange={e => onChange(e)}
+						name='password'
 						value={password}
+						onChange={e => onChange(e)}
 						required
 					/>
 					<StyledBlueButton type='submit' className='mt-4 px-5 py-2'>
@@ -62,4 +65,4 @@ const LoginForm = () => {
 // 	//is authenticated?
 // })
 
-export default connect(null, { })(LoginForm)
+export default connect(null, { login })(LoginForm)
