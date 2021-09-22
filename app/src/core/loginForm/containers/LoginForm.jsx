@@ -11,18 +11,17 @@ import { login } from '../../../redux/actions/auth';
 
 const LoginForm = ({ login }) => {
 	const [formData, setFormData] = useState({
-		email: '',
+		username: '',
 		password: ''
 	})
 
-	const { email, password } = formData;
+	const { username, password } = formData;
 	
 	const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 	
 	const onSubmit = e => {
 		e.preventDefault();
-		
-		login(email, password)
+		login(username, password)
 	};
 
 	//Is the user authenticated? => redirect to home page
@@ -37,8 +36,8 @@ const LoginForm = ({ login }) => {
 						type='text'
 						placeholder='login'
 						className='mt-md-5 mt-4 mb-4'
-						name='email'
-						value={email}
+						name='username'
+						value={username}
 						onChange={e => onChange(e)}
 						required
 					/>
