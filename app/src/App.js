@@ -17,15 +17,15 @@ import PrivateRoute from './core/common/PrivateRoute';
 
 //API
 import store from './store';
-import { loadUser } from './redux/actions/auth';
+import { loadUser, load_user } from './redux/actions/auth';
 import { ActivateAccount } from './core/ActivateAccount/containers/ActivateAccount';
 import {ResetPassword} from './core/ResetPassword/containers/ResetPassword'
 import { PasswordResetConfirm } from './core/PasswordResetConfirm/containers/PasswordResetConfirm'
 
 function App() {
-	// useEffect(() => {
-	// 	store.dispatch(loadUser());
-	// });
+	useEffect(() => {
+		store.dispatch(load_user());
+	});
 
 	return (
 		<>
