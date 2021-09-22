@@ -1,36 +1,49 @@
-import { USER_LOADED, USER_LOADING, AUTH_ERROR } from '../actions/types';
+import { 
+	LOGIN_SUCCESS,
+	LOGIN_FAIL,
+	USER_LOADED_SUCCESS,
+	USER_LOADED_FAIL 
+} from '../actions/types';
 
 const initialState = {
-	token: localStorage.getItem('token'),
+	access: localStorage.getItem('access'),
+	refresh: localStorage.getItem('refresh'),
 	isAuthenticated: null,
-	isLoading: false,
 	user: null,
+	isLoading: false,
 };
 
-export default function (state = initialState, action) {
-	switch (action.type) {
-		case USER_LOADING:
-			return {
-				...state,
-				isLoading: true,
-			};
-		case USER_LOADED:
+export default function(state = initialState, action) {
+	const { type, payload } = action;
+	switch (type) {
+		case LOGIN_SUCCESS:
+			localStorage.setItem('access', payload.access);
 			return {
 				...state,
 				isAuthenticated: true,
-				isLoading: false,
-				user: action.payload,
-			};
-		case AUTH_ERROR:
-			localStorage.removeItem('token');
+				access: payload.access,
+				refresh: payload.refresh
+			}
+		case USER_LOADED_SUCCESS:
 			return {
 				...state,
-				token: null,
-				user: null,
+				user: payload
+			}
+		case USER_LOADED_FAIL:
+			return {
+				...state,
+				user: null
+			}
+		case LOGIN_FAIL:
+			localStorage.removeItem('access');
+			localStorage.removeItem('refresh');
+			return{
+				...state,
+				access: null,
+				refresh: null,
 				isAuthenticated: false,
-				isLoading: false,
-			};
-
+				user: null
+			}
 		default:
 			return state;
 	}
