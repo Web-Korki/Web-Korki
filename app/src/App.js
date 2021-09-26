@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { MainContainer } from './core/MainContainer';
-import { UserMenu } from './core/userMenu/containers/UserMenu';
-import { AdminMenu } from './core/adminMenu/containers/AdminMenu';
+import UserMenu from './core/userMenu/containers/UserMenu';
+import AdminMenu from './core/adminMenu/containers/AdminMenu';
 import LoginForm from './core/loginForm/containers/LoginForm';
 import { RegisterForm } from './core/RegisterForm/containers/RegisterForm';
 import { InactiveReplacement } from './core/inactiveReplacement/containers/InactiveReplacement';
@@ -17,15 +17,15 @@ import PrivateRoute from './core/common/PrivateRoute';
 
 //API
 import store from './store';
-import { loadUser } from './redux/actions/auth';
+import { load_user } from './redux/actions/auth';
 import { ActivateAccount } from './core/ActivateAccount/containers/ActivateAccount';
 import {ResetPassword} from './core/ResetPassword/containers/ResetPassword'
 import { PasswordResetConfirm } from './core/PasswordResetConfirm/containers/PasswordResetConfirm'
 
 function App() {
-	// useEffect(() => {
-	// 	store.dispatch(loadUser());
-	// });
+	useEffect(() => {
+		store.dispatch(load_user());
+	});
 
 	return (
 		<>

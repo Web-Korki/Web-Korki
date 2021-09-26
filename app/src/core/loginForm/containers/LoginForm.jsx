@@ -4,12 +4,13 @@ import { StyledBlueButton } from '../../sharedComponents/styledComponents';
 import { Link, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../../redux/actions/auth';
+import { UserMenu } from '../../userMenu/containers/UserMenu';
 
 // https://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example
 // https://www.youtube.com/watch?v=Fia-GGgHpK0
 // https://github.com/axios/axios
 
-const LoginForm = ({ login }) => {
+const LoginForm = ({ login, isAuthenticated }) => {
 	const [formData, setFormData] = useState({
 		username: '',
 		password: ''
@@ -24,7 +25,9 @@ const LoginForm = ({ login }) => {
 		login(username, password)
 	};
 
-	//Is the user authenticated? => redirect to home page
+	if(isAuthenticated){
+		return <Redirect to='/admin_menu' />
+	}
 
 	return (
 		<div className='d-flex justify-content-center align-items-center flex-column loginForm'>
@@ -60,8 +63,8 @@ const LoginForm = ({ login }) => {
 	);
 };
 
-// const mapStateToProps = state => ({
-// 	//is authenticated?
-// })
+const mapStateToProps = state => ({
+	isAuthenticated: state.auth.isAuthenticated
+})
 
-export default connect(null, { login })(LoginForm)
+export default connect(mapStateToProps, { login })(LoginForm)

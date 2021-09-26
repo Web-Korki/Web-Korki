@@ -1,62 +1,57 @@
-// import axios from 'axios';
-// import { LOGIN_FAIL, USER_LOADED, USER_LOADING } from './types';
-
-// const baseURL = 'http://nujgoiz.cluster024.hosting.ovh.net';
-// // CHECK TOKEN & LOAD USER:
-// export const loadUser = () => (dispatch, getState) => {
-// 	//User loading:
-// 	dispatch({
-// 		type: USER_LOADING,
-// 	});
-
-// 	//Get token from state:
-// 	const token = getState().auth.token;
-
-// 	//Headers
-// 	const config = {
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 	};
-
-// 	//If token, add to headers config
-// 	if (token) {
-// 		config.headers['Authorization'] = `Token ${token}`;
-// 	}
-
-// 	axios
-// 		.get(`${baseURL}/api/auth/user`, config)
-// 		.then((res) => {
-// 			dispatch({
-// 				type: USER_LOADED,
-// 				payload: res.data,
-// 			});
-// 		})
-// 		.catch((err) => {
-// 			console.log(err.response.data, err.response.status);
-// 			dispatch({
-// 				type: LOGIN_FAIL,
-// 			});
-// 		});
-// };
-
-
 import axios from 'axios';
 import { 
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
 	USER_LOADED_SUCCESS,
-	USER_LOADED_FAIL 
+	USER_LOADED_FAIL,
+	AUTHENTICATED_FAIL,
+	AUTHENTICATED_SUCCESS,
+	LOGOUT
 } from './types';
 
 const API_URL = 'https://web-korki.edu.pl';
+
+export const checkAuthenticated = () => async dispatch => {
+	if(localStorage.getItem('access')){
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
+			}
+		};
+		const body = JSON.stringify({ token: localStorage.getItem('access') });
+
+		try {
+			const res = await axios.post(`${API_URL}/auth/jwt/verify`, body, config);
+
+			if(res.data.code !== 'token_not_valid'){
+				dispatch({
+					type: AUTHENTICATED_SUCCESS
+				})
+			} else {
+				dispatch({
+					type: AUTHENTICATED_FAIL
+				})	
+			}
+		} catch(err) {
+			dispatch({
+				type: AUTHENTICATED_FAIL
+			})
+		}
+
+	} else {
+		dispatch({
+			type: AUTHENTICATED_FAIL
+		})
+	}
+}
 
 export const load_user = () => async dispatch => {
 	if(localStorage.getItem('access')){
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': `JWT ${localStorage.getItem('access')}`,
+				'Authorization': `Bearer ${localStorage.getItem('access')}`,
 				'Accept': 'application/json'
 			}
 		};
@@ -104,4 +99,11 @@ export const login = (username, password) => async dispatch => {
 			type: LOGIN_FAIL
 		})
 	}
+}
+
+export const logout = () => dispatch => {
+	console.log('should logout')
+	dispatch({
+		type: LOGOUT
+	})
 }
