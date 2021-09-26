@@ -22,7 +22,7 @@ const AdminMenu = ({ logout }) => {
           </div>
           <div className="row justify-content-center">
             <div className="col-12 col-lg-auto p-lg-2 p-1">
-              <NavLink to="/volunteer_register">
+              <NavLink to="/register_form">
                 <StyledBox>Zarejestruj korepetytora</StyledBox>
               </NavLink>
             </div>
