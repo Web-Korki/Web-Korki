@@ -4,11 +4,6 @@ import { StyledBlueButton } from '../../sharedComponents/styledComponents';
 import { Link, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../../redux/actions/auth';
-import { UserMenu } from '../../userMenu/containers/UserMenu';
-
-// https://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example
-// https://www.youtube.com/watch?v=Fia-GGgHpK0
-// https://github.com/axios/axios
 
 const LoginForm = ({ login, isAuthenticated }) => {
 	const [formData, setFormData] = useState({
