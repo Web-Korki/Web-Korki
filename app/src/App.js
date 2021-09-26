@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { MainContainer } from './core/MainContainer';
-import { UserMenu } from './core/userMenu/containers/UserMenu';
-import { AdminMenu } from './core/adminMenu/containers/AdminMenu';
+import UserMenu from './core/userMenu/containers/UserMenu';
+import AdminMenu from './core/adminMenu/containers/AdminMenu';
 import LoginForm from './core/loginForm/containers/LoginForm';
 import { RegisterForm } from './core/RegisterForm/containers/RegisterForm';
 import { InactiveReplacement } from './core/inactiveReplacement/containers/InactiveReplacement';

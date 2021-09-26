@@ -102,6 +102,7 @@ export const login = (username, password) => async dispatch => {
 }
 
 export const logout = () => dispatch => {
+	console.log('should logout')
 	dispatch({
 		type: LOGOUT
 	})

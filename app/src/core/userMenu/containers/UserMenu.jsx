@@ -8,10 +8,7 @@ import "../UserMenu.style.css";
 import { connect } from "react-redux";
 import { logout } from "../../../redux/actions/auth";
 
-export const UserMenu = ({ logout }) => {
-  const logoutHandler = () => {
-    logout();
-  }
+const UserMenu = ({ logout }) => {
 
   return (
     <>
@@ -22,9 +19,7 @@ export const UserMenu = ({ logout }) => {
               Menu
             </h1>
             <div className="col-md d-flex align-items-center justify-content-lg-end justify-content-center">
-              <NavLink to="/login_form">
-                <StyledGreyButton>wyloguj się</StyledGreyButton>
-              </NavLink>
+              <StyledGreyButton onClick={logout}>wyloguj się</StyledGreyButton>
             </div>
           </div>
           <div className="row justify-content-center">
@@ -50,4 +45,8 @@ export const UserMenu = ({ logout }) => {
   );
 };
 
-export default connect(null, {logout})(UserMenu)
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { logout })(UserMenu)
