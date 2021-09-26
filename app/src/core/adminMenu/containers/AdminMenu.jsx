@@ -3,8 +3,14 @@ import {
   StyledBox,
 } from "../../sharedComponents/styledComponents/index";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../../../redux/actions/auth";
 
-export const AdminMenu = () => {
+export const AdminMenu = ({ logout }) => {
+  const logoutHandler = () => {
+    logout();
+  }
+
   return (
     <>
       <div className="adminMenu d-flex justify-content-center">
@@ -51,3 +57,5 @@ export const AdminMenu = () => {
     </>
   );
 };
+
+export default connect(null, {logout})(AdminMenu)

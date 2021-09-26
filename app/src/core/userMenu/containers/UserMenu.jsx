@@ -5,8 +5,14 @@ import {
 } from "../../sharedComponents/styledComponents/index";
 import { Link, NavLink } from "react-router-dom";
 import "../UserMenu.style.css";
+import { connect } from "react-redux";
+import { logout } from "../../../redux/actions/auth";
 
-export const UserMenu = () => {
+export const UserMenu = ({ logout }) => {
+  const logoutHandler = () => {
+    logout();
+  }
+
   return (
     <>
       <div className="userMenu d-flex justify-content-center">
@@ -43,3 +49,5 @@ export const UserMenu = () => {
     </>
   );
 };
+
+export default connect(null, {logout})(UserMenu)

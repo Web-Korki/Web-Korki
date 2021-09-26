@@ -9,7 +9,7 @@ import { login } from '../../../redux/actions/auth';
 // https://www.youtube.com/watch?v=Fia-GGgHpK0
 // https://github.com/axios/axios
 
-const LoginForm = ({ login }) => {
+const LoginForm = ({ login, isAuthenticated }) => {
 	const [formData, setFormData] = useState({
 		username: '',
 		password: ''
@@ -24,7 +24,9 @@ const LoginForm = ({ login }) => {
 		login(username, password)
 	};
 
-	//Is the user authenticated? => redirect to home page
+	// if(isAuthenticated){
+	// 	sprawdzić, czy jako admin czy zwykły user i w zależności od tego przekierować do innego menu
+	// }
 
 	return (
 		<div className='d-flex justify-content-center align-items-center flex-column loginForm'>
@@ -60,8 +62,8 @@ const LoginForm = ({ login }) => {
 	);
 };
 
-// const mapStateToProps = state => ({
-// 	//is authenticated?
-// })
+const mapStateToProps = state => ({
+	isAuthenticated: state.auth.isAuthenticated
+})
 
-export default connect(null, { login })(LoginForm)
+export default connect(mapStateToProps, { login })(LoginForm)
