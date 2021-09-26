@@ -4,6 +4,7 @@ import { StyledBlueButton } from '../../sharedComponents/styledComponents';
 import { Link, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../../redux/actions/auth';
+import { UserMenu } from '../../userMenu/containers/UserMenu';
 
 // https://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example
 // https://www.youtube.com/watch?v=Fia-GGgHpK0
@@ -24,9 +25,9 @@ const LoginForm = ({ login, isAuthenticated }) => {
 		login(username, password)
 	};
 
-	// if(isAuthenticated){
-	// 	sprawdzić, czy jako admin czy zwykły user i w zależności od tego przekierować do innego menu
-	// }
+	if(isAuthenticated){
+		return <Redirect to='/admin_menu' />
+	}
 
 	return (
 		<div className='d-flex justify-content-center align-items-center flex-column loginForm'>
