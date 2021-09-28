@@ -55,6 +55,14 @@ class PasswordReset(UserViewSet):
         #     else:
         #         return Response(response.json())
 
+    ##TODO: Tu coś zjebane i mi kurwa nie działa xD
+    #Flow:
+    #1. Zapomniałem hasła
+    #2. (Galicki view): Podaj maila
+    #3. Endpoint password reset confirmation -> wysyła maila, czy to na pewno ty
+    #4. Klik w link z tokenem -> otwiera stronę podaj nowe hasło
+    #5. POST request zmienia hasło i chuj
+
 
 
 

@@ -24,3 +24,5 @@ def send_mail(sender, instance, created, **kwargs):
             if teacher not in busy_teachers
         ]
         NotificationEmail.send(to=free_teachers)
+
+        ##TODO: Signals and sending substitution mail

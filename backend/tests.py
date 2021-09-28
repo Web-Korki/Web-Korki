@@ -17,3 +17,5 @@ class RegistrationTestCase(APITestCase):
         resolver = resolve("/api/")
         # response = self.client.post(, data)
         self.assertEqual(resolver.view_name, "summary")
+
+##TODO Write tests
