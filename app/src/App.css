@@ -25,7 +25,8 @@ h1 {
 }
 
 /* UserMenu Start */
-.userMenu {
+.userMenu,
+.adminMenu {
   height: 100vh;
   margin: 15vh 0;
 }
@@ -44,15 +45,15 @@ h1 {
 }
 /* UserMenu End */
 
-/* AdminMenu Start */
-.adminMenu {
-  height: 100vh;
-  margin: 15vh 0;
-}
-/* AdminMenu End */
-
 /* InactiveReplacement Start */
-.inactiveReplacementWrapper {
+.inactiveReplacementWrapper,
+.resetPassword,
+.loginForm,
+.registerForm,
+.resetPasswordConfirm,
+.Home,
+.Whoops404,
+.volunteerRegisterWrapper {
   height: 100vh;
 }
 
@@ -67,39 +68,19 @@ h1 {
 /* InactiveReplacement End */
 
 /* LectureAnalysis Start */
-.lectureAnalysisWrapper {
+.lectureAnalysisWrapper,
+.volunteerAnalysisWrapper {
   padding: 15vw 0 10vw 0;
 }
 /* LectureAnalysis End */
 
-/* VolunteerAnalysis Start */
-.volunteerAnalysisWrapper {
-  height: 100vh;
-  padding: 15vw 0 0 0;
-}
-/* VolunteerAnalysis End */
-
-.loginForm {
-  height: 100vh;
-}
-
-.registerForm {
-  height: 100vh;
-}
-
-.Home {
-  height: 100vh;
-}
-
-.Whoops404 {
-  height: 100vh;
-}
-/* VolunteerRegister Start */
-.volunteerRegisterWrapper {
-  height: 100vh;
-}
-/* VolunteerRegister End */
-
 .card {
   word-wrap: normal;
 }
+.lectureAnalysisInnerWrapper {
+  width: 1024px;
+  height: 650px;
+  margin: 0 auto;
+}
+
+/* LectureAnalysis End */

@@ -1,32 +1,28 @@
 import React, { useState } from 'react';
-import { StyledLoginBox, StyledInput } from '../styledComponents/index';
+import { StyledLoginBox, StyledInput } from '../../loginForm/styledComponents';
 import { StyledBlueButton } from '../../sharedComponents/styledComponents';
-import { Link, Redirect} from 'react-router-dom';
+import { Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../../../redux/actions/auth';
+import { verify } from '../../../redux/actions/auth';
 
-const LoginForm = ({ login, isAuthenticated }) => {
-	const [formData, setFormData] = useState({
-		username: '',
-		password: ''
-	})
+const ActivateAccount = ({ verify, match }) => {	
+    const [verified, setVerified] = useState(false);
 
-	const { username, password } = formData;
-	
-	const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
-	
-	const onSubmit = e => {
-		e.preventDefault();
-		login(username, password)
+	const verify_account = e => {
+		const uid = match.params.uid;
+        const token = match.params.token;
+		
+        verify(uid, token)
+        setVerified(true);
 	};
 
-	if(isAuthenticated){
-		return <Redirect to='/admin_menu' />
+	if(verified){
+		return <Redirect to='/UserMenu' />
 	}
 
 	return (
 		<div className='d-flex justify-content-center align-items-center flex-column loginForm'>
-			<form onSubmit={e => onSubmit(e)}>
+			{/* <form onSubmit={e => onSubmit(e)}>
 				<StyledLoginBox className='d-flex align-items-center flex-column'>
 					<h1 className='mt-md-5 mb-3'>Logowanie do platformy</h1>
 					<StyledInput
@@ -53,13 +49,9 @@ const LoginForm = ({ login, isAuthenticated }) => {
 					</StyledBlueButton>
 				</StyledLoginBox>
 			</form>
-			<Link className='mt-3' to='/reset-password'>Zapomniałem hasła</Link>
+			<Link className='mt-3' to='/reset-password'>Zapomniałem hasła</Link> */}
 		</div>
 	);
 };
 
-const mapStateToProps = state => ({
-	isAuthenticated: state.auth.isAuthenticated
-})
-
-export default connect(mapStateToProps, { login })(LoginForm)
+export default connect(null, { verify })(ActivateAccount)

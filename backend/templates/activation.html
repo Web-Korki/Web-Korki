@@ -1,0 +1,51 @@
+{% load i18n %}
+
+{% block subject %}
+{% blocktrans %}{{ site_name }} - aktywacja konta/account activation{% endblocktrans %}
+{% endblock subject %}
+
+{% block text_body %}
+{% blocktrans %}Polski (English below):{% endblocktrans %}
+{% blocktrans %}Niniejsza wiadomość zawiera informacje niezbędne do ukończenia procesu aktywacji konta na stronie {{ site_name }}.{% endblocktrans %}
+
+{% trans "Aby aktywować konto, kliknij w poniższy link:" %}
+{{ protocol }}://{{ domain }}/{{ url|safe }}
+
+{% trans "Dzięki, że jesteś częścią naszego projektu!" %}
+
+{% blocktrans %}Fundacja {{ site_name }}{% endblocktrans %}
+
+{% blocktrans %}English:{% endblocktrans %}
+{% blocktrans %}You're receiving this email because you need to finish activation process on {{ site_name }}.{% endblocktrans %}
+
+{% trans "Please go to the following page to activate account:" %}
+{{ protocol }}://{{ domain }}/{{ url|safe }}
+
+{% trans "Thanks for being a part of our team!" %}
+
+{% blocktrans %}The {{ site_name }} Foundation{% endblocktrans %}
+
+{% endblock text_body %}
+
+{% block html_body %}
+<p>{% blocktrans %}Polski (English below):{% endblocktrans %}</p>
+<p>{% blocktrans %}Niniejsza wiadomość zawiera informacje niezbędne do ukończenia procesu aktywacji konta na stronie {{ site_name }}.{% endblocktrans %}</p>
+
+<p>{% trans "Aby aktywować konto, kliknij w poniższy link:" %}</p>
+<p><a href="{{ protocol }}://{{ domain }}/{{ url|safe }}">{{ protocol }}://{{ domain }}/{{ url|safe }}</a></p>
+
+<p>{% trans "Dzięki, że jesteś częścią naszego projektu!" %}</p>
+
+<p>{% blocktrans %}Fundacja {{ site_name }}{% endblocktrans %}</p>
+
+<p>{% blocktrans %}English:{% endblocktrans %}</p>
+<p>{% blocktrans %}You're receiving this email because you need to finish activation process on {{ site_name }}.{% endblocktrans %}</p>
+
+<p>{% trans "Please go to the following page to activate account:" %}</p>
+<p><a href="{{ protocol }}://{{ domain }}/{{ url|safe }}">{{ protocol }}://{{ domain }}/{{ url|safe }}</a></p>
+
+<p>{% trans "Thanks for being a part of our team!" %}</p>
+
+<p>{% blocktrans %}The {{ site_name }} Foundation{% endblocktrans %}</p>
+
+{% endblock html_body %}

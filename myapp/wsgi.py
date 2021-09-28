@@ -11,15 +11,15 @@ import os
 import sys
 
 this_file = "www/venv/bin/activate_this.py"
-exec(open(this_file).read(), {'__file__': this_file})
+exec(open(this_file).read(), {"__file__": this_file})
 
 # add your project directory to the sys.path
-project_home = u'/home/nujgoiz/myapp'
+project_home = u"/home/nujgoiz/myapp"
 if project_home not in sys.path:
     sys.path.append(project_home)
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myapp.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myapp.settings")
 
 application = get_wsgi_application()

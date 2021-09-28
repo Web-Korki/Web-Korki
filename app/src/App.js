@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { MainContainer } from './core/MainContainer';
-import { UserMenu } from './core/userMenu/containers/UserMenu';
-import { AdminMenu } from './core/adminMenu/containers/AdminMenu';
-import { LoginForm } from './core/loginForm/containers/LoginForm';
-import { RegisterForm } from './core/RegisterForm/containers/RegisterForm';
+import UserMenu from './core/userMenu/containers/UserMenu';
+import AdminMenu from './core/adminMenu/containers/AdminMenu';
+import LoginForm from './core/loginForm/containers/LoginForm';
+import RegisterForm from './core/RegisterForm/containers/RegisterForm';
 import { InactiveReplacement } from './core/inactiveReplacement/containers/InactiveReplacement';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
@@ -19,11 +19,14 @@ import PrivateRoute from './core/common/PrivateRoute';
 
 //API
 import store from './store';
-import { loadUser } from './redux/actions/auth';
+import { load_user } from './redux/actions/auth';
+import ActivateAccount from './core/ActivateAccount/containers/ActivateAccount';
+import ResetPassword from './core/ResetPassword/containers/ResetPassword';
+import ResetPasswordConfirm from './core/ResetPasswordConfirm/containers/ResetPasswordConfirm';
 
 function App() {
   useEffect(() => {
-    store.dispatch(loadUser());
+    store.dispatch(load_user());
   });
 
   return (
@@ -56,6 +59,12 @@ function App() {
             component={VolunteerAnalysisDetail}
           />
           {/* <PrivateRoute path='/volunteer_register' component={VolunteerRegister} /> */}
+          <Route path="/activate/{uid}/{token}" component={ActivateAccount} />
+          <Route path="/reset-password" component={ResetPassword} />
+          <Route
+            path="/password/reset/confirm/{uid}/{token}"
+            component={ResetPasswordConfirm}
+          />
           <Route path="*" component={Whoops404} />
         </Switch>
       </MainContainer>
