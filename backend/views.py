@@ -1,10 +1,14 @@
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework import status, permissions, viewsets
-from django.contrib.auth import login
-from .serializers import *
-
-from djoser.views import UserViewSet
 from rest_framework.response import Response
+from rest_framework import status, permissions, viewsets
+from django.contrib import messages
+from django.contrib.auth import login
+from django.shortcuts import redirect, render
+from djoser.views import UserViewSet
+from djoser.conf import django_settings
+from django.urls import reverse
+from .serializers import *
+import requests
 
 
 class ActivateUser(UserViewSet):
@@ -22,15 +26,38 @@ class ActivateUser(UserViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class TeacherViewSet(viewsets.ModelViewSet):
 
-    serializer_class = TeacherListSerializer
+class PasswordReset(UserViewSet):
+    def get_serializer(self, *args, **kwargs):
+        serializer_class = self.get_serializer_class()
+        kwargs.setdefault("context", self.get_serializer_context())
 
-    def get_queryset(self):
-        return Teacher.objects.all()
+        kwargs["data"] = {"uid": self.kwargs["uid"], "token": self.kwargs["token"]}
+
+        return serializer_class(*args, **kwargs)
+
+    def reset_password(self, request, uid, token, *args, **kwargs):
+        password = request.POST.get('password1')
+        payload = {'uid': uid, 'token': token}
+        url = "http://127.0.0.1:8000/auth/password/reset/confirm/"
+        result = requests.post(url, data=payload)
+        print(result.status_code)
+        return render(request, 'templates/reset_password.html')
+        # super().reset_password_confirm(request, **payload)
+        # return Response(status=status.HTTP_204_NO_CONTENT)
+
+        #     url = '{0}://{1}{2}'.format(
+        #         django_settings.PROTOCOL, django_settings.DOMAIN, reverse('password_reset'))
+        #
+        #     response = requests.post(url, data=payload)
+        #     if response.status_code == 204:
+        #         messages.success(request, 'Your password has been reset successfully!')
+        #     else:
+        #         return Response(response.json())
 
 
-# Login
+
+
 class LoginView(viewsets.ModelViewSet):
     serializer_class = LoginSerializer
     http_method_names = ["post"]
@@ -60,6 +87,14 @@ class LoginView(viewsets.ModelViewSet):
         )
 
 
+class TeacherViewSet(viewsets.ModelViewSet):
+
+    serializer_class = TeacherListSerializer
+
+    def get_queryset(self):
+        return Teacher.objects.all()
+
+
 class HouseViewSet(viewsets.ModelViewSet):
 
     permission_classes = (permissions.IsAuthenticated,)
@@ -86,6 +121,9 @@ class CancelLessonViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = UpdateSubstitutionSerializer
     http_method_names = ["patch"]
+
+    def get_queryset(self):
+        pass
 
     def update_stats(self, request, lesson_id):
         if request.reason == "by_project":

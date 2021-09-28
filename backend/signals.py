@@ -2,6 +2,7 @@ from django.dispatch import receiver
 from django.db.models import signals
 from .models import Lesson, Teacher
 from datetime import timedelta
+from .notifications import NotificationEmail
 
 
 @receiver(signals.post_save, sender=Lesson)
@@ -22,3 +23,4 @@ def send_mail(sender, instance, created, **kwargs):
             for teacher in Teacher.objects.filter(is_active=True)
             if teacher not in busy_teachers
         ]
+        NotificationEmail.send(to=free_teachers)

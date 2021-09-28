@@ -6,7 +6,8 @@ from routers import router
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from backend.views import ActivateUser
+from backend.views import ActivateUser, PasswordReset
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -30,8 +31,11 @@ urlpatterns = [
     path(
         "activate/<uid>/<token>",
         ActivateUser.as_view({"get": "activation"}),
-        name="activation",
-    ),
+        name="activation"),
+    path(
+        "password/reset/confirm/<uid>/<token>",
+        PasswordReset.as_view({'get': 'reset_password'}),
+        name="reset_password"),
     path(
         r"docs/",
         schema_view.with_ui("swagger", cache_timeout=0),
