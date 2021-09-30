@@ -74,7 +74,7 @@ ROOT_URLCONF = "myapp.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, 'backend', 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -206,7 +206,7 @@ DJOSER = {
     "SET_PASSWORD_RETYPE": True,
     "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "activate/{uid}/{token}",
-    "EMAIL": {}, #"activation": "backend.notifications.ActivationEmail"
+    "EMAIL": {"activation": "backend.notifications.ActivationEmail"},
     "SERIALIZERS": {
         "user_create": "backend.serializers.UserRegisterSerializer",
         "user": "backend.serializers.UserRegisterSerializer",

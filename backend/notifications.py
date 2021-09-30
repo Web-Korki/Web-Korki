@@ -6,6 +6,7 @@ import os
 from myapp.settings import BASE_DIR
 from templated_mail import mail
 from pathlib import Path
+from myapp.settings import BASE_DIR
 
 # subject = 'Hello from WK'
 # sender = EMAIL_HOST_USER
@@ -16,11 +17,11 @@ from pathlib import Path
 
 
 class NotificationEmail(mail.BaseEmailMessage):
-    template_name = Path("backend/templates/substitution_needed.html")
+    template_name = os.path.join(BASE_DIR, "backend", "templates", "substitution_needed", "html")
 
     def get_context_data(self):
         context = super().get_context_data()
 
 
-#class ActivationEmail(email.ActivationEmail):
-    #template_name = "C:\\Users\\Hawkesky\\PycharmProjects\\backend\\templates\\activation.html"
+class ActivationEmail(email.ActivationEmail):
+    template_name = os.path.join(BASE_DIR, "backend", "templates", "activation.html")

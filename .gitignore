@@ -1,15 +1,17 @@
-
 # dependencies
 app/node_modules
 app/.pnp
 .pnp.js
+
+# venvs
+env
 venv
 venv35
 venv35.rar
+.python-version
 
 # testing
 app/coverage
-.python-version
 
 # production
 app/build
@@ -29,7 +31,6 @@ app.py
 **/__pycache__
 *.pyc
 staticfiles
-
 
 npm-debug.log*
 yarn-debug.log*

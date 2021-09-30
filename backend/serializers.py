@@ -17,11 +17,11 @@ class TeacherSerializer(serializers.ModelSerializer):
         model = Teacher
         fields = "__all__"
 
-
-class TeacherListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Teacher
-        fields = "__all__"
+# TODO do we need this ? Commented on 30.09.2021
+# class TeacherListSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Teacher
+#         fields = "__all__"
 
 
 class LoginSerializer(serializers.ModelSerializer):

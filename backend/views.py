@@ -95,13 +95,13 @@ class LoginView(viewsets.ModelViewSet):
         )
 
 
-class TeacherViewSet(viewsets.ModelViewSet):
-
-    serializer_class = TeacherListSerializer
-    permission_classes = [permissions.IsAdminUser]
-
-    def get_queryset(self):
-        return Teacher.objects.all()
+# class TeacherViewSet(viewsets.ModelViewSet):
+#
+#     serializer_class = TeacherListSerializer
+#     permission_classes = [permissions.IsAdminUser]
+#
+#     def get_queryset(self):
+#         return Teacher.objects.all()
 
 
 class HouseViewSet(viewsets.ModelViewSet):
