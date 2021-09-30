@@ -132,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pl-pl"
 
 TIME_ZONE = "Europe/Warsaw"
 
@@ -195,10 +195,10 @@ EMAIL_HOST_USER = "notifications@web-korki.edu.pl"
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_PWD"]
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
+# EMAIL_BACKEND = 'django.myapp.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
 
 DJOSER = {
-    "LOGIN_FIELD": "email",
+    "LOGIN_FIELD": "username",
     "USER_CREATE_PASSWORD_RETYPE": True,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "SEND_CONFIRMATION_EMAIL": True,
@@ -211,6 +211,7 @@ DJOSER = {
         "user_create": "backend.serializers.UserRegisterSerializer",
         "user": "backend.serializers.UserRegisterSerializer",
         "user_delete": "djoser.serializers.UserDeleteSerializer",
+        "current_user": "backend.serializers.TeacherSerializer",
     },
 }
 
