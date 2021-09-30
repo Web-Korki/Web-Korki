@@ -22,5 +22,5 @@ class NotificationEmail(mail.BaseEmailMessage):
         context = super().get_context_data()
 
 
-class ActivationEmail(email.ActivationEmail):
-    template_name = Path("backend/templates/activation.html")
+#class ActivationEmail(email.ActivationEmail):
+    #template_name = "C:\\Users\\Hawkesky\\PycharmProjects\\backend\\templates\\activation.html"

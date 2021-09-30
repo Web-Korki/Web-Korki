@@ -206,7 +206,7 @@ DJOSER = {
     "SET_PASSWORD_RETYPE": True,
     "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "activate/{uid}/{token}",
-    "EMAIL": {"activation": "backend.notifications.ActivationEmail"},
+    "EMAIL": {}, #"activation": "backend.notifications.ActivationEmail"
     "SERIALIZERS": {
         "user_create": "backend.serializers.UserRegisterSerializer",
         "user": "backend.serializers.UserRegisterSerializer",
