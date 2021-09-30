@@ -1,56 +1,70 @@
-import React from 'react';
-import { StyledBoxLectureAnalysis } from '../styledComponents/index';
+import { StyledBoxMonths } from '../../sharedComponents/styledComponents/index';
+import { BackButton } from '../../sharedComponents/containers/BackButton';
+import { Link } from 'react-router-dom';
 
 export const LectureAnalysis = () => {
   return (
-		<>
-			<div className='lectureAnalysisWrapper d-flex align-items-center justify-content-center'>
-				<div className='lectureAnalysisInnerWrapper'>
-					<div className='row'>
-						<div className='lectureAnalysisTitle text-center col-12'>
-							<h1>Analiza - zajęcia</h1>
-						</div>
-					</div>
-					<div className='row mt-md-5 mx-2'>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Wrzesień</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Październik</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Listopad</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Grudzień</StyledBoxLectureAnalysis>
-						</div>
-					</div>
-					<div className='row mx-2'>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Styczeń</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Luty</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Marzec</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Kwiecień</StyledBoxLectureAnalysis>
-						</div>
-					</div>
-					<div className='row mx-2'>
-						<div className='col-lg-3 col-0 p-0'></div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Maj</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-6 p-0'>
-							<StyledBoxLectureAnalysis>Czerwiec</StyledBoxLectureAnalysis>
-						</div>
-						<div className='col-lg-3 col-0 p-0'></div>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+    <>
+      <div className="lectureAnalysisWrapper justify-content-center">
+        <div className="container">
+          <div className="d-flex justify-content-center align-items-center mb-5">
+            <BackButton />
+            <h1 className="title ml-2">Analiza - zajęcia</h1>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/september">
+                <StyledBoxMonths>Wrzesień</StyledBoxMonths>
+              </Link>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/october">
+                <StyledBoxMonths>Październik</StyledBoxMonths>
+              </Link>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/november">
+                <StyledBoxMonths>Listopad</StyledBoxMonths>
+              </Link>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/december">
+                <StyledBoxMonths>Grudzień</StyledBoxMonths>
+              </Link>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/january">
+                <StyledBoxMonths>Styczeń</StyledBoxMonths>
+              </Link>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/february">
+                <StyledBoxMonths>Luty</StyledBoxMonths>
+              </Link>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/march">
+                <StyledBoxMonths>Marzec</StyledBoxMonths>
+              </Link>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/april">
+                <StyledBoxMonths>Kwiecień</StyledBoxMonths>
+              </Link>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/may">
+                <StyledBoxMonths>Maj</StyledBoxMonths>
+              </Link>
+            </div>
+            <div className="col-lg-3 col-6 p-lg-2 p-1">
+              <Link to="/lecture_analysis/june">
+                <StyledBoxMonths>Czerwiec</StyledBoxMonths>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };

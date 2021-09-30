@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
 
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -10,7 +10,7 @@ html {
 
 body {
   background-color: #dff2fb;
-  font-family: "Sen", sans-serif;
+  font-family: 'Sen', sans-serif;
 }
 
 h1 {
@@ -25,7 +25,8 @@ h1 {
 }
 
 /* UserMenu Start */
-.userMenu, .adminMenu {
+.userMenu,
+.adminMenu {
   height: 100vh;
   margin: 15vh 0;
 }
@@ -45,7 +46,14 @@ h1 {
 /* UserMenu End */
 
 /* InactiveReplacement Start */
-.inactiveReplacementWrapper, .resetPassword, .lectureAnalysisWrapper, .loginForm, .registerForm, .resetPasswordConfirm, .Home, .Whoops404, .volunteerRegisterWrapper, .volunteerAnalysisWrapper {
+.inactiveReplacementWrapper,
+.resetPassword,
+.loginForm,
+.registerForm,
+.resetPasswordConfirm,
+.Home,
+.Whoops404,
+.volunteerRegisterWrapper {
   height: 100vh;
 }
 
@@ -59,15 +67,20 @@ h1 {
 }
 /* InactiveReplacement End */
 
+/* LectureAnalysis Start */
+.lectureAnalysisWrapper,
+.volunteerAnalysisWrapper {
+  padding: 15vw 0 10vw 0;
+}
+/* LectureAnalysis End */
+
+.card {
+  word-wrap: normal;
+}
 .lectureAnalysisInnerWrapper {
   width: 1024px;
   height: 650px;
   margin: 0 auto;
 }
 
-.lectureAnalysisTitle {
-  color: #427e90;
-}
 /* LectureAnalysis End */
-
-
