@@ -23,13 +23,14 @@ const ActivateAccount = ({ verify, match }) => {
 	return (
 		<div className='d-flex justify-content-center align-items-center flex-column activateAccount'>
 			<StyledLoginBox className='d-flex align-items-center justify-content-center flex-column'>
-				<h1 className='mb-3'>Aktywacja nowego konta</h1>
+				<h1 className='mb-3'>Konto zostało aktywowane</h1>
+				<h5>Możesz teraz zalogować się do aplikacji</h5>
 				<StyledBlueButton 
 					className='mt-4 px-5 py-2'
 					onClick={verify_account}
 					type="button"
 				>
-					Aktywuj
+					zaloguj się
 				</StyledBlueButton>
 			</StyledLoginBox>
 		</div>

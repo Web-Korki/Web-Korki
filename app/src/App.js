@@ -59,7 +59,8 @@ function App() {
             component={VolunteerAnalysisDetail}
           />
           {/* <PrivateRoute path='/volunteer_register' component={VolunteerRegister} /> */}
-          <Route path="/activate/{uid}/{token}" component={ActivateAccount} />
+          {/* <Route path="/activate/{uid}/{token}" component={ActivateAccount} /> */}
+          <Route path="/activate" component={ActivateAccount} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route
             path="/password/reset/confirm/{uid}/{token}"
