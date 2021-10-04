@@ -53,7 +53,8 @@ h1 {
 .resetPasswordConfirm,
 .Home,
 .Whoops404,
-.volunteerRegisterWrapper {
+.volunteerRegisterWrapper,
+.activateAccount {
   height: 100vh;
 }
 

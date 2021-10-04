@@ -53,7 +53,7 @@ const LoginForm = ({ login, isAuthenticated }) => {
 					</StyledBlueButton>
 				</StyledLoginBox>
 			</form>
-			<Link className='mt-3' to='/reset-password'>Zapomniałem hasła</Link>
+			<Link className='mt-3' to='/reset_password'>Zapomniałem hasła</Link>
 		</div>
 	);
 };
