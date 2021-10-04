@@ -8,6 +8,7 @@ const StyledInput = styled.input`
 	box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.09);
 	border-radius: 10px;
 	text-align: center;
+	font-size: clamp(18px, 2.5vw, 25px);
 
 	&::placeholder {
 		color: #eeeeee;

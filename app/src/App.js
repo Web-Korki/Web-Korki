@@ -23,6 +23,7 @@ import { load_user } from './redux/actions/auth';
 import ActivateAccount from './core/ActivateAccount/containers/ActivateAccount';
 import ResetPassword from './core/ResetPassword/containers/ResetPassword';
 import ResetPasswordConfirm from './core/ResetPasswordConfirm/containers/ResetPasswordConfirm';
+import SubmitReplacement from './core/submitReplacementForm/containers/SubmitReplacement';
 
 function App() {
   useEffect(() => {
@@ -42,7 +43,7 @@ function App() {
             path="/inactive_replacement"
             component={InactiveReplacement}
           />
-          {/* na czas budowania */}
+          <Route path="/submit_replacement" exact component={SubmitReplacement} />
           <Route path="/lecture_analysis" exact component={LectureAnalysis} />
           <Route
             path="/lecture_analysis/:month"

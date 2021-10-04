@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyledLoginBox, StyledInput } from '../../loginForm/styledComponents';
+import { StyledLoginBox } from '../../loginForm/styledComponents';
 import { StyledBlueButton } from '../../sharedComponents/styledComponents';
 import { Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
