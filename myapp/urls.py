@@ -31,11 +31,13 @@ urlpatterns = [
     path(
         "activate/<uid>/<token>",
         ActivateUser.as_view({"get": "activation"}),
-        name="activation"),
+        name="activation",
+    ),
     path(
         "password/reset/confirm/<uid>/<token>",
-        PasswordReset.as_view({'get': 'reset_password'}),
-        name="reset_password"),
+        PasswordReset.as_view({"get": "reset_password"}),
+        name="reset_password",
+    ),
     path(
         r"docs/",
         schema_view.with_ui("swagger", cache_timeout=0),

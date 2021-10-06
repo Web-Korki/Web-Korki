@@ -23,6 +23,7 @@ app/build
 .env.production.local
 db.sqlite3
 app.py
+.env
 
 #migrations and cache
 **/migrations

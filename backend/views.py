@@ -26,7 +26,6 @@ class ActivateUser(UserViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
 class PasswordReset(UserViewSet):
     def get_serializer(self, *args, **kwargs):
         serializer_class = self.get_serializer_class()
@@ -37,12 +36,12 @@ class PasswordReset(UserViewSet):
         return serializer_class(*args, **kwargs)
 
     def reset_password(self, request, uid, token, *args, **kwargs):
-        password = request.POST.get('password1')
-        payload = {'uid': uid, 'token': token}
+        password = request.POST.get("password1")
+        payload = {"uid": uid, "token": token}
         url = "http://127.0.0.1:8000/auth/password/reset/confirm/"
         result = requests.post(url, data=payload)
         print(result.status_code)
-        return render(request, 'templates/reset_password.html')
+        return render(request, "templates/reset_password.html")
         # super().reset_password_confirm(request, **payload)
         # return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -56,14 +55,12 @@ class PasswordReset(UserViewSet):
         #         return Response(response.json())
 
     ##TODO: Tu coś zjebane i mi kurwa nie działa xD
-    #Flow:
-    #1. Zapomniałem hasła
-    #2. (Galicki view): Podaj maila
-    #3. Endpoint password reset confirmation -> wysyła maila, czy to na pewno ty
-    #4. Klik w link z tokenem -> otwiera stronę podaj nowe hasło
-    #5. POST request zmienia hasło i chuj
-
-
+    # Flow:
+    # 1. Zapomniałem hasła
+    # 2. (Galicki view): Podaj maila
+    # 3. Endpoint password reset confirmation -> wysyła maila, czy to na pewno ty
+    # 4. Klik w link z tokenem -> otwiera stronę podaj nowe hasło
+    # 5. POST request zmienia hasło i chuj
 
 
 class LoginView(viewsets.ModelViewSet):
