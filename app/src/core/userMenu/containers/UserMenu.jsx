@@ -3,7 +3,7 @@ import {
   StyledGreyButton,
   StyledBox,
 } from "../../sharedComponents/styledComponents/index";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../UserMenu.style.css";
 import { connect } from "react-redux";
 import { logout } from "../../../redux/actions/auth";

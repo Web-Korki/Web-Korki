@@ -86,3 +86,7 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+//refresh to https://web-korki.edu.pl/auth/jwt/refresh/
+// headers: Content-Type: application/json
+// body: { "refresh": "[refreshToken]"}

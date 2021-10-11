@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledInput = styled.input`
+const StyledDate = styled.input`
 	width: clamp(173px, 300px, 309px);
 	height: clamp(40px, 2.6vw, 50px);
 	background: #ffffff;
@@ -27,6 +27,10 @@ const StyledInput = styled.input`
 		box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.3);
 	}
 
+	&::-webkit-calendar-picker-indicator {
+		display: none;
+	}
+
 	/* Galaxy Fold responsivness - just because I can xd */
 	@media (width: 280px) {
 		width: 240px;
@@ -34,4 +38,4 @@ const StyledInput = styled.input`
 	}
 `;
 
-export default StyledInput;
+export default StyledDate;
