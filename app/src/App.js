@@ -19,18 +19,20 @@ import PrivateRoute from './core/common/PrivateRoute';
 
 //API
 import store from './store';
-import { load_user } from './redux/actions/auth';
+import { connect } from 'react-redux';
+import { checkAuthenticated, load_user } from './redux/actions/auth';
 import ActivateAccount from './core/ActivateAccount/containers/ActivateAccount';
 import ResetPassword from './core/ResetPassword/containers/ResetPassword';
 import ResetPasswordConfirm from './core/ResetPasswordConfirm/containers/ResetPasswordConfirm';
 import SubmitReplacement from './core/submitReplacementForm/containers/SubmitReplacement';
 
 function App() {
-  useEffect(() => {
-    store.dispatch(load_user());
-  });
+	useEffect(() => {
+		store.dispatch(checkAuthenticated());
+		store.dispatch(load_user());
+	});
 
-  return (
+	return (
 		<>
 			<MainContainer>
 				<Switch>
@@ -77,4 +79,4 @@ function App() {
 	);
 }
 
-export default App;
+export default connect(null, { checkAuthenticated, load_user })(App);

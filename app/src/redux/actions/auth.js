@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { 
+import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
 	REGISTER_SUCCESS,
@@ -10,78 +10,109 @@ import {
 	USER_LOADED_FAIL,
 	AUTHENTICATED_FAIL,
 	AUTHENTICATED_SUCCESS,
+	TOKEN_REFRESH_SUCCESS,
+	TOKEN_REFRESH_FAIL,
 	LOGOUT,
 	PASSWORD_RESET_SUCCESS,
 	PASSWORD_RESET_FAIL,
 	PASSWORD_RESET_CONFIRM_SUCCESS,
-	PASSWORD_RESET_CONFIRM_FAIL
+	PASSWORD_RESET_CONFIRM_FAIL,
 } from './types';
 
 const API_URL = 'https://web-korki.edu.pl';
 
-export const checkAuthenticated = () => async dispatch => {
-	if(localStorage.getItem('access')){
+export const refresh_token = () => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	};
+	const body = JSON.stringify({
+		refresh: localStorage.getItem('refresh'),
+	});
+
+	try {
+		const response = await axios.post(
+			`${API_URL}/auth/jwt/refresh/`,
+			body,
+			config
+		);
+
+		dispatch({
+			type: TOKEN_REFRESH_SUCCESS,
+			payload: response.data,
+		});
+		dispatch(load_user());
+	} catch (err) {
+		dispatch({
+			type: TOKEN_REFRESH_FAIL,
+		});
+	}
+};
+
+export const checkAuthenticated = () => async (dispatch) => {
+	if (localStorage.getItem('access')) {
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
-				'Accept': 'application/json'
-			}
+				Accept: 'application/json',
+			},
 		};
 		const body = JSON.stringify({ token: localStorage.getItem('access') });
 
 		try {
-			const res = await axios.post(`${API_URL}/auth/jwt/verify`, body, config);
+			const res = await axios.post(`${API_URL}/auth/jwt/verify/`, body, config);
 
-			if(res.data.code !== 'token_not_valid'){
+			if (res.data.code !== 'token_not_valid') {
 				dispatch({
-					type: AUTHENTICATED_SUCCESS
-				})
+					type: AUTHENTICATED_SUCCESS,
+				});
 			} else {
 				dispatch({
-					type: AUTHENTICATED_FAIL
-				})	
+					type: AUTHENTICATED_FAIL,
+				});
 			}
-		} catch(err) {
+		} catch (err) {
 			dispatch({
-				type: AUTHENTICATED_FAIL
-			})
+				type: AUTHENTICATED_FAIL,
+			});
+			dispatch(refresh_token());
 		}
-
 	} else {
 		dispatch({
-			type: AUTHENTICATED_FAIL
-		})
+			type: AUTHENTICATED_FAIL,
+		});
 	}
-}
+};
 
-export const load_user = () => async dispatch => {
-	if(localStorage.getItem('access')){
+export const load_user = () => async (dispatch) => {
+	if (localStorage.getItem('access')) {
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${localStorage.getItem('access')}`,
-				'Accept': 'application/json'
-			}
+				Authorization: `Bearer ${localStorage.getItem('access')}`,
+				Accept: 'application/json',
+			},
 		};
 
 		try {
 			const res = await axios.get(`${API_URL}/auth/users/me/`, config);
-	
 			dispatch({
 				type: USER_LOADED_SUCCESS,
-				payload: res.data
-			})
+				payload: res.data,
+			});
 		} catch (err) {
 			dispatch({
-				type: USER_LOADED_FAIL
-			})
+				type: USER_LOADED_FAIL,
+			});
+			dispatch(refresh_token());
 		}
 	} else {
 		dispatch({
-			type: USER_LOADED_FAIL
-		})
+			type: USER_LOADED_FAIL,
+		});
 	}
-}
+};
 
 export const login = (username, password) => async dispatch => {
 	const config = {
