@@ -42,7 +42,7 @@ export const refresh_token = () => async (dispatch) => {
 			type: TOKEN_REFRESH_SUCCESS,
 			payload: response.data,
 		});
-		dispatch(load_user());
+		// dispatch(load_user());
 	} catch (err) {
 		dispatch({
 			type: TOKEN_REFRESH_FAIL,
