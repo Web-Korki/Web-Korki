@@ -20,8 +20,8 @@ import {
 } from '../actions/types';
 
 const initialState = {
-	access: localStorage.getItem('access'),
-	refresh: localStorage.getItem('refresh'),
+	access: Cookies.get('access'),
+	refresh: Cookies.get('refresh'),
 	isAuthenticated: null,
 	user: null,
 	isLoading: false,
@@ -36,18 +36,18 @@ export default function (state = initialState, action) {
 				isAuthenticated: true,
 			};
 		case TOKEN_REFRESH_SUCCESS:
-			localStorage.removeItem('access');
-			localStorage.removeItem('refresh');
-			localStorage.setItem('access', payload.access);
-			localStorage.setItem('refresh', payload.refresh);
+			Cookies.remove('access');
+			Cookies.remove('refresh');
+			Cookies.set('access', payload.access);
+			Cookies.set('refresh', payload.refresh);
 			return {
 				...state,
 				access: payload.access,
 				refresh: payload.refresh,
 			};
 		case LOGIN_SUCCESS:
-			localStorage.setItem('access', payload.access);
-			localStorage.setItem('refresh', payload.refresh);
+			Cookies.set('access', payload.access);
+			Cookies.set('refresh', payload.refresh);
 			return {
 				...state,
 				isAuthenticated: true,
@@ -71,8 +71,8 @@ export default function (state = initialState, action) {
 				isAuthenticated: false,
 			};
 		case TOKEN_REFRESH_FAIL:
-			localStorage.removeItem('access');
-			localStorage.removeItem('refresh');
+			Cookies.remove('access');
+			Cookies.remove('refresh');
 			return {
 				...state,
 				access: null,
@@ -87,8 +87,8 @@ export default function (state = initialState, action) {
 		case LOGIN_FAIL:
 		case REGISTER_FAIL:
 		case LOGOUT:
-			localStorage.removeItem('access');
-			localStorage.removeItem('refresh');
+			Cookies.remove('access');
+			Cookies.remove('refresh');
 			return {
 				...state,
 				access: null,
@@ -109,7 +109,3 @@ export default function (state = initialState, action) {
 			return state;
 	}
 }
-
-//refresh to https://web-korki.edu.pl/auth/jwt/refresh/
-// headers: Content-Type: application/json
-// body: { "refresh": "[refreshToken]"}

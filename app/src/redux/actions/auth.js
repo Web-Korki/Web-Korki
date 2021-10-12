@@ -29,7 +29,7 @@ export const refresh_token = () => async (dispatch) => {
 		},
 	};
 	const body = JSON.stringify({
-		refresh: localStorage.getItem('refresh'),
+		refresh: Cookies.get('refresh'),
 	});
 
 	try {
@@ -45,7 +45,6 @@ export const refresh_token = () => async (dispatch) => {
 		});
 		dispatch(checkAuthenticated());
 		dispatch(load_user());
-		console.log('token updated');
 	} catch (err) {
 		dispatch({
 			type: TOKEN_REFRESH_FAIL,
@@ -54,14 +53,14 @@ export const refresh_token = () => async (dispatch) => {
 };
 
 export const checkAuthenticated = () => async (dispatch) => {
-	if (localStorage.getItem('access')) {
+	if (Cookies.get('access')) {
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
 				Accept: 'application/json',
 			},
 		};
-		const body = JSON.stringify({ token: localStorage.getItem('access') });
+		const body = JSON.stringify({ token: Cookies.get('access') });
 
 		try {
 			const res = await axios.post(`${API_URL}/auth/jwt/verify/`, body, config);
@@ -89,7 +88,7 @@ export const checkAuthenticated = () => async (dispatch) => {
 };
 
 export const load_user = () => async (dispatch) => {
-	if (localStorage.getItem('access')) {
+	if (Cookies.get('access')) {
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
