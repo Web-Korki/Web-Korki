@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
@@ -35,6 +36,10 @@ export default function (state = initialState, action) {
 				isAuthenticated: true,
 			};
 		case TOKEN_REFRESH_SUCCESS:
+			localStorage.removeItem('access');
+			localStorage.removeItem('refresh');
+			localStorage.setItem('access', payload.access);
+			localStorage.setItem('refresh', payload.refresh);
 			return {
 				...state,
 				access: payload.access,

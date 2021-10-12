@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import {
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
@@ -42,7 +43,9 @@ export const refresh_token = () => async (dispatch) => {
 			type: TOKEN_REFRESH_SUCCESS,
 			payload: response.data,
 		});
-		// dispatch(load_user());
+		dispatch(checkAuthenticated());
+		dispatch(load_user());
+		console.log('token updated');
 	} catch (err) {
 		dispatch({
 			type: TOKEN_REFRESH_FAIL,
@@ -105,7 +108,6 @@ export const load_user = () => async (dispatch) => {
 			dispatch({
 				type: USER_LOADED_FAIL,
 			});
-			dispatch(refresh_token());
 		}
 	} else {
 		dispatch({
