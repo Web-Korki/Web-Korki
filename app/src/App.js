@@ -1,31 +1,30 @@
 import React, { useEffect } from 'react';
-import { MainContainer } from './core/MainContainer';
-import UserMenu from './core/userMenu/containers/UserMenu';
-import AdminMenu from './core/adminMenu/containers/AdminMenu';
-import LoginForm from './core/loginForm/containers/LoginForm';
-import RegisterForm from './core/RegisterForm/containers/RegisterForm';
-import { InactiveReplacement } from './core/inactiveReplacement/containers/InactiveReplacement';
+import { Route, Switch } from 'react-router';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
-import { Route, Switch, Redirect } from 'react-router';
-import { LectureAnalysis } from './core/lectureAnalysis/containers/LectureAnalysis';
-import { LectureAnalysisDetail } from './core/lectureAnalysis/containers/LectureAnalysisDetail';
-import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/VolunteerAnalysis';
-import { VolunteerAnalysisDetail } from './core/volunteerAnalysis/containers/VolunteerAnalysisDetail';
-import { Whoops404 } from './core/Whoops404/containers/Whoops404';
-import { Home } from './core/Home/containers/Home';
-import PrivateRoute from './core/common/PrivateRoute';
-// import { VolunteerRegister } from './core/volunteerRegister/containers/VolunteerRegister';
+//all styled components are in the same place now. Remember to add them to index.js in the directory src/components/styledComponents
+import { MainContainer } from './components/styledComponents/index.js';
+import UserMenu from './containers/menus/UserMenu';
+import AdminMenu from './containers/menus/AdminMenu';
+import LoginForm from './containers/forms/LoginForm';
+import RegisterForm from './containers/forms/RegisterForm';
+import { InactiveReplacement } from './containers/InactiveReplacement';
+import { LectureAnalysis } from './containers/lectureAnalysis/LectureAnalysis';
+import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnalysisDetail';
+import { VolunteerAnalysis } from './containers/volunteerAnalysis/VolunteerAnalysis';
+import { VolunteerAnalysisDetail } from './containers/volunteerAnalysis/VolunteerAnalysisDetail';
+import { Whoops404 } from './containers/Whoops404';
+import { Home } from './containers/Home';
+import PrivateRoute from './containers/PrivateRoute';
 
 //API
 import store from './store';
 import { connect } from 'react-redux';
 import { checkAuthenticated, load_user } from './redux/actions/auth';
-import ActivateAccount from './core/ActivateAccount/containers/ActivateAccount';
-import ResetPassword from './core/ResetPassword/containers/ResetPassword';
-import ResetPasswordConfirm from './core/ResetPasswordConfirm/containers/ResetPasswordConfirm';
-import SubmitReplacement from './core/submitReplacementForm/containers/SubmitReplacement';
-
+import ActivateAccount from './containers/ActivateAccount';
+import ResetPassword from './containers/passwordReset/ResetPassword';
+import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
+import SubmitReplacement from './containers/forms/SubmitReplacement';
 function App() {
 	useEffect(() => {
 		store.dispatch(checkAuthenticated());
