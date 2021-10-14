@@ -1,5 +1,6 @@
 import axios from 'axios';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Cookies from 'js-cookie';
 import {
 	LOGIN_SUCCESS,
@@ -20,6 +21,8 @@ import {
 	PASSWORD_RESET_CONFIRM_SUCCESS,
 	PASSWORD_RESET_CONFIRM_FAIL,
 =======
+=======
+>>>>>>> master
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -36,11 +39,15 @@ import {
   PASSWORD_RESET_FAIL,
   PASSWORD_RESET_CONFIRM_SUCCESS,
   PASSWORD_RESET_CONFIRM_FAIL,
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 } from './types';
 
 const API_URL = 'https://web-korki.edu.pl';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 export const refresh_token = () => async (dispatch) => {
 	const config = {
@@ -256,6 +263,8 @@ export const logout = () => dispatch => {
 	})
 }
 =======
+=======
+>>>>>>> master
 export const checkAuthenticated = () => async (dispatch) => {
   if (localStorage.getItem('access')) {
     const config = {
@@ -448,4 +457,7 @@ export const logout = () => (dispatch) => {
     type: LOGOUT,
   });
 };
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master

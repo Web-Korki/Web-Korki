@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyledGreyButton,
   StyledBox,
+<<<<<<< HEAD:app/src/containers/menus/UserMenu.js
 <<<<<<< HEAD:app/src/core/userMenu/containers/UserMenu.jsx
 } from "../../sharedComponents/styledComponents/index";
 import { NavLink } from "react-router-dom";
@@ -9,12 +10,17 @@ import "../UserMenu.style.css";
 import { connect } from "react-redux";
 import { logout } from "../../../redux/actions/auth";
 =======
+=======
+>>>>>>> master:app/src/core/userMenu/containers/UserMenu.jsx
 } from '../../components/styledComponents/index';
 import { Link, NavLink } from 'react-router-dom';
 import './UserMenu.style.css';
 import { connect } from 'react-redux';
 import { logout } from '../../redux/actions/auth';
+<<<<<<< HEAD:app/src/containers/menus/UserMenu.js
 >>>>>>> master:app/src/containers/menus/UserMenu.js
+=======
+>>>>>>> master:app/src/core/userMenu/containers/UserMenu.jsx
 
 const UserMenu = ({ logout }) => {
   return (

@@ -7,24 +7,26 @@ export const BackButton = () => {
     history.goBack();
   };
   return (
-		<div className='p-0 d-flex justify-content-center align-items-center'>
-			<StyledBackButton
-				onClick={goToPreviousPath}
-				className='justify-content-center align-items-center'>
-				<svg
-					width='9'
-					height='14'
-					viewBox='0 0 9 14'
-					fill='none'
-					xmlns='http://www.w3.org/2000/svg'>
-					<path
-						d='M8 1L2 7L8 13'
-						stroke='#195669'
-						strokeWidth='2'
-						strokeLinecap='round'
-					/>
-				</svg>
-			</StyledBackButton>
-		</div>
-	);
+    <div className="p-0 d-flex justify-content-center align-items-center">
+      <StyledBackButton
+        onClick={goToPreviousPath}
+        className="justify-content-center align-items-center"
+      >
+        <svg
+          width="9"
+          height="14"
+          viewBox="0 0 9 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 1L2 7L8 13"
+            stroke="#195669"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </StyledBackButton>
+    </div>
+  );
 };
