@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-	StyledDate,
-	StyledTextarea,
-	StyledBlueButton,
-} from '../../core/sharedComponents/styledComponents/index';
-import { BackButton } from '../../sharedComponents/containers/BackButton';
-import { Container } from '../../core/sharedComponents/styledComponents';
-import Select from '../../sharedComponents/components/Select';
+ StyledDate,
+ StyledTextarea,
+ StyledBlueButton,
+ Container,
+} from '../../components/styledComponents/index';
+import { BackButton } from '../../components/buttons/BackButton';
+import Select from '../../components/components/Select';
 
 export const SubmitReplacement = () => {
 	return (
