@@ -90,12 +90,12 @@ export const checkAuthenticated = () => async (dispatch) => {
 export const load_user = () => async (dispatch) => {
 	if (Cookies.get('access')) {
 		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${localStorage.getItem('access')}`,
-				Accept: 'application/json',
-			},
-		};
+   headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${Cookies.get('access')}`,
+    Accept: 'application/json',
+   },
+  };
 
 		try {
 			const res = await axios.get(`${API_URL}/auth/users/me/`, config);
