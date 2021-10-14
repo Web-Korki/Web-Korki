@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TRY_LOGIN } from './types';
+import { TRY_LOGIN } from 'ReduxActions/types';
 
 //TRY LOGIN
 export const tryLogin = () => (dispatch) => {
