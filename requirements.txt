@@ -64,4 +64,3 @@ iniconfig~=1.1.1
 atomicwrites~=1.4.0
 pathlib2~=2.3.6
 pytest-django~=4.4.0
-virtualenvwrapper~=4.8.4
