@@ -28,4 +28,4 @@ jobs:
         EMAIL_PWD: ${{ secrets.EMAIL_PWD }}
         DEVELOP_DEBUG: ${{ secrets.DEVELOP_DEBUG }}
       run: |
-        SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG pytest --exitfirst --verbose --failed-first \
+        SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG python -m pytest --exitfirst --verbose --failed-first \
