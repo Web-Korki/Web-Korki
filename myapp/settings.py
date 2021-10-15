@@ -190,7 +190,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
     "http://nujgoiz.cluster024.hosting.ovh.net",
 ]
-# APPEND_SLASH=False
+APPEND_SLASH=False
 
 # Emails
 EMAIL_HOST = "ssl0.ovh.net"
@@ -201,13 +201,18 @@ EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 # EMAIL_BACKEND = 'django.myapp.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
 
+# Templated mail settings
+DOMAIN = "web-korki.edu.pl"
+SITE_NAME = "Web-Korki"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 DJOSER = {
     "LOGIN_FIELD": "username",
-    "USER_CREATE_PASSWORD_RETYPE": True,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "SEND_CONFIRMATION_EMAIL": True,
     "SEND_ACTIVATION_EMAIL": True,
     "SET_PASSWORD_RETYPE": True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
     "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "activate/{uid}/{token}",
     "EMAIL": {"activation": "backend.notifications.ActivationEmail"},
@@ -218,8 +223,3 @@ DJOSER = {
         "current_user": "backend.serializers.TeacherSerializer",
     },
 }
-
-# Templated mail settings
-DOMAIN = "web-korki.edu.pl"
-SITE_NAME = "Web-Korki"
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

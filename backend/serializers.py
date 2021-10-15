@@ -1,27 +1,26 @@
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework import serializers
 from .models import House, Lesson, Student, SUBJECT_CHOICES
-from djoser.serializers import UserCreateSerializer
+from djoser.serializers import UserCreateSerializer as DjoserRegisterSerializer
 
 Teacher = get_user_model()
 
 
-class UserRegisterSerializer(UserCreateSerializer):
-    class Meta(UserCreateSerializer.Meta):
+class UserRegisterSerializer(DjoserRegisterSerializer):
+    class Meta(DjoserRegisterSerializer.Meta):
         model = Teacher
-        fields = ("email", "username", "password", "subjects")
+        fields = ("email", "username")
+
+    def validate(self, attrs):
+        user = Teacher(**attrs)
+
+        return attrs
 
 
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
         fields = "__all__"
-
-# TODO do we need this ? Commented on 30.09.2021
-# class TeacherListSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Teacher
-#         fields = "__all__"
 
 
 class LoginSerializer(serializers.ModelSerializer):
