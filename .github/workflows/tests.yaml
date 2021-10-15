@@ -31,9 +31,10 @@ jobs:
         SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG pytest --exitfirst --verbose --failed-first \
 
     - name: Build coverage file
-        run: SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG  pytest --cache-clear --cov=app --cov-report xml
-          - uses: codecov/codecov-action@v1
-            with:
-              token: ${{ secrets.CODECOV_TOKEN }}
-              files: ./coverage.xml
-              flags: pytest
+      run: |
+        SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG  pytest --cache-clear --cov=app --cov-report xml \
+      - uses: codecov/codecov-action@v1
+          with:
+            token: ${{ secrets.CODECOV_TOKEN }}
+            files: ./coverage.xml
+            flags: pytest
