@@ -1,5 +1,7 @@
 ##README, MISIACZKI (nie dziękujcie, że ogarnąłem)
 
+[![codecov](https://codecov.io/gh/Web-Korki/Web-Korki/branch/master/graph/badge.svg?token=OEHMSAP5T3)](https://codecov.io/gh/Web-Korki/Web-Korki)
+
 ### GIT FLOW:
 1. Create Issue from GitHub perspective
 2. `git pull`
