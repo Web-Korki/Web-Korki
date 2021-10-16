@@ -141,3 +141,10 @@ class StudentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return House.objects.all()
+
+
+def index(request):
+    """
+    Renders built frontend application.
+    """
+    return render(request, os.path.join("build", "index.html"))
