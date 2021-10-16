@@ -1,0 +1,43 @@
+.svgImage{
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    stroke-linejoin: round;
+    stroke-miterlimit: 2;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.firstStyle{
+    fill:rgb(0,99,149);
+}
+
+.secondStyle{
+    fill:rgb(0,99,149);
+}
+
+.thirdStyle{
+    fill:rgb(0,99,149);
+}
+
+.fourthStyle{
+    fill:rgb(0,99,149);
+}
+
+.fifthStyle{
+    fill:rgb(0,99,149);
+}
+
+.sixthStyle{
+    fill:rgb(3,70,104);
+}
+
+.seventhStyle{
+    fill:rgb(0,99,149);
+}
+
+.eightStyle{
+    fill:rgb(3,70,104);
+}
+
+/* described paths styles as numberStyle instead of numberPath because of conflict in styles of bookImage.svg
+It should be investigated further */

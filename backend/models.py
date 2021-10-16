@@ -28,14 +28,22 @@ LEVEL_CHOICES = (
     ("5tech", "1. klasa tech"),
 )
 
+CANCEL_REASON_HOUSE = "by_house"
+CANCEL_REASON_PROJECT = "by_project"
+
 CANCEL_REASONS = (
-    ("by_house", "Odwołano przez dom dziecka"),
-    ("by_project", "Odwołano przez projekt/nauczyciela"),
+    (CANCEL_REASON_HOUSE, "Odwołano przez dom dziecka"),
+    (CANCEL_REASON_PROJECT, "Odwołano przez projekt/nauczyciela"),
 )
 
 
 # Create your models here.
 class Teacher(AbstractUser):
+    class Meta:
+        permissions = [
+            ("reading_reports", "Can read_reports"),
+        ]
+
     subjects = MultiSelectField(choices=SUBJECT_CHOICES)
     lessons_done = models.IntegerField(null=True)
     lessons_canceled = models.IntegerField(null=True)

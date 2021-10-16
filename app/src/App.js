@@ -1,36 +1,76 @@
-import React from 'react';
-import { MainContainer } from './core/MainContainer';
-import { UserMenu } from './core/userMenu/containers/UserMenu';
-import { AdminMenu } from './core/adminMenu/containers/AdminMenu';
-import { LoginForm } from './core/loginForm/containers/LoginForm';
-import { InactiveReplacement } from './core/inactiveReplacement/containers/InactiveReplacement';
+import React, { useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router';
+
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import './App.css';
-import { Route, Switch } from 'react-router';
-import { LectureAnalysis } from './core/lectureAnalysis/containers/LectureAnalysis';
-import { VolunteerAnalysis } from './core/volunteerAnalysis/containers/VolunteerAnalysis';
-import { Whoops404 } from './core/Whoops404/containers/Whoops404'
-import { Home } from './core/Home/containers/Home';
-import { VolunteerRegister } from './core/volunteerRegister/containers/VolunteerRegister';
+//all styled components are in the same place now. Remember to add them to index.js in the directory src/components/styledComponents
+import { MainContainer } from './components/styledComponents/index.js';
+
+import UserMenu from './containers/menus/UserMenu';
+import AdminMenu from './containers/menus/AdminMenu';
+import LoginForm from './containers/forms/LoginForm';
+import RegisterForm from './containers/forms/RegisterForm';
+import { InactiveReplacement } from './containers/InactiveReplacement';
+import { LectureAnalysis } from './containers/lectureAnalysis/LectureAnalysis';
+import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnalysisDetail';
+import { VolunteerAnalysis } from './containers/volunteerAnalysis/VolunteerAnalysis';
+import { VolunteerAnalysisDetail } from './containers/volunteerAnalysis/VolunteerAnalysisDetail';
+import { Whoops404 } from './containers/Whoops404';
+import { Home } from './containers/Home';
+import PrivateRoute from './containers/PrivateRoute';
+
+//API
+import store from './store';
+import { load_user } from './redux/actions/auth';
+import ActivateAccount from './containers/ActivateAccount';
+import ResetPassword from './containers/passwordReset/ResetPassword';
+import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
 
 function App() {
+  useEffect(() => {
+    store.dispatch(load_user());
+  });
+
   return (
-		<>
-			<MainContainer>
-				<Switch>
-					<Route exact path='/' component={Home} />
-					<Route exact path='/UserMenu' component={UserMenu} />
-					<Route path='/admin_menu' component={AdminMenu} />
-					<Route path='/login_form' component={LoginForm} />
-					<Route path='/inactive_replacement' component={InactiveReplacement} />
-					<Route path='/lecture_analysis' component={LectureAnalysis} />
-					<Route path='/volunteer_analysis' component={VolunteerAnalysis} />
-					<Route path='/volunteer_register' component={VolunteerRegister} />
-					<Route path='*' component={Whoops404} />
-				</Switch>
-			</MainContainer>
-		</>
-	);
+    <>
+      <MainContainer>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <PrivateRoute exact path="/UserMenu" component={UserMenu} />
+          <PrivateRoute path="/admin_menu" component={AdminMenu} />
+          <Route path="/login_form" component={LoginForm} />
+          <PrivateRoute path="/register_form" component={RegisterForm} />
+          <PrivateRoute
+            path="/inactive_replacement"
+            component={InactiveReplacement}
+          />
+          {/* na czas budowania */}
+          <Route path="/lecture_analysis" exact component={LectureAnalysis} />
+          <Route
+            path="/lecture_analysis/:month"
+            component={LectureAnalysisDetail}
+          />
+          {/* na czas budowania */}
+          <Route
+            path="/volunteer_analysis"
+            exact
+            component={VolunteerAnalysis}
+          />
+          <Route
+            path="/volunteer_analysis/:month"
+            component={VolunteerAnalysisDetail}
+          />
+          <Route path="/activate/{uid}/{token}" component={ActivateAccount} />
+          <Route path="/reset_password" component={ResetPassword} />
+          <Route
+            path="/password/reset/confirm/{uid}/{token}"
+            component={ResetPasswordConfirm}
+          />
+          <Route path="*" component={Whoops404} />
+        </Switch>
+      </MainContainer>
+    </>
+  );
 }
 
 export default App;

@@ -1,11 +1,10 @@
 //**import all reducers here**
+import auth from './auth';
 
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-    // all reducers will be here named as follows:
-    // name: nameReducer
-    // isLogged: loggedReducer
-})
+  auth,
+});
 
 export default rootReducer;

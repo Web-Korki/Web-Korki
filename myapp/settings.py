@@ -206,6 +206,11 @@ DOMAIN = "web-korki.edu.pl"
 SITE_NAME = "Web-Korki"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+# We have to set login url. This is just placeholder
+LOGIN_URL = "/login"
+
+
+
 DJOSER = {
     "LOGIN_FIELD": "username",
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
