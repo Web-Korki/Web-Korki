@@ -51,6 +51,8 @@ class Teacher(AbstractUser):
     def __str__(self):
         return self.username
 
+Teacher._meta.get_field('email')._unique = True
+Teacher._meta.get_field('email')._required = True
 
 class House(models.Model):
     id = models.AutoField(primary_key=True)
