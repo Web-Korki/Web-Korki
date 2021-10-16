@@ -25,6 +25,8 @@ import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
 import SubmitReplacement from './containers/forms/SubmitReplacement';
+
+
 function App() {
 	useEffect(() => {
 		store.dispatch(checkAuthenticated());
