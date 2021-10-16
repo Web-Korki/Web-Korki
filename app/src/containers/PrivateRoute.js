@@ -14,8 +14,8 @@ const PrivateRoute = ({
    PrivateRoute.propTypes = {
       component: PropTypes.shape({
          Component: PropTypes.func,
-         isAuthenticated: PropTypes.object,
-         isLoading: PropTypes.object,
+         isAuthenticated: PropTypes.bool,
+         isLoading: PropTypes.bool,
       }),
    };
 

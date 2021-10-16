@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 const RegisterForm = ({ register, isAuthenticated }) => {
    RegisterForm.propTypes = {
       register: PropTypes.func,
-      isAuthenticated: PropTypes.object,
+      isAuthenticated: PropTypes.bool,
    };
 
    const [accountCreated, setAccountCreated] = useState(false);
