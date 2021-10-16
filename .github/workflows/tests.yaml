@@ -1,0 +1,44 @@
+name: Tests
+on: [push]
+
+jobs:
+  build:
+    name: Run Python Tests
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.5
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.5"
+
+    - name: Install Python dependencies
+      run: |
+        sudo apt install -y $(grep -o ^[^#][[:alnum:]-]* "packages.list")
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+
+    - name: Test with pytest
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        EMAIL_PWD: ${{ secrets.EMAIL_PWD }}
+        DEVELOP_DEBUG: ${{ secrets.DEVELOP_DEBUG }}
+      run: |
+        SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG pytest --exitfirst --verbose --failed-first \
+
+    - name: Build coverage file
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        EMAIL_PWD: ${{ secrets.EMAIL_PWD }}
+        DEVELOP_DEBUG: ${{ secrets.DEVELOP_DEBUG }}
+      run: |
+        SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG pytest --cache-clear --cov=backend --cov-report xml \
+    - uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage.xml
+        flags: pytest

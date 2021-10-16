@@ -1,14 +1,36 @@
-from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework import status, permissions, viewsets
+
+from django.shortcuts import redirect, render, reverse
 from django.contrib import messages
-from django.contrib.auth import login
-from django.shortcuts import redirect, render
-from djoser.views import UserViewSet
 from djoser.conf import django_settings
-from django.urls import reverse
+
+from djoser.views import UserViewSet
+from djoser import signals, utils
+from djoser.compat import get_user_email
+from djoser.conf import settings
+
+from tests.utils import get_random_password
+from myapp.settings import BASE_DIR
 from .serializers import *
-import requests
+import requests, os
+
+
+class Register(UserViewSet):
+    def perform_create(self, serializer):
+        password = get_random_password()
+        serializer["password"] = password
+        user = serializer.save()
+        signals.user_registered.send(
+            sender=self.__class__, user=user, request=self.request
+        )
+
+        context = {"user": user}
+        to = [get_user_email(user)]
+        if settings.SEND_ACTIVATION_EMAIL:
+            settings.EMAIL.activation(self.request, context).send(to)
+        elif settings.SEND_CONFIRMATION_EMAIL:
+            settings.EMAIL.confirmation(self.request, context).send(to)
 
 
 class ActivateUser(UserViewSet):
@@ -24,84 +46,6 @@ class ActivateUser(UserViewSet):
     def activation(self, request, uid, token, *args, **kwargs):
         super().activation(request, *args, **kwargs)
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-
-class PasswordReset(UserViewSet):
-    def get_serializer(self, *args, **kwargs):
-        serializer_class = self.get_serializer_class()
-        kwargs.setdefault("context", self.get_serializer_context())
-
-        kwargs["data"] = {"uid": self.kwargs["uid"], "token": self.kwargs["token"]}
-
-        return serializer_class(*args, **kwargs)
-
-    def reset_password(self, request, uid, token, *args, **kwargs):
-        password = request.POST.get('password1')
-        payload = {'uid': uid, 'token': token}
-        url = "http://127.0.0.1:8000/auth/password/reset/confirm/"
-        result = requests.post(url, data=payload)
-        print(result.status_code)
-        return render(request, 'templates/reset_password.html')
-        # super().reset_password_confirm(request, **payload)
-        # return Response(status=status.HTTP_204_NO_CONTENT)
-
-        #     url = '{0}://{1}{2}'.format(
-        #         django_settings.PROTOCOL, django_settings.DOMAIN, reverse('password_reset'))
-        #
-        #     response = requests.post(url, data=payload)
-        #     if response.status_code == 204:
-        #         messages.success(request, 'Your password has been reset successfully!')
-        #     else:
-        #         return Response(response.json())
-
-    ##TODO: Tu coś zjebane i mi kurwa nie działa xD
-    #Flow:
-    #1. Zapomniałem hasła
-    #2. (Galicki view): Podaj maila
-    #3. Endpoint password reset confirmation -> wysyła maila, czy to na pewno ty
-    #4. Klik w link z tokenem -> otwiera stronę podaj nowe hasło
-    #5. POST request zmienia hasło i chuj
-
-
-
-
-class LoginView(viewsets.ModelViewSet):
-    serializer_class = LoginSerializer
-    http_method_names = ["post"]
-    permission_classes = (permissions.AllowAny,)
-
-    def generate_tokens(self, user):
-        refresh = RefreshToken.for_user(user)
-        return {
-            "refresh": str(refresh),
-            "access": str(refresh.access_token),
-        }
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        print(serializer)
-        user = serializer.validated_data
-        login(request, user)
-        return Response(
-            {
-                "user": TeacherSerializer(
-                    user, context=self.get_serializer_context()
-                ).data,
-                "tokens": self.generate_tokens(user),
-            },
-            status=status.HTTP_200_OK,
-        )
-
-
-class TeacherViewSet(viewsets.ModelViewSet):
-
-    serializer_class = TeacherListSerializer
-    permission_classes = [permissions.IsAdminUser]
-
-    def get_queryset(self):
-        return Teacher.objects.all()
 
 
 class HouseViewSet(viewsets.ModelViewSet):

@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from datetime import timedelta
 import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -54,6 +57,7 @@ INSTALLED_APPS = [
     # Local apps
     "myapp",
     "backend",
+    "tests",
 ]
 
 MIDDLEWARE = [
@@ -74,7 +78,7 @@ ROOT_URLCONF = "myapp.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, 'backend', 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -102,10 +106,10 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
-            "NAME": os.environ["DB_NAME"],
-            "USER": os.environ["DB_USER"],
-            "PASSWORD": os.environ["DB_PASSWORD"],
-            "HOST": os.environ["DB_HOST"],
+            "NAME": os.getenv("DB_NAME"),
+            "USER": os.getenv("DB_NAME"),
+            "PASSWORD": os.getenv("DB_NAME"),
+            "HOST": os.getenv("DB_NAME"),
         }
     }
 
@@ -186,27 +190,32 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
     "http://nujgoiz.cluster024.hosting.ovh.net",
 ]
-# APPEND_SLASH=False
+APPEND_SLASH=False
 
 # Emails
 EMAIL_HOST = "ssl0.ovh.net"
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "notifications@web-korki.edu.pl"
-EMAIL_HOST_PASSWORD = os.environ["EMAIL_PWD"]
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PWD")
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 # EMAIL_BACKEND = 'django.myapp.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
 
+# Templated mail settings
+DOMAIN = "web-korki.edu.pl"
+SITE_NAME = "Web-Korki"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 DJOSER = {
     "LOGIN_FIELD": "username",
-    "USER_CREATE_PASSWORD_RETYPE": True,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "SEND_CONFIRMATION_EMAIL": True,
     "SEND_ACTIVATION_EMAIL": True,
     "SET_PASSWORD_RETYPE": True,
+    'PASSWORD_RESET_CONFIRM_RETYPE': True,
     "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "activate/{uid}/{token}",
-    "EMAIL": {}, #"activation": "backend.notifications.ActivationEmail"
+    "EMAIL": {"activation": "backend.notifications.ActivationEmail"},
     "SERIALIZERS": {
         "user_create": "backend.serializers.UserRegisterSerializer",
         "user": "backend.serializers.UserRegisterSerializer",
@@ -214,8 +223,3 @@ DJOSER = {
         "current_user": "backend.serializers.TeacherSerializer",
     },
 }
-
-# Templated mail settings
-DOMAIN = "web-korki.edu.pl"
-SITE_NAME = "Web-Korki"
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
