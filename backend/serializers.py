@@ -1,38 +1,26 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
-from .models import Teacher, House, Lesson, Student
+from .models import House, Lesson, Student, SUBJECT_CHOICES
+from djoser.serializers import UserCreateSerializer as DjoserRegisterSerializer
+
+Teacher = get_user_model()
+
+
+class UserRegisterSerializer(DjoserRegisterSerializer):
+    class Meta(DjoserRegisterSerializer.Meta):
+        model = Teacher
+        fields = ("email", "username")
+
+    def validate(self, attrs):
+        user = Teacher(**attrs)
+
+        return attrs
 
 
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = '__all__'
-
-
-class TeacherListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Teacher
         fields = "__all__"
-
-
-class RegistrationSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(required=True)
-    username = serializers.CharField(required=True)
-    password = serializers.CharField(min_length=8, write_only=True, required=True)
-    subjects = serializers.CharField(required=True)
-
-    class Meta:
-        model = Teacher
-        fields = ['email', 'username', 'password', 'subjects']
-
-    def create(self, validated_data):
-        user = Teacher.objects.create_user(
-            username=validated_data["username"],
-            email=validated_data["email"],
-            password=validated_data["password"],
-        )
-        return user
 
 
 class LoginSerializer(serializers.ModelSerializer):
@@ -44,9 +32,12 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ["username", "password"]
 
     def validate(self, data):
-        user = authenticate(**data)
+        username = data.get("username", None)
+        password = data.get("password", None)
+        user = authenticate(username=username, password=password)
         if user and user.is_active:
             return user
+
         raise serializers.ValidationError("Incorrent login data")
 
 
