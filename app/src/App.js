@@ -32,50 +32,56 @@ function App() {
 	});
 
 	return (
-		<>
-			<MainContainer>
-				<Switch>
-					<Route exact path='/' component={Home} />
-					<PrivateRoute exact path='/UserMenu' component={UserMenu} />
-					<PrivateRoute path='/admin_menu' component={AdminMenu} />
-					<Route path='/login_form' component={LoginForm} />
-					<PrivateRoute path='/register_form' component={RegisterForm} />
-					<PrivateRoute
-						path='/inactive_replacement'
-						component={InactiveReplacement}
-					/>
-					<Route
-						path='/submit_replacement'
-						exact
-						component={SubmitReplacement}
-					/>
-					<Route path='/lecture_analysis' exact component={LectureAnalysis} />
-					<Route
-						path='/lecture_analysis/:month'
-						component={LectureAnalysisDetail}
-					/>
-					{/* na czas budowania */}
-					<Route
-						path='/volunteer_analysis'
-						exact
-						component={VolunteerAnalysis}
-					/>
-					<Route
-						path='/volunteer_analysis/:month'
-						component={VolunteerAnalysisDetail}
-					/>
-					{/* <PrivateRoute path='/volunteer_register' component={VolunteerRegister} /> */}
-					<Route path='/activate/{uid}/{token}' component={ActivateAccount} />
-					<Route path='/reset_password' component={ResetPassword} />
-					<Route
-						path='/password/reset/confirm/{uid}/{token}'
-						component={ResetPasswordConfirm}
-					/>
-					<Route path='*' component={Whoops404} />
-				</Switch>
-			</MainContainer>
-		</>
-	);
+      <>
+         <MainContainer>
+            <Switch>
+               <Route exact path='/' component={Home} />
+               <PrivateRoute exact path='/UserMenu' component={UserMenu} />
+               <PrivateRoute path='/admin_menu' component={AdminMenu} />
+               <Route path='/login_form' component={LoginForm} />
+               <PrivateRoute path='/register_form' component={RegisterForm} />
+               <PrivateRoute
+                  path='/inactive_replacement'
+                  component={InactiveReplacement}
+               />
+               <Route
+                  path='/submit_replacement'
+                  exact
+                  component={SubmitReplacement}
+               />
+               <Route
+                  path='/lecture_analysis'
+                  exact
+                  component={LectureAnalysis}
+               />
+               <Route
+                  path='/lecture_analysis/:month'
+                  component={LectureAnalysisDetail}
+               />
+               <Route
+                  path='/volunteer_analysis'
+                  exact
+                  component={VolunteerAnalysis}
+               />
+               <Route
+                  path='/volunteer_analysis/:month'
+                  component={VolunteerAnalysisDetail}
+               />
+               {/* <PrivateRoute path='/volunteer_register' component={VolunteerRegister} /> */}
+               <Route
+                  path='/activate/{uid}/{token}'
+                  component={ActivateAccount}
+               />
+               <Route path='/reset_password' component={ResetPassword} />
+               <Route
+                  path='/password/reset/confirm/{uid}/{token}'
+                  component={ResetPasswordConfirm}
+               />
+               <Route path='*' component={Whoops404} />
+            </Switch>
+         </MainContainer>
+      </>
+   );
 }
 
 export default connect(null, { checkAuthenticated, load_user })(App);
