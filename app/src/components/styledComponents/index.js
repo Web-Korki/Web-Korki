@@ -12,3 +12,6 @@ export { default as TextField } from './textField';
 export { default as StyledGoBack } from './StyledGoBack';
 export { default as StyledInput } from './StyledInput';
 export { default as StyledLoginBox } from './StyledLoginBox';
+export { default as StyledTextarea } from './StyledTextarea';
+export { default as StyledSelect } from './StyledSelect';
+export { default as StyledDate } from './StyledDate';
