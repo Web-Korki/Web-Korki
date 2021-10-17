@@ -1,12 +1,11 @@
-import { BackButton } from '../../components/buttons/BackButton';
-import { Container } from '../../components/styledComponents/index';
-import { VolunteerAnalysisData } from './VolunteerAnalysisData';
-import { WhichMonthFunc } from '../../components/form/WhichMonthFunc';
-
-const baseURL = 'https://web-korki.edu.pl';
+import { BackButton } from "../../components/buttons/BackButton";
+import { Container } from "../../components/styledComponents/index";
+import { VolunteerAnalysisData } from "./VolunteerAnalysisData";
+import { WhichMonthFunc } from "../../components/form/WhichMonthFunc";
 
 export const VolunteerAnalysisDetail = (link) => {
   const link_prop = link.match.params.month;
+
   return (
     <>
       <div className="volunteerAnalysisWrapper d-flex align-items-center justify-content-center">

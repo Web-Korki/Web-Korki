@@ -1,16 +1,18 @@
-import { TextField } from '../../components/styledComponents/index';
+import { TextField } from "../../components/styledComponents/index";
 
-export const LectureAnalysisData = (month) => {
+export const LectureAnalysisData = ({ month, title, done, canceled }) => {
   return (
     <>
-      <h4 className="text-center">Dom dziecka w [name]</h4>
+      <h4 className="text-center">{title}</h4>
       <div className="row">
         <h4 className="col align-self-center">Ilość zaplanowanych lekcji</h4>
-        <TextField className="col-2 text-center">132</TextField>
+        <TextField className="col-2 text-center">
+          132 {done + canceled}
+        </TextField>
         <h4 className="col align-self-center">Ilość przeprowadzonych lekcji</h4>
-        <TextField className="col-2 text-center">128</TextField>
+        <TextField className="col-2 text-center">128 {done}</TextField>
         <h4 className="col align-self-center">Ilość nieodbytych lekcji</h4>
-        <TextField className="col-2 text-center">4</TextField>
+        <TextField className="col-2 text-center">4 {canceled}</TextField>
       </div>
       <div>
         <h4 className="">Nieodbyte lekcje</h4>
@@ -22,7 +24,7 @@ export const LectureAnalysisData = (month) => {
           <div className="col">
             <h4 className="col">Powód</h4>
             <TextField className="col">
-              Coś więcej ni 4 Ty głupi debilu
+              Coś więcej niż 4 Ty głupi debilu
             </TextField>
           </div>
           <div className="col">
