@@ -11,12 +11,23 @@ const StyledBox = styled.button`
   border: 2px solid #ebf3f8;
   box-shadow: 4px 4px 15px 4px rgba(7, 93, 172, 0.1);
   border-radius: 10px;
-  color: #195669;
+  color: #427e90;
 
   @media (hover: hover) {
     &:hover {
       box-shadow: 4px 4px 15px 4px rgba(7, 93, 172, 0.25);
     }
+  }
+
+  select{
+    appearance: none;
+  }
+
+  &::after{
+    content: url('app\src\assets\selectBlueArrow\Vector 1.png');
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 `;
 export default StyledBox;

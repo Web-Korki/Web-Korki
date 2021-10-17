@@ -17,6 +17,12 @@ h1 {
   font-size: clamp(25px, 5vw, 42px);
 }
 
+label{
+  font-size: 25px;
+  margin-left: 12px;
+  margin-bottom: 0px;
+}
+
 .title {
   color: #427e90;
   font-weight: 400;
@@ -54,7 +60,8 @@ h1 {
 .Home,
 .Whoops404,
 .volunteerRegisterWrapper,
-.activateAccount {
+.activateAccount,
+.submitReplacement {
   height: 100vh;
 }
 
@@ -71,7 +78,7 @@ h1 {
 /* LectureAnalysis Start */
 .lectureAnalysisWrapper,
 .volunteerAnalysisWrapper {
-  padding: 15vw 0 10vw 0;
+  padding: 5vw 0 5vw 0;
 }
 /* LectureAnalysis End */
 
@@ -83,5 +90,7 @@ h1 {
   height: 650px;
   margin: 0 auto;
 }
-
 /* LectureAnalysis End */
+#date{
+  max-width: 220px;
+}
