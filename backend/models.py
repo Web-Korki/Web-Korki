@@ -45,8 +45,6 @@ class Teacher(AbstractUser):
         ]
 
     subjects = MultiSelectField(choices=SUBJECT_CHOICES)
-    lessons_done = models.IntegerField(null=True)
-    lessons_canceled = models.IntegerField(null=True)
 
     def __str__(self):
         return self.username
@@ -57,8 +55,6 @@ Teacher._meta.get_field('email')._required = True
 class House(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250)
-    lessons_done = models.IntegerField(null=True)
-    lessons_canceled = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name
@@ -82,6 +78,7 @@ class Lesson(models.Model):
         blank=True,
     )
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    house = models.ForeignKey(House, on_delete=models.CASCADE)
     level = MultiSelectField(choices=LEVEL_CHOICES)
     datetime = models.DateTimeField()
     subject = MultiSelectField(choices=SUBJECT_CHOICES)
@@ -92,6 +89,10 @@ class Lesson(models.Model):
     substitution = models.ForeignKey(
         "backend.Lesson", null=True, blank=True, on_delete=models.CASCADE
     )
+
+    def save(self, *args, **kwargs):
+        self.house = self.student.house
+        super(Lesson, self).save(*args, **kwargs)
 
     def __str__(self):
         return "Lekcja dn., " + str(

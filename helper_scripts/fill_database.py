@@ -124,7 +124,8 @@ def add_teachers(n=1):
             u = Teacher.objects.all().filter(username=username)
             if len(u) == 0:
                 is_unique = True
-        t = Teacher(subjects=subs, username=username)
+        email = "_".join(username.split()).lower() + "@.gmail.com"
+        t = Teacher(subjects=subs, username=username, email=email)
         t.save()
 
 

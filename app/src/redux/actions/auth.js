@@ -21,6 +21,7 @@ import {
 } from './types';
 
 const API_URL = 'https://web-korki.edu.pl';
+// const API_URL = 'http://127.0.0.1:8000';
 
 export const refresh_token = () => async (dispatch) => {
 	const config = {
