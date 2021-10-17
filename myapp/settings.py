@@ -36,7 +36,7 @@ if "DEVELOP_DEBUG" in os.environ:
 else:
     WSGI_APPLICATION = "myapp.wsgi.application"
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nujgoiz.cluster024.hosting.ovh.net"]
+ALLOWED_HOSTS = ["web-korki.edu.pl", "www.web-korki.edu.pl", "localhost", "127.0.0.1", "nujgoiz.cluster024.hosting.ovh.net"]
 
 
 # Application definition
@@ -110,10 +110,10 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.mysql",
-            "NAME": os.getenv("DB_NAME"),
-            "USER": os.getenv("DB_NAME"),
-            "PASSWORD": os.getenv("DB_NAME"),
-            "HOST": os.getenv("DB_NAME"),
+            "NAME": os.environ["DB_NAME"],
+            "USER": os.environ["DB_USER"],
+            "PASSWORD": os.environ["DB_PASSWORD"],
+            "HOST": os.environ["DB_HOST"],
         }
     }
 
@@ -214,7 +214,7 @@ APPEND_SLASH=False
 EMAIL_HOST = "ssl0.ovh.net"
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "notifications@web-korki.edu.pl"
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PWD")
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_PWD"]
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 # EMAIL_BACKEND = 'django.myapp.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
