@@ -13,14 +13,23 @@ class UserRegisterSerializer(DjoserRegisterSerializer):
 
     def validate(self, attrs):
         user = Teacher(**attrs)
-
         return attrs
 
 
 class TeacherSerializer(serializers.ModelSerializer):
+    lessons_done = serializers.SerializerMethodField('is_lessons_done')
+    lessons_canceled = serializers.SerializerMethodField('is_lessons_canceled')
+
+    def is_lessons_done(self, obj):
+        return len(Lesson.objects.filter(teacher_id=obj.id))
+
+    def is_lessons_canceled(self, obj):
+        return len(Lesson.objects.filter(teacher_id=obj.id, is_canceled=True))
+
     class Meta:
         model = Teacher
-        fields = "__all__"
+        exclude = ('password',)
+        # fields = "__all__"
 
 
 class LoginSerializer(serializers.ModelSerializer):
@@ -42,6 +51,15 @@ class LoginSerializer(serializers.ModelSerializer):
 
 
 class HouseSerializer(serializers.ModelSerializer):
+    total_lessons_number = serializers.SerializerMethodField('is_lessons_number')
+    canceled_lessons_number = serializers.SerializerMethodField('is_lessons_canceled')
+
+    def is_lessons_number(self, obj):
+        return len(Lesson.objects.filter(house_id=obj.id))
+
+    def is_lessons_canceled(self, obj):
+        return len(Lesson.objects.filter(house_id=obj.id, is_canceled=True))
+
     class Meta:
         model = House
         fields = "__all__"
@@ -50,7 +68,9 @@ class HouseSerializer(serializers.ModelSerializer):
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
-        fields = "__all__"
+        # House field is saved in model .save method. House is taken from student model.
+        exclude = ('house',) # This field acts the same as fields == "__all__" with except to mentioned field
+        # fields = "__all__"
 
 
 class StudentSerializer(serializers.ModelSerializer):

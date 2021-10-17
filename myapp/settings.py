@@ -177,8 +177,14 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
+
+# Set expiration for token much longer in developement
+access_token_time = 5
+if "DEVELOP_DEBUG" in os.environ:
+    access_token_time = 3600
+
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=access_token_time),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=14),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
@@ -232,7 +238,7 @@ DJOSER = {
     "EMAIL": {"activation": "backend.notifications.ActivationEmail"},
     "SERIALIZERS": {
         "user_create": "backend.serializers.UserRegisterSerializer",
-        "user": "backend.serializers.UserRegisterSerializer",
+        "user": "backend.serializers.TeacherSerializer",
         "user_delete": "djoser.serializers.UserDeleteSerializer",
         "current_user": "backend.serializers.TeacherSerializer",
     },
