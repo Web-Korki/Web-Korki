@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "bootstrap": "4.6",
     "jest": "^26.6.0",
+    "js-cookie": "^3.0.1",
     "json-server": "^0.16.3",
     "node": "^16.4.1",
     "prop-types": "^15.7.2",
