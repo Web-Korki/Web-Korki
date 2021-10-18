@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
-  StyledLoginBox,
-  StyledInput,
-  StyledBlueButton,
+	StyledLoginBox,
+	StyledInput,
+	StyledBlueButton,
 } from '../../components/styledComponents/index';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -14,7 +14,7 @@ const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
 	LoginForm.propTypes = {
 		login: PropTypes.func,
 		isAuthenticated: PropTypes.bool,
-		errorMsg: PropTypes.object,
+		errorMsg: PropTypes.string || PropTypes.object,
 	};
 
 	const [formData, setFormData] = useState({
@@ -46,10 +46,7 @@ const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
 						type='text'
 						placeholder='login'
 						className={`mt-md-5 mt-4 mb-4 ${
-							errorMsg ===
-							'No active account found with the given credentials'
-								? 'border-danger'
-								: null
+							errorMsg !== null ? 'border-danger' : null
 						}`}
 						name='username'
 						value={username}
@@ -60,17 +57,18 @@ const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
 						id='password'
 						type='password'
 						placeholder='hasło'
-						className={`${
-							errorMsg ===
-							'No active account found with the given credentials'
-								? 'border-danger'
-								: null
-						}`}
+						className={`${errorMsg !== null ? 'border-danger' : null}`}
 						name='password'
 						value={password}
 						onChange={(e) => onChange(e)}
 						required
 					/>
+					{errorMsg ===
+					'No active account found with the given credentials' ? (
+						<span className='text-danger pt-2'>
+							Podaj poprawny login i hasło
+						</span>
+					) : null}
 					<StyledBlueButton type='submit' className='mt-4 px-5 py-2'>
 						zaloguj się
 					</StyledBlueButton>
@@ -86,6 +84,7 @@ const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
 	errorMsg: state.errors.msg,
+	errorStatus: state.errors.status,
 });
 
 export default connect(mapStateToProps, { login })(LoginForm);

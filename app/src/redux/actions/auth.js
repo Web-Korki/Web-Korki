@@ -202,6 +202,7 @@ export const register =
 			});
 			const errors = {
 				msg: err.response.data.detail,
+				email: err.response.data.email[0],
 				status: err.response.status,
 			};
 			dispatch({

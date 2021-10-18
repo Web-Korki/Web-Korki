@@ -15,7 +15,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 //alerts
 import { Provider as AlertProvider } from 'react-alert';
-import AlertTemplate from 'react-alert-template-basic';
+// import AlertTemplate from 'react-alert-template-basic';
+import AlertTemplate from './containers/alerts/AlertTemplate';
 import Alerts from './containers/alerts/Alerts';
 
 //components

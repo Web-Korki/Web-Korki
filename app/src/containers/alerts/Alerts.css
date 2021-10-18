@@ -1,0 +1,25 @@
+.alert-block{
+   width: 412px;
+   height: 62px;
+   box-sizing: border-box;
+   border-radius: 10px;
+   position: relative;
+}
+
+.alert-type-info{
+   background: #FFFDF7;
+   border: 2px solid #FFEED9;
+   box-shadow: 4px 4px 15px 4px rgba(172, 96, 7, 0.12);
+}
+
+.alert-type-success{
+   background: #F5FFF5;
+   border: 2px solid #E6FAD3;
+   box-shadow: 4px 4px 15px 4px rgba(113, 213, 96, 0.12);
+}
+.alert-type-error{
+   color: #883838;
+   background: #FFF7F7;
+   border: 2px solid #FCE9E8;
+   box-shadow: 4px 4px 15px 4px rgba(172, 47, 7, 0.12);
+}
