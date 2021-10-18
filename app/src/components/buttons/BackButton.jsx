@@ -7,12 +7,12 @@ export const BackButton = () => {
     history.goBack();
   };
   return (
-    <div className="p-0 d-flex justify-content-center align-items-center">
-      <StyledBackButton
-        onClick={goToPreviousPath}
-        className="d-flex justify-content-center align-items-center"
-      >
-        <svg
+		<div className='p-0 d-flex justify-content-center align-items-center'>
+			<StyledBackButton
+				onClick={goToPreviousPath}
+				className='d-flex justify-content-center align-items-center'>
+				<img src='app\src\assets\404_book_icon.svg' />
+				{/* <svg
           className="arrow"
           width="9"
           height="14"
@@ -26,8 +26,8 @@ export const BackButton = () => {
             stroke-width="2"
             stroke-linecap="round"
           />
-        </svg>
-      </StyledBackButton>
-    </div>
+        </svg> */}
+			</StyledBackButton>
+		</div>
   );
 };
