@@ -33,8 +33,8 @@ class Index extends Component {
 			<React.StrictMode>
 				<Provider store={store}>
 					<AlertProvider template={AlertTemplate} {...alertOptions}>
-						<Alerts />
 						<Router>
+							<Alerts />
 							<App />
 						</Router>
 					</AlertProvider>

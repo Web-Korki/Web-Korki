@@ -8,64 +8,84 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/auth';
 
-const LoginForm = ({ login, isAuthenticated }) => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
+import PropTypes from 'prop-types';
 
-  const { username, password } = formData;
+const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
+	LoginForm.propTypes = {
+		login: PropTypes.func,
+		isAuthenticated: PropTypes.bool,
+		errorMsg: PropTypes.object,
+	};
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+	const [formData, setFormData] = useState({
+		username: '',
+		password: '',
+	});
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    login(username, password);
-  };
+	const { username, password } = formData;
 
-  if (isAuthenticated) {
-    return <Redirect to="/admin_menu" />;
-  }
+	const onChange = (e) =>
+		setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  return (
-    <div className="d-flex justify-content-center align-items-center flex-column loginForm">
-      <form onSubmit={(e) => onSubmit(e)}>
-        <StyledLoginBox className="d-flex align-items-center flex-column">
-          <h1 className="mt-md-5 mb-3">Logowanie do platformy</h1>
-          <StyledInput
-            id="name"
-            type="text"
-            placeholder="login"
-            className="mt-md-5 mt-4 mb-4"
-            name="username"
-            value={username}
-            onChange={(e) => onChange(e)}
-            required
-          />
-          <StyledInput
-            id="password"
-            type="password"
-            placeholder="hasło"
-            name="password"
-            value={password}
-            onChange={(e) => onChange(e)}
-            required
-          />
-          <StyledBlueButton type="submit" className="mt-4 px-5 py-2">
-            zaloguj się
-          </StyledBlueButton>
-        </StyledLoginBox>
-      </form>
-      <Link className="mt-3" to="/reset_password">
-        Zapomniałem hasła
-      </Link>
-    </div>
-  );
+	const onSubmit = (e) => {
+		e.preventDefault();
+		login(username, password);
+	};
+
+	if (isAuthenticated) {
+		return <Redirect to='/admin_menu' />;
+	}
+
+	return (
+		<div className='d-flex justify-content-center align-items-center flex-column loginForm'>
+			<form onSubmit={(e) => onSubmit(e)}>
+				<StyledLoginBox className='d-flex align-items-center flex-column'>
+					<h1 className='mt-md-5 mb-3'>Logowanie do platformy</h1>
+					<StyledInput
+						id='name'
+						type='text'
+						placeholder='login'
+						className={`mt-md-5 mt-4 mb-4 ${
+							errorMsg ===
+							'No active account found with the given credentials'
+								? 'border-danger'
+								: null
+						}`}
+						name='username'
+						value={username}
+						onChange={(e) => onChange(e)}
+						required
+					/>
+					<StyledInput
+						id='password'
+						type='password'
+						placeholder='hasło'
+						className={`${
+							errorMsg ===
+							'No active account found with the given credentials'
+								? 'border-danger'
+								: null
+						}`}
+						name='password'
+						value={password}
+						onChange={(e) => onChange(e)}
+						required
+					/>
+					<StyledBlueButton type='submit' className='mt-4 px-5 py-2'>
+						zaloguj się
+					</StyledBlueButton>
+				</StyledLoginBox>
+			</form>
+			<Link className='mt-3' to='/reset_password'>
+				Zapomniałem hasła
+			</Link>
+		</div>
+	);
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+	isAuthenticated: state.auth.isAuthenticated,
+	errorMsg: state.errors.msg,
 });
 
 export default connect(mapStateToProps, { login })(LoginForm);
