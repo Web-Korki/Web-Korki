@@ -29,15 +29,18 @@ const LoginForm = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column loginForm">
-      <form onSubmit={(e) => onSubmit(e)}>
-        <StyledLoginBox className="d-flex align-items-center flex-column">
-          <h1 className="mt-md-5 mb-3">Logowanie do platformy</h1>
+    <div className="d-flex justify-content-center align-items-center loginForm">
+      <StyledLoginBox className="d-flex justify-content-center">
+        <form
+          className="d-flex justify-content-center align-items-center flex-column"
+          onSubmit={(e) => onSubmit(e)}
+        >
+          <h1 className="title mb-4">Logowanie do platformy</h1>
           <StyledInput
             id="name"
             type="text"
             placeholder="login"
-            className="mt-md-5 mt-4 mb-4"
+            className="mb-4"
             name="username"
             value={username}
             onChange={(e) => onChange(e)}
@@ -55,11 +58,11 @@ const LoginForm = ({ login, isAuthenticated }) => {
           <StyledBlueButton type="submit" className="mt-4 px-5 py-2">
             zaloguj się
           </StyledBlueButton>
-        </StyledLoginBox>
-      </form>
-      <Link className="mt-3" to="/reset_password">
-        Zapomniałem hasła
-      </Link>
+          <Link className="mt-3 link" to="/reset_password">
+            zapomniałem hasła
+          </Link>
+        </form>
+      </StyledLoginBox>
     </div>
   );
 };

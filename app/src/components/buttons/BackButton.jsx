@@ -10,9 +10,10 @@ export const BackButton = () => {
     <div className="p-0 d-flex justify-content-center align-items-center">
       <StyledBackButton
         onClick={goToPreviousPath}
-        className="justify-content-center align-items-center"
+        className="d-flex justify-content-center align-items-center"
       >
         <svg
+          className="l-arrow"
           width="9"
           height="14"
           viewBox="0 0 9 14"

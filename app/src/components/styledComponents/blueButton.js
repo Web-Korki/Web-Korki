@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledBlueButton = styled.button`
   min-width: 150px;
@@ -8,11 +8,15 @@ const StyledBlueButton = styled.button`
   box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.1);
   border-radius: 28px;
   color: #427e90;
+  padding: 10px 20px;
 
   @media (hover: hover) {
     &:hover {
       box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.4);
     }
+  }
+  @media (max-width: 992px) {
+    padding: 5px 30px;
   }
 `;
 
