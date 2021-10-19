@@ -106,7 +106,10 @@ label {
   .volunteerAnalysisWrapper {
     padding: 20vw 0;
   }
-  .arrow {
+}
+
+@media screen and (max-width: 768px) {
+  .l-arrow {
     width: 6px;
     height: 10px;
   }

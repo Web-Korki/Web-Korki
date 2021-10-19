@@ -7,11 +7,11 @@
   height: max(25vw, 150px);
 }
 
-.firstStyle {
+.firstColor {
   fill: rgb(66, 126, 144);
 }
 
-.secondStyle {
+.secondColor {
   fill: rgb(40, 93, 108);
 }
 

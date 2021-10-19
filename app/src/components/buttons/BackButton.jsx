@@ -13,7 +13,7 @@ export const BackButton = () => {
         className="d-flex justify-content-center align-items-center"
       >
         <svg
-          className="arrow"
+          className="l-arrow"
           width="9"
           height="14"
           viewBox="0 0 9 14"

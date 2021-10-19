@@ -7,30 +7,22 @@
   height: max(25vw, 150px);
 }
 
-.firstPath {
+.firstCol {
   fill: #fbfcfd;
 }
 
-.secondPath {
+.secondCol {
   fill: #c2b280;
 }
 
-.thirdPath {
+.thirdCol {
   fill: #808080;
 }
 
-.fourthPath {
-  fill: #fbfcfd;
-}
-
-.fifthPath {
-  fill: #c2b280;
-}
-
-.sixthPath {
+.forthCol {
   fill: #808080;
 }
 
-.seventhPath {
+.fifthCol {
   fill: #fafbfc;
 }
