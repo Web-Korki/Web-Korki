@@ -6,36 +6,36 @@ import LoginForm from './forms/LoginForm';
 import Loader from 'react-loader-spinner';
 
 const PrivateRoute = ({
-   component: Component,
-   isAuthenticated,
-   isLoading,
-   ...rest
+	component: Component,
+	isAuthenticated,
+	isLoading,
+	...rest
 }) => {
-   PrivateRoute.propTypes = {
-      component: PropTypes.shape({
-         Component: PropTypes.func,
-         isAuthenticated: PropTypes.bool,
-         isLoading: PropTypes.bool,
-      }),
-   };
+	PrivateRoute.propTypes = {
+		component: PropTypes.shape({
+			Component: PropTypes.func,
+			isAuthenticated: PropTypes.bool,
+			isLoading: PropTypes.bool,
+		}),
+	};
 
-   return (
-      <Route
-         {...rest}
-         render={(props) => {
-            if (!isAuthenticated) {
-               return <LoginForm />;
-            } else if (isAuthenticated) {
-               return <Component {...props} />;
-            }
-            if (isLoading) {
-               return (
-                  <Loader type='Grid' color='#00BFFF' height={80} width={80} />
-               );
-            }
-         }}
-      />
-   );
+	return (
+		<Route
+			{...rest}
+			render={(props) => {
+				if (!isAuthenticated) {
+					return <LoginForm />;
+				} else if (isAuthenticated) {
+					return <Component {...props} />;
+				}
+				if (isLoading) {
+					return (
+						<Loader type='Grid' color='#00BFFF' height={80} width={80} />
+					);
+				}
+			}}
+		/>
+	);
 };
 
 const mapStateToProps = (state) => ({

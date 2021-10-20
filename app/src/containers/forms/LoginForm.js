@@ -10,10 +10,11 @@ import { login } from '../../redux/actions/auth';
 
 import PropTypes from 'prop-types';
 
-const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
+const LoginForm = ({ login, isAuthenticated, errorMsg, isSuperuser }) => {
 	LoginForm.propTypes = {
 		login: PropTypes.func,
 		isAuthenticated: PropTypes.bool,
+		isSuperuser: PropTypes.bool,
 		errorMsg: PropTypes.string || PropTypes.object,
 	};
 
@@ -32,8 +33,10 @@ const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
 		login(username, password);
 	};
 
-	if (isAuthenticated) {
+	if (isAuthenticated && isSuperuser) {
 		return <Redirect to='/admin_menu' />;
+	} else if (isAuthenticated && !isSuperuser) {
+		return <Redirect to='/userMenu' />;
 	}
 
 	return (
@@ -76,6 +79,7 @@ const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
+	isSuperuser: state.auth.user?.is_superuser,
 	errorMsg: state.errors.msg,
 	errorStatus: state.errors.status,
 });

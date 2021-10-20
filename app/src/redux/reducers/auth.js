@@ -23,6 +23,7 @@ const initialState = {
 	access: Cookies.get('access'),
 	refresh: Cookies.get('refresh'),
 	isAuthenticated: null,
+	loginSuccess: null,
 	user: null,
 	isLoading: false,
 };
@@ -51,6 +52,7 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				isAuthenticated: true,
+				loginSuccess: true,
 				access: payload.access,
 				refresh: payload.refresh,
 			};
@@ -94,6 +96,7 @@ export default function (state = initialState, action) {
 				access: null,
 				refresh: null,
 				isAuthenticated: false,
+				loginSuccess: false,
 				user: null,
 			};
 		case PASSWORD_RESET_SUCCESS:
