@@ -1,9 +1,14 @@
+//react
 import React from 'react';
-import { Route } from 'react-router-dom';
+//redux
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import LoginForm from './forms/LoginForm';
+//router
+import { Route } from 'react-router-dom';
+import { Redirect } from 'react-router';
+//utils
 import Loader from 'react-loader-spinner';
+//proptypes
+import PropTypes from 'prop-types';
 
 const PrivateRoute = ({
 	component: Component,
@@ -24,7 +29,7 @@ const PrivateRoute = ({
 			{...rest}
 			render={(props) => {
 				if (!isAuthenticated) {
-					return <LoginForm />;
+					return <Redirect to='login_form' />;
 				} else if (isAuthenticated) {
 					return <Component {...props} />;
 				}
@@ -39,8 +44,8 @@ const PrivateRoute = ({
 };
 
 const mapStateToProps = (state) => ({
-   isAuthenticated: state.auth.isAuthenticated,
-   isLoading: state.auth.isLoading,
+	isAuthenticated: state.auth.isAuthenticated,
+	isLoading: state.auth.isLoading,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

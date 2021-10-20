@@ -47,9 +47,13 @@ function App() {
 				<Switch>
 					<Route exact path='/' component={Home} />
 					<PrivateRoute exact path='/UserMenu' component={UserMenu} />
-					<PrivateRoute path='/admin_menu' component={AdminMenu} />
+					<PrivateRoute exact path='/admin_menu' component={AdminMenu} />
 					<Route path='/login_form' component={LoginForm} />
-					<PrivateRoute path='/register_form' component={RegisterForm} />
+					<PrivateRoute
+						exact
+						path='/register_form'
+						component={RegisterForm}
+					/>
 					<PrivateRoute
 						path='/inactive_replacement'
 						component={InactiveReplacement}

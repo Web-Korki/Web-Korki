@@ -4,7 +4,8 @@ import {
 	StyledInput,
 	StyledBlueButton,
 } from '../../components/styledComponents/index';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/auth';
 
@@ -34,6 +35,8 @@ const LoginForm = ({ login, isAuthenticated, errorMsg, isSuperuser }) => {
 	};
 
 	if (isAuthenticated && isSuperuser) {
+		console.log('authenticated?', isAuthenticated);
+		console.log('sudouser?', isSuperuser);
 		return <Redirect to='/admin_menu' />;
 	} else if (isAuthenticated && !isSuperuser) {
 		return <Redirect to='/userMenu' />;
