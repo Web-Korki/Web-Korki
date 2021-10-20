@@ -4,7 +4,7 @@ import {
 	StyledInput,
 	StyledBlueButton,
 } from '../../components/styledComponents/index';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/auth';
 
@@ -31,6 +31,10 @@ const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
 		e.preventDefault();
 		login(username, password);
 	};
+
+	if (isAuthenticated) {
+		return <Redirect to='/admin_menu' />;
+	}
 
 	return (
 		<div className='d-flex justify-content-center align-items-center loginForm'>

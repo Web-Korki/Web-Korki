@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledGreyButton, StyledBox } from '../../components/styledComponents';
 import './UserMenu.style.css';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './UserMenu.style.css';
 import { connect } from 'react-redux';
 import { logout } from '../../redux/actions/auth';
