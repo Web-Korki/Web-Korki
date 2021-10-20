@@ -27,58 +27,43 @@ const LoginForm = ({ login, isAuthenticated, errorMsg }) => {
 	const onChange = (e) =>
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		login(username, password);
-	};
-
-	if (isAuthenticated) {
-		return <Redirect to='/admin_menu' />;
-	}
-
-	return (
-		<div className='d-flex justify-content-center align-items-center flex-column loginForm'>
-			<form onSubmit={(e) => onSubmit(e)}>
-				<StyledLoginBox className='d-flex align-items-center flex-column'>
-					<h1 className='mt-md-5 mb-3'>Logowanie do platformy</h1>
-					<StyledInput
-						id='name'
-						type='text'
-						placeholder='login'
-						className={`mt-md-5 mt-4 mb-4 ${
-							errorMsg !== null ? 'border-danger' : null
-						}`}
-						name='username'
-						value={username}
-						onChange={(e) => onChange(e)}
-						required
-					/>
-					<StyledInput
-						id='password'
-						type='password'
-						placeholder='hasło'
-						className={`${errorMsg !== null ? 'border-danger' : null}`}
-						name='password'
-						value={password}
-						onChange={(e) => onChange(e)}
-						required
-					/>
-					{errorMsg ===
-					'No active account found with the given credentials' ? (
-						<span className='text-danger pt-2'>
-							Podaj poprawny login i hasło
-						</span>
-					) : null}
-					<StyledBlueButton type='submit' className='mt-4 px-5 py-2'>
-						zaloguj się
-					</StyledBlueButton>
-				</StyledLoginBox>
-			</form>
-			<Link className='mt-3' to='/reset_password'>
-				Zapomniałem hasła
-			</Link>
-		</div>
-	);
+  return (
+    <div className="d-flex justify-content-center align-items-center loginForm">
+      <StyledLoginBox className="d-flex justify-content-center">
+        <form
+          className="d-flex justify-content-center align-items-center flex-column"
+          onSubmit={(e) => onSubmit(e)}
+        >
+          <h1 className="title mb-4">Logowanie do platformy</h1>
+          <StyledInput
+            id="name"
+            type="text"
+            placeholder="login"
+            className="mb-4"
+            name="username"
+            value={username}
+            onChange={(e) => onChange(e)}
+            required
+          />
+          <StyledInput
+            id="password"
+            type="password"
+            placeholder="hasło"
+            name="password"
+            value={password}
+            onChange={(e) => onChange(e)}
+            required
+          />
+          <StyledBlueButton type="submit" className="mt-4 px-5 py-2">
+            zaloguj się
+          </StyledBlueButton>
+          <Link className="mt-3 link" to="/reset_password">
+            zapomniałem hasła
+          </Link>
+        </form>
+      </StyledLoginBox>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({

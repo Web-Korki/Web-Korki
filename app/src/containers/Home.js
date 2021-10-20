@@ -5,14 +5,8 @@ import { Logo } from '../components/layout/Logo';
 
 export const Home = () => {
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column Home">
-      <div
-        className="mb-5"
-        style={{
-          height: '300px',
-          width: '300px',
-        }}
-      >
+    <div className="homepage d-flex flex-column justify-content-center align-items-center">
+      <div className="mb-5">
         <Logo />
       </div>
       <div>

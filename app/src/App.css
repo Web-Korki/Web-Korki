@@ -11,23 +11,24 @@ html {
 body {
   background-color: #dff2fb;
   font-family: 'Sen', sans-serif;
+  color: #427e90;
 }
 
 h1 {
   font-size: clamp(25px, 5vw, 42px);
 }
 
-label{
+label {
   font-size: 25px;
   margin-left: 12px;
   margin-bottom: 0px;
 }
 
 .title {
-  color: #427e90;
   font-weight: 400;
   font-size: clamp(24px, 5vw, 42px);
   margin: 0;
+  text-align: center;
 }
 
 /* UserMenu Start */
@@ -41,7 +42,6 @@ label{
   width: 800px;
   height: 500px;
   flex-wrap: wrap;
-  color: #427e90;
 }
 
 .menu-text {
@@ -52,17 +52,22 @@ label{
 /* UserMenu End */
 
 /* InactiveReplacement Start */
-.inactiveReplacementWrapper,
+/* .inactiveReplacementWrapper,
 .resetPassword,
 .loginForm,
 .registerForm,
 .resetPasswordConfirm,
-.Home,
+.homepage,
 .Whoops404,
 .volunteerRegisterWrapper,
 .activateAccount,
 .submitReplacement {
   height: 100vh;
+} */
+
+.link,
+.link:hover {
+  color: #427e90;
 }
 
 .inactiveReplacementInnerWrapper {
@@ -70,15 +75,44 @@ label{
   height: 500px;
 }
 
-.sorryMessage {
-  color: #427e90;
-}
-/* InactiveReplacement End */
-
 /* LectureAnalysis Start */
+.inactiveReplacementWrapper,
+.resetPassword,
+.loginForm,
+.registerForm,
+.resetPasswordConfirm,
+.homepage,
+.Whoops404,
+.volunteerRegisterWrapper,
+.activateAccount,
+.submitReplacement,
 .lectureAnalysisWrapper,
 .volunteerAnalysisWrapper {
-  padding: 5vw 0 5vw 0;
+  padding: 5vw 0;
+}
+
+@media screen and (max-width: 992px) {
+  .inactiveReplacementWrapper,
+  .resetPassword,
+  .loginForm,
+  .registerForm,
+  .resetPasswordConfirm,
+  .homepage,
+  .Whoops404,
+  .volunteerRegisterWrapper,
+  .activateAccount,
+  .submitReplacement,
+  .lectureAnalysisWrapper,
+  .volunteerAnalysisWrapper {
+    padding: 20vw 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .l-arrow {
+    width: 6px;
+    height: 10px;
+  }
 }
 /* LectureAnalysis End */
 
@@ -91,6 +125,3 @@ label{
   margin: 0 auto;
 }
 /* LectureAnalysis End */
-#date{
-  max-width: 220px;
-}
