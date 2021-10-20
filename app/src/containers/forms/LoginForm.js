@@ -35,8 +35,10 @@ const LoginForm = ({ login, isAuthenticated, errorMsg, isSuperuser }) => {
 	};
 
 	if (isAuthenticated && isSuperuser) {
-		console.log('authenticated?', isAuthenticated);
-		console.log('sudouser?', isSuperuser);
+		setTimeout(() => {
+			console.log('authenticated?', isAuthenticated);
+			console.log('sudouser?', isSuperuser);
+		}, 1000);
 		return <Redirect to='/admin_menu' />;
 	} else if (isAuthenticated && !isSuperuser) {
 		return <Redirect to='/userMenu' />;
