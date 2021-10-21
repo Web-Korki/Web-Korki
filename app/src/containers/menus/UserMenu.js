@@ -1,19 +1,36 @@
 import React from 'react';
-import { StyledGreyButton, StyledBox } from '../../components/styledComponents';
+import { StyledBox } from '../../components/styledComponents';
+import Logout from '../forms/Logout';
 import './UserMenu.style.css';
 import { NavLink } from 'react-router-dom';
 import './UserMenu.style.css';
 import { connect } from 'react-redux';
-import { logout } from '../../redux/actions/auth';
 import PropTypes from 'prop-types';
 
-const UserMenu = ({ logout }, isAuthenticated, isSuperuser) => {
+const UserMenu = (isAuthenticated, isSuperuser, user) => {
 	UserMenu.propTypes = {
 		isAuthenticated: PropTypes.bool.isRequired,
 		isSuperuser: PropTypes.bool.isRequired,
+		user: PropTypes.object,
 	};
 
-	console.log(isSuperuser, isAuthenticated);
+	let AdminMenuBtn;
+
+	if (isSuperuser) {
+		AdminMenuBtn = (
+			<div className='col-12 col-lg-auto p-lg-2 p-1'>
+				<NavLink to='/admin_menu'>
+					<StyledBox>Menu administratora</StyledBox>
+				</NavLink>
+			</div>
+		);
+	} else {
+		AdminMenuBtn = null;
+	}
+
+	console.log('isAuthenticated', isAuthenticated);
+	console.log('isSuperuser', isSuperuser);
+	console.log('user', user);
 
 	return (
 		<>
@@ -24,9 +41,7 @@ const UserMenu = ({ logout }, isAuthenticated, isSuperuser) => {
 							Menu
 						</h1>
 						<div className='col-md d-flex align-items-center justify-content-lg-end justify-content-center'>
-							<StyledGreyButton onClick={logout}>
-								wyloguj się
-							</StyledGreyButton>
+							<Logout>wyloguj się</Logout>
 						</div>
 					</div>
 					<div className='row justify-content-center'>
@@ -45,13 +60,7 @@ const UserMenu = ({ logout }, isAuthenticated, isSuperuser) => {
 								<StyledBox>Uzupełnij raport</StyledBox>
 							</NavLink>
 						</div>
-						{isSuperuser ? (
-							<div className='col-12 col-lg-auto p-lg-2 p-1'>
-								<NavLink to='/admin_menu'>
-									<StyledBox>Menu administratora</StyledBox>
-								</NavLink>
-							</div>
-						) : null}
+						{AdminMenuBtn}
 					</div>
 				</div>
 			</div>
@@ -61,7 +70,8 @@ const UserMenu = ({ logout }, isAuthenticated, isSuperuser) => {
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
-	isSuperuser: state.auth.user?.is_superuser,
+	isSuperuser: state.auth.isSuperuser,
+	user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { logout })(UserMenu);
+export default connect(mapStateToProps)(UserMenu);

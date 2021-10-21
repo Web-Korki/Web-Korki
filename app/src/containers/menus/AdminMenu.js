@@ -3,24 +3,23 @@ import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router';
 //redux
 import { connect } from 'react-redux';
-import { logout } from '../../redux/actions/auth';
 //styledComponents
-import {
-	StyledGreyButton,
-	StyledBox,
-} from '../../components/styledComponents/index';
-//propTypes
+import { StyledBox } from '../../components/styledComponents/index';
+import Logout from '../forms/Logout';
 import PropTypes from 'prop-types';
 
-const AdminMenu = ({ logout }, isAuthenticated, isSuperuser) => {
+const AdminMenu = (isAuthenticated, isSuperuser, user) => {
 	AdminMenu.propTypes = {
-		isAuthenticated: PropTypes.bool,
-		isSuperuser: PropTypes.bool,
+		isAuthenticated: PropTypes.bool.isRequired,
+		isSuperuser: PropTypes.bool.isRequired,
+		user: PropTypes.object,
 	};
 
-	if (isAuthenticated && !isSuperuser) {
-		<Redirect to='/userMenu' />;
-	}
+	setTimeout(() => {
+		console.log('isAuthenticated', isAuthenticated);
+		console.log('isSuperuser', isSuperuser);
+		console.log('user', user);
+	}, 1000);
 
 	return (
 		<>
@@ -31,9 +30,7 @@ const AdminMenu = ({ logout }, isAuthenticated, isSuperuser) => {
 							Panel administratora
 						</h1>
 						<div className='col-md d-flex align-items-center justify-content-lg-end justify-content-center'>
-							<StyledGreyButton onClick={logout}>
-								wyloguj się
-							</StyledGreyButton>
+							<Logout>wyloguj się</Logout>
 						</div>
 					</div>
 					<div className='row justify-content-center'>
@@ -62,6 +59,11 @@ const AdminMenu = ({ logout }, isAuthenticated, isSuperuser) => {
 								<StyledBox>Aktywne zastępstwa</StyledBox>
 							</NavLink>
 						</div>
+						<div className='col-12 col-lg-auto p-lg-2 p-1'>
+							<NavLink to='/user_menu'>
+								<StyledBox>Menu nauczyciela</StyledBox>
+							</NavLink>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -71,7 +73,8 @@ const AdminMenu = ({ logout }, isAuthenticated, isSuperuser) => {
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
-	isSuperuser: state.auth.user?.is_superuser,
+	isSuperuser: state.auth.isSuperuser,
+	user: state.auth.user,
 });
 
-export default connect(mapStateToProps, { logout })(AdminMenu);
+export default connect(mapStateToProps)(AdminMenu);

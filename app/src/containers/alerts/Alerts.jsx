@@ -21,9 +21,9 @@ class Alerts extends Component {
 		const { error, alert, loginSuccess, isSuperuser } = this.props;
 
 		if (loginSuccess !== prevProps.loginSuccess) {
-			loginSuccess && isSuperuser
+			loginSuccess && !isSuperuser
 				? alert.success('Poprawnie zalogowano jako nauczyciel')
-				: loginSuccess && !isSuperuser
+				: loginSuccess && isSuperuser
 				? alert.success('Poprawnie zalogowano jako administrator')
 				: alert.info('Poprawnie wylogowano z portalu');
 		}

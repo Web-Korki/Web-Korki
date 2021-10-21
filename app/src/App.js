@@ -46,7 +46,7 @@ function App() {
 			<MainContainer>
 				<Switch>
 					<Route exact path='/' component={Home} />
-					<PrivateRoute exact path='/UserMenu' component={UserMenu} />
+					<PrivateRoute exact path='/user_menu' component={UserMenu} />
 					<PrivateRoute exact path='/admin_menu' component={AdminMenu} />
 					<Route path='/login_form' component={LoginForm} />
 					<PrivateRoute

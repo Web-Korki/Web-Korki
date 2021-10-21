@@ -9,6 +9,7 @@ import { Redirect } from 'react-router';
 import Loader from 'react-loader-spinner';
 //proptypes
 import PropTypes from 'prop-types';
+import LoginForm from './forms/LoginForm';
 
 const PrivateRoute = ({
 	component: Component,
@@ -29,7 +30,7 @@ const PrivateRoute = ({
 			{...rest}
 			render={(props) => {
 				if (!isAuthenticated) {
-					return <Redirect to='login_form' />;
+					return <LoginForm />;
 				} else if (isAuthenticated) {
 					return <Component {...props} />;
 				}

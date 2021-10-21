@@ -23,6 +23,7 @@ const initialState = {
 	access: Cookies.get('access'),
 	refresh: Cookies.get('refresh'),
 	isAuthenticated: null,
+	isSuperuser: null,
 	loginSuccess: null,
 	user: null,
 	isLoading: false,
@@ -65,6 +66,7 @@ export default function (state = initialState, action) {
 			return {
 				...state,
 				user: payload,
+				isSuperuser: payload.is_superuser,
 				isAuthenticated: true,
 			};
 		case AUTHENTICATED_FAIL:
@@ -96,6 +98,7 @@ export default function (state = initialState, action) {
 				access: null,
 				refresh: null,
 				isAuthenticated: false,
+				isSuperuser: null,
 				loginSuccess: false,
 				user: null,
 			};

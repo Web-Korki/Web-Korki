@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	StyledLoginBox,
 	StyledInput,
 	StyledBlueButton,
 } from '../../components/styledComponents/index';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/auth';
+//utils
+import Loader from 'react-loader-spinner';
 
 import PropTypes from 'prop-types';
 
-const LoginForm = ({ login, isAuthenticated, errorMsg, isSuperuser }) => {
+const LoginForm = ({ login }, isAuthenticated, isSuperuser, user) => {
 	LoginForm.propTypes = {
 		login: PropTypes.func,
 		isAuthenticated: PropTypes.bool,
-		isSuperuser: PropTypes.bool,
-		errorMsg: PropTypes.string || PropTypes.object,
+		isSuperuser: PropTypes.bool.isRequired,
+		user: PropTypes.object,
 	};
+	let history = useHistory();
 
 	const [formData, setFormData] = useState({
 		username: '',
@@ -34,15 +37,21 @@ const LoginForm = ({ login, isAuthenticated, errorMsg, isSuperuser }) => {
 		login(username, password);
 	};
 
-	if (isAuthenticated && isSuperuser) {
-		setTimeout(() => {
-			console.log('authenticated?', isAuthenticated);
-			console.log('sudouser?', isSuperuser);
-		}, 1000);
-		return <Redirect to='/admin_menu' />;
-	} else if (isAuthenticated && !isSuperuser) {
-		return <Redirect to='/userMenu' />;
-	}
+	const takeMeSomewhere = () => {
+		if (isAuthenticated && isSuperuser) {
+			history.push('/admin_menu');
+			// return <Redirect to='/admin_menu' />;
+		} else if (isAuthenticated && !isSuperuser) {
+			history.push('/user_menu');
+			// return <Redirect to='/user_menu' />;
+		} else {
+			return <Loader type='Grid' color='#00BFFF' height={80} width={80} />;
+		}
+	};
+
+	useEffect(() => {
+		takeMeSomewhere();
+	}, [user]);
 
 	return (
 		<div className='d-flex justify-content-center align-items-center loginForm'>
@@ -84,9 +93,8 @@ const LoginForm = ({ login, isAuthenticated, errorMsg, isSuperuser }) => {
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
-	isSuperuser: state.auth.user?.is_superuser,
-	errorMsg: state.errors.msg,
-	errorStatus: state.errors.status,
+	isSuperuser: state.auth.isSuperuser,
+	user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { login })(LoginForm);
