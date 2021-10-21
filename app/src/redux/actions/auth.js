@@ -18,7 +18,8 @@ import {
 	PASSWORD_RESET_FAIL,
 	PASSWORD_RESET_CONFIRM_SUCCESS,
 	PASSWORD_RESET_CONFIRM_FAIL,
-	GET_ERRORS
+	GET_ERRORS,
+	RESET_STATE
 } from './types';
 
 const API_URL = 'https://web-korki.edu.pl';
@@ -319,5 +320,11 @@ export const reset_password_confirm =
 export const logout = () => dispatch => {
 	dispatch({
 		type: LOGOUT
+	})
+}
+
+export const reset_state = () => dispatch => {
+	dispatch({
+		type: RESET_STATE,
 	})
 }

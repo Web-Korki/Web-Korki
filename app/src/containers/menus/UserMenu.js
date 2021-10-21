@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 const UserMenu = (isAuthenticated, isSuperuser, user) => {
 	UserMenu.propTypes = {
 		isAuthenticated: PropTypes.bool.isRequired,
-		isSuperuser: PropTypes.bool.isRequired,
+		isSuperuser: PropTypes.bool,
 		user: PropTypes.object,
 	};
 

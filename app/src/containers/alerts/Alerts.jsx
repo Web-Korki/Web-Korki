@@ -12,13 +12,21 @@ import { withAlert } from 'react-alert';
 
 class Alerts extends Component {
 	static propTypes = {
+		accountCreated: PropTypes.bool,
 		error: PropTypes.object.isRequired,
 		loginSuccess: PropTypes.bool,
 		isSuperuser: PropTypes.bool,
 	};
 
 	componentDidUpdate(prevProps) {
-		const { error, alert, loginSuccess, isSuperuser } = this.props;
+		const { error, alert, loginSuccess, isSuperuser, accountCreated } =
+			this.props;
+
+		if (accountCreated !== prevProps.accountCreated) {
+			accountCreated
+				? alert.success('Pomyślnie zarejestrowano użytkownika')
+				: alert.error('Rejestracja użytkownika nie powiodła się');
+		}
 
 		if (loginSuccess !== prevProps.loginSuccess) {
 			loginSuccess && !isSuperuser
@@ -41,6 +49,7 @@ class Alerts extends Component {
 }
 
 const mapStateToProps = (state) => ({
+	accountCreated: state.auth.accountCreated,
 	error: state.errors,
 	loginSuccess: state.auth.loginSuccess,
 	isSuperuser: state.auth.user?.is_superuser,

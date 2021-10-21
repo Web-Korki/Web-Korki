@@ -34,9 +34,9 @@ const RegisterForm = ({ register, isAuthenticated }) => {
 		setAccountCreated(true);
   };
 
-  if (accountCreated) {
-		return <Redirect to='/admin_menu' />;
-  }
+//   if (accountCreated) {
+// 		return <Redirect to='/admin_menu' />;
+//   }
 
   return (
 		<div className='d-flex justify-content-center align-items-center flex-column loginForm'>

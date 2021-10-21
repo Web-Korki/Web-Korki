@@ -4,6 +4,7 @@ import {
 	LOGIN_FAIL,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
+	RESET_STATE,
 	ACTIVATION_SUCCESS,
 	ACTIVATION_FAIL,
 	USER_LOADED_SUCCESS,
@@ -25,6 +26,7 @@ const initialState = {
 	isAuthenticated: null,
 	isSuperuser: null,
 	loginSuccess: null,
+	accountCreated: null,
 	user: null,
 	isLoading: false,
 };
@@ -32,6 +34,11 @@ const initialState = {
 export default function (state = initialState, action) {
 	const { type, payload } = action;
 	switch (type) {
+		case RESET_STATE:
+			return {
+				...state,
+				accountCreated: null,
+			};
 		case AUTHENTICATED_SUCCESS:
 			return {
 				...state,
@@ -56,6 +63,16 @@ export default function (state = initialState, action) {
 				loginSuccess: true,
 				access: payload.access,
 				refresh: payload.refresh,
+			};
+		case REGISTER_SUCCESS:
+			return {
+				...state,
+				accountCreated: true,
+			};
+		case REGISTER_FAIL:
+			return {
+				...state,
+				accountCreated: false,
 			};
 		case USER_LOADED_SUCCESS:
 			return {
@@ -84,7 +101,6 @@ export default function (state = initialState, action) {
 				user: null,
 			};
 		case LOGIN_FAIL:
-		case REGISTER_FAIL:
 		case LOGOUT:
 			Cookies.remove('access');
 			Cookies.remove('refresh');
@@ -95,6 +111,7 @@ export default function (state = initialState, action) {
 				isAuthenticated: false,
 				isSuperuser: null,
 				loginSuccess: false,
+				accountCreated: false,
 				user: null,
 			};
 		case PASSWORD_RESET_SUCCESS:

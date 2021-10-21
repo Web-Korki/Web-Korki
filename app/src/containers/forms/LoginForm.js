@@ -37,21 +37,21 @@ const LoginForm = ({ login }, isAuthenticated, isSuperuser, user) => {
 		login(username, password);
 	};
 
-	const takeMeSomewhere = () => {
-		if (isAuthenticated && isSuperuser) {
-			history.push('/admin_menu');
-			// return <Redirect to='/admin_menu' />;
-		} else if (isAuthenticated && !isSuperuser) {
-			history.push('/user_menu');
-			// return <Redirect to='/user_menu' />;
-		} else {
-			return <Loader type='Grid' color='#00BFFF' height={80} width={80} />;
-		}
-	};
+	// const takeMeSomewhere = () => {
+	// 	if (isAuthenticated && isSuperuser) {
+	// 		history.push('/admin_menu');
+	// 		// return <Redirect to='/admin_menu' />;
+	// 	} else if (isAuthenticated && !isSuperuser) {
+	// 		history.push('/user_menu');
+	// 		// return <Redirect to='/user_menu' />;
+	// 	} else {
+	// 		return <Loader type='Grid' color='#00BFFF' height={80} width={80} />;
+	// 	}
+	// };
 
-	useEffect(() => {
-		takeMeSomewhere();
-	}, [user]);
+	// useEffect(() => {
+	// 	takeMeSomewhere();
+	// }, [user]);
 
 	return (
 		<div className='d-flex justify-content-center align-items-center loginForm'>

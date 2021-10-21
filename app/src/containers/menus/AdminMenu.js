@@ -1,25 +1,43 @@
+//react
+import React, { useEffect } from 'react';
 //router
 import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router';
 //redux
 import { connect } from 'react-redux';
+//actions
+import { reset_state } from '../../redux/actions/auth';
 //styledComponents
 import { StyledBox } from '../../components/styledComponents/index';
 import Logout from '../forms/Logout';
 import PropTypes from 'prop-types';
 
-const AdminMenu = (isAuthenticated, isSuperuser, user) => {
+const AdminMenu = (
+	{ reset_state },
+	isAuthenticated,
+	isSuperuser,
+	user,
+	accountCreated
+) => {
 	AdminMenu.propTypes = {
+		reset_state: PropTypes.func.isRequired,
+		accountCreated: PropTypes.bool,
 		isAuthenticated: PropTypes.bool.isRequired,
 		isSuperuser: PropTypes.bool.isRequired,
 		user: PropTypes.object,
 	};
 
-	setTimeout(() => {
-		console.log('isAuthenticated', isAuthenticated);
-		console.log('isSuperuser', isSuperuser);
-		console.log('user', user);
-	}, 1000);
+	//needs to be adjusted
+	// useEffect(() => {
+	// 	reset_state();
+	// }, [accountCreated]);
+
+	// setTimeout(() => {
+	// 	console.log('isAuthenticated', isAuthenticated);
+	// 	console.log('accountCreated', accountCreated);
+	// 	console.log('isSuperuser', isSuperuser);
+	// 	console.log('user', user);
+	// }, 1000);
 
 	return (
 		<>
@@ -72,9 +90,10 @@ const AdminMenu = (isAuthenticated, isSuperuser, user) => {
 };
 
 const mapStateToProps = (state) => ({
+	accountCreated: state.auth.accountCreated,
 	isAuthenticated: state.auth.isAuthenticated,
 	isSuperuser: state.auth.isSuperuser,
 	user: state.auth.user,
 });
 
-export default connect(mapStateToProps)(AdminMenu);
+export default connect(mapStateToProps, { reset_state })(AdminMenu);
