@@ -57,11 +57,6 @@ export default function (state = initialState, action) {
 				access: payload.access,
 				refresh: payload.refresh,
 			};
-		case REGISTER_SUCCESS:
-			return {
-				...state,
-				isAuthenticated: false,
-			};
 		case USER_LOADED_SUCCESS:
 			return {
 				...state,
@@ -108,6 +103,7 @@ export default function (state = initialState, action) {
 		case PASSWORD_RESET_CONFIRM_FAIL:
 		case ACTIVATION_SUCCESS:
 		case ACTIVATION_FAIL:
+		case REGISTER_SUCCESS:
 			return {
 				...state,
 			};

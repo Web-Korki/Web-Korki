@@ -180,14 +180,14 @@ export const login = (username, password) => async (dispatch) => {
 };
 
 export const register =
-	(username, email, password, re_password) => async (dispatch) => {
+	(username, email) => async (dispatch) => {
 		const config = {
 			headers: {
 				'Content-Type': 'application/json',
 			},
 		};
 
-		const body = JSON.stringify({ username, email, password, re_password });
+		const body = JSON.stringify({ username, email });
 
 		try {
 			const res = await axios.post(`${API_URL}/auth/users/`, body, config);
