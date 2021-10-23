@@ -13,10 +13,5 @@ const StyledBackButton = styled.button`
     border: 2px solid #ebf3f8;
     box-shadow: 2px 2px 15px 4px rgba(7, 93, 172, 0.09);
   }
-
-  @media screen and (max-width: 768px) {
-    width: 30px;
-    height: 30px;
-  }
 `;
 export default StyledBackButton;

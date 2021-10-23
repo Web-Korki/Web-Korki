@@ -29,7 +29,7 @@ const LoginForm = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center loginForm">
+    <div className="d-flex flex-column justify-content-center align-items-center loginForm">
       <StyledLoginBox className="d-flex justify-content-center">
         <form
           className="d-flex justify-content-center align-items-center flex-column"
@@ -55,7 +55,7 @@ const LoginForm = ({ login, isAuthenticated }) => {
             onChange={(e) => onChange(e)}
             required
           />
-          <StyledBlueButton type="submit" className="mt-4 px-5 py-2">
+          <StyledBlueButton type="submit" className="mt-4">
             zaloguj się
           </StyledBlueButton>
           <Link className="mt-3 link" to="/reset_password">
