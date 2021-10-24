@@ -22,11 +22,12 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 import PropTypes from 'prop-types';
 
-const LoginForm = ({ login, isAuthenticated, isSuperuser }) => {
+const LoginForm = ({ login, isAuthenticated, isSuperuser, error }) => {
 	LoginForm.propTypes = {
 		login: PropTypes.func,
 		isAuthenticated: PropTypes.bool,
 		isSuperuser: PropTypes.bool,
+		error: PropTypes.string,
 	};
 
 	const eye = <FontAwesomeIcon icon={faEye} />;
@@ -69,7 +70,9 @@ const LoginForm = ({ login, isAuthenticated, isSuperuser }) => {
 						id='name'
 						type='text'
 						placeholder='login'
-						className='mb-4'
+						className={`mb-4 ${
+							error !== null ? 'border border-danger' : null
+						}`}
 						name='username'
 						value={username}
 						onChange={(e) => onChange(e)}
@@ -79,6 +82,9 @@ const LoginForm = ({ login, isAuthenticated, isSuperuser }) => {
 						<StyledInputPassword
 							id='password'
 							type={passwordShown ? 'text' : 'password'}
+							className={`${
+								error !== null ? 'border border-danger' : null
+							}`}
 							placeholder='hasło'
 							name='password'
 							value={password}
@@ -102,6 +108,7 @@ const LoginForm = ({ login, isAuthenticated, isSuperuser }) => {
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
 	isSuperuser: state.auth.isSuperuser,
+	error: state.errors.msg,
 });
 
 export default connect(mapStateToProps, { login })(LoginForm);
