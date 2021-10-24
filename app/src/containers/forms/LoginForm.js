@@ -34,10 +34,8 @@ const LoginForm = ({ login, isAuthenticated, isSuperuser }) => {
 	};
 
 	if (isAuthenticated && isSuperuser) {
-		console.log('admin', isAuthenticated, isSuperuser);
 		return <Redirect push to='/admin_menu' />;
 	} else if (isAuthenticated && !isSuperuser) {
-		console.log('user', isAuthenticated, isSuperuser);
 		return <Redirect push to='/user_menu' />;
 	}
 
