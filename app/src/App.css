@@ -6,29 +6,29 @@
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
 
 body {
+  height: 100%;
   background-color: #dff2fb;
   font-family: 'Sen', sans-serif;
   color: #427e90;
-}
-
-h1 {
-  font-size: clamp(25px, 5vw, 42px);
-}
-
-label {
-  font-size: 25px;
-  margin-left: 12px;
-  margin-bottom: 0px;
+  font-weight: 400;
 }
 
 .title {
-  font-weight: 400;
   font-size: clamp(24px, 5vw, 42px);
   margin: 0;
   text-align: center;
+}
+
+.text {
+  font-size: clamp(15px, 4vw, 24px);
 }
 
 /* UserMenu Start */
@@ -89,6 +89,7 @@ label {
 .lectureAnalysisWrapper,
 .volunteerAnalysisWrapper {
   padding: 5vw 0;
+  height: 100%;
 }
 
 @media screen and (max-width: 992px) {
@@ -105,6 +106,10 @@ label {
   .lectureAnalysisWrapper,
   .volunteerAnalysisWrapper {
     padding: 20vw 0;
+    height: 100%;
+  }
+  .button {
+    display: none !important;
   }
 }
 
