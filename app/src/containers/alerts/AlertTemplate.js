@@ -9,7 +9,13 @@ const AlertTemplate = ({ style, options, message, close }) => (
 				: options.type === 'success'
 				? 'success'
 				: 'error'
-		}`}>
+		}`}
+		style={{
+			marginTop: '20px',
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+		}}>
 		{options.type === 'info'}
 		{options.type === 'success'}
 		{options.type === 'error'}

@@ -4,10 +4,6 @@
    box-sizing: border-box;
    border-radius: 10px;
    position: relative;
-   margin-top: '20px';
-	display: 'flex';
-	justify-content: 'center';
-	align-items: 'center';
 }
 
 .alert-type-info{

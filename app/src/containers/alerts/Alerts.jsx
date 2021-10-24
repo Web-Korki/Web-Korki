@@ -12,14 +12,13 @@ import { withAlert } from 'react-alert';
 
 class Alerts extends Component {
 	static propTypes = {
-		accountCreated: PropTypes.bool,
 		error: PropTypes.object.isRequired,
 		loginSuccess: PropTypes.bool,
 		isSuperuser: PropTypes.bool,
 	};
 
 	componentDidUpdate(prevProps) {
-		const { error, alert, loginSuccess, isSuperuser, accountCreated } =
+		const { error, alert, loginSuccess, isSuperuser } =
 			this.props;
 
 		// if (accountCreated !== prevProps.accountCreated) {
@@ -49,7 +48,6 @@ class Alerts extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	accountCreated: state.auth.accountCreated,
 	loginSuccess: state.auth.loginSuccess,
 	isSuperuser: state.auth.isSuperuser,
 	error: state.errors,

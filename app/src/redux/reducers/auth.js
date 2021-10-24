@@ -59,7 +59,6 @@ export default function (state = initialState, action) {
 			Cookies.set('refresh', payload.refresh);
 			return {
 				...state,
-				loginSuccess: true,
 				access: payload.access,
 				refresh: payload.refresh,
 			};
@@ -78,6 +77,7 @@ export default function (state = initialState, action) {
 				...state,
 				user: payload,
 				isSuperuser: payload.is_superuser,
+				loginSuccess: true,
 				isAuthenticated: true,
 			};
 		case AUTHENTICATED_FAIL:
