@@ -11,7 +11,7 @@ import { login } from '../../redux/actions/auth';
 
 import PropTypes from 'prop-types';
 
-const LoginForm = ({ login }, isAuthenticated, isSuperuser) => {
+const LoginForm = ({ login, isAuthenticated, isSuperuser }) => {
 	LoginForm.propTypes = {
 		login: PropTypes.func,
 		isAuthenticated: PropTypes.bool,
@@ -32,6 +32,14 @@ const LoginForm = ({ login }, isAuthenticated, isSuperuser) => {
 		e.preventDefault();
 		login(username, password);
 	};
+
+	if (isAuthenticated && isSuperuser) {
+		console.log('admin', isAuthenticated, isSuperuser);
+		return <Redirect push to='/admin_menu' />;
+	} else if (isAuthenticated && !isSuperuser) {
+		console.log('user', isAuthenticated, isSuperuser);
+		return <Redirect push to='/user_menu' />;
+	}
 
 	return (
 		<div className='d-flex justify-content-center align-items-center loginForm'>
@@ -73,6 +81,7 @@ const LoginForm = ({ login }, isAuthenticated, isSuperuser) => {
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
+	isSuperuser: state.auth.isSuperuser,
 });
 
 export default connect(mapStateToProps, { login })(LoginForm);

@@ -59,7 +59,6 @@ export default function (state = initialState, action) {
 			Cookies.set('refresh', payload.refresh);
 			return {
 				...state,
-				isAuthenticated: true,
 				loginSuccess: true,
 				access: payload.access,
 				refresh: payload.refresh,
