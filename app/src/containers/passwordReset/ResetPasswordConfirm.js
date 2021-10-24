@@ -35,13 +35,17 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column resetPasswordConfirm">
-      <form onSubmit={(e) => onSubmit(e)}>
-        <StyledLoginBox className="d-flex align-items-center flex-column pt-4">
-          <h1 className="mt-md-5 mb-3">Resetuj hasło</h1>
+    <div className="resetPasswordConfirm d-flex flex-column justify-content-center align-items-center">
+      <StyledLoginBox className="d-flex flex-column justify-content-center align-items-center">
+        <h1 className="title mb-4">Resetuj hasło</h1>
+        <form
+          className="d-flex align-items-center flex-column"
+          onSubmit={(e) => onSubmit(e)}
+        >
           <StyledInput
             id="password"
             type="password"
+            className="mb-3 mb-md-4"
             placeholder="nowe hasło"
             name="new_password"
             value={new_password}
@@ -51,17 +55,16 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
           <StyledInput
             id="password"
             type="password"
+            className="mb-3 mb-md-4"
             placeholder="potwierdź nowe hasło"
             name="re_new_password"
             value={re_new_password}
             onChange={(e) => onChange(e)}
             required
           />
-          <StyledBlueButton type="submit" className="mt-4 px-5 py-2">
-            ustaw nowe hasło
-          </StyledBlueButton>
-        </StyledLoginBox>
-      </form>
+          <StyledBlueButton type="submit">ustaw nowe hasło</StyledBlueButton>
+        </form>
+      </StyledLoginBox>
     </div>
   );
 };

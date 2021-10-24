@@ -7,6 +7,11 @@ const Container = styled.div`
   box-shadow: 4px 4px 15px 4px rgba(7, 93, 172, 0.1);
   border-radius: 10px;
   color: #195669;
+
+  @media screen and (max-width: 992px) {
+    padding: 30px;
+    margin: 0 5vw;
+  }
 `;
 
 export default Container;

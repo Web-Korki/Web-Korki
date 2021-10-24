@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledDate = styled.input`
+const StyledInput = styled.input`
   width: clamp(173px, 300px, 309px);
   height: clamp(40px, 2.6vw, 50px);
   background: #ffffff;
@@ -32,11 +32,10 @@ const StyledDate = styled.input`
     display: none;
   }
 
-  /* Galaxy Fold responsivness - just because I can xd */
   @media screen and (max-width: 768px) {
     width: 240px;
     height: 40px;
   }
 `;
 
-export default StyledDate;
+export default StyledInput;

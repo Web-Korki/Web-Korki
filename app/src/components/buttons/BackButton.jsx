@@ -7,7 +7,7 @@ export const BackButton = () => {
     history.goBack();
   };
   return (
-    <div className="p-0 d-flex justify-content-center align-items-center">
+    <div className="p-0 d-flex justify-content-center align-items-center button">
       <StyledBackButton
         onClick={goToPreviousPath}
         className="d-flex justify-content-center align-items-center"
