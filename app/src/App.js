@@ -27,7 +27,7 @@ import { Home } from './containers/Home';
 //default imports
 import UserMenu from './containers/menus/UserMenu';
 import AdminMenu from './containers/menus/AdminMenu';
-import LoginForm from './containers/forms/LoginForm';
+import LoginForm from './containers/forms/LoginForm/LoginForm';
 import RegisterForm from './containers/forms/RegisterForm';
 import PrivateRoute from './containers/PrivateRoute';
 import ActivateAccount from './containers/ActivateAccount';

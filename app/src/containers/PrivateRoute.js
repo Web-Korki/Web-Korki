@@ -9,7 +9,7 @@ import { Redirect } from 'react-router';
 import Loader from 'react-loader-spinner';
 //proptypes
 import PropTypes from 'prop-types';
-import LoginForm from './forms/LoginForm';
+import LoginForm from './forms/LoginForm/LoginForm';
 
 const PrivateRoute = ({
 	component: Component,

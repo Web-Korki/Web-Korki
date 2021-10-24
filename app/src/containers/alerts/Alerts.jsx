@@ -29,10 +29,10 @@ class Alerts extends Component {
 		// }
 
 		if (loginSuccess !== prevProps.loginSuccess) {
-			loginSuccess && !isSuperuser
-				? alert.success('Poprawnie zalogowano jako nauczyciel')
-				: loginSuccess && isSuperuser
+			loginSuccess && isSuperuser
 				? alert.success('Poprawnie zalogowano jako administrator')
+				: loginSuccess && !isSuperuser
+				? alert.success('Poprawnie zalogowano jako nauczyciel')
 				: alert.info('Poprawnie wylogowano z portalu');
 		}
 
@@ -50,9 +50,9 @@ class Alerts extends Component {
 
 const mapStateToProps = (state) => ({
 	accountCreated: state.auth.accountCreated,
-	error: state.errors,
 	loginSuccess: state.auth.loginSuccess,
-	isSuperuser: state.auth.user?.is_superuser,
+	isSuperuser: state.auth.isSuperuser,
+	error: state.errors,
 });
 
 export default connect(mapStateToProps)(withAlert()(Alerts));
