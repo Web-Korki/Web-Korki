@@ -4,23 +4,19 @@ import {
 	StyledInput,
 	StyledBlueButton,
 } from '../../components/styledComponents/index';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/auth';
-//utils
-import Loader from 'react-loader-spinner';
 
 import PropTypes from 'prop-types';
 
-const LoginForm = ({ login }, isAuthenticated, isSuperuser, user) => {
+const LoginForm = ({ login }, isAuthenticated, isSuperuser) => {
 	LoginForm.propTypes = {
 		login: PropTypes.func,
 		isAuthenticated: PropTypes.bool,
-		isSuperuser: PropTypes.bool.isRequired,
-		user: PropTypes.object,
+		isSuperuser: PropTypes.bool,
 	};
-	let history = useHistory();
 
 	const [formData, setFormData] = useState({
 		username: '',
@@ -36,22 +32,6 @@ const LoginForm = ({ login }, isAuthenticated, isSuperuser, user) => {
 		e.preventDefault();
 		login(username, password);
 	};
-
-	// const takeMeSomewhere = () => {
-	// 	if (isAuthenticated && isSuperuser) {
-	// 		history.push('/admin_menu');
-	// 		// return <Redirect to='/admin_menu' />;
-	// 	} else if (isAuthenticated && !isSuperuser) {
-	// 		history.push('/user_menu');
-	// 		// return <Redirect to='/user_menu' />;
-	// 	} else {
-	// 		return <Loader type='Grid' color='#00BFFF' height={80} width={80} />;
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	takeMeSomewhere();
-	// }, [user]);
 
 	return (
 		<div className='d-flex justify-content-center align-items-center loginForm'>
@@ -93,8 +73,6 @@ const LoginForm = ({ login }, isAuthenticated, isSuperuser, user) => {
 
 const mapStateToProps = (state) => ({
 	isAuthenticated: state.auth.isAuthenticated,
-	isSuperuser: state.auth.isSuperuser,
-	user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { login })(LoginForm);

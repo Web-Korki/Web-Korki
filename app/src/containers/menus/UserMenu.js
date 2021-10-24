@@ -1,37 +1,13 @@
+//react
 import React from 'react';
-import { StyledBox } from '../../components/styledComponents';
-import Logout from '../forms/Logout';
-import './UserMenu.style.css';
+//router
 import { NavLink } from 'react-router-dom';
+//utils
+import Logout from '../forms/Logout';
+import { StyledBox } from '../../components/styledComponents';
 import './UserMenu.style.css';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
-const UserMenu = (isAuthenticated, isSuperuser, user) => {
-	UserMenu.propTypes = {
-		isAuthenticated: PropTypes.bool.isRequired,
-		isSuperuser: PropTypes.bool,
-		user: PropTypes.object,
-	};
-
-	let AdminMenuBtn;
-
-	if (isSuperuser) {
-		AdminMenuBtn = (
-			<div className='col-12 col-lg-auto p-lg-2 p-1'>
-				<NavLink to='/admin_menu'>
-					<StyledBox>Menu administratora</StyledBox>
-				</NavLink>
-			</div>
-		);
-	} else {
-		AdminMenuBtn = null;
-	}
-
-	console.log('isAuthenticated', isAuthenticated);
-	console.log('isSuperuser', isSuperuser);
-	console.log('user', user);
-
+const UserMenu = () => {
 	return (
 		<>
 			<div className='userMenu d-flex justify-content-center'>
@@ -60,7 +36,6 @@ const UserMenu = (isAuthenticated, isSuperuser, user) => {
 								<StyledBox>Uzupełnij raport</StyledBox>
 							</NavLink>
 						</div>
-						{AdminMenuBtn}
 					</div>
 				</div>
 			</div>
@@ -68,10 +43,4 @@ const UserMenu = (isAuthenticated, isSuperuser, user) => {
 	);
 };
 
-const mapStateToProps = (state) => ({
-	isAuthenticated: state.auth.isAuthenticated,
-	isSuperuser: state.auth.isSuperuser,
-	user: state.auth.user,
-});
-
-export default connect(mapStateToProps)(UserMenu);
+export default UserMenu;

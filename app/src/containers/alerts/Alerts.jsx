@@ -22,11 +22,11 @@ class Alerts extends Component {
 		const { error, alert, loginSuccess, isSuperuser, accountCreated } =
 			this.props;
 
-		if (accountCreated !== prevProps.accountCreated) {
-			accountCreated
-				? alert.success('Pomyślnie zarejestrowano użytkownika')
-				: alert.error('Rejestracja użytkownika nie powiodła się');
-		}
+		// if (accountCreated !== prevProps.accountCreated) {
+		// 	accountCreated
+		// 		? alert.success('Pomyślnie zarejestrowano użytkownika')
+		// 		: alert.error('Rejestracja użytkownika nie powiodła się');
+		// }
 
 		if (loginSuccess !== prevProps.loginSuccess) {
 			loginSuccess && !isSuperuser

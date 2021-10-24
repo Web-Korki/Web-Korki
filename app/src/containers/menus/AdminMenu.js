@@ -1,44 +1,12 @@
 //react
-import React, { useEffect } from 'react';
+import React from 'react';
 //router
 import { NavLink } from 'react-router-dom';
-import { Redirect } from 'react-router';
-//redux
-import { connect } from 'react-redux';
-//actions
-import { reset_state } from '../../redux/actions/auth';
 //styledComponents
 import { StyledBox } from '../../components/styledComponents/index';
 import Logout from '../forms/Logout';
-import PropTypes from 'prop-types';
 
-const AdminMenu = (
-	{ reset_state },
-	isAuthenticated,
-	isSuperuser,
-	user,
-	accountCreated
-) => {
-	AdminMenu.propTypes = {
-		reset_state: PropTypes.func.isRequired,
-		accountCreated: PropTypes.bool,
-		isAuthenticated: PropTypes.bool.isRequired,
-		isSuperuser: PropTypes.bool.isRequired,
-		user: PropTypes.object,
-	};
-
-	//needs to be adjusted
-	// useEffect(() => {
-	// 	reset_state();
-	// }, [accountCreated]);
-
-	// setTimeout(() => {
-	// 	console.log('isAuthenticated', isAuthenticated);
-	// 	console.log('accountCreated', accountCreated);
-	// 	console.log('isSuperuser', isSuperuser);
-	// 	console.log('user', user);
-	// }, 1000);
-
+const AdminMenu = () => {
 	return (
 		<>
 			<div className='adminMenu d-flex justify-content-center'>
@@ -89,11 +57,4 @@ const AdminMenu = (
 	);
 };
 
-const mapStateToProps = (state) => ({
-	accountCreated: state.auth.accountCreated,
-	isAuthenticated: state.auth.isAuthenticated,
-	isSuperuser: state.auth.isSuperuser,
-	user: state.auth.user,
-});
-
-export default connect(mapStateToProps, { reset_state })(AdminMenu);
+export default AdminMenu;
