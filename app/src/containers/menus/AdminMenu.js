@@ -1,12 +1,25 @@
 //react
 import React from 'react';
+//redux
+import { connect } from 'react-redux';
 //router
 import { NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router'
+//propTypes
+import PropTypes from 'prop-types'
 //styledComponents
 import { StyledBox } from '../../components/styledComponents/index';
 import Logout from '../forms/Logout';
 
-const AdminMenu = () => {
+const AdminMenu = ({isSuperuser}) => {
+  AdminMenu.propTypes = {
+    isSuperuser: PropTypes.bool.isRequired
+  }
+
+  if(!isSuperuser){
+    return <Redirect push to='/user_menu' />
+  }
+
 	return (
 		<>
 			<div className='adminMenu d-flex justify-content-center'>
@@ -57,4 +70,8 @@ const AdminMenu = () => {
 	);
 };
 
-export default AdminMenu;
+const mapStateToProps = state => ({
+  isSuperuser: state.auth.isSuperuser,
+})
+
+export default connect(mapStateToProps)(AdminMenu);

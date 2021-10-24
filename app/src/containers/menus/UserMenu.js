@@ -1,13 +1,21 @@
 //react
 import React from 'react';
+//redux
+import { connect } from 'react-redux';
 //router
 import { NavLink } from 'react-router-dom';
+//propTypes
+import PropTypes from 'prop-types'
 //utils
 import Logout from '../forms/Logout';
 import { StyledBox } from '../../components/styledComponents';
 import './UserMenu.style.css';
 
-const UserMenu = () => {
+const UserMenu = ({isSuperuser}) => {
+   UserMenu.propTypes = {
+      isSuperuser: PropTypes.bool.isRequired,
+   }
+
 	return (
 		<>
 			<div className='userMenu d-flex justify-content-center'>
@@ -36,6 +44,13 @@ const UserMenu = () => {
 								<StyledBox>Uzupełnij raport</StyledBox>
 							</NavLink>
 						</div>
+                  {isSuperuser ? (
+                  <div className='col-12 col-lg-auto p-lg-2 p-1'>
+							<NavLink to='/admin_menu'>
+								<StyledBox>Menu Administratora</StyledBox>
+							</NavLink>
+						</div>
+                  ) : null}
 					</div>
 				</div>
 			</div>
@@ -43,4 +58,8 @@ const UserMenu = () => {
 	);
 };
 
-export default UserMenu;
+const mapStateToProps = state => ({
+   isSuperuser: state.auth.isSuperuser
+})
+
+export default connect(mapStateToProps)(UserMenu);
