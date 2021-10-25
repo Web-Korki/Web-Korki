@@ -207,6 +207,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "http://nujgoiz.cluster024.hosting.ovh.net",
+    "https://www.web-korki.edu.pl",
+    "https://web-korki.edu.pl",
 ]
 APPEND_SLASH=False
 
