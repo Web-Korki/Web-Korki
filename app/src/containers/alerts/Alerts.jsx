@@ -9,17 +9,17 @@ import PropTypes from 'prop-types';
 
 //alerts
 import { withAlert } from 'react-alert';
+import errors from '../../redux/reducers/errors';
 
 class Alerts extends Component {
 	static propTypes = {
-		error: PropTypes.object.isRequired,
+		error: PropTypes.object,
 		loginSuccess: PropTypes.bool,
 		isSuperuser: PropTypes.bool,
 	};
 
 	componentDidUpdate(prevProps) {
-		const { error, alert, loginSuccess, isSuperuser } =
-			this.props;
+		const { error, alert, loginSuccess, isSuperuser } = this.props;
 
 		// if (accountCreated !== prevProps.accountCreated) {
 		// 	accountCreated
@@ -35,7 +35,12 @@ class Alerts extends Component {
 				: alert.info('Poprawnie wylogowano z portalu');
 		}
 
-		if (error !== prevProps.error) {
+		if (
+			error !== prevProps.error &&
+			error.msg !== null &&
+			error.email !== null &&
+			error.status !== null
+		) {
 			error.email !== undefined
 				? alert.error(error.email)
 				: alert.error(error.msg);

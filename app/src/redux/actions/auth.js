@@ -19,7 +19,8 @@ import {
 	PASSWORD_RESET_CONFIRM_SUCCESS,
 	PASSWORD_RESET_CONFIRM_FAIL,
 	GET_ERRORS,
-	RESET_STATE
+	CLEAN_ERROR_MSG,
+	RESET_STATE,
 } from './types';
 
 const API_URL = 'https://web-korki.edu.pl';
@@ -126,9 +127,6 @@ export const load_user = () => async (dispatch) => {
 				type: USER_LOADED_SUCCESS,
 				payload: res.data,
 			});
-			dispatch({
-				type: CLEAN_ERROR_MSG,
-			});
 		} catch (err) {
 			dispatch({
 				type: USER_LOADED_FAIL,
@@ -166,8 +164,11 @@ export const login = (username, password) => async (dispatch) => {
 			payload: res.data,
 		});
 
-		dispatch(load_user());
+		dispatch({
+			type: CLEAN_ERROR_MSG,
+		});
 
+		dispatch(load_user());
 	} catch (err) {
 		dispatch({
 			type: LOGIN_FAIL,
