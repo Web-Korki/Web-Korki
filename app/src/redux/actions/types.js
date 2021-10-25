@@ -20,3 +20,4 @@ export const LOGOUT = 'LOGOUT';
 
 //errors
 export const GET_ERRORS = 'GET_ERRORS';
+export const CLEAN_ERROR_MSG = 'CLEAN_ERROR_MSG';
