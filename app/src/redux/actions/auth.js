@@ -94,14 +94,6 @@ export const checkAuthenticated = () => async (dispatch) => {
 			dispatch({
 				type: AUTHENTICATED_FAIL,
 			});
-			const errors = {
-				msg: err.response.data.detail,
-				status: err.response.status,
-			};
-			dispatch({
-				type: GET_ERRORS,
-				payload: errors,
-			});
 			dispatch(refresh_token());
 		}
 	} else {

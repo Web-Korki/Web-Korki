@@ -1,15 +1,11 @@
 //react
 import React, { Component, Fragment } from 'react';
-
 //redux
 import { connect } from 'react-redux';
-
-//propTypes
-import PropTypes from 'prop-types';
-
 //alerts
 import { withAlert } from 'react-alert';
-import errors from '../../redux/reducers/errors';
+//propTypes
+import PropTypes from 'prop-types';
 
 class Alerts extends Component {
 	static propTypes = {
