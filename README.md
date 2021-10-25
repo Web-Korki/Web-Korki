@@ -8,7 +8,7 @@
 3. `npm i`
 4. `git checkout -b '#10_mockUps'`
 5. `git add .` 
-6. `git commit -m 'fjadlkjfkldsj'`
+6. `git commit -m '[commit message]'`
 7. `git push`
 8. pull request
 9. assign reviewer
