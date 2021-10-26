@@ -1,2 +1,10 @@
 {% load i18n %}
 
+{% block subject %}
+{% blocktrans %}ZASTĘPSTWO {{ site_name }} - {{ subject }} {{ week_day }} {{ time }} ({{ date }}) {{ level }}   {% endblocktrans %}
+{% endblock subject %}
+
+{% block text_body %}
+    Link - https://{{ domain }}/{{ url|safe }}substitutions/{{ substitution_id }}
+{% endblock text_body %}
+
