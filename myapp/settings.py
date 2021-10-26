@@ -36,6 +36,11 @@ if "DEVELOP_DEBUG" in os.environ:
 else:
     WSGI_APPLICATION = "myapp.wsgi.application"
 
+
+URL = "www.web-korki.edu.pl"
+if DEBUG:
+    URL = "127.0.0.1"
+
 ALLOWED_HOSTS = ["web-korki.edu.pl", "www.web-korki.edu.pl", "localhost", "127.0.0.1", "nujgoiz.cluster024.hosting.ovh.net"]
 
 

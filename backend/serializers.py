@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework import serializers
-from .models import House, Lesson, Student, SUBJECT_CHOICES
+from .models import House, Lesson, Student, SUBJECT_CHOICES, Substitution
 from djoser.serializers import UserCreateSerializer as DjoserRegisterSerializer
 
 Teacher = get_user_model()
@@ -112,3 +112,23 @@ class AssignTeacherSerializer(serializers.ModelSerializer):
 
         model = Lesson
         fields = ["teacher"]
+
+
+class SubstitutionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Substitution
+        fields = "__all__"
+
+        # Save request.user instead
+        extra_kwargs = {'old_teacher': {'required': False}}
+
+
+class SubstitutionSerializerUpdate(serializers.ModelSerializer):
+    class Meta:
+        model = SubstitutionSerializer.Meta.model
+        fields = SubstitutionSerializer.Meta.fields
+        extra_kwargs = {**SubstitutionSerializer.Meta.extra_kwargs, **{
+            'datetime': {'required': False},
+            'level': {'required': False},
+            'subject': {'required': False},
+        }}
