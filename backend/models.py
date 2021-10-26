@@ -58,8 +58,10 @@ class Teacher(AbstractUser):
     def __str__(self):
         return self.username
 
-Teacher._meta.get_field('email')._unique = True
-Teacher._meta.get_field('email')._required = True
+
+Teacher._meta.get_field("email")._unique = True
+Teacher._meta.get_field("email")._required = True
+
 
 class House(models.Model):
     id = models.AutoField(primary_key=True)
@@ -114,14 +116,19 @@ class Substitution(models.Model):
     In this moment the Lesson model is not going to be used in the app.
     Thus the substitution has to inherit all its field instead just to refer to it.
     """
+
     # Should be lesson attrs
-    old_teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, related_name="old_teacher")
+    old_teacher = models.ForeignKey(
+        Teacher, on_delete=models.PROTECT, related_name="old_teacher"
+    )
     level = models.CharField(max_length=300, choices=LEVEL_CHOICES)
     datetime = models.DateTimeField()
     subject = models.CharField(max_length=300, choices=SUBJECT_CHOICES)
 
     # Substitution specific
-    new_teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, null=True, related_name="new_teacher")
+    new_teacher = models.ForeignKey(
+        Teacher, on_delete=models.PROTECT, null=True, related_name="new_teacher"
+    )
     new_teacher_found = models.BooleanField(default=False)
 
     # Substitution optional

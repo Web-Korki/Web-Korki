@@ -1,5 +1,11 @@
 from django.http import JsonResponse
-from .models import Lesson, Substitution, Teacher, get_subject_full_name, get_level_full_name
+from .models import (
+    Lesson,
+    Substitution,
+    Teacher,
+    get_subject_full_name,
+    get_level_full_name,
+)
 from rest_framework.response import Response as RestFrameworkResponse
 from rest_framework import status
 from myapp.settings import URL, BASE_DIR
@@ -18,7 +24,7 @@ status_permission = status.HTTP_401_UNAUTHORIZED
 
 
 def map_number_to_weekday(number):
-    """ Returns name of the week for number from 1 to 7 """
+    """Returns name of the week for number from 1 to 7"""
     assert 0 < number <= 7
     days = [
         "Poniedziałek",
@@ -27,17 +33,17 @@ def map_number_to_weekday(number):
         "Czwartek",
         "Piątek",
         "Sobota",
-        "Niedziela"
+        "Niedziela",
     ]
     return days[number - 1]
 
 
 def validate_user_before_email(teacher, current_user):
     """
-        Returns true if teacher:
-            - has valid email
-            - is active
-            - is not current user
+    Returns true if teacher:
+        - has valid email
+        - is active
+        - is not current user
     """
     # Validate Email
     try:
@@ -65,10 +71,13 @@ def save_substitution(data):
 
 class SubstitutionEmail(mail.BaseEmailMessage):
     """
-        Class for sending substitution emails
-        Initialize it with context dict of parameters that will be passed to email template
+    Class for sending substitution emails
+    Initialize it with context dict of parameters that will be passed to email template
     """
-    template_name = os.path.join(BASE_DIR, "backend", "templates", "substitution_needed.html")
+
+    template_name = os.path.join(
+        BASE_DIR, "backend", "templates", "substitution_needed.html"
+    )
 
     def __init__(self, additional_context, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -89,21 +98,29 @@ def create_substitution(request):
     # Dont let the user to pass new_teacher or new_teacher_found fields
     if "new_teacher" in request.data or "new_teacher_found" in request.data:
         current_status = status_conflict
-        response_data["reason"] = 'You cannot pass new_teacher or new_teacher_found field while creating substitution'
+        response_data[
+            "reason"
+        ] = "You cannot pass new_teacher or new_teacher_found field while creating substitution"
 
     # Assert that date of that lesson is in the future
     if current_status == status_ok:
         current_time = datetime.now()
-        requested_time = datetime.strptime(request.data["datetime"], '%Y-%m-%dT%H:%M:%S')
+        requested_time = datetime.strptime(
+            request.data["datetime"], "%Y-%m-%dT%H:%M:%S"
+        )
         if requested_time.timestamp() < current_time.timestamp():
             current_status = status_conflict
             response_data["reason"] = "Please provide time in the future"
 
     # Assert that this is not duplicate (Same user and exactly the same date)
-    sub_with_same_date_and_user = Substitution.objects.filter(datetime=requested_time, old_teacher=request.user)
+    sub_with_same_date_and_user = Substitution.objects.filter(
+        datetime=requested_time, old_teacher=request.user
+    )
     if sub_with_same_date_and_user:
         current_status = status_conflict
-        response_data["reason"] = "There is already substitution for this user with exactly the same. Substitution not created assuming this is an error"
+        response_data[
+            "reason"
+        ] = "There is already substitution for this user with exactly the same. Substitution not created assuming this is an error"
 
     # Create substitution
     if current_status == status_ok:
@@ -127,8 +144,8 @@ def send_mail_with_substitution_info(substitution_id, substitution_date, request
     teachers = Teacher.objects.all()
 
     week_day = substitution_date.weekday()
-    time = substitution_date.strftime('%H:%M')
-    date = substitution_date.strftime('%d.%m')
+    time = substitution_date.strftime("%H:%M")
+    date = substitution_date.strftime("%d.%m")
 
     context = {
         "subject": get_subject_full_name(request.data["subject"]),
@@ -140,14 +157,20 @@ def send_mail_with_substitution_info(substitution_id, substitution_date, request
     }
 
     sub_email = SubstitutionEmail(context)
-    mail_list = [teacher.email for teacher in teachers if validate_user_before_email(teacher, request.user)]
+    mail_list = [
+        teacher.email
+        for teacher in teachers
+        if validate_user_before_email(teacher, request.user)
+    ]
     # sub_email.send(to=mail_list)
     return True
 
 
 def assign_teacher(request, substitution):
     teacher = request.user
-    substitution.new_teacher = teacher # new_teacher_found property updates in model.on_save
+    substitution.new_teacher = (
+        teacher  # new_teacher_found property updates in model.on_save
+    )
     substitution.save()
 
 
@@ -162,15 +185,16 @@ def user_can_modify(request, instance):
     return True
 
 
-cannot_modify_response = RestFrameworkResponse(status=status.HTTP_401_UNAUTHORIZED, data={
-    "reason": "Only substitution creator or admin can edit this substitution"
-})
+cannot_modify_response = RestFrameworkResponse(
+    status=status.HTTP_401_UNAUTHORIZED,
+    data={"reason": "Only substitution creator or admin can edit this substitution"},
+)
 
-teacher_already_assigned_response = RestFrameworkResponse(status=status.HTTP_409_CONFLICT, data={
-    "reason": "New teacher was already assigned to this substitution",
-    "new_teacher_found": True,
-    "success": False,
-})
-
-
-
+teacher_already_assigned_response = RestFrameworkResponse(
+    status=status.HTTP_409_CONFLICT,
+    data={
+        "reason": "New teacher was already assigned to this substitution",
+        "new_teacher_found": True,
+        "success": False,
+    },
+)

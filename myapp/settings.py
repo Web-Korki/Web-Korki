@@ -41,7 +41,13 @@ URL = "www.web-korki.edu.pl"
 if DEBUG:
     URL = "127.0.0.1"
 
-ALLOWED_HOSTS = ["web-korki.edu.pl", "www.web-korki.edu.pl", "localhost", "127.0.0.1", "nujgoiz.cluster024.hosting.ovh.net"]
+ALLOWED_HOSTS = [
+    "web-korki.edu.pl",
+    "www.web-korki.edu.pl",
+    "localhost",
+    "127.0.0.1",
+    "nujgoiz.cluster024.hosting.ovh.net",
+]
 
 
 # Application definition
@@ -85,8 +91,8 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(BASE_DIR, 'backend', 'templates'),
-            os.path.join(BASE_DIR, FRONTEND_DIR)
+            os.path.join(BASE_DIR, "backend", "templates"),
+            os.path.join(BASE_DIR, FRONTEND_DIR),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -161,9 +167,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, FRONTEND_DIR, "build", "static"),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, FRONTEND_DIR, "build", "static"),)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Default primary key field type
@@ -181,9 +185,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    )
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
 }
 
 # Set expiration for token much longer in developement
@@ -215,7 +217,7 @@ CORS_ORIGIN_WHITELIST = [
     "https://www.web-korki.edu.pl",
     "https://web-korki.edu.pl",
 ]
-APPEND_SLASH=False
+APPEND_SLASH = False
 
 # Emails
 EMAIL_HOST = "ssl0.ovh.net"
@@ -235,14 +237,13 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 LOGIN_URL = "/login"
 
 
-
 DJOSER = {
     "LOGIN_FIELD": "username",
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "SEND_CONFIRMATION_EMAIL": True,
     "SEND_ACTIVATION_EMAIL": True,
     "SET_PASSWORD_RETYPE": True,
-    'PASSWORD_RESET_CONFIRM_RETYPE': True,
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
     "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
     "ACTIVATION_URL": "activate/{uid}/{token}",
     "EMAIL": {"activation": "backend.notifications.ActivationEmail"},
@@ -253,5 +254,3 @@ DJOSER = {
         "current_user": "backend.serializers.TeacherSerializer",
     },
 }
-
-

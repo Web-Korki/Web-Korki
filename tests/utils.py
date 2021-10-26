@@ -8,26 +8,20 @@ import random, string
 Teacher = get_user_model()
 
 # Utils
-def register_sample_user(
-    client: Client, username: str, email: str
-):
+def register_sample_user(client: Client, username: str, email: str):
     url = reverse("teacher-list")
     response = client.post(
         url,
-        data={
-            "username": username,
-            "email": email
-        },
+        data={"username": username, "email": email},
     )
     return response
+
 
 def activate_sample_user(client: Client, user):
     uid = encode_uid(user.id)
     token = default_token_generator.make_token(user)
-    url = reverse("activation", kwargs={'uid': uid, 'token': token})
-    response = client.get(
-        url
-    )
+    url = reverse("activation", kwargs={"uid": uid, "token": token})
+    response = client.get(url)
     return response
 
 
@@ -55,6 +49,7 @@ def get_random_password():
         [random.choice(string.digits + string.ascii_letters) for i in range(10)]
     )
 
+
 def get_random_logged_user(client: Client):
     email = get_random_email()
     username = get_random_username()
@@ -65,11 +60,21 @@ def get_random_logged_user(client: Client):
     r4 = login_sample_user(client, username, "somestrongpassword123")
     return r4
 
+
 def get_user_me(client: Client):
     return client.get("/user/me", cookies=client.cookies)
+
 
 def set_password(client: Client, user):
     uid = encode_uid(user.id)
     token = default_token_generator.make_token(user)
-    url = reverse('teacher-reset-password-confirm')
-    return client.post(url, data={'uid': uid, 'token': token, 'new_password': 'somestrongpassword123', 're_new_password': 'somestrongpassword123'})
+    url = reverse("teacher-reset-password-confirm")
+    return client.post(
+        url,
+        data={
+            "uid": uid,
+            "token": token,
+            "new_password": "somestrongpassword123",
+            "re_new_password": "somestrongpassword123",
+        },
+    )

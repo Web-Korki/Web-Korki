@@ -17,8 +17,8 @@ class UserRegisterSerializer(DjoserRegisterSerializer):
 
 
 class TeacherSerializer(serializers.ModelSerializer):
-    lessons_done = serializers.SerializerMethodField('is_lessons_done')
-    lessons_canceled = serializers.SerializerMethodField('is_lessons_canceled')
+    lessons_done = serializers.SerializerMethodField("is_lessons_done")
+    lessons_canceled = serializers.SerializerMethodField("is_lessons_canceled")
 
     def is_lessons_done(self, obj):
         return len(Lesson.objects.filter(teacher_id=obj.id))
@@ -28,7 +28,7 @@ class TeacherSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Teacher
-        exclude = ('password',)
+        exclude = ("password",)
         # fields = "__all__"
 
 
@@ -51,8 +51,8 @@ class LoginSerializer(serializers.ModelSerializer):
 
 
 class HouseSerializer(serializers.ModelSerializer):
-    total_lessons_number = serializers.SerializerMethodField('is_lessons_number')
-    canceled_lessons_number = serializers.SerializerMethodField('is_lessons_canceled')
+    total_lessons_number = serializers.SerializerMethodField("is_lessons_number")
+    canceled_lessons_number = serializers.SerializerMethodField("is_lessons_canceled")
 
     def is_lessons_number(self, obj):
         return len(Lesson.objects.filter(house_id=obj.id))
@@ -69,7 +69,9 @@ class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         # House field is saved in model .save method. House is taken from student model.
-        exclude = ('house',) # This field acts the same as fields == "__all__" with except to mentioned field
+        exclude = (
+            "house",
+        )  # This field acts the same as fields == "__all__" with except to mentioned field
         # fields = "__all__"
 
 
@@ -120,15 +122,18 @@ class SubstitutionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
         # Save request.user instead
-        extra_kwargs = {'old_teacher': {'required': False}}
+        extra_kwargs = {"old_teacher": {"required": False}}
 
 
 class SubstitutionSerializerUpdate(serializers.ModelSerializer):
     class Meta:
         model = SubstitutionSerializer.Meta.model
         fields = SubstitutionSerializer.Meta.fields
-        extra_kwargs = {**SubstitutionSerializer.Meta.extra_kwargs, **{
-            'datetime': {'required': False},
-            'level': {'required': False},
-            'subject': {'required': False},
-        }}
+        extra_kwargs = {
+            **SubstitutionSerializer.Meta.extra_kwargs,
+            **{
+                "datetime": {"required": False},
+                "level": {"required": False},
+                "subject": {"required": False},
+            },
+        }

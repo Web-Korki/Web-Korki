@@ -14,7 +14,13 @@ from tests.utils import get_random_password
 from myapp.settings import BASE_DIR
 from .serializers import *
 import requests, os
-from .substitutions import create_substitution, assign_teacher, user_can_modify, cannot_modify_response, teacher_already_assigned_response
+from .substitutions import (
+    create_substitution,
+    assign_teacher,
+    user_can_modify,
+    cannot_modify_response,
+    teacher_already_assigned_response,
+)
 
 
 class Register(UserViewSet):
@@ -153,8 +159,11 @@ def index(request):
 
 # SUBSTITUTION VIEWS
 
+
 class SubstitutionsView(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)  # Should already be set by default
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )  # Should already be set by default
     serializer_class = SubstitutionSerializer
     http_method_names = ["get", "put", "delete"]
 
@@ -166,7 +175,7 @@ class SubstitutionsView(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         self.serializer_class = SubstitutionSerializerUpdate
-        partial = kwargs.pop('partial', False)
+        partial = kwargs.pop("partial", False)
         instance = self.get_object()
 
         # Assert substitution belongs to the request user or request user is admin
@@ -177,7 +186,7 @@ class SubstitutionsView(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
-        if getattr(instance, '_prefetched_objects_cache', None):
+        if getattr(instance, "_prefetched_objects_cache", None):
             # If 'prefetch_related' has been applied to a queryset, we need to
             # forcibly invalidate the prefetch cache on the instance.
             instance._prefetched_objects_cache = {}
@@ -206,17 +215,19 @@ class AssignTeacherView(SubstitutionsView):
     http_method_names = ["patch"]
 
     def update(self, request, *args, **kwargs):
-        partial = kwargs.pop('partial', False)
+        partial = kwargs.pop("partial", False)
         substitution = self.get_object()
         if substitution.new_teacher_found:
             return teacher_already_assigned_response
-        serializer = self.get_serializer(substitution, data=request.data, partial=partial)
+        serializer = self.get_serializer(
+            substitution, data=request.data, partial=partial
+        )
         serializer.is_valid(raise_exception=True)
 
         # Custom perform update
         assign_teacher(self.request, substitution)
 
-        if getattr(substitution, '_prefetched_objects_cache', None):
+        if getattr(substitution, "_prefetched_objects_cache", None):
             substitution._prefetched_objects_cache = {}
 
         return Response(serializer.data)
