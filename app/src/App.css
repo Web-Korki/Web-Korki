@@ -52,18 +52,18 @@ body {
 /* UserMenu End */
 
 /* InactiveReplacement Start */
-/* .inactiveReplacementWrapper,
+.inactiveReplacementWrapper,
 .resetPassword,
-.loginForm,
 .registerForm,
 .resetPasswordConfirm,
 .homepage,
 .Whoops404,
 .volunteerRegisterWrapper,
 .activateAccount,
-.submitReplacement {
+.submitReplacement, 
+.loginForm {
   height: 100vh;
-} */
+}
 
 .link,
 .link:hover {
