@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from rest_framework import status, permissions, viewsets, mixins
+from rest_framework import status, permissions, viewsets
 
 from django.shortcuts import redirect, render, reverse
 from django.contrib import messages
