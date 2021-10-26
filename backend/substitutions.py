@@ -132,8 +132,6 @@ def create_substitution(request):
         send_mail_with_substitution_info(substitution_id, requested_time, request)
 
         response_data.update(SubstitutionSerializer(substitution).data)
-        # response_data["old_teacher"] = request.user.id
-        # response_data["substitution_id"] = substitution_id
 
     response = RestFrameworkResponse(data=response_data, status=current_status)
     return response
@@ -162,7 +160,7 @@ def send_mail_with_substitution_info(substitution_id, substitution_date, request
         for teacher in teachers
         if validate_user_before_email(teacher, request.user)
     ]
-    # sub_email.send(to=mail_list)
+    sub_email.send(to=mail_list)
     return True
 
 
