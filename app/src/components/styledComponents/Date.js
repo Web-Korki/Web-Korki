@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-const StyledInput = styled.input`
+const Date = styled.input`
   width: clamp(173px, 300px, 309px);
   height: clamp(40px, 2.6vw, 50px);
   background: #ffffff;
-  color: #427e90;
   border: 1px solid #ebeff1;
   box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.09);
   border-radius: 10px;
@@ -32,10 +31,9 @@ const StyledInput = styled.input`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
-    width: 240px;
-    height: 40px;
+  @media (max-width: 992px) {
+    width: 80vw;
   }
 `;
 
-export default StyledInput;
+export default Date;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledBackButton = styled.button`
+const GoBackButton = styled.button`
   width: 50px;
   height: 50px;
   background: #fbfcfd;
@@ -14,4 +14,4 @@ const StyledBackButton = styled.button`
     box-shadow: 2px 2px 15px 4px rgba(7, 93, 172, 0.09);
   }
 `;
-export default StyledBackButton;
+export default GoBackButton;

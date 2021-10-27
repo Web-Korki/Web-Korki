@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledInactiveReplacementMessage } from '../components/styledComponents/index';
+import { InactiveReplacementMessage } from '../components/styledComponents/index';
 import { NavLink } from 'react-router-dom';
 
 export const InactiveReplacement = () => {
@@ -15,9 +15,9 @@ export const InactiveReplacement = () => {
           <div className="row">
             <div className="col-12">
               <NavLink to="/UserMenu">
-                <StyledInactiveReplacementMessage>
+                <InactiveReplacementMessage>
                   <h1>Zastępstwo nieaktywne</h1>
-                </StyledInactiveReplacementMessage>
+                </InactiveReplacementMessage>
               </NavLink>
             </div>
           </div>

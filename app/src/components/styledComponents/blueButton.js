@@ -1,23 +1,21 @@
 import styled from 'styled-components';
 
-const StyledBlueButton = styled.button`
-  min-width: 150px;
+const BlueButton = styled.button`
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  padding: 0.25em 2.25em;
+  border-radius: 3rem;
   background: #dff2fb;
   border: 1px solid #d2ebf6;
   box-sizing: border-box;
   box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.1);
-  border-radius: 28px;
   color: #427e90;
-  padding: 10px 20px;
+  font-weight: 400;
 
   @media (hover: hover) {
     &:hover {
       box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.4);
     }
   }
-  @media (max-width: 992px) {
-    padding: 5px 30px;
-  }
 `;
 
-export default StyledBlueButton;
+export default BlueButton;

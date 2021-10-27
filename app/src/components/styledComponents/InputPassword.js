@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledInputPassword = styled.input`
+const InputPassword = styled.input`
   width: clamp(173px, 300px, 309px);
   height: clamp(40px, 2.6vw, 50px);
   background: #ffffff;
@@ -38,4 +38,4 @@ const StyledInputPassword = styled.input`
   }
 `;
 
-export default StyledInputPassword;
+export default InputPassword;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const StyledLoginBox = styled.div`
-  padding: 50px 130px;
+const Wrapper = styled.div`
+  padding: 5rem 13rem;
   box-shadow: 4px 4px 15px 4px rgba(7, 93, 172, 0.12);
   border: 2px solid #ebf3f8;
   background: #fbfcfd;
@@ -10,8 +10,8 @@ const StyledLoginBox = styled.div`
 
   @media (max-width: 768px) {
     width: 95vw;
-    padding: 40px 0;
+    padding: 4rem 1rem;
   }
 `;
 
-export default StyledLoginBox;
+export default Wrapper;

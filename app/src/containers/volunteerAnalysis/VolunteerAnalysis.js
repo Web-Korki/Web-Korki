@@ -1,4 +1,4 @@
-import { StyledBoxMonths } from '../../components/styledComponents/index';
+import { BoxMonths } from '../../components/styledComponents/index';
 import { BackButton } from '../../components/buttons/BackButton';
 import { Link } from 'react-router-dom';
 
@@ -14,52 +14,52 @@ export const VolunteerAnalysis = () => {
           <div className="row justify-content-center">
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/september">
-                <StyledBoxMonths>Wrzesień</StyledBoxMonths>
+                <BoxMonths>Wrzesień</BoxMonths>
               </Link>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/october">
-                <StyledBoxMonths>Październik</StyledBoxMonths>
+                <BoxMonths>Październik</BoxMonths>
               </Link>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/november">
-                <StyledBoxMonths>Listopad</StyledBoxMonths>
+                <BoxMonths>Listopad</BoxMonths>
               </Link>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/december">
-                <StyledBoxMonths>Grudzień</StyledBoxMonths>
+                <BoxMonths>Grudzień</BoxMonths>
               </Link>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/january">
-                <StyledBoxMonths>Styczeń</StyledBoxMonths>
+                <BoxMonths>Styczeń</BoxMonths>
               </Link>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/february">
-                <StyledBoxMonths>Luty</StyledBoxMonths>
+                <BoxMonths>Luty</BoxMonths>
               </Link>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/march">
-                <StyledBoxMonths>Marzec</StyledBoxMonths>
+                <BoxMonths>Marzec</BoxMonths>
               </Link>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/april">
-                <StyledBoxMonths>Kwiecień</StyledBoxMonths>
+                <BoxMonths>Kwiecień</BoxMonths>
               </Link>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/may">
-                <StyledBoxMonths>Maj</StyledBoxMonths>
+                <BoxMonths>Maj</BoxMonths>
               </Link>
             </div>
             <div className="col-lg-3 col-6 p-lg-2 p-1">
               <Link to="/volunteer_analysis/june">
-                <StyledBoxMonths>Czerwiec</StyledBoxMonths>
+                <BoxMonths>Czerwiec</BoxMonths>
               </Link>
             </div>
           </div>

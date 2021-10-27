@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  StyledDate,
-  StyledTextarea,
-  StyledBlueButton,
+  Date,
+  Textarea,
+  BlueButton,
   Container,
 } from '../../components/styledComponents/index';
 import { BackButton } from '../../components/buttons/BackButton';
@@ -32,7 +32,7 @@ export const SubmitReplacement = () => {
                 Data
               </label>
               <div className="d-flex justify-content-center">
-                <StyledDate
+                <Date
                   className="d-flex justify-content-center"
                   type="date"
                   id="date"
@@ -54,34 +54,32 @@ export const SubmitReplacement = () => {
             <label className="text" for="last-topics">
               Ostatnio przerabiane zagadnienia
             </label>
-            <StyledTextarea
+            <Textarea
               className="align-self-center pl-2"
               name="last-topics"
-            ></StyledTextarea>
+            ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
             <label className="text" for="planned-topics">
               Planowane zagadnienia na lekcję
             </label>
-            <StyledTextarea
+            <Textarea
               className="align-self-center pl-2"
               name="planned-topics"
-            ></StyledTextarea>
+            ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
             <label className="text" for="teaching-methodology">
               Metodyka nauczania oraz platforma
             </label>
-            <StyledTextarea
+            <Textarea
               className="align-self-center pl-2"
               name="teaching-methodology"
-            ></StyledTextarea>
+            ></Textarea>
           </div>
         </div>
         <div className="row mt-5">
-          <StyledBlueButton className="py-md-2 px-md-5">
-            zgłoś zastępstwo
-          </StyledBlueButton>
+          <BlueButton className="py-md-2 px-md-5">zgłoś zastępstwo</BlueButton>
         </div>
       </Container>
     </div>

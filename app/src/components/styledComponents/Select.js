@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledSelect = styled.select`
+const Select = styled.select`
   width: clamp(173px, 250px, 309px);
   height: clamp(40px, 2.6vw, 50px);
   background-color: #fff;
@@ -28,4 +28,4 @@ const StyledSelect = styled.select`
   }
 `;
 
-export default StyledSelect;
+export default Select;

@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
-const StyledDate = styled.input`
-  width: clamp(173px, 300px, 309px);
-  height: clamp(40px, 2.6vw, 50px);
+const Input = styled.input`
+  width: clamp(20rem, 35vw, 30rem);
+  height: clamp(3.2rem, 5vw, 5rem);
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
   background: #ffffff;
+  color: #427e90;
   border: 1px solid #ebeff1;
   box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.09);
   border-radius: 10px;
   text-align: center;
-  font-size: clamp(18px, 2.5vw, 25px);
 
   &::placeholder {
     color: #eeeeee;
@@ -30,10 +31,6 @@ const StyledDate = styled.input`
   &::-webkit-calendar-picker-indicator {
     display: none;
   }
-
-  @media (max-width: 992px) {
-    width: 80vw;
-  }
 `;
 
-export default StyledDate;
+export default Input;

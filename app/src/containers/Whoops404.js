@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { StyledGreyButton } from '../components/styledComponents/index';
+import { GreyButton } from '../components/styledComponents/index';
 import { BookImage } from '../components/layout/BookImage';
 
 export function Whoops404() {
@@ -11,11 +11,11 @@ export function Whoops404() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column scalable-wrapper Whoops404">
+    <div className="min-h-100 d-flex justify-content-center align-items-center flex-column scalable-wrapper">
       <h1 className="title mb-3">Przepraszamy</h1>
       <BookImage />
-      <p>Żądana strona nie istnieje :/</p>
-      <StyledGreyButton onClick={() => goBack()}>Go back</StyledGreyButton>
+      <p className="text">Żądana strona nie istnieje :/</p>
+      <GreyButton onClick={() => goBack()}>wróć</GreyButton>
     </div>
   );
 }

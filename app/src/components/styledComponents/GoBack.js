@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledGoBack = styled.button`
+const GoBack = styled.button`
   background-color: #fbfcfd;
   border-radius: 50px;
   border: none;
@@ -14,4 +14,4 @@ const StyledGoBack = styled.button`
     background-color: #f2f2f2;
   }
 `;
-export default StyledGoBack;
+export default GoBack;

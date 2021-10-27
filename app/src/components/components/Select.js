@@ -1,9 +1,9 @@
-import StyledSelect from '../styledComponents/StyledSelect';
+import { Select } from '../styledComponents/index';
 
-const Select = () => {
+const SelectIcon = () => {
   return (
     <div className="d-flex justify-content-center align-items center">
-      <StyledSelect className="justify-content-center align-items-center">
+      <Select className="justify-content-center align-items-center">
         <svg
           width="19"
           height="11"
@@ -18,9 +18,9 @@ const Select = () => {
             strokeLinecap="round"
           />
         </svg>
-      </StyledSelect>
+      </Select>
     </div>
   );
 };
 
-export default Select;
+export default SelectIcon;

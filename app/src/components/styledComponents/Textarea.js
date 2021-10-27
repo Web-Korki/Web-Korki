@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledTextarea = styled.textarea`
+const Textarea = styled.textarea`
   width: 60vw;
   max-width: 800px;
   border-radius: 10px;
@@ -12,4 +12,4 @@ const StyledTextarea = styled.textarea`
   }
 `;
 
-export default StyledTextarea;
+export default Textarea;
