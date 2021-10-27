@@ -123,14 +123,6 @@ export const load_user = () => async (dispatch) => {
 			dispatch({
 				type: USER_LOADED_FAIL,
 			});
-			const errors = {
-				msg: err.response.data.detail,
-				status: err.response.status,
-			};
-			dispatch({
-				type: GET_ERRORS,
-				payload: errors,
-			});
 		}
 	} else {
 		dispatch({
