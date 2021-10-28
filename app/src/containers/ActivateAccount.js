@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  LoginBox,
+  Wrapper,
   Input,
   BlueButton,
 } from '../components/styledComponents/index';
@@ -24,18 +24,14 @@ const ActivateAccount = ({ verify, match }) => {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column activateAccount">
-      <LoginBox className="d-flex align-items-center justify-content-center flex-column">
-        <h1 className="mb-3">Konto zostało aktywowane</h1>
-        <h5>Możesz teraz zalogować się do aplikacji</h5>
-        <BlueButton
-          className="mt-4 px-5 py-2"
-          onClick={verify_account}
-          type="button"
-        >
+    <div className="container min-h-100 d-flex justify-content-center align-items-center flex-column">
+      <Wrapper>
+        <h1 className="title mb-3">Konto zostało aktywowane</h1>
+        <p className="text mb-3">Możesz teraz zalogować się do aplikacji</p>
+        <BlueButton onClick={verify_account} type="button">
           zaloguj się
         </BlueButton>
-      </LoginBox>
+      </Wrapper>
     </div>
   );
 };

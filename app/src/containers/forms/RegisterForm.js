@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { register } from '../../redux/actions/auth';
 import {
   Input,
-  LoginBox,
+  Wrapper,
   BlueButton,
 } from '../../components/styledComponents/index';
 import { BackButton } from '../../components/buttons/BackButton';
@@ -39,35 +39,37 @@ const RegisterForm = ({ register, isAuthenticated }) => {
   //   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column loginForm">
+    <div className="min-h-100 d-flex justify-content-center align-items-center flex-column">
       <form onSubmit={(e) => onSubmit(e)}>
         <div class="d-flex justify-content-center mb-5">
           <BackButton />
-          <h1 className="title ml-2">Zarejestruj korepetytora</h1>
+          <h1 className="title">Zarejestruj korepetytora</h1>
         </div>
-        <LoginBox className="d-flex justify-content-center align-items-center flex-column">
+        <Wrapper>
+          <p className="text">Nazwa użytkownika</p>
           <Input
             id="name"
             type="text"
             placeholder="login"
-            className="mt-md-2 mb-1"
+            className="mb-4"
             name="username"
             value={username}
             onChange={(e) => onChange(e)}
             required
           />
+          <p className="text">Email wolontariusza</p>
           <Input
             id="email"
             type="email"
             placeholder="email"
-            className="mt-md-2 mb-1"
+            className="mb-4 "
             name="email"
             value={email}
             onChange={(e) => onChange(e)}
             required
           />
-          <BlueButton type="submit">Zarejestruj</BlueButton>
-        </LoginBox>
+          <BlueButton type="submit">zarejestruj</BlueButton>
+        </Wrapper>
       </form>
     </div>
   );

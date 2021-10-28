@@ -4,20 +4,20 @@ import {
   Date,
   Textarea,
   BlueButton,
-  Container,
+  Wrapper,
 } from '../../components/styledComponents/index';
 import { BackButton } from '../../components/buttons/BackButton';
 import Select from '../../components/components/Select';
 
 export const SubmitReplacement = () => {
   return (
-    <div className="mx-2 d-flex justify-content-center align-items-center flex-column submitReplacement">
-      <Container className="d-flex align-items-center flex-column submitReplacementContainer">
-        <div class="d-flex mb-2 mb-md-5">
+    <div className="min-h-100 container-fluid container-lg py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
+      <Wrapper>
+        <div class="d-flex mb-2 mb-lg-5">
           <BackButton />
-          <h1 className="title ml-2">Formularz zgłaszania zastępstwa</h1>
+          <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
-        <div className="row justify-content-center">
+        <div className="row g-0 justify-content-center">
           <div className="row">
             <div className="col d-flex justify-content-center flex-column mt-4">
               <label className="text" for="class">
@@ -79,9 +79,9 @@ export const SubmitReplacement = () => {
           </div>
         </div>
         <div className="row mt-5">
-          <BlueButton className="py-md-2 px-md-5">zgłoś zastępstwo</BlueButton>
+          <BlueButton>zgłoś zastępstwo</BlueButton>
         </div>
-      </Container>
+      </Wrapper>
     </div>
   );
 };

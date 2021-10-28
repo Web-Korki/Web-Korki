@@ -58,7 +58,7 @@ const LoginForm = ({ login, isAuthenticated, isSuperuser, error }) => {
   }
 
   return (
-    <div className="min-h-100 container d-flex flex-column justify-content-center align-items-center">
+    <div className="min-h-100 d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
         <form
           className="d-flex justify-content-between align-items-center flex-column"
@@ -98,7 +98,7 @@ const LoginForm = ({ login, isAuthenticated, isSuperuser, error }) => {
             zaloguj się
           </BlueButton>
           <Link className="link" to="/reset_password">
-            zapomniałem hasła
+            nie pamiętam hasła
           </Link>
         </form>
       </Wrapper>

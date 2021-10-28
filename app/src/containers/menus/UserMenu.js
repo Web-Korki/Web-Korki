@@ -18,11 +18,11 @@ const UserMenu = ({ isSuperuser }) => {
 
   return (
     <>
-      <div className="userMenu d-flex flex-column justify-content-center align-items-center">
+      <div className="min-h-100 py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
         <div className="container p-5 p-lg-0">
           <div className="row d-flex justify-content-lg-between mb-3 mb-md-5">
             <h1 className="col-lg-auto text-lg-left text-center title justify-content-lg-start justify-content-center mb-4 mb-md-0">
-              Menu
+              Panel korepetytora
             </h1>
             <div className="col-lg-auto d-flex align-items-center justify-content-lg-end justify-content-center">
               <Logout>wyloguj się</Logout>
@@ -36,7 +36,7 @@ const UserMenu = ({ isSuperuser }) => {
             </div>
             <div className="col-12 col-lg-auto g-4 g-md-3">
               <NavLink to="/active_replacements">
-                <Box>Aktywne zastępstwa</Box>
+                <Box>Oczekujące zastępstwa</Box>
               </NavLink>
             </div>
             <div className="col-12 col-lg-auto g-4 g-md-3">
@@ -47,7 +47,7 @@ const UserMenu = ({ isSuperuser }) => {
             {isSuperuser ? (
               <div className="col-12 col-lg-auto g-4 g-md-3">
                 <NavLink to="/admin_menu">
-                  <Box>Menu Administratora</Box>
+                  <Box>Panel Administratora</Box>
                 </NavLink>
               </div>
             ) : null}

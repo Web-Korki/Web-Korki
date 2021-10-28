@@ -1,17 +1,16 @@
 import styled from 'styled-components';
 
 const GoBackButton = styled.button`
-  width: 50px;
-  height: 50px;
+  width: 5rem;
+  height: 5rem;
   background: #fbfcfd;
-  border: 2px solid #ebf3f8;
-  box-shadow: 4px 4px 15px 4px rgba(7, 93, 172, 0.12);
-  border-radius: 50%;
+  border: 2px solid #ebeff1;
+  margin-right: 1.25rem;
+  box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.1);
+  border-radius: 5rem;
 
   &:hover {
-    background-color: #f6f6f6;
-    border: 2px solid #ebf3f8;
-    box-shadow: 2px 2px 15px 4px rgba(7, 93, 172, 0.09);
+    box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.3);
   }
 `;
 export default GoBackButton;

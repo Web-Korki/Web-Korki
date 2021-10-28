@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  height: 100vh;
+  height: 100%;
   background-color: #dff2fb;
   font-family: 'Sen', sans-serif;
   color: #427e90;
@@ -28,31 +28,19 @@ body {
   font-size: clamp(1.2rem, 2vw, 2.4rem);
 }
 
-/* UserMenu Start */
-.userMenu,
-.adminMenu,
-.min-h-100 {
-  min-height: 100%;
-}
-/* UserMenu End */
-
-/* InactiveReplacement Start */
-.inactiveReplacementWrapper,
-.resetPassword,
-.registerForm,
-.resetPasswordConfirm,
-.homepage,
-.Whoops404,
-.volunteerRegisterWrapper,
-.activateAccount,
-.submitReplacement,
-.loginForm {
-  height: 100vh;
+.text-sm {
+  font-size: clamp(0.9rem, 1vw, 1.4rem);
 }
 
 .link,
 .link:hover {
+  text-decoration: none;
+  font-size: clamp(0.9rem, 1vw, 1.4rem);
   color: #427e90;
+}
+
+.min-h-100 {
+  min-height: 100%;
 }
 
 .inactiveReplacementInnerWrapper {
@@ -60,61 +48,21 @@ body {
   height: 500px;
 }
 
-/* LectureAnalysis Start */
-.inactiveReplacementWrapper,
-.resetPassword,
-.loginForm,
-.registerForm,
-.resetPasswordConfirm,
-.homepage,
-.Whoops404,
-.volunteerRegisterWrapper,
-.activateAccount,
-.submitReplacement,
-.lectureAnalysisWrapper,
-.volunteerAnalysisWrapper {
-  padding: 5vw 0;
-  height: 100%;
-}
-
-@media screen and (max-width: 992px) {
-  .inactiveReplacementWrapper,
-  .resetPassword,
-  .loginForm,
-  .registerForm,
-  .resetPasswordConfirm,
-  .homepage,
-  .Whoops404,
-  .volunteerRegisterWrapper,
-  .activateAccount,
-  .submitReplacement,
-  .lectureAnalysisWrapper,
-  .volunteerAnalysisWrapper {
-    padding: 20vw 0;
-    height: 100%;
-  }
+@media screen and (max-width: 768px) {
   .button {
     display: none !important;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .l-arrow {
-    width: 6px;
-    height: 10px;
-  }
-}
-/* LectureAnalysis End */
-
 .card {
   word-wrap: normal;
 }
+
 .lectureAnalysisInnerWrapper {
   width: 1024px;
   height: 650px;
   margin: 0 auto;
 }
-/* LectureAnalysis End */
 
 .eye-icon {
   top: 53%;
