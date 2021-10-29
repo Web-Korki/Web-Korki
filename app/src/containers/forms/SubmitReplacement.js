@@ -7,7 +7,7 @@ import {
   Wrapper,
 } from '../../components/styledComponents/index';
 import { BackButton } from '../../components/buttons/BackButton';
-import Select from '../../components/components/Select';
+import { SelectField } from '../../components/components/SelectField';
 
 export const SubmitReplacement = () => {
   return (
@@ -17,17 +17,24 @@ export const SubmitReplacement = () => {
           <BackButton />
           <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
-        <div className="row g-0 justify-content-center">
-          <div className="row">
-            <div className="col d-flex justify-content-center flex-column mt-4">
+        <div className="d-flex flex-column p-4 mb-4">
+          <div className="row mb-4">
+            <div className="col d-flex justify-content-center flex-column mb-4 mb-lg-0">
               <label className="text" for="class">
                 Klasa
               </label>
-              <Select id="class" required>
-                {/* option tag rendered conditi */}
-              </Select>
+              <SelectField
+                id="class"
+                required
+                options={[
+                  //przykład wyboru
+                  { value: '', name: '--Wybierz opcję--' },
+                  { value: '1pod', name: '1 szkoły podstawowej' },
+                  { value: '3lic', name: '3 liceum' },
+                ]}
+              />
             </div>
-            <div className="col d-flex justify-content-center flex-column mt-4">
+            <div className="col d-flex justify-content-center flex-column mb-4 mb-lg-0">
               <label for="date" className="text">
                 Data
               </label>
@@ -40,23 +47,30 @@ export const SubmitReplacement = () => {
                 />
               </div>
             </div>
-            <div className="col d-flex justify-content-center flex-column mt-4">
+            <div className="col d-flex justify-content-center flex-column">
               <label className="text" for="subject">
                 Przedmiot
               </label>
-              <Select id="subject" required>
-                {/* option tag rendered conditi */}
-              </Select>
+              <SelectField
+                id="subject"
+                required
+                options={[
+                  //przykład wyboru
+                  { value: '', name: '--Wybierz opcję--' },
+                  { value: 'j.pol', name: 'Język polski' },
+                  { value: 'mat', name: 'Matematyka' },
+                ]}
+              />
             </div>
           </div>
-
-          <div className="col d-flex flex-column mt-4 justify-content-center">
+          <div className="col d-flex flex-column justify-content-center">
             <label className="text" for="last-topics">
               Ostatnio przerabiane zagadnienia
             </label>
             <Textarea
-              className="align-self-center pl-2"
+              className="align-self-center ps-3"
               name="last-topics"
+              placeholder="Temat ostatniej lekcji to..."
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -64,8 +78,9 @@ export const SubmitReplacement = () => {
               Planowane zagadnienia na lekcję
             </label>
             <Textarea
-              className="align-self-center pl-2"
+              className="align-self-center ps-3"
               name="planned-topics"
+              placeholder="Temat przyszłej lekcji to..."
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -73,14 +88,13 @@ export const SubmitReplacement = () => {
               Metodyka nauczania oraz platforma
             </label>
             <Textarea
-              className="align-self-center pl-2"
+              className="align-self-center ps-3"
               name="teaching-methodology"
+              placeholder="Z uczniem pracujemy korzystając z..."
             ></Textarea>
           </div>
         </div>
-        <div className="row mt-5">
-          <BlueButton>zgłoś zastępstwo</BlueButton>
-        </div>
+        <BlueButton>zgłoś zastępstwo</BlueButton>
       </Wrapper>
     </div>
   );

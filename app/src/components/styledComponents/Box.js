@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Box = styled.button`
-  padding: 0.75em 2em;
+  padding: 1em 2em;
   box-sizing: border-box;
   width: 100%;
   font-size: clamp(2rem, 4vw, 3.4rem);

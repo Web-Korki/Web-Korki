@@ -12,9 +12,9 @@ export function Whoops404() {
 
   return (
     <div className="min-h-100 d-flex justify-content-center align-items-center flex-column scalable-wrapper">
-      <h1 className="title mb-3">Przepraszamy</h1>
+      <h1 className="title">Przepraszamy</h1>
       <BookImage />
-      <p className="text">Żądana strona nie istnieje :/</p>
+      <p className="text mb-4">Żądana strona nie istnieje :/</p>
       <GreyButton onClick={() => goBack()}>wróć</GreyButton>
     </div>
   );

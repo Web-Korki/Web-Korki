@@ -6,13 +6,13 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 4px 4px 15px 4px rgba(7, 93, 172, 0.12);
+  box-shadow: 0 0 15px 4px rgba(7, 93, 172, 0.12);
   border: 2px solid #ebf3f8;
-  background: #fbfcfd;
-  border-radius: 10px;
-  color: #427e90;
+  background-color: #fbfcfd;
+  border-radius: 1rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
+    box-shadow: 0 0 8px 2px rgba(7, 93, 172, 0.12);
     width: 95vw;
     padding: 4rem 1rem;
   }

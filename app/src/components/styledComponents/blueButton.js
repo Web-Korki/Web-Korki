@@ -7,13 +7,13 @@ const BlueButton = styled.button`
   background: #dff2fb;
   border: 1px solid #d2ebf6;
   box-sizing: border-box;
-  box-shadow: 1px 1px 5px rgba(7, 93, 172, 0.1);
+  box-shadow: 0 0 5px rgba(7, 93, 172, 0.1);
   color: #427e90;
   font-weight: 400;
 
   @media (hover: hover) {
     &:hover {
-      box-shadow: 1px 1px 5px rgba(7, 93, 172, 0.4);
+      box-shadow: 0 0 5px rgba(7, 93, 172, 0.4);
     }
   }
 `;

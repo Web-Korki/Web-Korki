@@ -7,7 +7,7 @@ const Input = styled.input`
   background: #ffffff;
   color: #427e90;
   border: 1px solid #ebeff1;
-  box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.09);
+  box-shadow: 0 0 5px rgba(55, 55, 55, 0.09);
   border-radius: 10px;
   text-align: center;
 
@@ -25,7 +25,7 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.3);
+    box-shadow: 0 0 5px rgba(55, 55, 55, 0.3);
   }
 
   &::-webkit-calendar-picker-indicator {

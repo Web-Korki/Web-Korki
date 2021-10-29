@@ -14,6 +14,3 @@
 .secondColor {
   fill: rgb(40, 93, 108);
 }
-
-/* described paths styles as numberStyle instead of numberPath because of conflict in styles of bookImage.svg
-It should be investigated further */

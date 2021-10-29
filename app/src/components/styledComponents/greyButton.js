@@ -7,13 +7,13 @@ const GreyButton = styled.button`
   background-color: #fbfcfd;
   border: 1px solid #ebeff1;
   box-sizing: border-box;
-  box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.1);
+  box-shadow: 0 0 5px rgba(55, 55, 55, 0.1);
   color: #427e90;
   font-weight: 400;
 
   @media (hover: hover) {
     &:hover {
-      box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.4);
+      box-shadow: 0 0 5px rgba(55, 55, 55, 0.4);
     }
   }
 `;

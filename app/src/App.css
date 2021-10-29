@@ -18,6 +18,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Font varieties */
 .title {
   margin: 0;
   text-align: center;
@@ -25,11 +26,15 @@ body {
 }
 
 .text {
-  font-size: clamp(1.2rem, 2vw, 2.4rem);
+  font-size: clamp(1.4rem, 2vw, 2.4rem);
+  color: #195669;
+  text-decoration: none;
 }
 
 .text-sm {
   font-size: clamp(0.9rem, 1vw, 1.4rem);
+  color: #195669;
+  text-decoration: none;
 }
 
 .link,
@@ -39,31 +44,23 @@ body {
   color: #427e90;
 }
 
+/* Bootstrap like class that is indeed missing from dependency */
 .min-h-100 {
   min-height: 100%;
 }
 
-.inactiveReplacementInnerWrapper {
-  width: 650px;
-  height: 500px;
-}
-
-@media screen and (max-width: 768px) {
-  .button {
-    display: none !important;
-  }
-}
-
-.card {
-  word-wrap: normal;
-}
-
-.lectureAnalysisInnerWrapper {
-  width: 1024px;
-  height: 650px;
+/* Limiter used to shorten the width to better match layout of the app */
+.limiter {
   margin: 0 auto;
+  max-width: 85%;
 }
 
+/* Used for lecture analysis and volunteer analysis, because they have dynamic content that can go beyond the screen height */
+.analysis {
+  padding: 10em 0 5em;
+}
+
+/* Icon used to display password */
 .eye-icon {
   top: 53%;
   right: 8%;
@@ -72,4 +69,38 @@ body {
 
 .eye-icon:hover {
   color: #4ea2c9;
+}
+
+.footer {
+  background-color: #b0d6e8;
+  font-size: clamp(0.9rem, 1vw, 1.4rem);
+  color: #195669;
+  padding: 0.25em;
+}
+
+.d-arrow {
+  pointer-events: none;
+  position: absolute;
+  top: 35%;
+  right: 8%;
+  transform: translateY(-50%);
+  transform: rotate(-90deg);
+}
+
+/* Bootstrap's lg breakpoint */
+@media screen and (max-width: 992px) {
+  .d-arrow {
+    right: 4%;
+  }
+  .limiter {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+/* Bootstrap's md breakpoint */
+@media screen and (max-width: 768px) {
+  .button {
+    display: none !important;
+  }
 }

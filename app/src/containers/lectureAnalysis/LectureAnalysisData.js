@@ -1,40 +1,49 @@
-import { TextField } from '../../components/styledComponents/index';
+import {
+  TextField,
+  ContainerSmall,
+} from '../../components/styledComponents/index';
 
 export const LectureAnalysisData = (month) => {
   return (
-    <>
-      <h4 className="text-center">Dom dziecka w [name]</h4>
-      <div className="row">
-        <h4 className="col align-self-center">Ilość zaplanowanych lekcji</h4>
-        <TextField className="col-2 text-center">132</TextField>
-        <h4 className="col align-self-center">Ilość przeprowadzonych lekcji</h4>
-        <TextField className="col-2 text-center">128</TextField>
-        <h4 className="col align-self-center">Ilość nieodbytych lekcji</h4>
-        <TextField className="col-2 text-center">4</TextField>
-      </div>
-      <div>
-        <h4 className="">Nieodbyte lekcje</h4>
-        <div className="row row-cols-2">
-          <div className="col">
-            <h4 className="col">Data</h4>
-            <TextField className="col text-center">11.03 12:00</TextField>
+    <div className="col">
+      <ContainerSmall>
+        <p className="text text-center">Dom dziecka w [name]</p>
+        <div className="row g-4">
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="text m-0">Ilość zaplanowanych lekcji</p>
+            <TextField>132</TextField>
           </div>
-          <div className="col">
-            <h4 className="col">Powód</h4>
-            <TextField className="col">
-              Coś więcej ni 4 Ty głupi debilu
-            </TextField>
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="text m-0">Ilość przeprowadzonych lekcji</p>
+            <TextField>128</TextField>
           </div>
-          <div className="col">
-            <h4 className="col">Data</h4>
-            <TextField className="col text-center">13.03 16:00</TextField>
-          </div>
-          <div className="col">
-            <h4 className="col">Powód</h4>
-            <TextField className="col">W sumie to nie wiem</TextField>
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="text m-0">Ilość nieodbytych lekcji</p>
+            <TextField>4</TextField>
           </div>
         </div>
-      </div>
-    </>
+        <div className="mt-3">
+          <p className="text">Nieodbyte lekcje:</p>
+          <div className="row row-cols-2 g-4">
+            <div className="col">
+              <p className="text">Data:</p>
+              <TextField className="text-center">11.03 12:00</TextField>
+            </div>
+            <div className="col">
+              <p className="text">Powód:</p>
+              <TextField>Odwołane przez</TextField>
+            </div>
+            <div className="col">
+              <p className="text col">Data:</p>
+              <TextField className="text-center">13.03 16:00</TextField>
+            </div>
+            <div className="col">
+              <p className="text">Powód:</p>
+              <TextField>Odwołane przez</TextField>
+            </div>
+          </div>
+        </div>
+      </ContainerSmall>
+    </div>
   );
 };

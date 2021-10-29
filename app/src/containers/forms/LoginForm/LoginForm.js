@@ -1,7 +1,5 @@
 //react
 import React, { useState } from 'react';
-//styles
-import './LoginForm.styles.css';
 //redux
 import { connect } from 'react-redux';
 import { login } from '../../../redux/actions/auth';
@@ -13,7 +11,6 @@ import {
   Wrapper,
   Input,
   BlueButton,
-  InputPassword,
 } from '../../../components/styledComponents/index';
 
 //font awesome:

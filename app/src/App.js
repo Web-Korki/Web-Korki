@@ -73,6 +73,7 @@ function App() {
         />
         <Route path="*" component={Whoops404} />
       </Switch>
+      <div className="footer fixed-bottom text-center">© 2021 Web-Korki</div>
     </>
   );
 }

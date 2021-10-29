@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 //utils
 import Logout from '../forms/Logout';
 import { Box } from '../../components/styledComponents';
-import './UserMenu.style.css';
 
 const UserMenu = ({ isSuperuser }) => {
   UserMenu.propTypes = {

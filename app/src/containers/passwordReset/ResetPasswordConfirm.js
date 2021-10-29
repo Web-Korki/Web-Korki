@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   BlueButton,
   Input,
-  LoginBox,
+  Wrapper,
 } from '../../components/styledComponents/index';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -36,7 +36,7 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
 
   return (
     <div className="resetPasswordConfirm d-flex flex-column justify-content-center align-items-center">
-      <LoginBox className="d-flex flex-column justify-content-center align-items-center">
+      <Wrapper className="d-flex flex-column justify-content-center align-items-center">
         <h1 className="title mb-4">Resetuj hasło</h1>
         <form
           className="d-flex align-items-center flex-column"
@@ -64,7 +64,7 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
           />
           <BlueButton type="submit">ustaw nowe hasło</BlueButton>
         </form>
-      </LoginBox>
+      </Wrapper>
     </div>
   );
 };
