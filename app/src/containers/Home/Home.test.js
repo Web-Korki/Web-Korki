@@ -5,11 +5,13 @@ import '@testing-library/jest-dom';
 import { Home } from './Home';
 
 describe('Home', () => {
+	const RenderedHome = render(
+		<Router>
+			<Home />
+		</Router>
+	);
+
 	it('renders the Home component', () => {
-		render(
-			<Router>
-				<Home />
-			</Router>
-		);
+		<RenderedHome />;
 	});
 });
