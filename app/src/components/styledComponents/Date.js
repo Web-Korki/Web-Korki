@@ -32,7 +32,7 @@ const Date = styled.input`
     display: none;
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1200px - 1px) {
     width: 80vw;
   }
 `;

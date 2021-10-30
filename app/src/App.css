@@ -90,7 +90,10 @@ body {
 }
 
 /* Bootstrap's xl breakpoint */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1200px - 1px) {
+  .d-arrow {
+    right: 4%;
+  }
   .limiter {
     max-width: 100%;
     margin: 0;
@@ -98,18 +101,15 @@ body {
 }
 
 /* Bootstrap's lg breakpoint */
-@media screen and (max-width: 992px) {
-  .limiter {
+@media screen and (max-width: 992px - 1px) {
+  /* .limiter {
     max-width: 100%;
     margin: 0;
-  }
+  } */
 }
 
 /* Bootstrap's md breakpoint */
-@media screen and (max-width: 768px) {
-  .d-arrow {
-    right: 4%;
-  }
+@media screen and (max-width: 768px - 1px) {
   .button {
     display: none !important;
   }

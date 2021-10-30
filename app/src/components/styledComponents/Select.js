@@ -13,7 +13,7 @@ const Select = styled.select`
   border-radius: 1rem;
   text-align: center;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1200px - 1px) {
     width: 80vw;
   }
 `;
