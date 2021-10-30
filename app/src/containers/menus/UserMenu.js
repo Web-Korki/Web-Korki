@@ -1,14 +1,14 @@
 //react
-import React from 'react';
+import React from "react";
 //redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 //router
-import { NavLink } from 'react-router-dom';
+import { Link } from "react-router-dom";
 //propTypes
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 //utils
-import Logout from '../forms/Logout';
-import { Box } from '../../components/styledComponents';
+import Logout from "../forms/Logout";
+import { Box } from "../../components/styledComponents";
 
 const UserMenu = ({ isSuperuser }) => {
   UserMenu.propTypes = {
@@ -17,37 +17,37 @@ const UserMenu = ({ isSuperuser }) => {
 
   return (
     <>
-      <div className="min-h-100 py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
-        <div className="container p-5 p-lg-0">
-          <div className="row d-flex justify-content-lg-between mb-3 mb-md-5">
-            <h1 className="col-lg-auto text-lg-left text-center title justify-content-lg-start justify-content-center mb-4 mb-md-0">
+      <div className="min-h-100 py-5 py-xl-0 d-flex flex-column justify-content-center align-items-center">
+        <div className="container-xl container-fluid p-5 p-lg-0">
+          <div className="row d-flex justify-content-xl-between justify-content-md-evenly justify-content-center mb-3 mb-xl-5">
+            <h1 className="col-xl-auto text-xl-left text-center title justify-content-xl-start justify-content-center mb-4 mb-xl-0">
               Panel korepetytora
             </h1>
-            <div className="col-lg-auto d-flex align-items-center justify-content-lg-end justify-content-center">
+            <div className="col-xl-auto d-flex align-items-center justify-content-xl-end justify-content-center">
               <Logout>wyloguj się</Logout>
             </div>
           </div>
           <div className="row justify-content-center">
-            <div className="col-12 col-lg-auto g-4 g-md-3">
-              <NavLink to="/submit_replacement">
+            <div className="col-12 col-lg-auto g-4">
+              <Link to="/submit_replacement">
                 <Box>Zgłoś zastępstwo</Box>
-              </NavLink>
+              </Link>
             </div>
-            <div className="col-12 col-lg-auto g-4 g-md-3">
-              <NavLink to="/active_replacements">
+            <div className="col-12 col-lg-auto g-4">
+              <Link to="/active_replacements">
                 <Box>Oczekujące zastępstwa</Box>
-              </NavLink>
+              </Link>
             </div>
-            <div className="col-12 col-lg-auto g-4 g-md-3">
-              <NavLink to="/fill_in_report">
+            <div className="col-12 col-lg-auto g-4">
+              <Link to="/fill_in_report">
                 <Box>Uzupełnij raport</Box>
-              </NavLink>
+              </Link>
             </div>
             {isSuperuser ? (
-              <div className="col-12 col-lg-auto g-4 g-md-3">
-                <NavLink to="/admin_menu">
+              <div className="col-12 col-lg-auto g-4">
+                <Link to="/admin_menu">
                   <Box>Panel Administratora</Box>
-                </NavLink>
+                </Link>
               </div>
             ) : null}
           </div>

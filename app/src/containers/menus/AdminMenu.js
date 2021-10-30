@@ -1,15 +1,15 @@
 //react
-import React from 'react';
+import React from "react";
 //redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 //router
-import { NavLink } from 'react-router-dom';
-import { Redirect } from 'react-router';
+import { Link } from "react-router-dom";
+import { Redirect } from "react-router";
 //propTypes
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 //styledComponents
-import { Box } from '../../components/styledComponents/index';
-import Logout from '../forms/Logout';
+import { Box } from "../../components/styledComponents/index";
+import Logout from "../forms/Logout";
 
 const AdminMenu = ({ isSuperuser }) => {
   AdminMenu.propTypes = {
@@ -21,46 +21,46 @@ const AdminMenu = ({ isSuperuser }) => {
   }
 
   return (
-    <div className="min-h-100 py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
-      <div className="container-lg container-fluid p-5 p-lg-0">
-        <div className="row d-flex justify-content-lg-between mb-3 mb-lg-5">
-          <h1 className="col-lg-auto text-lg-left text-center title justify-content-lg-start justify-content-center mb-4 mb-lg-0">
+    <div className="min-h-100 py-5 py-xl-0 d-flex flex-column justify-content-center align-items-center">
+      <div className="container-xl container-fluid p-5 p-lg-0">
+        <div className="row d-flex justify-content-xl-between justify-content-md-evenly justify-content-center mb-3 mb-xl-5">
+          <h1 className="col-xl-auto text-xl-left text-center title justify-content-xl-start justify-content-center mb-4 mb-xl-0">
             Panel administratora
           </h1>
-          <div className="col-lg-auto d-flex align-items-center justify-content-lg-end justify-content-center">
+          <div className="col-xl-auto d-flex align-items-center justify-content-xl-end justify-content-center">
             <Logout>wyloguj się</Logout>
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-12 col-lg-auto g-4 g-lg-3">
-            <NavLink to="/register_form">
+          <div className="col-12 col-lg-auto g-4">
+            <Link to="/register_form">
               <Box>Zarejestruj korepetytora</Box>
-            </NavLink>
+            </Link>
           </div>
-          <div className="col-12 col-lg-auto g-4 g-lg-3">
-            <NavLink to="/current_report">
+          <div className="col-12 col-lg-auto g-4">
+            <Link to="/current_report">
               <Box>Bieżący raport</Box>
-            </NavLink>
+            </Link>
           </div>
-          <div className="col-12 col-lg-auto g-4 g-lg-3">
-            <NavLink to="/lecture_analysis">
+          <div className="col-12 col-lg-auto g-4">
+            <Link to="/lecture_analysis">
               <Box>Analiza - zajęcia</Box>
-            </NavLink>
+            </Link>
           </div>
-          <div className="col-12 col-lg-auto g-4 g-lg-3">
-            <NavLink to="/volunteer_analysis">
+          <div className="col-12 col-lg-auto g-4">
+            <Link to="/volunteer_analysis">
               <Box>Analiza - wolontariusze</Box>
-            </NavLink>
+            </Link>
           </div>
-          <div className="col-12 col-lg-auto g-4 g-lg-3">
-            <NavLink to="/active_replacements">
+          <div className="col-12 col-lg-auto g-4">
+            <Link to="/active_replacements">
               <Box>Oczekujące zastępstwa</Box>
-            </NavLink>
+            </Link>
           </div>
-          <div className="col-12 col-lg-auto g-4 g-lg-3">
-            <NavLink to="/user_menu">
+          <div className="col-12 col-lg-auto g-4">
+            <Link to="/user_menu">
               <Box>Panel korepetytora</Box>
-            </NavLink>
+            </Link>
           </div>
         </div>
       </div>

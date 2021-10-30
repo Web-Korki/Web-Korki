@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Wrapper,
   Input,
   BlueButton,
-} from '../components/styledComponents/index';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { verify } from '../redux/actions/auth';
+} from "../components/styledComponents/index";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { verify } from "../redux/actions/auth";
 
 const ActivateAccount = ({ verify, match }) => {
   const [verified, setVerified] = useState(false);
@@ -20,7 +20,7 @@ const ActivateAccount = ({ verify, match }) => {
   };
 
   if (verified) {
-    return <Redirect to="/UserMenu" />;
+    return <Redirect to="/user_menu" />;
   }
 
   return (

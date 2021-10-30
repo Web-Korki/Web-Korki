@@ -1,25 +1,25 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import {
   Date,
   Textarea,
   BlueButton,
   Wrapper,
-} from '../../components/styledComponents/index';
-import { BackButton } from '../../components/buttons/BackButton';
-import { SelectField } from '../../components/components/SelectField';
+} from "../../components/styledComponents/index";
+import { BackButton } from "../../components/buttons/BackButton";
+import { SelectField } from "../../components/components/SelectField";
 
 export const SubmitReplacement = () => {
   return (
-    <div className="min-h-100 container-fluid container-lg py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
+    <div className="min-h-100 container-fluid container-md py-5 py-md-0 d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
-        <div class="d-flex mb-2 mb-lg-5">
+        <div class="d-flex mb-2 mb-xl-5">
           <BackButton />
           <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
         <div className="d-flex flex-column p-4 mb-4">
           <div className="row mb-4">
-            <div className="col d-flex justify-content-center flex-column mb-4 mb-lg-0">
+            <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label className="text" for="class">
                 Klasa
               </label>
@@ -28,13 +28,13 @@ export const SubmitReplacement = () => {
                 required
                 options={[
                   //przykład wyboru
-                  { value: '', name: '--Wybierz opcję--' },
-                  { value: '1pod', name: '1 szkoły podstawowej' },
-                  { value: '3lic', name: '3 liceum' },
+                  { value: "", name: "--Wybierz opcję--" },
+                  { value: "1pod", name: "1 szkoły podstawowej" },
+                  { value: "3lic", name: "3 liceum" },
                 ]}
               />
             </div>
-            <div className="col d-flex justify-content-center flex-column mb-4 mb-lg-0">
+            <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label for="date" className="text">
                 Data
               </label>
@@ -47,7 +47,7 @@ export const SubmitReplacement = () => {
                 />
               </div>
             </div>
-            <div className="col d-flex justify-content-center flex-column">
+            <div className="col-12 col-xl-4 d-flex justify-content-center flex-column">
               <label className="text" for="subject">
                 Przedmiot
               </label>
@@ -56,9 +56,9 @@ export const SubmitReplacement = () => {
                 required
                 options={[
                   //przykład wyboru
-                  { value: '', name: '--Wybierz opcję--' },
-                  { value: 'j.pol', name: 'Język polski' },
-                  { value: 'mat', name: 'Matematyka' },
+                  { value: "", name: "--Wybierz opcję--" },
+                  { value: "j.pol", name: "Język polski" },
+                  { value: "mat", name: "Matematyka" },
                 ]}
               />
             </div>
@@ -68,7 +68,7 @@ export const SubmitReplacement = () => {
               Ostatnio przerabiane zagadnienia
             </label>
             <Textarea
-              className="align-self-center ps-3"
+              className="align-self-center ps-4"
               name="last-topics"
               placeholder="Temat ostatniej lekcji to..."
             ></Textarea>
@@ -78,7 +78,7 @@ export const SubmitReplacement = () => {
               Planowane zagadnienia na lekcję
             </label>
             <Textarea
-              className="align-self-center ps-3"
+              className="align-self-center ps-4"
               name="planned-topics"
               placeholder="Temat przyszłej lekcji to..."
             ></Textarea>
@@ -88,7 +88,7 @@ export const SubmitReplacement = () => {
               Metodyka nauczania oraz platforma
             </label>
             <Textarea
-              className="align-self-center ps-3"
+              className="align-self-center ps-4"
               name="teaching-methodology"
               placeholder="Z uczniem pracujemy korzystając z..."
             ></Textarea>

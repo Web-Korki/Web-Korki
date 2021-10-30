@@ -3,8 +3,8 @@
   clip-rule: evenodd;
   stroke-linejoin: round;
   stroke-miterlimit: 2;
-  width: max(25vw, 180px);
-  height: max(25vw, 150px);
+  width: clamp(18rem, 25vw, 54rem);
+  height: clamp(15rem, 25vw, 45rem);
 }
 
 .firstColor {

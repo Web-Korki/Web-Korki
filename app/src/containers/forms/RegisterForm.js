@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { register } from '../../redux/actions/auth';
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { register } from "../../redux/actions/auth";
 import {
   Input,
   Wrapper,
   BlueButton,
-} from '../../components/styledComponents/index';
-import { BackButton } from '../../components/buttons/BackButton';
+} from "../../components/styledComponents/index";
+import { BackButton } from "../../components/buttons/BackButton";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const RegisterForm = ({ register, isAuthenticated }) => {
   RegisterForm.propTypes = {
@@ -19,8 +19,8 @@ const RegisterForm = ({ register, isAuthenticated }) => {
 
   const [accountCreated, setAccountCreated] = useState(false);
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
+    username: "",
+    email: "",
   });
 
   const { username, email } = formData;
@@ -41,7 +41,7 @@ const RegisterForm = ({ register, isAuthenticated }) => {
   return (
     <div className="min-h-100 d-flex justify-content-center align-items-center flex-column">
       <form onSubmit={(e) => onSubmit(e)}>
-        <div class="d-flex justify-content-center mb-5">
+        <div class="d-flex justify-content-center align-items-center mb-5">
           <BackButton />
           <h1 className="title">Zarejestruj korepetytora</h1>
         </div>

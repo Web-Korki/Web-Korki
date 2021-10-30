@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Input = styled.input`
   width: clamp(20rem, 35vw, 30rem);
@@ -8,7 +8,7 @@ const Input = styled.input`
   color: #427e90;
   border: 1px solid #ebeff1;
   box-shadow: 0 0 5px rgba(55, 55, 55, 0.09);
-  border-radius: 10px;
+  border-radius: 1rem;
   text-align: center;
 
   &::placeholder {

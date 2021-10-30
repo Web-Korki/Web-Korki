@@ -1,17 +1,17 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Textarea = styled.textarea`
-  width: 60vw;
+  width: 95rem;
   min-height: 2em;
-  max-width: 80rem;
-  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
   color: #195669;
   text-decoration: none;
   border-radius: 1rem;
   border: 1px solid #ebeff1;
   box-shadow: 0 0 5px rgb(55, 55, 55, 0.1);
 
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 1200px) {
+    min-height: 3.2em;
     width: 80vw;
   }
 `;

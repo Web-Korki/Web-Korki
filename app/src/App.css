@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
 
 html {
   font-size: 62.5%;
@@ -12,7 +12,7 @@ html {
 body {
   height: 100%;
   background-color: #dff2fb;
-  font-family: 'Sen', sans-serif;
+  font-family: "Sen", sans-serif;
   color: #427e90;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -27,13 +27,13 @@ body {
 }
 
 .text {
-  font-size: clamp(1.4rem, 2vw, 2.4rem);
+  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
   color: #195669;
   text-decoration: none;
 }
 
 .text-sm {
-  font-size: clamp(0.9rem, 1vw, 1.4rem);
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
   color: #195669;
   text-decoration: none;
 }
@@ -41,7 +41,7 @@ body {
 .link,
 .link:hover {
   text-decoration: none;
-  font-size: clamp(0.9rem, 1vw, 1.4rem);
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
   color: #427e90;
 }
 
@@ -89,11 +89,16 @@ body {
   transform: rotate(-90deg);
 }
 
+/* Bootstrap's xl breakpoint */
+@media screen and (max-width: 1200px) {
+  .limiter {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
 /* Bootstrap's lg breakpoint */
 @media screen and (max-width: 992px) {
-  .d-arrow {
-    right: 4%;
-  }
   .limiter {
     max-width: 100%;
     margin: 0;
@@ -102,6 +107,9 @@ body {
 
 /* Bootstrap's md breakpoint */
 @media screen and (max-width: 768px) {
+  .d-arrow {
+    right: 4%;
+  }
   .button {
     display: none !important;
   }
