@@ -23,8 +23,8 @@ import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnal
 import { VolunteerAnalysis } from './containers/volunteerAnalysis/VolunteerAnalysis';
 import { VolunteerAnalysisDetail } from './containers/volunteerAnalysis/VolunteerAnalysisDetail';
 import { Whoops404 } from './containers/Whoops404';
-import { Home } from './containers/Home/Home';
 //default imports
+import Home from './containers/Home/Home';
 import UserMenu from './containers/menus/UserMenu';
 import AdminMenu from './containers/menus/AdminMenu';
 import LoginForm from './containers/forms/LoginForm/LoginForm';

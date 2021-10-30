@@ -3,11 +3,11 @@ import { StyledBox } from '../../components/styledComponents/index';
 import { Link } from 'react-router-dom';
 import { Logo } from '../../components/layout/Logo';
 
-export const Home = () => {
+const Home = () => {
 	return (
 		<div className='homepage d-flex flex-column justify-content-center align-items-center'>
 			<div className='mb-5'>
-				<Logo />
+				<Logo dataset-id='logo' />
 			</div>
 			<div>
 				<Link to='/login_form'>
@@ -17,3 +17,5 @@ export const Home = () => {
 		</div>
 	);
 };
+
+export default Home;
