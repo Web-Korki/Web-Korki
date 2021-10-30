@@ -3,6 +3,7 @@
 html {
   font-size: 62.5%;
   height: 100vh;
+  scroll-behavior: smooth;
 }
 #root {
   height: 100%;
@@ -72,6 +73,7 @@ body {
 }
 
 .footer {
+  pointer-events: none;
   background-color: #b0d6e8;
   font-size: clamp(0.9rem, 1vw, 1.4rem);
   color: #195669;

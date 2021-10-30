@@ -6,7 +6,6 @@ export { default as Box } from './Box';
 export { default as Container } from './Container';
 export { default as ContainerSmall } from './ContainerSmall';
 export { default as TextField } from './TextField';
-export { default as GoBack } from './GoBack';
 export { default as Input } from './Input';
 export { default as Textarea } from './Textarea';
 export { default as Select } from './Select';

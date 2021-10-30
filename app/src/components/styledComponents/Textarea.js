@@ -9,7 +9,7 @@ const Textarea = styled.textarea`
   text-decoration: none;
   border-radius: 1rem;
   border: 1px solid #ebeff1;
-  box-shadow: 1px 1px 5px rgb(55, 55, 55, 0.09);
+  box-shadow: 0 0 5px rgb(55, 55, 55, 0.1);
 
   @media screen and (max-width: 992px) {
     width: 80vw;

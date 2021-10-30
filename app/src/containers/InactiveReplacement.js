@@ -1,6 +1,7 @@
 import React from 'react';
-import { Wrapper } from '../components/styledComponents/index';
+import { Wrapper, BlueButton } from '../components/styledComponents/index';
 import { BackButton } from '../components/buttons/BackButton';
+import { NavLink } from 'react-router-dom';
 
 export const InactiveReplacement = () => {
   return (
@@ -10,7 +11,10 @@ export const InactiveReplacement = () => {
         <h1 className="title">Przepraszamy</h1>
       </div>
       <Wrapper>
-        <p className="text">Zastępstwo nieaktywne</p>
+        <p className="text mb-3">Zastępstwo nieaktywne</p>
+        <NavLink to="/login_form">
+          <BlueButton>zaloguj się</BlueButton>
+        </NavLink>
       </Wrapper>
     </div>
   );

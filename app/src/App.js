@@ -16,7 +16,6 @@ import { Route, Switch } from 'react-router';
 //components
 //all styled components are in the same place now. Remember to add them to index.js in the directory src/components/styledComponents
 //named imports
-import { MainContainer } from './components/styledComponents/index.js';
 import { InactiveReplacement } from './containers/InactiveReplacement';
 import { LectureAnalysis } from './containers/lectureAnalysis/LectureAnalysis';
 import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnalysisDetail';
@@ -53,18 +52,29 @@ function App() {
           path="/inactive_replacement"
           component={InactiveReplacement}
         />
-        <Route path="/submit_replacement" exact component={SubmitReplacement} />
-        <Route path="/lecture_analysis" exact component={LectureAnalysis} />
-        <Route
+        <PrivateRoute
+          path="/submit_replacement"
+          exact
+          component={SubmitReplacement}
+        />
+        <PrivateRoute
+          path="/lecture_analysis"
+          exact
+          component={LectureAnalysis}
+        />
+        <PrivateRoute
           path="/lecture_analysis/:month"
           component={LectureAnalysisDetail}
         />
-        <Route path="/volunteer_analysis" exact component={VolunteerAnalysis} />
-        <Route
+        <PrivateRoute
+          path="/volunteer_analysis"
+          exact
+          component={VolunteerAnalysis}
+        />
+        <PrivateRoute
           path="/volunteer_analysis/:month"
           component={VolunteerAnalysisDetail}
         />
-        {/* <PrivateRoute path='/volunteer_register' component={VolunteerRegister} /> */}
         <Route path="/activate/:uid/:token" component={ActivateAccount} />
         <Route path="/reset_password" component={ResetPassword} />
         <Route
