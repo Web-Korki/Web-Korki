@@ -1,14 +1,15 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const StyledDate = styled.input`
-  width: clamp(173px, 300px, 309px);
-  height: clamp(40px, 2.6vw, 50px);
+const Date = styled.input`
+  width: clamp(17rem, 35vw, 30rem);
+  height: clamp(4rem, 3.3vw, 5rem);
   background: #ffffff;
   border: 1px solid #ebeff1;
-  box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.09);
+  box-shadow: 0 0 5px rgba(55, 55, 55, 0.09);
   border-radius: 10px;
   text-align: center;
-  font-size: clamp(18px, 2.5vw, 25px);
+  color: #195669;
+  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
 
   &::placeholder {
     color: #eeeeee;
@@ -24,16 +25,16 @@ const StyledDate = styled.input`
 
   &:focus {
     outline: none;
-    box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.3);
+    box-shadow: 0 0 5px rgba(55, 55, 55, 0.3);
   }
 
   &::-webkit-calendar-picker-indicator {
     display: none;
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px - 1px) {
     width: 80vw;
   }
 `;
 
-export default StyledDate;
+export default Date;

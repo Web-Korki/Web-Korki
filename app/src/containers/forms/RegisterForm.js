@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { register } from '../../redux/actions/auth';
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { register } from "../../redux/actions/auth";
 import {
-  StyledInput,
-  StyledLoginBox,
-  StyledBlueButton,
-} from '../../components/styledComponents/index';
-import { BackButton } from '../../components/buttons/BackButton';
+  Input,
+  Wrapper,
+  BlueButton,
+} from "../../components/styledComponents/index";
+import { BackButton } from "../../components/buttons/BackButton";
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const RegisterForm = ({ register, isAuthenticated }) => {
   RegisterForm.propTypes = {
@@ -19,57 +19,59 @@ const RegisterForm = ({ register, isAuthenticated }) => {
 
   const [accountCreated, setAccountCreated] = useState(false);
   const [formData, setFormData] = useState({
-		username: '',
-		email: '',
+    username: "",
+    email: "",
   });
 
   const { username, email } = formData;
 
   const onChange = (e) =>
-		setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
-		e.preventDefault();
-		register(username, email);
-		setAccountCreated(true);
+    e.preventDefault();
+    register(username, email);
+    setAccountCreated(true);
   };
 
-//   if (accountCreated) {
-// 		return <Redirect to='/admin_menu' />;
-//   }
+  //   if (accountCreated) {
+  // 		return <Redirect to='/admin_menu' />;
+  //   }
 
   return (
-		<div className='d-flex justify-content-center align-items-center flex-column loginForm'>
-			<form onSubmit={(e) => onSubmit(e)}>
-				<div class='d-flex justify-content-center mb-5'>
-					<BackButton />
-					<h1 className='title ml-2'>Zarejestruj korepetytora</h1>
-				</div>
-				<StyledLoginBox className='d-flex justify-content-center align-items-center flex-column'>
-					<StyledInput
-						id='name'
-						type='text'
-						placeholder='login'
-						className='mt-md-2 mb-1'
-						name='username'
-						value={username}
-						onChange={(e) => onChange(e)}
-						required
-					/>
-					<StyledInput
-						id='email'
-						type='email'
-						placeholder='email'
-						className='mt-md-2 mb-1'
-						name='email'
-						value={email}
-						onChange={(e) => onChange(e)}
-						required
-					/>
-					<StyledBlueButton type='submit'>Zarejestruj</StyledBlueButton>
-				</StyledLoginBox>
-			</form>
-		</div>
+    <div className="min-h-100 d-flex justify-content-center align-items-center flex-column">
+      <form onSubmit={(e) => onSubmit(e)}>
+        <div class="d-flex justify-content-center align-items-center mb-5">
+          <BackButton />
+          <h1 className="title">Zarejestruj korepetytora</h1>
+        </div>
+        <Wrapper>
+          <p className="text">Nazwa użytkownika</p>
+          <Input
+            id="name"
+            type="text"
+            placeholder="login"
+            className="mb-4"
+            name="username"
+            value={username}
+            onChange={(e) => onChange(e)}
+            required
+          />
+          <p className="text">Email wolontariusza</p>
+          <Input
+            id="email"
+            type="email"
+            placeholder="email"
+            className="mb-4 "
+            name="email"
+            value={email}
+            onChange={(e) => onChange(e)}
+            required
+          />
+          <BlueButton type="submit">zarejestruj</BlueButton>
+        </Wrapper>
+      </form>
+    </div>
   );
 };
 

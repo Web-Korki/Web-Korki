@@ -1,5 +1,4 @@
 import { BackButton } from '../../components/buttons/BackButton';
-import { ContainerSmall } from '../../components/styledComponents/index';
 import { LectureAnalysisData } from './LectureAnalysisData';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -31,38 +30,24 @@ export const LectureAnalysisDetail = (link) => {
   // }, []);
 
   return (
-    <>
-      <div className="lectureAnalysisWrapper d-flex justify-content-center">
-        <div className="container">
-          <div className="d-flex justify-content-between align-items-center mb-5">
-            <div className="row">
-              <BackButton className="col" />
-              <h1 className="col title ml-2">Analiza - zajęcia</h1>
-            </div>
-            <WhichMonthFunc month={link_prop} />
+    <div className="min-h-100 analysis d-flex flex-column justify-content-center align-items-center">
+      <div className="container">
+        <div className="d-flex justify-content-lg-between justify-content-center flex-lg-row flex-column align-items-center mb-5">
+          <div className="d-flex justify-content-between align-items-center mb-4 mb-lg-0">
+            <BackButton />
+            <h1 className="title">Analiza - zajęcia</h1>
           </div>
-          <div className="card-columns" style={{ columnCount: 2 }}>
-            <ContainerSmall className="card mb-3">
-              <LectureAnalysisData />
-            </ContainerSmall>
-            <ContainerSmall className="card mb-3">
-              <LectureAnalysisData />
-            </ContainerSmall>
-            <ContainerSmall className="card mb-3">
-              <LectureAnalysisData />
-            </ContainerSmall>
-            <ContainerSmall className="card mb-3">
-              <LectureAnalysisData />
-            </ContainerSmall>
-            <ContainerSmall className="card mb-3">
-              <LectureAnalysisData />
-            </ContainerSmall>
-            <ContainerSmall className="card mb-3">
-              <LectureAnalysisData />
-            </ContainerSmall>
-          </div>
+          <WhichMonthFunc month={link_prop} />
+        </div>
+        <div className="limiter row row-cols-1 row-cols-lg-2 g-4">
+          <LectureAnalysisData />
+          <LectureAnalysisData />
+          <LectureAnalysisData />
+          <LectureAnalysisData />
+          <LectureAnalysisData />
+          <LectureAnalysisData />
         </div>
       </div>
-    </>
+    </div>
   );
 };

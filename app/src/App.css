@@ -1,14 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
-
-* {
-  box-sizing: border-box;
-}
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
 
 html {
+  font-size: 62.5%;
+  height: 100vh;
   scroll-behavior: smooth;
-  height: 100%;
 }
-
 #root {
   height: 100%;
 }
@@ -16,117 +12,105 @@ html {
 body {
   height: 100%;
   background-color: #dff2fb;
-  font-family: 'Sen', sans-serif;
+  font-family: "Sen", sans-serif;
   color: #427e90;
   font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Font varieties */
 .title {
-  font-size: clamp(24px, 5vw, 42px);
   margin: 0;
   text-align: center;
+  font-size: clamp(2.4rem, 4vw, 4.2rem);
 }
 
 .text {
-  font-size: clamp(15px, 4vw, 24px);
+  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+  color: #195669;
+  text-decoration: none;
 }
 
-/* UserMenu Start */
-.userMenu,
-.adminMenu {
-  height: 100vh;
-  margin: 15vh 0;
-}
-
-.wrapper {
-  width: 800px;
-  height: 500px;
-  flex-wrap: wrap;
-}
-
-.menu-text {
-  font-weight: 400;
-  font-size: 42px;
-  margin-left: 15px;
-}
-/* UserMenu End */
-
-/* InactiveReplacement Start */
-.inactiveReplacementWrapper,
-.resetPassword,
-.registerForm,
-.resetPasswordConfirm,
-.homepage,
-.Whoops404,
-.volunteerRegisterWrapper,
-.activateAccount,
-.submitReplacement, 
-.loginForm {
-  height: 100vh;
+.text-sm {
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  color: #195669;
+  text-decoration: none;
 }
 
 .link,
 .link:hover {
+  text-decoration: none;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
   color: #427e90;
 }
 
-.inactiveReplacementInnerWrapper {
-  width: 650px;
-  height: 500px;
+/* Bootstrap like class that is indeed missing from dependency */
+.min-h-100 {
+  min-height: 100%;
 }
 
-/* LectureAnalysis Start */
-.inactiveReplacementWrapper,
-.resetPassword,
-.loginForm,
-.registerForm,
-.resetPasswordConfirm,
-.homepage,
-.Whoops404,
-.volunteerRegisterWrapper,
-.activateAccount,
-.submitReplacement,
-.lectureAnalysisWrapper,
-.volunteerAnalysisWrapper {
-  padding: 5vw 0;
-  height: 100%;
+/* Limiter used to shorten the width to better match layout of the app */
+.limiter {
+  margin: 0 auto;
+  max-width: 85%;
 }
 
-@media screen and (max-width: 992px) {
-  .inactiveReplacementWrapper,
-  .resetPassword,
-  .loginForm,
-  .registerForm,
-  .resetPasswordConfirm,
-  .homepage,
-  .Whoops404,
-  .volunteerRegisterWrapper,
-  .activateAccount,
-  .submitReplacement,
-  .lectureAnalysisWrapper,
-  .volunteerAnalysisWrapper {
-    padding: 20vw 0;
-    height: 100%;
+/* Used for lecture analysis and volunteer analysis, because they have dynamic content that can go beyond the screen height */
+.analysis {
+  padding: 10em 0 5em;
+}
+
+/* Icon used to display password */
+.eye-icon {
+  top: 53%;
+  right: 8%;
+  transform: translateY(-50%);
+}
+
+.eye-icon:hover {
+  color: #4ea2c9;
+}
+
+.footer {
+  pointer-events: none;
+  background-color: #b0d6e8;
+  font-size: clamp(0.9rem, 1vw, 1.4rem);
+  color: #195669;
+  padding: 0.25em;
+}
+
+.d-arrow {
+  pointer-events: none;
+  position: absolute;
+  top: 35%;
+  right: 8%;
+  transform: translateY(-50%);
+  transform: rotate(-90deg);
+}
+
+/* Bootstrap's xl breakpoint */
+@media screen and (max-width: 1200px - 1px) {
+  .d-arrow {
+    right: 4%;
   }
+  .limiter {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+/* Bootstrap's lg breakpoint */
+@media screen and (max-width: 992px - 1px) {
+  /* .limiter {
+    max-width: 100%;
+    margin: 0;
+  } */
+}
+
+/* Bootstrap's md breakpoint */
+@media screen and (max-width: 768px - 1px) {
   .button {
     display: none !important;
   }
 }
-
-@media screen and (max-width: 768px) {
-  .l-arrow {
-    width: 6px;
-    height: 10px;
-  }
-}
-/* LectureAnalysis End */
-
-.card {
-  word-wrap: normal;
-}
-.lectureAnalysisInnerWrapper {
-  width: 1024px;
-  height: 650px;
-  margin: 0 auto;
-}
-/* LectureAnalysis End */

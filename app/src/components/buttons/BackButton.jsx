@@ -1,4 +1,4 @@
-import { StyledBackButton } from '../styledComponents/index';
+import { GoBackButton } from '../styledComponents/index';
 import { useHistory } from 'react-router-dom';
 
 export const BackButton = () => {
@@ -8,7 +8,7 @@ export const BackButton = () => {
   };
   return (
     <div className="p-0 d-flex justify-content-center align-items-center button">
-      <StyledBackButton
+      <GoBackButton
         onClick={goToPreviousPath}
         className="d-flex justify-content-center align-items-center"
       >
@@ -27,7 +27,7 @@ export const BackButton = () => {
             stroke-linecap="round"
           />
         </svg>
-      </StyledBackButton>
+      </GoBackButton>
     </div>
   );
 };
