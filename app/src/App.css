@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
 
 html {
   font-size: 62.5%;
@@ -12,7 +12,7 @@ html {
 body {
   height: 100%;
   background-color: #dff2fb;
-  font-family: "Sen", sans-serif;
+  font-family: 'Sen', sans-serif;
   color: #427e90;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -90,7 +90,7 @@ body {
 }
 
 /* Bootstrap's xl breakpoint */
-@media screen and (max-width: 1200px - 1px) {
+@media screen and (max-width: 1199px) {
   .d-arrow {
     right: 4%;
   }
@@ -101,7 +101,7 @@ body {
 }
 
 /* Bootstrap's lg breakpoint */
-@media screen and (max-width: 992px - 1px) {
+@media screen and (max-width: 991px) {
   /* .limiter {
     max-width: 100%;
     margin: 0;
@@ -109,7 +109,7 @@ body {
 }
 
 /* Bootstrap's md breakpoint */
-@media screen and (max-width: 768px - 1px) {
+@media screen and (max-width: 767px) {
   .button {
     display: none !important;
   }

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Box = styled.button`
   padding: 1em 2em;
@@ -17,7 +17,7 @@ const Box = styled.button`
     }
   }
 
-  @media screen and (max-width: 992px - 1px) {
+  @media screen and (max-width: 991px) {
     padding: 2.1rem auto;
   }
 `;

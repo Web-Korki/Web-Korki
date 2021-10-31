@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Select = styled.select`
   appearance: none;
@@ -13,7 +13,7 @@ const Select = styled.select`
   border-radius: 1rem;
   text-align: center;
 
-  @media (max-width: 1200px - 1px) {
+  @media (max-width: 1199px) {
     width: 80vw;
   }
 `;

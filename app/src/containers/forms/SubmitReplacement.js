@@ -1,17 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 import {
   Date,
   Textarea,
   BlueButton,
   Wrapper,
-} from "../../components/styledComponents/index";
-import { BackButton } from "../../components/buttons/BackButton";
-import { SelectField } from "../../components/components/SelectField";
+} from '../../components/styledComponents/index';
+import { BackButton } from '../../components/buttons/BackButton';
+import { SelectField } from '../../components/components/SelectField';
 
 export const SubmitReplacement = () => {
   return (
-    <div className="min-h-100 container-fluid container-md py-5 py-md-0 d-flex flex-column justify-content-center align-items-center">
+    <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
         <div class="d-flex mb-2 mb-xl-5">
           <BackButton />
@@ -28,9 +28,9 @@ export const SubmitReplacement = () => {
                 required
                 options={[
                   //przykład wyboru
-                  { value: "", name: "--Wybierz opcję--" },
-                  { value: "1pod", name: "1 szkoły podstawowej" },
-                  { value: "3lic", name: "3 liceum" },
+                  { value: '', name: '--Wybierz opcję--' },
+                  { value: '1pod', name: '1 szkoły podstawowej' },
+                  { value: '3lic', name: '3 liceum' },
                 ]}
               />
             </div>
@@ -56,9 +56,9 @@ export const SubmitReplacement = () => {
                 required
                 options={[
                   //przykład wyboru
-                  { value: "", name: "--Wybierz opcję--" },
-                  { value: "j.pol", name: "Język polski" },
-                  { value: "mat", name: "Matematyka" },
+                  { value: '', name: '--Wybierz opcję--' },
+                  { value: 'j.pol', name: 'Język polski' },
+                  { value: 'mat', name: 'Matematyka' },
                 ]}
               />
             </div>
