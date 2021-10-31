@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 3em 5em;
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   background-color: #fbfcfd;
   border-radius: 1rem;
 
-  @media (max-width: 768px - 1px) {
+  @media (max-width: 767px) {
     box-shadow: 0 0 8px 2px rgba(7, 93, 172, 0.12);
     width: 95vw;
   }

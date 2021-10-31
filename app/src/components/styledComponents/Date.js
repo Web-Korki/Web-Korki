@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Date = styled.input`
   width: clamp(17rem, 35vw, 30rem);
@@ -32,7 +32,7 @@ const Date = styled.input`
     display: none;
   }
 
-  @media (max-width: 1200px - 1px) {
+  @media (max-width: 1199px) {
     width: 80vw;
   }
 `;
