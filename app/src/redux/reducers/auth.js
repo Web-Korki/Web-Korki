@@ -61,6 +61,7 @@ export default function (state = initialState, action) {
 				...state,
 				access: payload.access,
 				refresh: payload.refresh,
+				loginSuccess: true,
 			};
 		case REGISTER_SUCCESS:
 			return {
@@ -77,7 +78,6 @@ export default function (state = initialState, action) {
 				...state,
 				user: payload,
 				isSuperuser: payload.is_superuser,
-				loginSuccess: true,
 				isAuthenticated: true,
 			};
 		case AUTHENTICATED_FAIL:
@@ -100,6 +100,16 @@ export default function (state = initialState, action) {
 				user: null,
 			};
 		case LOGIN_FAIL:
+			return {
+				...state,
+				access: null,
+				refresh: null,
+				isAuthenticated: false,
+				isSuperuser: null,
+				loginSuccess: false,
+				accountCreated: false,
+				user: null,
+			};
 		case LOGOUT:
 			Cookies.remove('access');
 			Cookies.remove('refresh');
@@ -109,7 +119,7 @@ export default function (state = initialState, action) {
 				refresh: null,
 				isAuthenticated: false,
 				isSuperuser: null,
-				loginSuccess: false,
+				loginSuccess: null,
 				accountCreated: false,
 				user: null,
 			};
