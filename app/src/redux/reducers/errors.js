@@ -14,12 +14,6 @@ export default function (state = initialState, action) {
 				email: action.payload.email,
 				status: action.payload.status,
 			};
-		case CLEAN_ERROR_MSG:
-			return {
-				...state,
-				msg: null,
-				status: null,
-			};
 		default:
 			return state;
 	}

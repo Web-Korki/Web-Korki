@@ -100,6 +100,16 @@ export default function (state = initialState, action) {
 				user: null,
 			};
 		case LOGIN_FAIL:
+			return {
+				...state,
+				access: null,
+				refresh: null,
+				isAuthenticated: false,
+				isSuperuser: null,
+				loginSuccess: false,
+				accountCreated: false,
+				user: null,
+			};
 		case LOGOUT:
 			Cookies.remove('access');
 			Cookies.remove('refresh');
@@ -109,7 +119,7 @@ export default function (state = initialState, action) {
 				refresh: null,
 				isAuthenticated: false,
 				isSuperuser: null,
-				loginSuccess: false,
+				loginSuccess: null,
 				accountCreated: false,
 				user: null,
 			};

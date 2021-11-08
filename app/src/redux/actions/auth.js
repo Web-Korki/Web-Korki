@@ -148,10 +148,6 @@ export const login = (username, password) => async (dispatch) => {
 			payload: res.data,
 		});
 
-		dispatch({
-			type: CLEAN_ERROR_MSG,
-		});
-
 		dispatch(load_user());
 	} catch (err) {
 		dispatch({
@@ -168,38 +164,37 @@ export const login = (username, password) => async (dispatch) => {
 	}
 };
 
-export const register =
-	(username, email) => async (dispatch) => {
-		const config = {
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		};
-
-		const body = JSON.stringify({ username, email });
-
-		try {
-			const res = await axios.post(`${API_URL}/auth/users/`, body, config);
-
-			dispatch({
-				type: REGISTER_SUCCESS,
-				payload: res.data,
-			});
-		} catch (err) {
-			dispatch({
-				type: REGISTER_FAIL,
-			});
-			const errors = {
-				msg: err.response.data.detail,
-				email: err.response.data.email[0],
-				status: err.response.status,
-			};
-			dispatch({
-				type: GET_ERRORS,
-				payload: errors,
-			});
-		}
+export const register = (username, email) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json',
+		},
 	};
+
+	const body = JSON.stringify({ username, email });
+
+	try {
+		const res = await axios.post(`${API_URL}/auth/users/`, body, config);
+
+		dispatch({
+			type: REGISTER_SUCCESS,
+			payload: res.data,
+		});
+	} catch (err) {
+		dispatch({
+			type: REGISTER_FAIL,
+		});
+		const errors = {
+			msg: err.response.data.detail,
+			email: err.response.data.email[0],
+			status: err.response.status,
+		};
+		dispatch({
+			type: GET_ERRORS,
+			payload: errors,
+		});
+	}
+};
 
 export const verify = (uid, token) => async (dispatch) => {
 	const config = {
@@ -305,11 +300,11 @@ export const reset_password_confirm =
 		}
 	};
 
-export const logout = () => dispatch => {
+export const logout = () => (dispatch) => {
 	dispatch({
-		type: LOGOUT
-	})
-}
+		type: LOGOUT,
+	});
+};
 
 export const reset_state = () => dispatch => {
 	dispatch({

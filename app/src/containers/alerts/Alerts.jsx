@@ -8,45 +8,45 @@ import { withAlert } from 'react-alert';
 import PropTypes from 'prop-types';
 
 class Alerts extends Component {
-  static propTypes = {
-    error: PropTypes.object.isRequired,
-    loginSuccess: PropTypes.bool,
-    isSuperuser: PropTypes.bool,
-  };
+	static propTypes = {
+		error: PropTypes.object.isRequired,
+		loginSuccess: PropTypes.bool,
+		isSuperuser: PropTypes.bool,
+		isAuthenticated: PropTypes.bool,
+		user: PropTypes.bool,
+	};
 
-  componentDidUpdate(prevProps) {
-    const { error, alert, loginSuccess, isSuperuser } = this.props;
+	componentDidUpdate(prevProps) {
+		const { error, alert, loginSuccess, isSuperuser, isAuthenticated, user } =
+			this.props;
 
-    // if (accountCreated !== prevProps.accountCreated) {
-    // 	accountCreated
-    // 		? alert.success('Pomyślnie zarejestrowano użytkownika')
-    // 		: alert.error('Rejestracja użytkownika nie powiodła się');
-    // }
+		if (loginSuccess !== prevProps.loginSuccess) {
+			if (loginSuccess && isSuperuser)
+				return alert.success('Zalogowano jako administrator');
+			if (loginSuccess && !isSuperuser)
+				return alert.success('Zalogowano jako korepetytor');
+			if (loginSuccess === null && !isAuthenticated && user === null)
+				return alert.info('Pomyślnie wylogowano');
+		}
 
-    if (loginSuccess !== prevProps.loginSuccess) {
-      loginSuccess && isSuperuser
-        ? alert.success('Zalogowano jako administrator')
-        : loginSuccess && !isSuperuser
-        ? alert.success('Zalogowano jako korepetytor')
-        : alert.info('Pomyślnie wylogowano');
-    }
+		if (error !== prevProps.error && error !== null) {
+			error.email !== undefined
+				? alert.error(error.email)
+				: alert.error(error.msg);
+		}
+	}
 
-    if (error !== prevProps.error) {
-      error.email !== undefined
-        ? alert.error(error.email)
-        : alert.error(error.msg);
-    }
-  }
-
-  render() {
-    return <Fragment />;
-  }
+	render() {
+		return <Fragment />;
+	}
 }
 
 const mapStateToProps = (state) => ({
-  loginSuccess: state.auth.loginSuccess,
-  isSuperuser: state.auth.isSuperuser,
-  error: state.errors,
+	isAuthenticated: state.isAuthenticated,
+	user: state.auth.user,
+	loginSuccess: state.auth.loginSuccess,
+	isSuperuser: state.auth.isSuperuser,
+	error: state.errors,
 });
 
 export default connect(mapStateToProps)(withAlert()(Alerts));
