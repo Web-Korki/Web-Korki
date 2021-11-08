@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
-  StyledBlueButton,
-  StyledInput,
-  StyledLoginBox,
+  BlueButton,
+  Input,
+  Wrapper,
 } from '../../components/styledComponents/index';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -36,13 +36,13 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
 
   return (
     <div className="resetPasswordConfirm d-flex flex-column justify-content-center align-items-center">
-      <StyledLoginBox className="d-flex flex-column justify-content-center align-items-center">
+      <Wrapper className="d-flex flex-column justify-content-center align-items-center">
         <h1 className="title mb-4">Resetuj hasło</h1>
         <form
           className="d-flex align-items-center flex-column"
           onSubmit={(e) => onSubmit(e)}
         >
-          <StyledInput
+          <Input
             id="password"
             type="password"
             className="mb-3 mb-md-4"
@@ -52,7 +52,7 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
             onChange={(e) => onChange(e)}
             required
           />
-          <StyledInput
+          <Input
             id="password"
             type="password"
             className="mb-3 mb-md-4"
@@ -62,9 +62,9 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
             onChange={(e) => onChange(e)}
             required
           />
-          <StyledBlueButton type="submit">ustaw nowe hasło</StyledBlueButton>
+          <BlueButton type="submit">ustaw nowe hasło</BlueButton>
         </form>
-      </StyledLoginBox>
+      </Wrapper>
     </div>
   );
 };
