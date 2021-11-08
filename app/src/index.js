@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 //css
-import './index.css';
 import './reset.css';
 
 //redux
@@ -24,25 +23,25 @@ import App from './App';
 
 //Alert Options:
 const alertOptions = {
-	timeout: 3000,
-	position: 'top center',
+  timeout: 3000,
+  position: 'top center',
 };
 
 class Index extends Component {
-	render() {
-		return (
-			<React.StrictMode>
-				<Provider store={store}>
-					<AlertProvider template={AlertTemplate} {...alertOptions}>
-						<Router>
-							<Alerts />
-							<App />
-						</Router>
-					</AlertProvider>
-				</Provider>
-			</React.StrictMode>
-		);
-	}
+  render() {
+    return (
+      <React.StrictMode>
+        <Provider store={store}>
+          <AlertProvider template={AlertTemplate} {...alertOptions}>
+            <Router>
+              <Alerts />
+              <App />
+            </Router>
+          </AlertProvider>
+        </Provider>
+      </React.StrictMode>
+    );
+  }
 }
 
 ReactDOM.render(<Index />, document.getElementById('root'));

@@ -1,7 +1,5 @@
 //react
 import React, { useState } from 'react';
-//styles
-import './LoginForm.styles.css';
 //redux
 import { connect } from 'react-redux';
 import { login } from '../../../redux/actions/auth';
@@ -10,105 +8,105 @@ import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 //utils
 import {
-	StyledLoginBox,
-	StyledInput,
-	StyledBlueButton,
-	StyledInputPassword,
+  Wrapper,
+  Input,
+  BlueButton,
 } from '../../../components/styledComponents/index';
 
 //font awesome:
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import PropTypes from 'prop-types';
 
 const LoginForm = ({ login, isAuthenticated, isSuperuser, error }) => {
-	LoginForm.propTypes = {
-		login: PropTypes.func,
-		isAuthenticated: PropTypes.bool,
-		isSuperuser: PropTypes.bool,
-		error: PropTypes.string,
-	};
+  LoginForm.propTypes = {
+    login: PropTypes.func,
+    isAuthenticated: PropTypes.bool,
+    isSuperuser: PropTypes.bool,
+    error: PropTypes.string,
+  };
 
-	const eye = <FontAwesomeIcon icon={faEye} />;
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
 
-	const [formData, setFormData] = useState({
-		username: '',
-		password: '',
-	});
+  const [passwordShown, setPasswordShown] = useState(false);
 
-	const [passwordShown, setPasswordShown] = useState(false);
+  const { username, password } = formData;
 
-	const { username, password } = formData;
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-	const onChange = (e) =>
-		setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    login(username, password);
+  };
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		login(username, password);
-	};
+  const togglePasswordShow = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
 
-	const togglePasswordShow = () => {
-		setPasswordShown(passwordShown ? false : true);
-	};
+  if (isAuthenticated && isSuperuser) {
+    return <Redirect push to="/admin_menu" />;
+  } else if (isAuthenticated && !isSuperuser) {
+    return <Redirect push to="/user_menu" />;
+  }
 
-	if (isAuthenticated && isSuperuser) {
-		return <Redirect push to='/admin_menu' />;
-	} else if (isAuthenticated && !isSuperuser) {
-		return <Redirect push to='/user_menu' />;
-	}
+  return (
+    <div className="min-h-100 d-flex flex-column justify-content-center align-items-center">
+      <Wrapper>
+        <form
+          className="d-flex justify-content-between align-items-center flex-column"
+          onSubmit={(e) => onSubmit(e)}
+        >
+          <h1 className="title mb-5">Logowanie do platformy</h1>
+          <Input
+            id="name"
+            type="text"
+            placeholder="login"
+            className={`mb-4 ${error !== null ? 'border border-danger' : null}`}
+            name="username"
+            value={username}
+            onChange={(e) => onChange(e)}
+            required
+          />
+          <div className="position-relative">
+            <Input
+              id="password"
+              type={passwordShown ? 'text' : 'password'}
+              placeholder="hasło"
+              name="password"
+              className={`${error !== null ? 'border border-danger' : null}`}
+              value={password}
+              onChange={(e) => onChange(e)}
+              required
+            />
+            <i
+              className="position-absolute eye-icon"
+              onClick={() => togglePasswordShow()}
+            >
+              {<FontAwesomeIcon icon={passwordShown ? faEyeSlash : faEye} />}
+            </i>
+          </div>
 
-	return (
-		<div className='d-flex justify-content-center align-items-center loginForm'>
-			<StyledLoginBox className='d-flex justify-content-center'>
-				<form
-					className='d-flex justify-content-center align-items-center flex-column'
-					onSubmit={(e) => onSubmit(e)}>
-					<h1 className='title mb-4'>Logowanie do platformy</h1>
-					<StyledInput
-						id='name'
-						type='text'
-						placeholder='login'
-						className={`mb-4 ${
-							error !== null ? 'border border-danger' : null
-						}`}
-						name='username'
-						value={username}
-						onChange={(e) => onChange(e)}
-						required
-					/>
-					<div className='password-wrapper'>
-						<StyledInputPassword
-							id='password'
-							type={passwordShown ? 'text' : 'password'}
-							className={`${
-								error !== null ? 'border border-danger' : null
-							}`}
-							placeholder='hasło'
-							name='password'
-							value={password}
-							onChange={(e) => onChange(e)}
-							required
-						/>
-						<i onClick={() => togglePasswordShow()}>{eye}</i>
-					</div>
-					<StyledBlueButton type='submit' className='mt-4 px-5 py-2'>
-						zaloguj się
-					</StyledBlueButton>
-					<Link className='mt-3 link' to='/reset_password'>
-						zapomniałem hasła
-					</Link>
-				</form>
-			</StyledLoginBox>
-		</div>
-	);
+          <BlueButton type="submit" className="mt-5 mb-3">
+            zaloguj się
+          </BlueButton>
+          <Link className="link" to="/reset_password">
+            nie pamiętam hasła
+          </Link>
+        </form>
+      </Wrapper>
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => ({
-	isAuthenticated: state.auth.isAuthenticated,
-	isSuperuser: state.auth.isSuperuser,
-	error: state.errors.msg,
+  isAuthenticated: state.auth.isAuthenticated,
+  isSuperuser: state.auth.isSuperuser,
+  error: state.errors.msg,
 });
 
 export default connect(mapStateToProps, { login })(LoginForm);

@@ -1,36 +1,36 @@
-import { TextField } from '../../components/styledComponents/index';
+import { TextField, Container } from '../../components/styledComponents/index';
 
 export const VolunteerAnalysisData = (month) => {
   return (
-    <>
-      <div>
-        <h3>Korepetytor, który najczęściej potrzebował zastępstw</h3>
-        <div className="row">
-          {/* <div className="row col-6">
-            <TextField className="col">Daniel Konnek</TextField>
-            <TextField className="col-2 text-center">3</TextField>
-          </div> */}
+    <Container>
+      <div className="row g-4">
+        <p className="text">
+          Korepetytorzy, którzy najczęściej potrzebowali zastępstw:
+        </p>
+        <div className="row row-cols-2 g-4 mt-0">
+          <div className="d-flex justify-content-between">
+            <TextField>Guma Halls</TextField>
+            <TextField>69</TextField>
+          </div>
+        </div>
+        <p className="text">
+          Korepetytorzy, którzy przeprowadzili wszystkie lekcje w miesiącu:
+        </p>
+        <div className="row row-cols-2 g-4 mt-0">
+          <div className="d-flex justify-content-center">
+            <TextField>Karyna Grażyna</TextField>
+          </div>
+        </div>
+        <p className="text">
+          Korepetytorzy, który przejęli najwięcej zastępstw w miesiącu:
+        </p>
+        <div className="row row-cols-2 g-4 mt-0">
+          <div className="d-flex justify-content-between">
+            <TextField>Papaj JP</TextField>
+            <TextField>2137</TextField>
+          </div>
         </div>
       </div>
-      <div>
-        <h3>
-          Korepetytorzy, którzy przeprowadzili wszystkie lekcje w miesiącu
-        </h3>
-        <div className="row">
-          {/* <div className="row col-6">
-            <TextField className="col">Daniel Konnek</TextField>
-          </div> */}
-        </div>
-      </div>
-      <div>
-        <h3>Korepetytor, który przejął najwięcej zastępstw w miesiącu</h3>
-        <div className="row">
-          {/* <div className="row col-6">
-            <TextField className="col">Daniel Konnek</TextField>
-            <TextField className="col-2 text-center">3</TextField>
-          </div> */}
-        </div>
-      </div>
-    </>
+    </Container>
   );
 };

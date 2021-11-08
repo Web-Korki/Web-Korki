@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-const StyledInputPassword = styled.input`
-  width: clamp(173px, 300px, 309px);
-  height: clamp(40px, 2.6vw, 50px);
+const Date = styled.input`
+  width: clamp(17rem, 35vw, 30rem);
+  height: clamp(4rem, 3.3vw, 5rem);
   background: #ffffff;
-  color: #427e90;
   border: 1px solid #ebeff1;
-  box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.09);
+  box-shadow: 0 0 5px rgba(55, 55, 55, 0.09);
   border-radius: 10px;
   text-align: center;
-  font-size: clamp(18px, 2.5vw, 25px);
+  color: #195669;
+  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
 
   &::placeholder {
     color: #eeeeee;
@@ -25,17 +25,16 @@ const StyledInputPassword = styled.input`
 
   &:focus {
     outline: none;
-    box-shadow: 1px 1px 5px rgba(55, 55, 55, 0.3);
+    box-shadow: 0 0 5px rgba(55, 55, 55, 0.3);
   }
 
   &::-webkit-calendar-picker-indicator {
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
-    width: 240px;
-    height: 40px;
+  @media (max-width: 1199px) {
+    width: 80vw;
   }
 `;
 
-export default StyledInputPassword;
+export default Date;

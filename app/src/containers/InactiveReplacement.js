@@ -1,28 +1,21 @@
-import React from 'react';
-import { StyledInactiveReplacementMessage } from '../components/styledComponents/index';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { Wrapper, BlueButton } from "../components/styledComponents/index";
+import { BackButton } from "../components/buttons/BackButton";
+import { Link } from "react-router-dom";
 
 export const InactiveReplacement = () => {
   return (
-    <>
-      <div className="inactiveReplacementWrapper d-flex align-items-center justify-content-center">
-        <div className="inactiveReplacementInnerWrapper">
-          <div className="row">
-            <div className="sorryMessage text-center col-12">
-              <h1>Przepraszamy</h1>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12">
-              <NavLink to="/UserMenu">
-                <StyledInactiveReplacementMessage>
-                  <h1>Zastępstwo nieaktywne</h1>
-                </StyledInactiveReplacementMessage>
-              </NavLink>
-            </div>
-          </div>
-        </div>
+    <div className="min-h-100 py-5 py-xl-0 d-flex flex-column justify-content-center align-items-center">
+      <div className="d-flex justify-content-center mb-5">
+        <BackButton />
+        <h1 className="title">Przepraszamy</h1>
       </div>
-    </>
+      <Wrapper>
+        <p className="text mb-3">Zastępstwo nieaktywne</p>
+        <Link to="/login_form">
+          <BlueButton>zaloguj się</BlueButton>
+        </Link>
+      </Wrapper>
+    </div>
   );
 };
