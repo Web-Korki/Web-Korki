@@ -61,6 +61,7 @@ export default function (state = initialState, action) {
 				...state,
 				access: payload.access,
 				refresh: payload.refresh,
+				loginSuccess: true,
 			};
 		case REGISTER_SUCCESS:
 			return {
@@ -77,7 +78,6 @@ export default function (state = initialState, action) {
 				...state,
 				user: payload,
 				isSuperuser: payload.is_superuser,
-				loginSuccess: true,
 				isAuthenticated: true,
 			};
 		case AUTHENTICATED_FAIL:

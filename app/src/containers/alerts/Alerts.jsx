@@ -11,20 +11,15 @@ class Alerts extends Component {
 	static propTypes = {
 		error: PropTypes.object.isRequired,
 		loginSuccess: PropTypes.bool,
-		isSuperuser: PropTypes.bool,
 		isAuthenticated: PropTypes.bool,
 		user: PropTypes.bool,
 	};
 
 	componentDidUpdate(prevProps) {
-		const { error, alert, loginSuccess, isSuperuser, isAuthenticated, user } =
-			this.props;
+		const { error, alert, loginSuccess, isAuthenticated, user } = this.props;
 
 		if (loginSuccess !== prevProps.loginSuccess) {
-			if (loginSuccess && isSuperuser)
-				return alert.success('Zalogowano jako administrator');
-			if (loginSuccess && !isSuperuser)
-				return alert.success('Zalogowano jako korepetytor');
+			if (loginSuccess) alert.success('Pomyślnie zalogowano');
 			if (loginSuccess === null && !isAuthenticated && user === null)
 				return alert.info('Pomyślnie wylogowano');
 		}
@@ -45,7 +40,6 @@ const mapStateToProps = (state) => ({
 	isAuthenticated: state.isAuthenticated,
 	user: state.auth.user,
 	loginSuccess: state.auth.loginSuccess,
-	isSuperuser: state.auth.isSuperuser,
 	error: state.errors,
 });
 
