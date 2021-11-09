@@ -12,7 +12,7 @@ class Alerts extends Component {
 		error: PropTypes.object.isRequired,
 		loginSuccess: PropTypes.bool,
 		isAuthenticated: PropTypes.bool,
-		user: PropTypes.bool,
+		user: PropTypes.object,
 	};
 
 	componentDidUpdate(prevProps) {
