@@ -4,7 +4,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 //router
 import { Route } from 'react-router-dom';
-import { Redirect } from 'react-router';
 //utils
 import Loader from 'react-loader-spinner';
 //proptypes

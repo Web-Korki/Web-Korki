@@ -27,6 +27,16 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+      
+      <!-- DISABLE REACT DEVTOOLS ON PRODUCTION ENV-->
+    <script>
+      // before React is loaded
+      if (!window.location.port && typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
+          window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function () {}
+      }
+
+    </script>
+
     <title>Web-Korki</title>
   </head>
   <body>
