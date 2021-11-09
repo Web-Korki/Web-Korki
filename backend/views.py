@@ -1,19 +1,28 @@
 from rest_framework.response import Response
 from rest_framework import status, permissions, viewsets
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 
-from django.shortcuts import redirect, render, reverse
-from django.contrib import messages
-from djoser.conf import django_settings
+from django.shortcuts import render
 
 from djoser.views import UserViewSet
-from djoser import signals, utils
+from djoser import signals
 from djoser.compat import get_user_email
 from djoser.conf import settings
+from djoser.serializers import SetPasswordSerializer
 
 from tests.utils import get_random_password
-from myapp.settings import BASE_DIR
-from .serializers import *
-import requests, os
+from .models import Lesson, House, Teacher, Substitution
+from .serializers import (
+    LessonSerializer,
+    HouseSerializer,
+    UpdateSubstitutionSerializer,
+    StudentSerializer,
+    SubstitutionSerializer,
+    SubstitutionSerializerUpdate,
+    ChangePasswordAfterRegisterSerializer
+)
+
 from .substitutions import (
     create_substitution,
     assign_teacher,
@@ -21,7 +30,7 @@ from .substitutions import (
     cannot_modify_response,
     teacher_already_assigned_response,
 )
-
+import os
 
 class Register(UserViewSet):
     def perform_create(self, serializer):
@@ -38,6 +47,55 @@ class Register(UserViewSet):
             settings.EMAIL.activation(self.request, context).send(to)
         elif settings.SEND_CONFIRMATION_EMAIL:
             settings.EMAIL.confirmation(self.request, context).send(to)
+
+
+class ChangePasswordAfterRegister(UserViewSet):
+    http_method_names = ["post"]
+
+    serializer_class = ChangePasswordAfterRegisterSerializer
+    model = Teacher
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        # print("obj", obj)
+        return obj
+
+    def patch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid(raise_exception=True):
+            # Check old password
+
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            # set_password also hashes the password that the user will get
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.fb_name = serializer.data.get("fb_mode")
+            self.object.is_resetpwd = True
+            self.object.save()
+
+            response = {
+                'message': 'Password updated successfully',
+            }
+
+            return Response(response)
+
+class Login(TokenObtainPairView):
+    permission_classes = [permissions.AllowAny,]
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except TokenError as e:
+            raise InvalidToken(e.args[0])
+
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
+
 
 
 class ActivateUser(UserViewSet):
@@ -106,40 +164,6 @@ class CancelLessonViewSet(viewsets.ModelViewSet):
             partial=True,
             instance=lesson_serializer,
         )
-
-
-# class SubstitutionViewSet(viewsets.ModelViewSet):
-#
-#     permission_classes = (permissions.IsAuthenticated,)
-#     serializer_class = AddSubstitutionSerializer
-#     http_method_names = ["post"]
-#
-#     def create(self, request, *args):
-#         substitution = AddSubstitutionSerializer(data=request.data)
-#         substitution.is_valid(raise_exception=True)
-#         self.perform_create(substitution)
-#         headers = self.get_success_headers(substitution.data)
-#
-#         return Response(
-#             substitution.data, status=status.HTTP_201_CREATED, headers=headers
-#         )
-#
-#
-# class AssignTeacherViewSet(viewsets.ModelViewSet):
-#     permission_classes = (permissions.IsAuthenticated,)
-#     serializer_class = AssignTeacherSerializer
-#     http_method_names = ["post"]
-#
-#     def partial_update(self, request, lesson_id=None, **kwargs):
-#         user = request.user
-#         queryset = Lesson.objects.get(id=lesson_id)
-#         serializer = self.get_serializer(
-#             queryset, data={"teacher": user.id}, partial=True
-#         )
-#         serializer.is_valid(raise_exception=True)
-#         self.perform_update(serializer)
-#         headers = self.get_success_headers(serializer.data)
-#         return Response(serializer.data, status=status.HTTP_200_OK, headers=headers)
 
 
 class StudentViewSet(viewsets.ModelViewSet):

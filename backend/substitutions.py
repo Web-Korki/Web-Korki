@@ -1,6 +1,4 @@
-from django.http import JsonResponse
 from .models import (
-    Lesson,
     Substitution,
     Teacher,
     get_subject_full_name,

@@ -1,7 +1,9 @@
 from django.contrib.auth import authenticate, get_user_model
-from rest_framework import serializers
-from .models import House, Lesson, Student, SUBJECT_CHOICES, Substitution
+from django.contrib.auth.password_validation import validate_password
 from djoser.serializers import UserCreateSerializer as DjoserRegisterSerializer
+from rest_framework import serializers
+from .models import House, Lesson, Student, Substitution
+
 
 Teacher = get_user_model()
 
@@ -137,3 +139,15 @@ class SubstitutionSerializerUpdate(serializers.ModelSerializer):
                 "subject": {"required": False},
             },
         }
+
+class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+    fb_name = serializers.CharField(required=True)
+
+    def validate_new_password(self, value):
+        validate_password(value)
+        return value
