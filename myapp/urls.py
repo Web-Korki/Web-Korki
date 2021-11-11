@@ -7,7 +7,7 @@ from routers import router
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from backend.views import ActivateUser, index
+from backend.views import ActivateUser, Login, index
 
 
 schema_view = get_schema_view(
@@ -29,15 +29,16 @@ urlpatterns = [
     path("api/", include((router.urls, "myapp"), namespace="api")),
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
-    path(
-        "activate/<uid>/<token>",
-        ActivateUser.as_view({"get": "activation"}),
-        name="activation",
-    ),
+    path(r"auth/jwt-login/", Login.as_view(), name="jwt-login"),
     path(
         r"docs/",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
+    ),
+    path(
+        "activate/<uid>/<token>",
+        ActivateUser.as_view({"get": "activation"}),
+        name="activation",
     ),
     path(r"redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     url(

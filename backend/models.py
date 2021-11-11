@@ -48,12 +48,16 @@ CANCEL_REASONS = (
 
 # Create your models here.
 class Teacher(AbstractUser):
+
     class Meta:
         permissions = [
             ("reading_reports", "Can read_reports"),
         ]
 
     subjects = MultiSelectField(choices=SUBJECT_CHOICES)
+    is_resetpwd = models.BooleanField(default=False)
+    fb_name = models.CharField(null=True, blank=True, max_length=250)
+
 
     def __str__(self):
         return self.username
