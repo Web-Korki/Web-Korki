@@ -67,15 +67,11 @@ def save_substitution(data):
     return new_substitution
 
 
-class SubstitutionEmail(mail.BaseEmailMessage):
+class MyEmail(mail.BaseEmailMessage):
     """
-    Class for sending substitution emails
+    Interface for sending substitution emails
     Initialize it with context dict of parameters that will be passed to email template
     """
-
-    template_name = os.path.join(
-        BASE_DIR, "backend", "templates", "substitution_needed.html"
-    )
 
     def __init__(self, additional_context, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -85,6 +81,26 @@ class SubstitutionEmail(mail.BaseEmailMessage):
         context = super().get_context_data()
         context.update(self.additional_context)
         return context
+
+
+class SubstitutionEmail(MyEmail):
+    """
+    Class for sending information about new substitution.
+    """
+
+    template_name = os.path.join(
+        BASE_DIR, "backend", "templates", "substitution_needed.html"
+    )
+
+
+class SubstitutionConfirmationEmail(MyEmail):
+    """
+    Class for sending confirmation to teacher that applied for substitution.
+    """
+
+    template_name = os.path.join(
+        BASE_DIR, "backend", "templates", "substitution_confirm.html"
+    )
 
 
 def create_substitution(request):
@@ -158,16 +174,41 @@ def send_mail_with_substitution_info(substitution_id, substitution_date, request
         for teacher in teachers
         if validate_user_before_email(teacher, request.user)
     ]
-    sub_email.send(to=mail_list)
+    sub_email.send(to=[], bcc=mail_list)
     return True
 
 
 def assign_teacher(request, substitution):
-    teacher = request.user
+    new_teacher = request.user
+
     substitution.new_teacher = (
-        teacher  # new_teacher_found property updates in model.on_save
+        new_teacher  # new_teacher_found property updates in model.on_save
     )
     substitution.save()
+    send_email_to_old_teacher(substitution)
+
+def send_email_to_old_teacher(substitution):
+    """"
+    Send email with new teacher contact info to the teacher that applied for subsitution
+    """
+
+    time = substitution.datetime.strftime("%H:%M")
+    date = substitution.datetime.strftime("%d.%m")
+
+    context = {
+        "new_teacher": substitution.new_teacher.fb_name,
+        "time": time,
+        "date": date,
+        "substitution_id": substitution.id,
+    }
+
+    sub_email = SubstitutionConfirmationEmail(context)
+
+    mail_list = [
+        substitution.old_teacher.email
+    ]
+
+    sub_email.send(to=[], bcc=mail_list)
 
 
 def user_can_modify(request, instance):
