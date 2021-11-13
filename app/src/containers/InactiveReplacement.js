@@ -12,9 +12,6 @@ export const InactiveReplacement = () => {
       </div>
       <Wrapper>
         <p className="text mb-3">Zastępstwo nieaktywne</p>
-        <Link to="/login_form">
-          <BlueButton>zaloguj się</BlueButton>
-        </Link>
       </Wrapper>
     </div>
   );
