@@ -3,6 +3,7 @@ from .models import (
     Teacher,
     get_subject_full_name,
     get_level_full_name,
+Email
 )
 from rest_framework.response import Response as RestFrameworkResponse
 from rest_framework import status
@@ -13,6 +14,11 @@ import os
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from .serializers import SubstitutionSerializer
+
+from django.template.context import make_context
+from django.template.loader import get_template, _engine_list
+from django.template import engines, TemplateSyntaxError
+from django.template.exceptions import TemplateDoesNotExist
 
 # Possible statuses used in substitutions responses
 status_ok = status.HTTP_200_OK
@@ -67,6 +73,35 @@ def save_substitution(data):
     return new_substitution
 
 
+def get_template(template_name, using=None):
+    """
+    Load and return a template for the given name.
+
+    Raise TemplateDoesNotExist if no such template exists.
+    """
+    chain = []
+    engines = _engine_list(using)
+    for engine in engines:
+        try:
+            e = Email.objects.get(name__exact="SubstitutionEmail")
+            return engine.from_string(compose_email_from_model(e))
+        except TemplateDoesNotExist as e:
+            chain.append(e)
+
+    raise TemplateDoesNotExist(template_name, chain=chain)
+
+
+def compose_email_from_model(model):
+    string = "{% load i18n %}"
+    string += "{% block subject %}{% blocktrans %}" + model.title + "{% endblocktrans %}{% endblock subject %}"
+    string += "{% block text_body %}"
+    string += model.text
+    string += "\n\n"
+    string += model.footer.text
+    string += "{% endblock text_body %}"
+    return string
+
+
 class SubstitutionEmail(mail.BaseEmailMessage):
     """
     Class for sending substitution emails
@@ -85,6 +120,15 @@ class SubstitutionEmail(mail.BaseEmailMessage):
         context = super().get_context_data()
         context.update(self.additional_context)
         return context
+
+    def render(self):
+        context = make_context(self.get_context_data(), request=self.request)
+        template = get_template(self.template_name)
+        with context.bind_template(template.template):
+            for node in template.template.nodelist:
+                self._process_node(node, context)
+        self._attach_body()
+
 
 
 def create_substitution(request):
@@ -158,6 +202,7 @@ def send_mail_with_substitution_info(substitution_id, substitution_date, request
         for teacher in teachers
         if validate_user_before_email(teacher, request.user)
     ]
+    print(mail_list)
     sub_email.send(to=mail_list)
     return True
 
