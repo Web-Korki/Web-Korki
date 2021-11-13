@@ -75,11 +75,11 @@ export default function (state = initialState, action) {
 			};
 		case USER_LOADED_SUCCESS:
 			return {
-				...state,
-				user: payload,
-				isSuperuser: payload.is_superuser,
-				isAuthenticated: true,
-			};
+        ...state,
+        user: payload,
+        isSuperuser: payload.is_superuser,
+        isAuthenticated: true,
+      };
 		case AUTHENTICATED_FAIL:
 			return {
 				...state,
