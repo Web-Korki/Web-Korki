@@ -3,7 +3,7 @@ from .models import (
     Teacher,
     get_subject_full_name,
     get_level_full_name,
-    Email
+    Email,
 )
 from rest_framework.response import Response as RestFrameworkResponse
 from rest_framework import status
@@ -18,7 +18,6 @@ from .serializers import SubstitutionSerializer
 # New
 from django.template.context import make_context
 from django.template.loader import _engine_list
-from django.template import engines, TemplateSyntaxError
 from django.template.exceptions import TemplateDoesNotExist
 
 # Possible statuses used in substitutions responses
@@ -94,7 +93,11 @@ def compose_email_from_model(model):
     Main string builder method for emails. Converts email title, text and footer into final email string.
     """
     e = "{% load i18n %}"
-    e += "{% block subject %}{% blocktrans %}" + model.title + "{% endblocktrans %}{% endblock subject %}"
+    e += (
+        "{% block subject %}{% blocktrans %}"
+        + model.title
+        + "{% endblocktrans %}{% endblock subject %}"
+    )
     e += "{% block text_body %}"
     e += model.text
     e += "\n\n"
@@ -120,7 +123,9 @@ class MyEmail(mail.BaseEmailMessage):
 
     def render(self):
         context = make_context(self.get_context_data(), request=self.request)
-        assert self.email_model, "You have to specify self.email_model (String - name of model) in child class"
+        assert (
+            self.email_model
+        ), "You have to specify self.email_model (String - name of model) in child class"
         template = get_template_from_string(self.email_model)
         with context.bind_template(template.template):
             for node in template.template.nodelist:
@@ -132,6 +137,7 @@ class SubstitutionEmail(MyEmail):
     """
     Class for sending information about new substitution.
     """
+
     email_model = "SubstitutionEmail"
 
 
@@ -139,6 +145,7 @@ class SubstitutionConfirmationEmail(MyEmail):
     """
     Class for sending confirmation to teacher that applied for substitution.
     """
+
     email_model = "SubstitutionConfirmEmail"
 
 
@@ -247,9 +254,7 @@ def send_email_to_old_teacher(substitution):
 
     sub_email = SubstitutionConfirmationEmail(context)
 
-    mail_list = [
-        substitution.old_teacher.email
-    ]
+    mail_list = [substitution.old_teacher.email]
 
     sub_email.send(to=[], bcc=mail_list)
 
