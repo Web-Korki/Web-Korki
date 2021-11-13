@@ -1,14 +1,14 @@
 //react
-import React from "react";
+import React from 'react';
 //redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 //router
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 //propTypes
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 //utils
-import Logout from "../forms/Logout";
-import { Box } from "../../components/styledComponents";
+import Logout from '../forms/Logout';
+import { Box } from '../../components/styledComponents';
 
 const UserMenu = ({ isSuperuser }) => {
   UserMenu.propTypes = {
@@ -29,12 +29,12 @@ const UserMenu = ({ isSuperuser }) => {
           </div>
           <div className="row justify-content-center">
             <div className="col-12 col-lg-auto g-4">
-              <Link to="/submit_replacement">
+              <Link to="/submit_substitution">
                 <Box>Zgłoś zastępstwo</Box>
               </Link>
             </div>
             <div className="col-12 col-lg-auto g-4">
-              <Link to="/active_replacements">
+              <Link to="/substitutions">
                 <Box>Oczekujące zastępstwa</Box>
               </Link>
             </div>

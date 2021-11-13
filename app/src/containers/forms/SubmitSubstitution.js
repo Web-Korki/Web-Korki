@@ -9,7 +9,7 @@ import {
 import { BackButton } from '../../components/buttons/BackButton';
 import { SelectField } from '../../components/components/SelectField';
 
-export const SubmitReplacement = () => {
+export const SubmitSubstitution = () => {
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
@@ -108,7 +108,7 @@ export const SubmitReplacement = () => {
 
 // }
 
-export default connect(null, {})(SubmitReplacement);
+export default connect(null, {})(SubmitSubstitution);
 
 // Inner content should be limited by the inner padding of StyledBox
 // TextArea and columns of flex content should be limited only by the inner padding of StyledBox

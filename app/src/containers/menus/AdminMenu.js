@@ -1,26 +1,26 @@
 //react
-import React from "react";
+import React from 'react';
 //redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 //router
-import { Link } from "react-router-dom";
-import { Redirect } from "react-router";
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 //propTypes
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 //styledComponents
-import { Box } from "../../components/styledComponents/index";
-import Logout from "../forms/Logout";
+import { Box } from '../../components/styledComponents/index';
+import Logout from '../forms/Logout';
 
 const AdminMenu = ({ isSuperuser }) => {
-	AdminMenu.propTypes = {
-		isSuperuser: PropTypes.bool.isRequired,
-	};
+  AdminMenu.propTypes = {
+    isSuperuser: PropTypes.bool.isRequired,
+  };
 
-	if (!isSuperuser) {
-		return <Redirect push to='/user_menu' />;
-	}
+  if (!isSuperuser) {
+    return <Redirect push to="/user_menu" />;
+  }
 
-	return (
+  return (
     <div className="min-h-100 py-5 py-xl-0 d-flex flex-column justify-content-center align-items-center">
       <div className="container-xl container-fluid p-5 p-lg-0">
         <div className="row d-flex justify-content-xl-between justify-content-md-evenly justify-content-center mb-3 mb-xl-5">
@@ -53,7 +53,7 @@ const AdminMenu = ({ isSuperuser }) => {
             </Link>
           </div>
           <div className="col-12 col-lg-auto g-4">
-            <Link to="/admin/active_replacements">
+            <Link to="/substitutions">
               <Box>Oczekujące zastępstwa</Box>
             </Link>
           </div>

@@ -16,12 +16,13 @@ import { Route, Switch } from 'react-router';
 //components
 //all styled components are in the same place now. Remember to add them to index.js in the directory src/components/styledComponents
 //named imports
-import { InactiveReplacement } from './containers/InactiveReplacement';
+import { InactiveSubstitution } from './containers/InactiveSubstitution';
 import { LectureAnalysis } from './containers/lectureAnalysis/LectureAnalysis';
 import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnalysisDetail';
 import { VolunteerAnalysis } from './containers/volunteerAnalysis/VolunteerAnalysis';
 import { VolunteerAnalysisDetail } from './containers/volunteerAnalysis/VolunteerAnalysisDetail';
 import { Whoops404 } from './containers/Whoops404';
+import { AwaitingSubstitutions } from './containers/AwaitingSubstitutions';
 //default imports
 import Home from './containers/Home';
 import UserMenu from './containers/menus/UserMenu';
@@ -32,7 +33,7 @@ import PrivateRoute from './containers/PrivateRoute';
 import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
-import SubmitReplacement from './containers/forms/SubmitReplacement';
+import SubmitSubstitution from './containers/forms/SubmitSubstitution';
 
 function App() {
   useEffect(() => {
@@ -46,13 +47,18 @@ function App() {
         {/* USER PATHS */}
         <PrivateRoute exact path="/user_menu" component={UserMenu} />
         <PrivateRoute
-          path="/inactive_replacement"
-          component={InactiveReplacement}
+          path="/inactive_substitution"
+          component={InactiveSubstitution}
         />
         <PrivateRoute
-          path="/submit_replacement"
+          path="/submit_substitution"
           exact
-          component={SubmitReplacement}
+          component={SubmitSubstitution}
+        />
+        <PrivateRoute
+          path="/substitutions"
+          exact
+          component={AwaitingSubstitutions}
         />
         {/* <PrivateRoute 
           path="/fill_in_report"
