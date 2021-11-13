@@ -15,7 +15,6 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from .serializers import SubstitutionSerializer
 
-# New
 from django.template.context import make_context
 from django.template.loader import _engine_list
 from django.template.exceptions import TemplateDoesNotExist
