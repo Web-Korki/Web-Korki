@@ -43,11 +43,8 @@ function App() {
   return (
     <>
       <Switch>
-        <Route exact path="/" component={Home} />
+        {/* USER PATHS */}
         <PrivateRoute exact path="/user_menu" component={UserMenu} />
-        <PrivateRoute path="/admin_menu" component={AdminMenu} />
-        <Route path="/login_form" component={LoginForm} />
-        <PrivateRoute path="/register_form" component={RegisterForm} />
         <PrivateRoute
           path="/inactive_replacement"
           component={InactiveReplacement}
@@ -57,24 +54,37 @@ function App() {
           exact
           component={SubmitReplacement}
         />
+        {/* <PrivateRoute 
+          path="/fill_in_report"
+          component={FillInReport}
+        /> */}
+
+        {/* ADMIN PATHS */}
+        <PrivateRoute path="/admin_menu" component={AdminMenu} />
+        <PrivateRoute path="/admin/register_form" component={RegisterForm} />
+        {/* <PrivateRoute path="/admin/current_report" component={CurrentReport} /> */}
+
         <PrivateRoute
-          path="/lecture_analysis"
+          path="/admin/lecture_analysis"
           exact
           component={LectureAnalysis}
         />
         <PrivateRoute
-          path="/lecture_analysis/:month"
+          path="/admin/lecture_analysis/:month"
           component={LectureAnalysisDetail}
         />
         <PrivateRoute
-          path="/volunteer_analysis"
+          path="/admin/volunteer_analysis"
           exact
           component={VolunteerAnalysis}
         />
         <PrivateRoute
-          path="/volunteer_analysis/:month"
+          path="/admin/volunteer_analysis/:month"
           component={VolunteerAnalysisDetail}
         />
+        {/* COMMON PATHS */}
+        <Route exact path="/" component={Home} />
+        <Route path="/login_form" component={LoginForm} />
         <Route path="/activate/:uid/:token" component={ActivateAccount} />
         <Route path="/reset_password" component={ResetPassword} />
         <Route
