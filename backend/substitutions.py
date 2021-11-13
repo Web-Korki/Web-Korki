@@ -187,6 +187,7 @@ def assign_teacher(request, substitution):
     substitution.save()
     send_email_to_old_teacher(substitution)
 
+
 def send_email_to_old_teacher(substitution):
     """"
     Send email with new teacher contact info to the teacher that applied for subsitution
