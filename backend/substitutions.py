@@ -3,6 +3,7 @@ from .models import (
     Teacher,
     get_subject_full_name,
     get_level_full_name,
+    Email
 )
 from rest_framework.response import Response as RestFrameworkResponse
 from rest_framework import status
@@ -13,6 +14,12 @@ import os
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from .serializers import SubstitutionSerializer
+
+# New
+from django.template.context import make_context
+from django.template.loader import _engine_list
+from django.template import engines, TemplateSyntaxError
+from django.template.exceptions import TemplateDoesNotExist
 
 # Possible statuses used in substitutions responses
 status_ok = status.HTTP_200_OK
@@ -67,6 +74,35 @@ def save_substitution(data):
     return new_substitution
 
 
+def get_template_from_string(email_model, using=None):
+    """
+    Overridden get_template from django.template.loader.
+    Loads template from string instead from file.
+    """
+    chain = []
+    for engine in _engine_list(using):
+        try:
+            m = Email.objects.get(name__exact=email_model)
+            return engine.from_string(compose_email_from_model(m))
+        except TemplateDoesNotExist as e:
+            chain.append(e)
+    raise TemplateDoesNotExist(email_model, chain=chain)
+
+
+def compose_email_from_model(model):
+    """
+    Main string builder method for emails. Converts email title, text and footer into final email string.
+    """
+    e = "{% load i18n %}"
+    e += "{% block subject %}{% blocktrans %}" + model.title + "{% endblocktrans %}{% endblock subject %}"
+    e += "{% block text_body %}"
+    e += model.text
+    e += "\n\n"
+    e += model.footer.text
+    e += "{% endblock text_body %}"
+    return e
+
+
 class MyEmail(mail.BaseEmailMessage):
     """
     Interface for sending substitution emails
@@ -82,25 +118,28 @@ class MyEmail(mail.BaseEmailMessage):
         context.update(self.additional_context)
         return context
 
+    def render(self):
+        context = make_context(self.get_context_data(), request=self.request)
+        assert self.email_model, "You have to specify self.email_model (String - name of model) in child class"
+        template = get_template_from_string(self.email_model)
+        with context.bind_template(template.template):
+            for node in template.template.nodelist:
+                self._process_node(node, context)
+        self._attach_body()
+
 
 class SubstitutionEmail(MyEmail):
     """
     Class for sending information about new substitution.
     """
-
-    template_name = os.path.join(
-        BASE_DIR, "backend", "templates", "substitution_needed.html"
-    )
+    email_model = "SubstitutionEmail"
 
 
 class SubstitutionConfirmationEmail(MyEmail):
     """
     Class for sending confirmation to teacher that applied for substitution.
     """
-
-    template_name = os.path.join(
-        BASE_DIR, "backend", "templates", "substitution_confirm.html"
-    )
+    email_model = "SubstitutionConfirmEmail"
 
 
 def create_substitution(request):
@@ -190,14 +229,17 @@ def assign_teacher(request, substitution):
 
 def send_email_to_old_teacher(substitution):
     """"
-    Send email with new teacher contact info to the teacher that applied for subsitution
+    Send email with new teacher contact info to the teacher that applied for substitution
     """
+    contact = substitution.new_teacher.fb_name
+    if contact is None:
+        contact = "User did not provide fb name."
 
     time = substitution.datetime.strftime("%H:%M")
     date = substitution.datetime.strftime("%d.%m")
 
     context = {
-        "new_teacher": substitution.new_teacher.fb_name,
+        "new_teacher": contact,
         "time": time,
         "date": date,
         "substitution_id": substitution.id,
