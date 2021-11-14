@@ -21,3 +21,8 @@ export const LOGOUT = 'LOGOUT';
 //errors
 export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAN_ERROR_MSG = 'CLEAN_ERROR_MSG';
+
+//substitutions
+export const GET_SUBSTITUTIONS = 'GET_SUBSTITUTIONS'; //list of all active substitutions in db
+export const SUBMIT_SUBSTITUTION = 'SUBMIT_SUBSTITUTION'; //submit newly created substitution to db
+export const TAKE_SUBSTITUTION = 'TAKE_SUBSTITUTION'; //tutor sees need for a substitution and notify db that he/she will take it
