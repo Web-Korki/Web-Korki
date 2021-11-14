@@ -14,7 +14,8 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  substitutions: null,
+  pending_substitutions: null,
+  all_substitutions: null,
 };
 
 export default function (state = initialState, action) {
@@ -39,6 +40,7 @@ export default function (state = initialState, action) {
     case GET_SUBSTITUTIONS_SUCCESS:
       return {
         ...state,
+        pending_substitutions: payload,
       };
     case GET_SUBSTITUTIONS_FAIL:
       return {

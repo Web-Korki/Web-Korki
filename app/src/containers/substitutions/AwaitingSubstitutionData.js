@@ -3,7 +3,7 @@ import {
   Container,
   GreyButton,
   BlueButton,
-} from '../components/styledComponents/index';
+} from '../../components/styledComponents/index';
 
 export const AwaitingSubstitutionData = () => {
   return (

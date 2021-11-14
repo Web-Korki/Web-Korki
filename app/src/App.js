@@ -16,13 +16,13 @@ import { Route, Switch } from 'react-router';
 //components
 //all styled components are in the same place now. Remember to add them to index.js in the directory src/components/styledComponents
 //named imports
-import { InactiveSubstitution } from './containers/InactiveSubstitution';
+import { InactiveSubstitution } from './containers/substitutions/InactiveSubstitution';
 import { LectureAnalysis } from './containers/lectureAnalysis/LectureAnalysis';
 import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnalysisDetail';
 import { VolunteerAnalysis } from './containers/volunteerAnalysis/VolunteerAnalysis';
 import { VolunteerAnalysisDetail } from './containers/volunteerAnalysis/VolunteerAnalysisDetail';
 import { Whoops404 } from './containers/Whoops404';
-import { AwaitingSubstitutions } from './containers/AwaitingSubstitutions';
+import { AwaitingSubstitutions } from './containers/substitutions/AwaitingSubstitutions';
 //default imports
 import Home from './containers/Home';
 import UserMenu from './containers/menus/UserMenu';

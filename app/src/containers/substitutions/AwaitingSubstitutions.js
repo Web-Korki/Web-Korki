@@ -1,4 +1,4 @@
-import { BackButton } from '../components/buttons/BackButton';
+import { BackButton } from '../../components/buttons/BackButton';
 import { AwaitingSubstitutionData } from './AwaitingSubstitutionData';
 
 export const AwaitingSubstitutions = () => {
