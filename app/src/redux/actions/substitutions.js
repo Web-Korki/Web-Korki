@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import {
   CREATE_SUBSTITUTION_SUCCESS,
   CREATE_SUBSTITUTION_FAIL,
@@ -19,28 +20,36 @@ const API_URL = 'https://web-korki.edu.pl';
 //export const get_all_substitutions
 
 export const get_pending_substitutions = () => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  const body = {
-    only_pending: true,
-  };
+  if (Cookies.get('access')) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('access')}`,
+        Accept: 'application/json',
+      },
+    };
+    const body = {
+      only_pending: true,
+    };
 
-  try {
-    const response = await axios.get(
-      `${API_URL}/api/substitutions/`,
-      body,
-      config
-    );
-    console.log(response);
-    dispatch({
-      type: GET_SUBSTITUTIONS_SUCCESS,
-      payload: response.data,
-    });
-  } catch (err) {
-    console.log(err);
+    try {
+      const response = await axios.get(
+        `${API_URL}/api/substitutions/`,
+        config,
+        body
+      );
+      console.log(response);
+      dispatch({
+        type: GET_SUBSTITUTIONS_SUCCESS,
+        payload: response.data,
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: GET_SUBSTITUTIONS_FAIL,
+      });
+    }
+  } else {
     dispatch({
       type: GET_SUBSTITUTIONS_FAIL,
     });
