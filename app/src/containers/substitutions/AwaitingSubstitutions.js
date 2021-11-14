@@ -1,7 +1,21 @@
-import { BackButton } from '../../components/buttons/BackButton';
+//react
+import React, { useEffect } from 'react';
+//redux
+import store from '../../store';
+import { connect } from 'react-redux';
+import { get_pending_substitutions } from '../../redux/actions/substitutions';
+//subcomponents
 import { AwaitingSubstitutionData } from './AwaitingSubstitutionData';
+//utils
+import { BackButton } from '../../components/buttons/BackButton';
+//propTypes
+import PropTypes from 'prop-types';
 
-export const AwaitingSubstitutions = () => {
+const AwaitingSubstitutions = ({ get_pending_substitutions }) => {
+  const returnValues = () => {
+    get_pending_substitutions();
+  };
+
   return (
     <div className="min-h-100 analysis d-flex flex-column justify-content-center align-items-center">
       <div className="container">
@@ -11,6 +25,7 @@ export const AwaitingSubstitutions = () => {
             <h1 className="title">Oczekujące zastępstwa: {4}</h1>
           </div>
         </div>
+        <button onClick={() => returnValues()}>Console.log values</button>
         <div className="limiter row g-4">
           <AwaitingSubstitutionData />
           <AwaitingSubstitutionData />
@@ -21,3 +36,7 @@ export const AwaitingSubstitutions = () => {
     </div>
   );
 };
+
+export default connect(null, { get_pending_substitutions })(
+  AwaitingSubstitutions
+);

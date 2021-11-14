@@ -24,9 +24,9 @@ export const get_pending_substitutions = () => async (dispatch) => {
       'Content-Type': 'application/json',
     },
   };
-  const body = {
+  const body = JSON.stringify({
     only_pending: true,
-  };
+  });
 
   try {
     const response = await axios.get(
@@ -34,11 +34,13 @@ export const get_pending_substitutions = () => async (dispatch) => {
       body,
       config
     );
+    console.log(response);
     dispatch({
       type: GET_SUBSTITUTIONS_SUCCESS,
       payload: response.data,
     });
   } catch (err) {
+    console.log(err);
     dispatch({
       type: GET_SUBSTITUTIONS_FAIL,
     });

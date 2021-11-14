@@ -22,7 +22,6 @@ import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnal
 import { VolunteerAnalysis } from './containers/volunteerAnalysis/VolunteerAnalysis';
 import { VolunteerAnalysisDetail } from './containers/volunteerAnalysis/VolunteerAnalysisDetail';
 import { Whoops404 } from './containers/Whoops404';
-import { AwaitingSubstitutions } from './containers/substitutions/AwaitingSubstitutions';
 //default imports
 import Home from './containers/Home';
 import UserMenu from './containers/menus/UserMenu';
@@ -34,6 +33,7 @@ import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
 import SubmitSubstitution from './containers/forms/SubmitSubstitution';
+import AwaitingSubstitutions from './containers/substitutions/AwaitingSubstitutions';
 
 function App() {
   useEffect(() => {

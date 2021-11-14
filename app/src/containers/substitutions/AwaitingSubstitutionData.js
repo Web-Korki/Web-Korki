@@ -5,6 +5,8 @@ import {
   BlueButton,
 } from '../../components/styledComponents/index';
 
+
+//dane z reduxa trzeba wyciągnąć komponent wyżej i tutaj podać jako propy, ergo ten komponent wgl nie będzie podłączony do reduxa
 export const AwaitingSubstitutionData = () => {
   return (
     <div className="col-12">
