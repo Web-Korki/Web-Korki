@@ -33,7 +33,8 @@ import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
 import SubmitSubstitution from './containers/forms/SubmitSubstitution';
-import AwaitingSubstitutions from './containers/substitutions/AwaitingSubstitutions';
+import AwaitingSubstitutions
+ from './containers/substitutions/AwaitingSubstitutions';
 
 function App() {
   useEffect(() => {
