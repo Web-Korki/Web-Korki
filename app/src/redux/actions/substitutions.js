@@ -38,13 +38,21 @@ export const get_pending_substitutions = () => async (dispatch) => {
         config,
         body
       );
-      console.log(response);
       dispatch({
         type: GET_SUBSTITUTIONS_SUCCESS,
         payload: response.data,
       });
     } catch (err) {
-      console.log(err);
+      //w przypadku przedawnienia tokena będzie potrzebne handle err;
+      //najlepiej byłoby stworzyć sagę, która będzie wywoływać kolejne akcje wg struktury:
+      /*
+       yield(request_get_pending_substitutions)
+       err?{
+          token?
+         yield(refresh_token())
+         yield(request_get_pending_substitutions)
+       }
+        */
       dispatch({
         type: GET_SUBSTITUTIONS_FAIL,
       });

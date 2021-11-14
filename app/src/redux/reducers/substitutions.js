@@ -45,6 +45,7 @@ export default function (state = initialState, action) {
     case GET_SUBSTITUTIONS_FAIL:
       return {
         ...state,
+        
       };
     case GET_SUBSTITUTION_SUCCESS:
       return {
