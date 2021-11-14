@@ -24,9 +24,9 @@ export const get_pending_substitutions = () => async (dispatch) => {
       'Content-Type': 'application/json',
     },
   };
-  const body = JSON.stringify({
+  const body = {
     only_pending: true,
-  });
+  };
 
   try {
     const response = await axios.get(
