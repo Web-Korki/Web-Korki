@@ -3,6 +3,7 @@ from rest_framework import status, permissions, viewsets
 
 from django.shortcuts import render
 
+
 from djoser.views import UserViewSet
 from djoser import signals
 from djoser.compat import get_user_email
@@ -53,11 +54,11 @@ class ChangePasswordAfterRegister(viewsets.ModelViewSet):
 
     serializer_class = ChangePasswordAfterRegisterSerializer
     model = Teacher
-    permission_classes = (permissions.IsAuthenticated,)
-    lookup_url_kwarg = "id"
+    permission_classes = (permissions.AllowAny,)
 
     def get_object(self, queryset=None):
-        obj = self.model.objects.get(self.lookup_url_kwarg)
+        user_id = self.kwargs['id']
+        obj = self.model.objects.get(id=user_id)
         # print("obj", obj)
         return obj
 
@@ -73,7 +74,7 @@ class ChangePasswordAfterRegister(viewsets.ModelViewSet):
                 return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
             # set_password also hashes the password that the user will get
             self.object.set_password(serializer.data.get("new_password"))
-            self.object.fb_name = serializer.data.get("fb_mode")
+            self.object.fb_name = serializer.data.get("fb_name")
             self.object.is_resetpwd = True
             self.object.save()
 

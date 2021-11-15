@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Teacher, Email, EmailFooter
+from .models import Teacher, Email, EmailFooter, Subject
 
 UserAdmin.list_display = ('username', 'email', 'fb_name', 'is_active', 'is_staff')
 UserAdmin.fieldsets[1][1]["fields"] += ('fb_name',)

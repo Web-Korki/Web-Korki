@@ -50,6 +50,26 @@ CANCEL_REASONS = (
 
 
 # Create your models here.
+
+class Level(models.Model):
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
+
+class Subject(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class CancelReason(models.Model):
+    name = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.name
+
 class Teacher(AbstractUser):
 
     class Meta:
@@ -57,7 +77,7 @@ class Teacher(AbstractUser):
             ("reading_reports", "Can read_reports"),
         ]
 
-    subjects = MultiSelectField(choices=SUBJECT_CHOICES)
+    subjects = models.ManyToManyField(Subject)
     is_resetpwd = models.BooleanField(default=False)
     fb_name = models.CharField(null=True, blank=True, max_length=250)
 
@@ -86,24 +106,6 @@ class Student(models.Model):
     def __str__(self):
         return "Uczeń" + " " + self.first_name
 
-class Level(models.Model):
-    name = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.name
-
-class Subject(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-
-class CancelReason(models.Model):
-    name = models.CharField(max_length=300)
-
-    def __str__(self):
-        return self.name
 
 class Lesson(models.Model):
     teacher = models.ForeignKey(
