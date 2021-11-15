@@ -36,7 +36,8 @@ const ResetPassword = ({ reset_password }) => {
           className="d-flex flex-column justify-content-center align-items-center"
           onSubmit={(e) => onSubmit(e)}
         >
-          <h1 className="title mb-4">Podaj adres e-mail</h1>
+          <h1 className="title mb-4">Reset hasła</h1>
+          <p className="text">Podaj adres e-mail</p>
           <Input
             id="name"
             type="text"
