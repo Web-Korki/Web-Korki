@@ -162,3 +162,21 @@ class Substitution(models.Model):
         if self.new_teacher:
             self.new_teacher_found = True
         super(Substitution, self).save(*args, **kwargs)
+
+
+class EmailFooter(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+class Email(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
+    text = models.TextField()
+    footer = models.ForeignKey(EmailFooter, null=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.name
