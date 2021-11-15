@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const BlueButton = styled.button`
   font-size: clamp(1.4rem, 3vw, 2.4rem);
-  padding: 0.1em 1.75em;
+  padding: 0.25em 2.25em;
   border-radius: 3rem;
   background: #dff2fb;
   border: 1px solid #d2ebf6;

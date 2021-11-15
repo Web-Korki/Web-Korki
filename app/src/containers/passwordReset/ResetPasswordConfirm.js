@@ -35,14 +35,13 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
   }
 
   return (
-    <div className="min-h-100 py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
-      <Wrapper>
-        <h1 className="title mb-4">Formularz resetowania hasła</h1>
+    <div className="resetPasswordConfirm d-flex flex-column justify-content-center align-items-center">
+      <Wrapper className="d-flex flex-column justify-content-center align-items-center">
+        <h1 className="title mb-4">Resetuj hasło</h1>
         <form
           className="d-flex align-items-center flex-column"
           onSubmit={(e) => onSubmit(e)}
         >
-          <p className="text">Podaj nowe hasło</p>
           <Input
             id="password"
             type="password"
@@ -53,7 +52,6 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
             onChange={(e) => onChange(e)}
             required
           />
-          <p className="text">Potwierdź nowe hasło</p>
           <Input
             id="password"
             type="password"
@@ -64,7 +62,7 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
             onChange={(e) => onChange(e)}
             required
           />
-          <BlueButton type="submit">wyślij</BlueButton>
+          <BlueButton type="submit">ustaw nowe hasło</BlueButton>
         </form>
       </Wrapper>
     </div>
