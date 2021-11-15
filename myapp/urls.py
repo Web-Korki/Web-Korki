@@ -3,7 +3,6 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf.urls import url
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
 from routers import router
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -40,7 +39,10 @@ urlpatterns = [
         ActivateUser.as_view({"get": "activation"}),
         name="activation",
     ),
-    path("api/change_default_password/<id>", ChangePasswordAfterRegister.as_view({"patch": "update"})),
+    path(
+        "api/change_default_password/<id>",
+        ChangePasswordAfterRegister.as_view({"patch": "update"}),
+    ),
     path(r"redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     url(
         r"^.*", index, name="index"

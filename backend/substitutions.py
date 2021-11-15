@@ -234,7 +234,7 @@ def assign_teacher(request, substitution):
 
 
 def send_email_to_old_teacher(substitution):
-    """"
+    """ "
     Send email with new teacher contact info to the teacher that applied for substitution
     """
     contact = substitution.new_teacher.fb_name

@@ -30,14 +30,19 @@ LEVEL_CHOICES = (
 )
 
 
-def get_subject_full_name(sub):
-    subject = Subject.objects.get(sub)
+def get_subject_full_name(id):
+    subject = Subject.objects.get(id=id)
     return subject.name
 
 
-def get_level_full_name(lvl):
-    level = Level.objects.get(lvl)
+def get_level_full_name(id):
+    level = Level.objects.get(id=id)
     return level.name
+
+
+def get_cancel_reason_full_name(id):
+    cancel_reason = CancelReason.objects.get(id=id)
+    return cancel_reason.name
 
 
 CANCEL_REASON_HOUSE = "by_house"
@@ -51,11 +56,13 @@ CANCEL_REASONS = (
 
 # Create your models here.
 
+
 class Level(models.Model):
     name = models.CharField(max_length=150)
 
     def __str__(self):
         return self.name
+
 
 class Subject(models.Model):
     name = models.CharField(max_length=100)
@@ -70,8 +77,8 @@ class CancelReason(models.Model):
     def __str__(self):
         return self.name
 
-class Teacher(AbstractUser):
 
+class Teacher(AbstractUser):
     class Meta:
         permissions = [
             ("reading_reports", "Can read_reports"),
@@ -80,7 +87,6 @@ class Teacher(AbstractUser):
     subjects = models.ManyToManyField(Subject)
     is_resetpwd = models.BooleanField(default=False)
     fb_name = models.CharField(null=True, blank=True, max_length=250)
-
 
     def __str__(self):
         return self.username

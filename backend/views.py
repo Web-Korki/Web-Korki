@@ -20,7 +20,7 @@ from .serializers import (
     ChangePasswordAfterRegisterSerializer,
     SubjectSerializer,
     LevelSerializer,
-    CancelReasonSerializer
+    CancelReasonSerializer,
 )
 
 from .substitutions import (
@@ -31,6 +31,7 @@ from .substitutions import (
     teacher_already_assigned_response,
 )
 import os
+
 
 class Register(UserViewSet):
     def perform_create(self, serializer):
@@ -54,10 +55,10 @@ class ChangePasswordAfterRegister(viewsets.ModelViewSet):
 
     serializer_class = ChangePasswordAfterRegisterSerializer
     model = Teacher
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_object(self, queryset=None):
-        user_id = self.kwargs['id']
+        user_id = self.kwargs["id"]
         obj = self.model.objects.get(id=user_id)
         # print("obj", obj)
         return obj
@@ -71,7 +72,10 @@ class ChangePasswordAfterRegister(viewsets.ModelViewSet):
             # Check old password
 
             if not self.object.check_password(serializer.data.get("old_password")):
-                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    {"old_password": ["Wrong password."]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
             # set_password also hashes the password that the user will get
             self.object.set_password(serializer.data.get("new_password"))
             self.object.fb_name = serializer.data.get("fb_name")
@@ -79,11 +83,10 @@ class ChangePasswordAfterRegister(viewsets.ModelViewSet):
             self.object.save()
 
             response = {
-                'message': 'Password updated successfully',
+                "message": "Password updated successfully",
             }
 
             return Response(response)
-
 
 
 class ActivateUser(UserViewSet):
@@ -213,12 +216,14 @@ class AssignTeacherView(SubstitutionsView):
 
         return Response(serializer.data)
 
+
 class SubjectViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = SubjectSerializer
 
     def get_queryset(self):
         return Subject.objects.all()
+
 
 class LevelViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
@@ -227,10 +232,10 @@ class LevelViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Level.objects.all()
 
+
 class CancelReasonViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = CancelReasonSerializer
 
     def get_queryset(self):
         return CancelReason.objects.all()
-

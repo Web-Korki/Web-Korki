@@ -140,10 +140,12 @@ class SubstitutionSerializerUpdate(serializers.ModelSerializer):
             },
         }
 
+
 class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
     """
     Serializer for password change endpoint.
     """
+
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
     fb_name = serializers.CharField(required=True)
@@ -152,20 +154,20 @@ class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
         validate_password(value)
         return value
 
-class SubjectSerializer(serializers.ModelSerializer):
 
+class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
         fields = "__all__"
 
-class LevelSerializer(serializers.ModelSerializer):
 
+class LevelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Level
         fields = "__all__"
 
-class CancelReasonSerializer(serializers.ModelSerializer):
 
+class CancelReasonSerializer(serializers.ModelSerializer):
     class Meta:
         model = CancelReason
         fields = "__all__"
