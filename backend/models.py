@@ -1,6 +1,7 @@
 from django.db import models
 from multiselectfield import MultiSelectField
 from django.contrib.auth.models import AbstractUser
+from django.contrib.contenttypes.models import ContentType
 
 
 SUBJECT_CHOICES = (
@@ -30,11 +31,13 @@ LEVEL_CHOICES = (
 
 
 def get_subject_full_name(sub):
-    return dict(SUBJECT_CHOICES)[sub]
+    subject = Subject.objects.get(sub)
+    return subject.name
 
 
 def get_level_full_name(lvl):
-    return dict(LEVEL_CHOICES)[lvl]
+    level = Level.objects.get(lvl)
+    return level.name
 
 
 CANCEL_REASON_HOUSE = "by_house"
@@ -81,8 +84,26 @@ class Student(models.Model):
     house = models.ForeignKey(House, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Uczeń" + " "
+        return "Uczeń" + " " + self.first_name
 
+class Level(models.Model):
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
+
+class Subject(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class CancelReason(models.Model):
+    name = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.name
 
 class Lesson(models.Model):
     teacher = models.ForeignKey(
@@ -94,16 +115,13 @@ class Lesson(models.Model):
     )
     student = models.ForeignKey(Student, on_delete=models.PROTECT)
     house = models.ForeignKey(House, on_delete=models.PROTECT)
-    level = MultiSelectField(choices=LEVEL_CHOICES)
+    level = models.ForeignKey(Level, on_delete=models.PROTECT)
     datetime = models.DateTimeField()
-    subject = MultiSelectField(choices=SUBJECT_CHOICES)
+    subject = models.ForeignKey(Subject, on_delete=models.PROTECT)
     last_topics = models.TextField(max_length=300, null=True, blank=True)
     planned_topics = models.TextField(max_length=300, null=True, blank=True)
     is_canceled = models.BooleanField(null=True, blank=True)
     cancel_reason = MultiSelectField(null=True, blank=True, choices=CANCEL_REASONS)
-    # substitution = models.ForeignKey(
-    #     "backend.Lesson", null=True, blank=True, on_delete=models.CASCADE
-    # )
 
     def save(self, *args, **kwargs):
         self.house = self.student.house
@@ -127,7 +145,7 @@ class Substitution(models.Model):
     )
     level = models.CharField(max_length=300, choices=LEVEL_CHOICES)
     datetime = models.DateTimeField()
-    subject = models.CharField(max_length=300, choices=SUBJECT_CHOICES)
+    subject = models.ForeignKey(Subject, on_delete=models.PROTECT)
 
     # Substitution specific
     new_teacher = models.ForeignKey(
