@@ -91,6 +91,11 @@ function App() {
           path="/password/reset/confirm/:uid/:token"
           component={ResetPasswordConfirm}
         />
+        {/* Place for a new endpoint for the initial pass reset containing fb name field */}
+        {/* <Route
+          path="/password/reset/confirm/:uid/:token"
+          component={ResetPasswordConfirm}
+        /> */}
         <Route path="*" component={Whoops404} />
       </Switch>
       <div className="footer fixed-bottom text-center">© 2021 Web-Korki</div>

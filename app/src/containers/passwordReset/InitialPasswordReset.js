@@ -6,16 +6,17 @@ import {
 } from '../../components/styledComponents/index';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reset_password_confirm } from '../../redux/actions/auth';
+import { initial_password_reset } from '../../redux/actions/auth';
 
-const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
+const InitialPasswordReset = ({ match, initial_password_reset }) => {
   const [requestSent, setRequestSent] = useState(false);
   const [formData, setFormData] = useState({
     new_password: '',
     re_new_password: '',
+    fb_name: '',
   });
 
-  const { new_password, re_new_password } = formData;
+  const { new_password, re_new_password, fb_name } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,7 +27,7 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
     const uid = match.params.uid;
     const token = match.params.token;
 
-    reset_password_confirm(uid, token, new_password, re_new_password);
+    initial_password_reset(uid, token, new_password, re_new_password);
     setRequestSent(true);
   };
 
@@ -42,6 +43,17 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
           className="d-flex align-items-center flex-column"
           onSubmit={(e) => onSubmit(e)}
         >
+          <p className="text">Wprowadź nazwę z platformy facebook</p>
+          <Input
+            id="fb_name"
+            type="text"
+            className="mb-3 mb-md-4"
+            placeholder="np. Adam Kowalski"
+            name="fb_name"
+            value={fb_name}
+            onChange={(e) => onChange(e)}
+            required
+          />
           <p className="text">Podaj nowe hasło</p>
           <Input
             id="password"
@@ -71,4 +83,4 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
   );
 };
 
-export default connect(null, { reset_password_confirm })(ResetPasswordConfirm);
+export default connect(null, { initial_password_reset })(InitialPasswordReset);
