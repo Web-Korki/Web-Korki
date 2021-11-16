@@ -3,7 +3,6 @@ from rest_framework import status, permissions, viewsets
 
 from django.shortcuts import render
 
-
 from djoser.views import UserViewSet
 from djoser import signals
 from djoser.compat import get_user_email
@@ -101,8 +100,7 @@ class ActivateUser(UserViewSet):
 
     def activation(self, request, uid, token, *args, **kwargs):
         super().activation(request, *args, **kwargs)
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
+        return render(request, "activation_confirmed.html")
 
 class HouseViewSet(viewsets.ModelViewSet):
 

@@ -5,9 +5,8 @@
 {% endblock subject %}
 
 {% block text_body %}
-{% blocktrans %}Polski (English below):{% endblocktrans %}
 {% blocktrans %}Niniejsza wiadomość zawiera informacje niezbędne do ukończenia procesu aktywacji konta na stronie {{ site_name }}.{% endblocktrans %}
-{% blocktrans %}Your password {{ password }}{% endblocktrans %}
+{% blocktrans %}Twoje hasło: {{ password }}{% endblocktrans %}
 {% trans "Aby aktywować konto, kliknij w poniższy link:" %}
 {{ protocol }}://{{ domain }}/{{ url|safe }}
 
@@ -18,9 +17,9 @@
 {% endblock text_body %}
 
 {% block html_body %}
-<p>{% blocktrans %}Polski (English below):{% endblocktrans %}</p>
+<p>{% blocktrans %}Polski:{% endblocktrans %}</p>
 <p>{% blocktrans %}Niniejsza wiadomość zawiera informacje niezbędne do ukończenia procesu aktywacji konta na stronie {{ site_name }}.{% endblocktrans %}</p>
-    <p>{% blocktrans %}Your password {{ password }}{% endblocktrans %}</p>
+    <p>{% blocktrans %}Twoje hasło {{ password }}{% endblocktrans %}</p>
 <p>{% trans "Aby aktywować konto, kliknij w poniższy link:" %}</p>
 <p><a href="{{ protocol }}://{{ domain }}/{{ url|safe }}">{{ protocol }}://{{ domain }}/{{ url|safe }}</a></p>
 
