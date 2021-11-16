@@ -4,6 +4,9 @@ from .models import (
     get_subject_full_name,
     get_level_full_name,
     Email,
+    Subject,
+    Level
+
 )
 from rest_framework.response import Response as RestFrameworkResponse
 from rest_framework import status
@@ -185,6 +188,11 @@ def create_substitution(request):
     if current_status == status_ok:
         substitution_data = request.data.dict()
         substitution_data["old_teacher"] = request.user
+
+        # Already checked if exist in serializer
+        substitution_data["subject"] = Subject.objects.get(id=substitution_data["subject"])
+        substitution_data["level"] = Level.objects.get(id=substitution_data["level"])
+
         substitution = save_substitution(substitution_data)
         substitution_id = substitution.id
 

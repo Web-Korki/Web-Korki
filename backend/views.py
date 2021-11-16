@@ -152,8 +152,8 @@ class SubstitutionsView(viewsets.ModelViewSet):
     http_method_names = ["get", "put", "delete"]
 
     def get_queryset(self):
-        if "only_pending" in self.request.data:
-            if self.request.data["only_pending"].lower() == "true":
+        if "only_pending" in self.request.query_params:
+            if self.request.query_params["only_pending"].lower() == "true":
                 return Substitution.objects.filter(new_teacher_found=False)
         return Substitution.objects.all()
 
