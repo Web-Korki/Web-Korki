@@ -151,7 +151,7 @@ class Substitution(models.Model):
     old_teacher = models.ForeignKey(
         Teacher, on_delete=models.PROTECT, related_name="old_teacher"
     )
-    level = models.CharField(max_length=300, choices=LEVEL_CHOICES)
+    level = models.ForeignKey(Level, on_delete=models.PROTECT)
     datetime = models.DateTimeField()
     subject = models.ForeignKey(Subject, on_delete=models.PROTECT)
 

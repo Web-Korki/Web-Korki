@@ -7,7 +7,7 @@ router.register(r"lessons", LessonViewSet, basename="lessons")
 router.register(r"houses", HouseViewSet, basename="houses")
 router.register(r"students", StudentViewSet, basename="students")
 router.register(r"subjects", SubjectViewSet, basename="subjects")
-router.register(r"levels", LessonViewSet, basename="levels")
+router.register(r"levels", LevelViewSet, basename="levels")
 router.register(r"cancel_reasons", CancelReasonViewSet, basename="cancel_reasons")
 
 # Substitutions
