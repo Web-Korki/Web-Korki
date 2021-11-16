@@ -1,7 +1,5 @@
 from rest_framework.response import Response
 from rest_framework import status, permissions, viewsets
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 
 from django.shortcuts import render
 
@@ -9,18 +7,19 @@ from djoser.views import UserViewSet
 from djoser import signals
 from djoser.compat import get_user_email
 from djoser.conf import settings
-from djoser.serializers import SetPasswordSerializer
 
 from tests.utils import get_random_password
-from .models import Lesson, House, Teacher, Substitution
+from .models import Lesson, House, Teacher, Substitution, Subject, Level, CancelReason
 from .serializers import (
     LessonSerializer,
     HouseSerializer,
-    UpdateSubstitutionSerializer,
     StudentSerializer,
     SubstitutionSerializer,
     SubstitutionSerializerUpdate,
-    ChangePasswordAfterRegisterSerializer
+    ChangePasswordAfterRegisterSerializer,
+    SubjectSerializer,
+    LevelSerializer,
+    CancelReasonSerializer,
 )
 
 from .substitutions import (
@@ -31,6 +30,7 @@ from .substitutions import (
     teacher_already_assigned_response,
 )
 import os
+
 
 class Register(UserViewSet):
     def perform_create(self, serializer):
@@ -49,19 +49,20 @@ class Register(UserViewSet):
             settings.EMAIL.confirmation(self.request, context).send(to)
 
 
-class ChangePasswordAfterRegister(UserViewSet):
-    http_method_names = ["post"]
+class ChangePasswordAfterRegister(viewsets.ModelViewSet):
+    http_method_names = ["patch"]
 
     serializer_class = ChangePasswordAfterRegisterSerializer
     model = Teacher
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_object(self, queryset=None):
-        obj = self.request.user
+        user_id = self.kwargs["id"]
+        obj = self.model.objects.get(id=user_id)
         # print("obj", obj)
         return obj
 
-    def patch(self, request, *args, **kwargs):
+    def update(self, request, *args, **kwargs):
         self.object = self.get_object()
 
         serializer = self.serializer_class(data=request.data)
@@ -70,32 +71,21 @@ class ChangePasswordAfterRegister(UserViewSet):
             # Check old password
 
             if not self.object.check_password(serializer.data.get("old_password")):
-                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    {"old_password": ["Wrong password."]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
             # set_password also hashes the password that the user will get
             self.object.set_password(serializer.data.get("new_password"))
-            self.object.fb_name = serializer.data.get("fb_mode")
+            self.object.fb_name = serializer.data.get("fb_name")
             self.object.is_resetpwd = True
             self.object.save()
 
             response = {
-                'message': 'Password updated successfully',
+                "message": "Password updated successfully",
             }
 
             return Response(response)
-
-class Login(TokenObtainPairView):
-    permission_classes = [permissions.AllowAny,]
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-
-        try:
-            serializer.is_valid(raise_exception=True)
-        except TokenError as e:
-            raise InvalidToken(e.args[0])
-
-        return Response(serializer.validated_data, status=status.HTTP_200_OK)
-
 
 
 class ActivateUser(UserViewSet):
@@ -110,8 +100,7 @@ class ActivateUser(UserViewSet):
 
     def activation(self, request, uid, token, *args, **kwargs):
         super().activation(request, *args, **kwargs)
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
+        return render(request, "activation_confirmed.html")
 
 class HouseViewSet(viewsets.ModelViewSet):
 
@@ -133,37 +122,6 @@ class LessonViewSet(viewsets.ModelViewSet):
     # @action(detail=True, url_path=r"lessons/<lesson_id>", url_name="lesson-detail")
     # def get_lesson(self, request, lesson_id=None):
     #     return Lesson.objects.filter(id=lesson_id)
-
-
-class CancelLessonViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = UpdateSubstitutionSerializer
-    http_method_names = ["patch"]
-
-    def get_queryset(self):
-        pass
-
-    def update_stats(self, request, lesson_id):
-        if request.reason == "by_project":
-            teacher = Teacher.objects.get(
-                id=Lesson.objects.get(id=lesson_id).teacher.id
-            )
-            teacher["lessons_canceled"] = +1
-            teacher.save()
-        else:
-            house = House.objects.get(id=Lesson.objects.get(id=lesson_id).house.id)
-            house["lessons_canceled"] = +1
-            house.save()
-
-    def update_canceled_lesson(self, canc_lesson_id, updated):
-        lesson = Lesson.objects.get(id=canc_lesson_id)
-        lesson_serializer = UpdateSubstitutionSerializer(data=lesson)
-        LessonViewSet.update(
-            LessonViewSet(),
-            request=updated.data,
-            partial=True,
-            instance=lesson_serializer,
-        )
 
 
 class StudentViewSet(viewsets.ModelViewSet):
@@ -192,8 +150,8 @@ class SubstitutionsView(viewsets.ModelViewSet):
     http_method_names = ["get", "put", "delete"]
 
     def get_queryset(self):
-        if "only_pending" in self.request.data:
-            if self.request.data["only_pending"].lower() == "true":
+        if "only_pending" in self.request.query_params:
+            if self.request.query_params["only_pending"].lower() == "true":
                 return Substitution.objects.filter(new_teacher_found=False)
         return Substitution.objects.all()
 
@@ -255,3 +213,27 @@ class AssignTeacherView(SubstitutionsView):
             substitution._prefetched_objects_cache = {}
 
         return Response(serializer.data)
+
+
+class SubjectViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = SubjectSerializer
+
+    def get_queryset(self):
+        return Subject.objects.all()
+
+
+class LevelViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = LevelSerializer
+
+    def get_queryset(self):
+        return Level.objects.all()
+
+
+class CancelReasonViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = CancelReasonSerializer
+
+    def get_queryset(self):
+        return CancelReason.objects.all()

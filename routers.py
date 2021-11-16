@@ -4,11 +4,11 @@ from backend.views import *
 
 router = routers.SimpleRouter()
 router.register(r"lessons", LessonViewSet, basename="lessons")
-router.register(
-    r"lessons/cancel_lesson/<lesson_id>", CancelLessonViewSet, basename="cancel_lesson"
-)
 router.register(r"houses", HouseViewSet, basename="houses")
 router.register(r"students", StudentViewSet, basename="students")
+router.register(r"subjects", SubjectViewSet, basename="subjects")
+router.register(r"levels", LevelViewSet, basename="levels")
+router.register(r"cancel_reasons", CancelReasonViewSet, basename="cancel_reasons")
 
 # Substitutions
 router.register(
