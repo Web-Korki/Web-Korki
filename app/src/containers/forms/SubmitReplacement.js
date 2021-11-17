@@ -13,22 +13,23 @@ import {
   get_subjects,
 } from '../../redux/actions/substitutionForm';
 
-const SubmitReplacement = () => {
-  // useEffect(() => {
-  //   get_classes();
-  //   get_subjects();
-  // }, []);
-
+const SubmitReplacement = ({ get_classes, get_subjects, data }) => {
+  useEffect(() => {
+    get_classes();
+    get_subjects();
+    console.log('konneki', data);
+  }, []);
+  //to poniżej jest bezużyteczne mając data w propsach bezpośrednio mapujesz sobie to, co siedzi w środku na dane do komponentu
   // const updateClasses = () => {
   //   return props.data.classes.map((e) => {
   //     return { value: e.id, name: e.value };
   //   });
   // };
-  //console.log(props.data.classes);
+  console.log(data.classes);
 
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
-      {/* <button onClick={() => returnValues()}>Console.log values</button> */}
+      {/* {<button onClick={() => returnValues()}>Console.log values</button>} */}
       <Wrapper>
         <div class="d-flex mb-2 mb-xl-5">
           <BackButton />
@@ -107,20 +108,19 @@ const SubmitReplacement = () => {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log(state);
-  return { data: state.substitutionForm };
-};
+const mapStateToProps = (state) => ({
+  data: state.substitutionForm,
+});
 
-//chuj z tym
-const mapDispatchToProps = (dispatch) => {
-  return {
-    get_classes,
-    get_subjects,
-  };
-};
+//
+// const mapDispatchToProps = (dispatch) => ({
+//   get_classes,
+//   get_subjects,
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubmitReplacement);
+export default connect(mapStateToProps, { get_classes, get_subjects })(
+  SubmitReplacement
+);
 
 // Inner content should be limited by the inner padding of StyledBox
 // TextArea and columns of flex content should be limited only by the inner padding of StyledBox
