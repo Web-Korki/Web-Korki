@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import {
   Date,
   Textarea,
@@ -12,8 +12,14 @@ import {
   get_classes,
   get_subjects,
 } from '../../redux/actions/substitutionForm';
+//propTypes
+import PropTypes from 'prop-types';
 
 const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
+  SubmitReplacement.propTypes = {
+    storeData: PropTypes.bool.isRequired,
+  };
+
   useEffect(() => {
     get_classes();
     get_subjects();
@@ -26,7 +32,6 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
 
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
-      {/* {<button onClick={() => returnValues()}>Console.log values</button>} */}
       <Wrapper>
         <div class="d-flex mb-2 mb-xl-5">
           <BackButton />
