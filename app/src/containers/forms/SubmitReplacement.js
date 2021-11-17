@@ -112,12 +112,6 @@ const mapStateToProps = (state) => ({
   data: state.substitutionForm,
 });
 
-//
-// const mapDispatchToProps = (dispatch) => ({
-//   get_classes,
-//   get_subjects,
-// });
-
 export default connect(mapStateToProps, { get_classes, get_subjects })(
   SubmitReplacement
 );
