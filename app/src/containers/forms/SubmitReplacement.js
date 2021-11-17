@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useSelector } from 'react-redux';
 import {
   Date,
   Textarea,
@@ -8,10 +8,27 @@ import {
 } from '../../components/styledComponents/index';
 import { BackButton } from '../../components/buttons/BackButton';
 import { SelectField } from '../../components/components/SelectField';
+import {
+  get_classes,
+  get_subjects,
+} from '../../redux/actions/substitutionForm';
 
-export const SubmitReplacement = () => {
+const SubmitReplacement = () => {
+  // useEffect(() => {
+  //   get_classes();
+  //   get_subjects();
+  // }, []);
+
+  // const updateClasses = () => {
+  //   return props.data.classes.map((e) => {
+  //     return { value: e.id, name: e.value };
+  //   });
+  // };
+  //console.log(props.data.classes);
+
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
+      {/* <button onClick={() => returnValues()}>Console.log values</button> */}
       <Wrapper>
         <div class="d-flex mb-2 mb-xl-5">
           <BackButton />
@@ -26,12 +43,7 @@ export const SubmitReplacement = () => {
               <SelectField
                 id="class"
                 required
-                options={[
-                  //przykład wyboru
-                  { value: '', name: '--Wybierz opcję--' },
-                  { value: '1pod', name: '1 szkoły podstawowej' },
-                  { value: '3lic', name: '3 liceum' },
-                ]}
+                options={[{ value: '', name: '' }]}
               />
             </div>
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
@@ -54,12 +66,7 @@ export const SubmitReplacement = () => {
               <SelectField
                 id="subject"
                 required
-                options={[
-                  //przykład wyboru
-                  { value: '', name: '--Wybierz opcję--' },
-                  { value: 'j.pol', name: 'Język polski' },
-                  { value: 'mat', name: 'Matematyka' },
-                ]}
+                options={[{ value: '', name: '' }]}
               />
             </div>
           </div>
@@ -100,15 +107,20 @@ export const SubmitReplacement = () => {
   );
 };
 
-// const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+  console.log(state);
+  return { data: state.substitutionForm };
+};
 
-// })
+//chuj z tym
+const mapDispatchToProps = (dispatch) => {
+  return {
+    get_classes,
+    get_subjects,
+  };
+};
 
-// const mapDispatchToProps = {
-
-// }
-
-export default connect(null, {})(SubmitReplacement);
+export default connect(mapStateToProps, mapDispatchToProps)(SubmitReplacement);
 
 // Inner content should be limited by the inner padding of StyledBox
 // TextArea and columns of flex content should be limited only by the inner padding of StyledBox
