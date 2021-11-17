@@ -11,7 +11,6 @@ const Select = styled.select`
   font-size: clamp(1.4rem, 2.5vw, 2rem);
   box-shadow: 0 0 5px rgba(55, 55, 55, 0.09);
   border-radius: 1rem;
-  text-align: center;
 
   @media (max-width: 1199px) {
     width: 80vw;

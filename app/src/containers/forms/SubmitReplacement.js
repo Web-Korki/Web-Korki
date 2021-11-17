@@ -13,19 +13,16 @@ import {
   get_subjects,
 } from '../../redux/actions/substitutionForm';
 
-const SubmitReplacement = ({ get_classes, get_subjects, data }) => {
+const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
   useEffect(() => {
     get_classes();
     get_subjects();
-    console.log('konneki', data);
   }, []);
-  //to poniżej jest bezużyteczne mając data w propsach bezpośrednio mapujesz sobie to, co siedzi w środku na dane do komponentu
-  // const updateClasses = () => {
-  //   return props.data.classes.map((e) => {
-  //     return { value: e.id, name: e.value };
-  //   });
-  // };
-  console.log(data.classes);
+
+  const initialState = {
+    classes: [{ value: '', name: '' }],
+    subjects: [{ value: '', name: '' }],
+  };
 
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
@@ -44,7 +41,16 @@ const SubmitReplacement = ({ get_classes, get_subjects, data }) => {
               <SelectField
                 id="class"
                 required
-                options={[{ value: '', name: '' }]}
+                options={
+                  storeData.classes
+                    ? storeData.classes.map((e) => {
+                        return {
+                          value: e.id,
+                          name: e.name,
+                        };
+                      })
+                    : initialState.classes
+                }
               />
             </div>
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
@@ -54,7 +60,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, data }) => {
               <div className="d-flex justify-content-center">
                 <Date
                   className="d-flex justify-content-center"
-                  type="date"
+                  type="datetime-local"
                   id="date"
                   required
                 />
@@ -67,7 +73,16 @@ const SubmitReplacement = ({ get_classes, get_subjects, data }) => {
               <SelectField
                 id="subject"
                 required
-                options={[{ value: '', name: '' }]}
+                options={
+                  storeData.subjects
+                    ? storeData.subjects.map((e) => {
+                        return {
+                          value: e.id,
+                          name: e.name,
+                        };
+                      })
+                    : initialState.subjects
+                }
               />
             </div>
           </div>
@@ -109,18 +124,12 @@ const SubmitReplacement = ({ get_classes, get_subjects, data }) => {
 };
 
 const mapStateToProps = (state) => ({
-  data: state.substitutionForm,
+  storeData: state.substitutionForm,
 });
 
-//
-// const mapDispatchToProps = (dispatch) => ({
-//   get_classes,
-//   get_subjects,
-// });
+const mapDispatchToProps = { get_classes, get_subjects };
 
-export default connect(mapStateToProps, { get_classes, get_subjects })(
-  SubmitReplacement
-);
+export default connect(mapStateToProps, mapDispatchToProps)(SubmitReplacement);
 
 // Inner content should be limited by the inner padding of StyledBox
 // TextArea and columns of flex content should be limited only by the inner padding of StyledBox
