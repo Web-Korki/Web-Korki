@@ -33,6 +33,7 @@ import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
 import SubmitReplacement from './containers/forms/SubmitReplacement';
+import InitialPasswordReset from './containers/passwordReset/InitialPasswordReset';
 
 function App() {
   useEffect(() => {
@@ -87,6 +88,10 @@ function App() {
         <Route path="/login_form" component={LoginForm} />
         <Route path="/activate/:uid/:token" component={ActivateAccount} />
         <Route path="/reset_password" component={ResetPassword} />
+        <Route
+          path="/initial_password_reset"
+          component={InitialPasswordReset}
+        />
         <Route
           path="/password/reset/confirm/:uid/:token"
           component={ResetPasswordConfirm}
