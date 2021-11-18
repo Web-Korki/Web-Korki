@@ -14,8 +14,9 @@ import {
 } from '../../redux/actions/substitutionForm';
 //propTypes
 import PropTypes from 'prop-types';
+import Select from 'react-select';
 
-import Select, { StylesConfig } from 'react-select';
+// import Select, { StylesConfig } from 'react-select';
 
 const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
   SubmitReplacement.propTypes = {
@@ -28,22 +29,42 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
   }, []);
 
   const initialState = {
-    classes: [{ value: '', name: '' }],
-    subjects: [{ value: '', name: '' }],
+    classes: [{ value: '', label: 'Wybierz klasę' }],
+    subjects: [{ value: '', label: 'Wybierz przedmiot' }],
   };
 
-  const [formData, setFormData] = useState({
-    datetime: '',
-    last_topics: '',
-    planned_topics: '',
-    methodology: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   datetime: '',
+  //   last_topics: '',
+  //   planned_topics: '',
+  //   methodology: '',
+  // });
 
-  const { datetime, last_topics, planned_topics, methodology } = formData;
+  // const { datetime, last_topics, planned_topics, methodology } = formData;
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    // login(username, password);
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   // login(username, password);
+  // };
+
+  // będzie do wyjebania później
+  const theme = (theme) => {
+    console.log(theme);
+    return {
+      ...theme,
+      borderRadius: '1rem',
+      colors: {
+        ...theme.colors,
+        color: 'pink',
+        primary: '#427e90',
+        primary25: '#dff2fb',
+        primary50: '#a3dff1',
+        neutral20: '#ebeff1',
+        neutral30: '#376c7c',
+        neutral50: '#a9a9a9',
+        neutral80: '#195669',
+      },
+    };
   };
 
   return (
@@ -55,7 +76,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
         </div>
         <form
           className="d-flex flex-column p-4 mb-4"
-          onSubmit={(e) => onSubmit(e)}
+          // onSubmit={(e) => onSubmit(e)}
         >
           <div className="row mb-4">
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
@@ -63,9 +84,10 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                 Klasa
               </label>
               <Select
-                className="dropdown-select"
-                defaultValue={{ value: '', label: 'Wybierz opcję' }}
-                isSearchable={false}
+                className="text-select"
+                placeholder="Wybierz klasę"
+                isSearchable
+                theme={theme}
                 name="class"
                 options={
                   storeData.classes
@@ -102,7 +124,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                   className="d-flex justify-content-center"
                   type="datetime-local"
                   id="date"
-                  value={datetime}
+                  // value={datetime}
                   required
                 />
               </div>
@@ -112,9 +134,10 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                 Przedmiot
               </label>
               <Select
-                className="dropdown-select"
-                defaultValue={{ value: '', label: 'Wybierz opcję' }}
-                isSearchable={false}
+                className="text-select"
+                placeholder="Wybierz przedmiot"
+                isSearchable={true}
+                theme={theme}
                 name="class"
                 options={
                   storeData.subjects
@@ -151,7 +174,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               className="align-self-center ps-4"
               name="last-topics"
               placeholder="Temat ostatniej lekcji to..."
-              value={last_topics}
+              // value={last_topics}
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -162,7 +185,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               className="align-self-center ps-4"
               name="planned-topics"
               placeholder="Temat przyszłej lekcji to..."
-              value={planned_topics}
+              // value={planned_topics}
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -173,7 +196,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               className="align-self-center ps-4"
               name="teaching-methodology"
               placeholder="Z uczniem pracujemy korzystając z..."
-              value={methodology}
+              // value={methodology}
             ></Textarea>
           </div>
         </form>
