@@ -4,7 +4,7 @@ export const SelectField = (props) => {
   return (
     <div className="position-relative align-self-center">
       <Select>
-        <option value="0">--Wybierz opcję--</option>
+        <option value="">--Wybierz opcję--</option>
         {props.options.map((e) => (
           <option value={e.value}>{e.name}</option>
         ))}

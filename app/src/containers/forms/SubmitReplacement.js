@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Date,
@@ -15,9 +15,11 @@ import {
 //propTypes
 import PropTypes from 'prop-types';
 
+import Select, { StylesConfig } from 'react-select';
+
 const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
   SubmitReplacement.propTypes = {
-    storeData: PropTypes.bool.isRequired,
+    storeData: PropTypes.object.isRequired,
   };
 
   useEffect(() => {
@@ -30,6 +32,20 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
     subjects: [{ value: '', name: '' }],
   };
 
+  const [formData, setFormData] = useState({
+    datetime: '',
+    last_topics: '',
+    planned_topics: '',
+    methodology: '',
+  });
+
+  const { datetime, last_topics, planned_topics, methodology } = formData;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // login(username, password);
+  };
+
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
@@ -37,13 +53,32 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
           <BackButton />
           <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
-        <div className="d-flex flex-column p-4 mb-4">
+        <form
+          className="d-flex flex-column p-4 mb-4"
+          onSubmit={(e) => onSubmit(e)}
+        >
           <div className="row mb-4">
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label className="text" for="class">
                 Klasa
               </label>
-              <SelectField
+              <Select
+                className="dropdown-select"
+                defaultValue={{ value: '', label: 'Wybierz opcję' }}
+                isSearchable={false}
+                name="class"
+                options={
+                  storeData.classes
+                    ? storeData.classes.map((e) => {
+                        return {
+                          value: e.id,
+                          label: e.name,
+                        };
+                      })
+                    : initialState.classes
+                }
+              />
+              {/* <SelectField
                 id="class"
                 required
                 options={
@@ -56,7 +91,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                       })
                     : initialState.classes
                 }
-              />
+              /> */}
             </div>
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label for="date" className="text">
@@ -67,6 +102,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                   className="d-flex justify-content-center"
                   type="datetime-local"
                   id="date"
+                  value={datetime}
                   required
                 />
               </div>
@@ -75,7 +111,23 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               <label className="text" for="subject">
                 Przedmiot
               </label>
-              <SelectField
+              <Select
+                className="dropdown-select"
+                defaultValue={{ value: '', label: 'Wybierz opcję' }}
+                isSearchable={false}
+                name="class"
+                options={
+                  storeData.subjects
+                    ? storeData.subjects.map((e) => {
+                        return {
+                          value: e.id,
+                          label: e.name,
+                        };
+                      })
+                    : initialState.subjects
+                }
+              />
+              {/* <SelectField
                 id="subject"
                 required
                 options={
@@ -88,7 +140,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                       })
                     : initialState.subjects
                 }
-              />
+              /> */}
             </div>
           </div>
           <div className="col d-flex flex-column justify-content-center">
@@ -99,6 +151,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               className="align-self-center ps-4"
               name="last-topics"
               placeholder="Temat ostatniej lekcji to..."
+              value={last_topics}
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -109,6 +162,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               className="align-self-center ps-4"
               name="planned-topics"
               placeholder="Temat przyszłej lekcji to..."
+              value={planned_topics}
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -119,9 +173,10 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               className="align-self-center ps-4"
               name="teaching-methodology"
               placeholder="Z uczniem pracujemy korzystając z..."
+              value={methodology}
             ></Textarea>
           </div>
-        </div>
+        </form>
         <BlueButton>zgłoś zastępstwo</BlueButton>
       </Wrapper>
     </div>
