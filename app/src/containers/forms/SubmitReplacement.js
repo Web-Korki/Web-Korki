@@ -28,10 +28,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
     get_subjects();
   }, []);
 
-  const initialState = {
-    classes: [{ value: '', label: 'Wybierz klasę' }],
-    subjects: [{ value: '', label: 'Wybierz przedmiot' }],
-  };
+  const initialState = [{ value: '', label: '' }];
 
   // const [formData, setFormData] = useState({
   //   datetime: '',
@@ -97,23 +94,9 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                           label: e.name,
                         };
                       })
-                    : initialState.classes
+                    : initialState
                 }
               />
-              {/* <SelectField
-                id="class"
-                required
-                options={
-                  storeData.classes
-                    ? storeData.classes.map((e) => {
-                        return {
-                          value: e.id,
-                          name: e.name,
-                        };
-                      })
-                    : initialState.classes
-                }
-              /> */}
             </div>
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label for="date" className="text">
@@ -147,23 +130,9 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                           label: e.name,
                         };
                       })
-                    : initialState.subjects
+                    : initialState
                 }
               />
-              {/* <SelectField
-                id="subject"
-                required
-                options={
-                  storeData.subjects
-                    ? storeData.subjects.map((e) => {
-                        return {
-                          value: e.id,
-                          name: e.name,
-                        };
-                      })
-                    : initialState.subjects
-                }
-              /> */}
             </div>
           </div>
           <div className="col d-flex flex-column justify-content-center">
