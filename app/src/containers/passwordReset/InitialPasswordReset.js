@@ -49,7 +49,7 @@ const InitialPasswordReset = () => {
             id="fb_name"
             type="text"
             className="mb-3 mb-md-4"
-            placeholder="np. Adam Kowalski"
+            placeholder="Adam Kowalski"
             name="fb_name"
             // value={fb_name}
             // onChange={(e) => onChange(e)}

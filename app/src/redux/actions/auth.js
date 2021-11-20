@@ -296,46 +296,47 @@ export const reset_password_confirm =
     }
   };
 
-export const initial_password_reset =
-  (uid, token, new_password, re_new_password, fb_name) => async (dispatch) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+//template of initial pass reset
+// export const initial_password_reset =
+//   (uid, token, new_password, re_new_password, fb_name) => async (dispatch) => {
+//     const config = {
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     };
 
-    const body = JSON.stringify({
-      uid,
-      token,
-      new_password,
-      re_new_password,
-      fb_name,
-    });
+//     const body = JSON.stringify({
+//       uid,
+//       token,
+//       new_password,
+//       re_new_password,
+//       fb_name,
+//     });
 
-    try {
-      await axios.post(
-        `${API_URL}/auth/users/reset_password_confirm/`,
-        body,
-        config
-      );
+//     try {
+//       await axios.post(
+//         `${API_URL}/auth/users/reset_password_confirm/`,
+//         body,
+//         config
+//       );
 
-      dispatch({
-        type: PASSWORD_RESET_CONFIRM_SUCCESS,
-      });
-    } catch (err) {
-      dispatch({
-        type: PASSWORD_RESET_CONFIRM_FAIL,
-      });
-      const errors = {
-        msg: err.response.data.detail,
-        status: err.response.status,
-      };
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors,
-      });
-    }
-  };
+//       dispatch({
+//         type: PASSWORD_RESET_CONFIRM_SUCCESS,
+//       });
+//     } catch (err) {
+//       dispatch({
+//         type: PASSWORD_RESET_CONFIRM_FAIL,
+//       });
+//       const errors = {
+//         msg: err.response.data.detail,
+//         status: err.response.status,
+//       };
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: errors,
+//       });
+//     }
+//   };
 
 export const logout = () => (dispatch) => {
   dispatch({
