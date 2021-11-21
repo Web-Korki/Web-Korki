@@ -80,7 +80,6 @@ const mapStateToProps = (state) => ({
   isSuperuser: state.auth.isSuperuser,
   hasChangedPassword: state.auth.user?.is_resetpwd,
   defaultPasswordChanged: state.auth.defaultPasswordChanged,
-  hasChangedPassword: state.auth.user?.is_resetpwd,
 });
 
 export default connect(mapStateToProps)(AdminMenu);
