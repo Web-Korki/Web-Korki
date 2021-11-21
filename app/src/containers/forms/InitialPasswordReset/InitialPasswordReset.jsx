@@ -170,7 +170,7 @@ const InitialPasswordReset = ({
         <Wrapper className="mt-5 mx-5">
           <div className="text-sm">
             <p className="m-0">
-              Twoje nowe hasło powinno nie być krótsze niż{' '}
+              Twoje nowe hasło powinno być moe krótsze niż{' '}
               <span
                 className={`fst-italic ${
                   longEnough ? 'text-green' : 'text-red'
