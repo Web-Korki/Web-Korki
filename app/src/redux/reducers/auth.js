@@ -48,7 +48,7 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
       };
     case TOKEN_REFRESH_SUCCESS:
-      Cookies.remove('access'); //redundant code
+      Cookies.remove('access'); //redundant
       Cookies.remove('refresh'); //redundant code
       Cookies.set('access', payload.access);
       Cookies.set('refresh', payload.refresh);
