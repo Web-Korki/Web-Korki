@@ -19,7 +19,10 @@ import {
   PASSWORD_RESET_CONFIRM_SUCCESS,
   PASSWORD_RESET_CONFIRM_FAIL,
   GET_ERRORS,
+<<<<<<< HEAD
   CLEAN_ERROR_MSG,
+=======
+>>>>>>> master
   RESET_STATE,
 } from './types';
 
