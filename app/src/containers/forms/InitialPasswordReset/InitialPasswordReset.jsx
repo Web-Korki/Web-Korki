@@ -58,7 +58,8 @@ const InitialPasswordReset = ({
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    //nowe i stare hasło nie mogą być takie same
+    //po zalogowaniu legitnym użytkownikiem, który zmienił hasło, przerzuć do menu admin
+    //nowe i stare hasło nie mogą być takie same i czy nie jest podobne do loginu
     change_default_password(id, fb_name, old_password, new_password);
   };
 
