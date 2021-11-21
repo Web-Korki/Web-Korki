@@ -57,13 +57,17 @@ const LoginForm = ({
     setPasswordShown(passwordShown ? false : true);
   };
 
-  if (!defaultPasswordChanged && !hasChangedPassword) {
-    return <Redirect push to="/initialPasswordReset" />;
-  } else {
-    if (isAuthenticated && isSuperuser) {
-      return <Redirect push to="/admin_menu" />;
-    } else if (isAuthenticated && !isSuperuser) {
+  if (isAuthenticated && isSuperuser) {
+    if (defaultPasswordChanged && hasChangedPassword) {
+      return <Redirect push to="/admin_user" />;
+    } else if (!defaultPasswordChanged && !hasChangedPassword) {
+      return <Redirect push to="/initialPasswordReset" />;
+    }
+  } else if (isAuthenticated && !isSuperuser) {
+    if (defaultPasswordChanged && hasChangedPassword) {
       return <Redirect push to="/user_menu" />;
+    } else if (!defaultPasswordChanged && !hasChangedPassword) {
+      return <Redirect push to="/initialPasswordReset" />;
     }
   }
 
