@@ -120,7 +120,7 @@ const InitialPasswordReset = ({
             onChange={(e) => onChange(e)}
             required
           />
-          <p className="text">Podaj nowe hasło</p>
+          <p className="text">Podaj hasło tymczasowe</p>
           <div className="position-relative mb-3 mb-md-4">
             <Input
               id="password"
