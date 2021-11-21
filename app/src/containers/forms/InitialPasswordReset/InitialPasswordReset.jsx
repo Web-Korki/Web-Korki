@@ -33,11 +33,14 @@ const InitialPasswordReset = ({
     change_default_password_validation_error: PropTypes.func.isRequired,
   };
 
+  //FORM STATE:
   const [formData, setFormData] = useState({
     fb_name: '',
     old_password: '',
     new_password: '',
   });
+
+  //STATES FOR VALIDATION:
   const [lowerCase, setLowerCase] = useState(false);
   const [upperCase, setUpperCase] = useState(false);
   const [numbers, setNumbers] = useState(false);
@@ -45,9 +48,11 @@ const InitialPasswordReset = ({
   const [longEnough, setLongEnough] = useState(false);
   const [changingPassword, setChangingPassword] = useState(false);
 
+  //STATES FOR EYEBALL:
   const [oldPasswordShown, setOldPasswordShown] = useState(false);
   const [newPasswordShown, setNewPasswordShown] = useState(false);
 
+  //FORM:
   const { fb_name, old_password, new_password } = formData;
 
   const passwordValidation = (e) => {
@@ -65,7 +70,6 @@ const InitialPasswordReset = ({
       : setSpecialCharacters(false);
     e.target.value.length >= 8 ? setLongEnough(true) : setLongEnough(false);
   };
-
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -83,14 +87,15 @@ const InitialPasswordReset = ({
     }
   };
 
+  //TOGGLERS:
   const toggleOldPasswordShow = () => {
     setOldPasswordShown(oldPasswordShown ? false : true);
   };
-
   const toggleNewPasswordShow = () => {
     setNewPasswordShown(newPasswordShown ? false : true);
   };
 
+  //REDIRECT:
   if (defaultPasswordChanged) {
     return <Redirect to="/admin_menu" />;
   }
@@ -158,6 +163,8 @@ const InitialPasswordReset = ({
           </BlueButton>
         </form>
       </Wrapper>
+
+      {/* PASSWORD VALIDATION: */}
       {changingPassword ? (
         <Wrapper className="d-flex flex-column justify-content-center align-items-center">
           <div className="text-sm">
