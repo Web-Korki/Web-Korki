@@ -22,13 +22,13 @@ import PropTypes from 'prop-types';
 
 const InitialPasswordReset = ({
   id,
-  defaultPassowrdChanged,
+  defaultPasswordChanged,
   change_default_password,
   change_default_password_validation_error,
 }) => {
   InitialPasswordReset.propTypes = {
     id: PropTypes.number.isRequired,
-    defaultPassowrdChanged: PropTypes.bool.isRequired,
+    defaultPasswordChanged: PropTypes.bool.isRequired,
     change_default_password: PropTypes.func.isRequired,
     change_default_password_validation_error: PropTypes.func.isRequired,
   };
@@ -45,7 +45,6 @@ const InitialPasswordReset = ({
   const [longEnough, setLongEnough] = useState(false);
   const [changingPassword, setChangingPassword] = useState(false);
 
-  const [oldPasswordShown, setOldPasswordShown] = useState(false);
   const [newPasswordShown, setNewPasswordShown] = useState(false);
 
   const { fb_name, old_password, new_password } = formData;
@@ -82,16 +81,12 @@ const InitialPasswordReset = ({
       //TO DO: check similarity of passwords
     }
   };
-  
-  const toggleOldPasswordShow = () => {
-    setOldPasswordShown(oldPasswordShown ? false : true);
-  };
+
   const toggleNewPasswordShow = () => {
     setNewPasswordShown(newPasswordShown ? false : true);
   };
 
-
-  if (defaultPassowrdChanged) {
+  if (defaultPasswordChanged) {
     return <Redirect to="/admin_menu" />;
   }
 
@@ -116,7 +111,7 @@ const InitialPasswordReset = ({
           <div className="position-relative">
             <Input
               id="password"
-              type={oldPasswordShown ? "text" : "password"}
+              type="password"
               className="mb-3 mb-md-4"
               placeholder="stare hasło"
               name="old_password"
@@ -124,17 +119,11 @@ const InitialPasswordReset = ({
               onChange={(e) => onChange(e)}
               required
             />
-            <i
-              className="position-absolute eye-icon-large"
-              onClick={() => toggleOldPasswordShow()}
-            >
-              {<FontAwesomeIcon icon={oldPasswordShown ? faEyeSlash : faEye} />}
-            </i>
           </div>
           <div className="position-relative">
             <Input
               id="new_password"
-              type={newPasswordShown ? "text" : "password"}
+              type={newPasswordShown ? 'text' : 'password'}
               className="mb-3 mb-md-4"
               placeholder="nowe hasło"
               name="new_password"
@@ -143,7 +132,6 @@ const InitialPasswordReset = ({
                 onChange(e);
                 passwordValidation(e);
               }}
-              onFocus={() => setChangingPassword(true)}
               onBlur={() => setChangingPassword(false)}
               required
             />
@@ -199,7 +187,7 @@ const InitialPasswordReset = ({
 
 const mapStateToProps = (state) => ({
   id: state.auth.user?.id,
-  defaultPassowrdChanged: state.auth.defaultPassowrdChanged,
+  defaultPasswordChanged: state.auth.defaultPasswordChanged,
 });
 
 export default connect(mapStateToProps, {

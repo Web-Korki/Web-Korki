@@ -323,17 +323,10 @@ export const change_default_password =
         type: CHANGE_DEFAULT_PASSWORD_SUCCESS,
       });
     } catch (err) {
-      const errors = {
-        msg: err.response.data.detail,
-        status: err.response.status,
-      };
       dispatch({
         type: CHANGE_DEFAULT_PASSWORD_FAIL,
       });
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors,
-      });
+      //coś nie halko z errorami - mają inną strukturę niż dotychczas wyciągane z response
     }
   };
   export const change_default_password_validation_error =

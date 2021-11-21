@@ -31,7 +31,7 @@ const initialState = {
   accountCreated: null,
   user: null,
   isLoading: false,
-  defaultPassowrdChanged: null,
+  defaultPasswordChanged: null,
 };
 
 export default function (state = initialState, action) {
@@ -129,12 +129,12 @@ export default function (state = initialState, action) {
     case CHANGE_DEFAULT_PASSWORD_SUCCESS:
       return {
         ...state,
-        defaultPassowrdChanged: true,
+        defaultPasswordChanged: true,
       };
     case CHANGE_DEFAULT_PASSWORD_FAIL:
       return {
         ...state,
-        defaultPassowrdChanged: false,
+        defaultPasswordChanged: false,
       };
     case PASSWORD_RESET_SUCCESS:
     case PASSWORD_RESET_FAIL:
