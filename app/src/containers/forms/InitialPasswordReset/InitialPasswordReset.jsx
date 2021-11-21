@@ -75,6 +75,7 @@ const InitialPasswordReset = ({
   };
   const onSubmit = (e) => {
     e.preventDefault();
+    setChangingPassword(false);
 
     if (new_password !== old_password) {
       change_default_password(id, fb_name, old_password, new_password);
@@ -148,7 +149,6 @@ const InitialPasswordReset = ({
                 onChange(e);
                 passwordValidation(e);
               }}
-              onBlur={() => setChangingPassword(false)}
               required
             />
             <i
