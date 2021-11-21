@@ -38,6 +38,15 @@ body {
   text-decoration: none;
 }
 
+/* colors */
+.text-green{
+  color: #52c535;
+}
+
+.text-red{
+  color: #e43434;
+}
+
 .link,
 .link:hover {
   text-decoration: none;

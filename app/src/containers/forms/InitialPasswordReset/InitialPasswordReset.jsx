@@ -11,6 +11,7 @@ import {
   Input,
   Wrapper,
 } from '../../../components/styledComponents/index';
+import { set } from 'js-cookie';
 
 const InitialPasswordReset = ({
   id,
@@ -27,30 +28,24 @@ const InitialPasswordReset = ({
   const [numbers, setNumbers] = useState(false);
   const [specialCharacters, setSpecialCharacters] = useState(false);
   const [longEnough, setLongEnough] = useState(false);
+  const [changingPassword, setChangingPassword] = useState(false);
 
   const { fb_name, old_password, new_password } = formData;
 
   const passwordValidation = (e) => {
+    setChangingPassword(true);
     const lowerCase = /[a-z]/g;
     const upperCase = /[A-Z]/g;
     const numbers = /[0-9]/g;
     const specialCharacters = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g;
 
-    if (lowerCase.test(e.target.value)) {
-      console.log('lowerCase ok');
-    }
-    if (upperCase.test(e.target.value)) {
-      console.log('upperCase ok');
-    }
-    if (numbers.test(e.target.value)) {
-      console.log('numbers ok');
-    }
-    if (specialCharacters.test(e.target.value)) {
-      console.log('specialCharacters ok');
-    }
-    if (e.target.value.length >= 8) {
-      console.log('passwordLongEnough ok');
-    }
+    lowerCase.test(e.target.value) ? setLowerCase(true) : setLowerCase(false);
+    upperCase.test(e.target.value) ? setUpperCase(true) : setUpperCase(false);
+    numbers.test(e.target.value) ? setNumbers(true) : setNumbers(false);
+    specialCharacters.test(e.target.value)
+      ? setSpecialCharacters(true)
+      : setSpecialCharacters(false);
+    e.target.value.length >= 8 ? setLongEnough(true) : setLongEnough(false);
   };
 
   const onChange = (e) => {
@@ -59,8 +54,11 @@ const InitialPasswordReset = ({
   const onSubmit = (e) => {
     e.preventDefault();
     //po zalogowaniu legitnym użytkownikiem, który zmienił hasło, przerzuć do menu admin
-    //nowe i stare hasło nie mogą być takie same i czy nie jest podobne do loginu
-    change_default_password(id, fb_name, old_password, new_password);
+    if (new_password !== old_password) {
+      change_default_password(id, fb_name, old_password, new_password);
+    } else {
+      console.log('hasła są takie same');
+    }
   };
 
   if (defaultPassowrdChanged) {
@@ -106,11 +104,49 @@ const InitialPasswordReset = ({
               onChange(e);
               passwordValidation(e);
             }}
+            onFocus={() => setChangingPassword(true)}
+            onBlur={() => setChangingPassword(false)}
             required
           />
-          <BlueButton type="submit">Zatwierdź</BlueButton>
+          <BlueButton className="mt-5" type="submit">
+            Zatwierdź
+          </BlueButton>
         </form>
       </Wrapper>
+      {changingPassword ? (
+        <Wrapper className="d-flex flex-column justify-content-center align-items-center">
+          <div className="text-sm">
+            <p>Twoje nowe hasło musi spełniać następujące wymagania:</p>
+            <p
+              className={`fst-italic ${lowerCase ? 'text-green' : 'text-red'}`}
+            >
+              Małe litery {lowerCase ? <span>&#10004;</span> : null}
+            </p>
+            <p
+              className={`fst-italic ${upperCase ? 'text-green' : 'text-red'}`}
+            >
+              Duże litery {upperCase ? <span>&#10004;</span> : null}
+            </p>
+            <p className={`fst-italic ${numbers ? 'text-green' : 'text-red'}`}>
+              Przynajmniej jedną cyfrę {numbers ? <span>&#10004;</span> : null}
+            </p>
+            <p
+              className={`fst-italic ${
+                specialCharacters ? 'text-green' : 'text-red'
+              }`}
+            >
+              Przynajmniej jeden znak specjalny{' '}
+              {specialCharacters ? <span>&#10004;</span> : null}
+            </p>
+            <p
+              className={`fst-italic ${longEnough ? 'text-green' : 'text-red'}`}
+            >
+              Hasło musi być dłuższe niż 8 znaków{' '}
+              {longEnough ? <span>&#10004;</span> : null}
+            </p>
+          </div>
+        </Wrapper>
+      ) : null}
     </div>
   );
 };
