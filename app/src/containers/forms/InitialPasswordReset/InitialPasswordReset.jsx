@@ -138,7 +138,7 @@ const InitialPasswordReset = ({
               {<FontAwesomeIcon icon={oldPasswordShown ? faEyeSlash : faEye} />}
             </i>
           </div>
-          <p className="text">Potwierdź nowe hasło</p>
+          <p className="text">Podaj nowe hasło</p>
           <div className="position-relative mb-3 mb-md-4">
             <Input
               id="new_password"
