@@ -55,8 +55,6 @@ const LoginForm = ({
     setPasswordShown(passwordShown ? false : true);
   };
 
-  console.log(hasChangedPassword);
-
   if (hasChangedPassword !== undefined && !hasChangedPassword) {
     return <Redirect push to="/initialPasswordReset" />;
   } else {

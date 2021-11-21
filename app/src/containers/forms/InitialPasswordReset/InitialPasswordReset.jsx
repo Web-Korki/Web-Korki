@@ -2,7 +2,10 @@
 import React, { useState } from 'react';
 //redux
 import { connect } from 'react-redux';
-import { change_default_password } from '../../../redux/actions/auth';
+import {
+  change_default_password,
+  change_default_password_validation_error,
+} from '../../../redux/actions/auth';
 //router
 import { Redirect } from 'react-router-dom';
 //utils
@@ -11,13 +14,24 @@ import {
   Input,
   Wrapper,
 } from '../../../components/styledComponents/index';
-import { set } from 'js-cookie';
+//propTypes:
+import PropTypes from 'prop-types';
 
 const InitialPasswordReset = ({
   id,
+  is_resetpwd,
   defaultPassowrdChanged,
   change_default_password,
+  change_default_password_validation_error,
 }) => {
+  InitialPasswordReset.propTypes = {
+    id: PropTypes.number.isRequired,
+    is_resetpwd: PropTypes.bool.isRequired,
+    defaultPassowrdChanged: PropTypes.bool.isRequired,
+    change_default_password: PropTypes.func.isRequired,
+    change_default_password_validation_error: PropTypes.func.isRequired,
+  };
+
   const [formData, setFormData] = useState({
     fb_name: '',
     old_password: '',
@@ -53,15 +67,19 @@ const InitialPasswordReset = ({
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    //po zalogowaniu legitnym użytkownikiem, który zmienił hasło, przerzuć do menu admin
+
     if (new_password !== old_password) {
       change_default_password(id, fb_name, old_password, new_password);
     } else {
-      console.log('hasła są takie same');
+      change_default_password_validation_error(
+        'Stare i nowe hasło nie mogą być identyczne!'
+      );
+
+      //TO DO: check similarity of passwords
     }
   };
 
-  if (defaultPassowrdChanged) {
+  if (defaultPassowrdChanged || is_resetpwd) {
     return <Redirect to="/admin_menu" />;
   }
 
@@ -153,9 +171,11 @@ const InitialPasswordReset = ({
 
 const mapStateToProps = (state) => ({
   id: state.auth.user?.id,
+  is_resetpwd: state.auth.user?.is_resetpwd,
   defaultPassowrdChanged: state.auth.defaultPassowrdChanged,
 });
 
-export default connect(mapStateToProps, { change_default_password })(
-  InitialPasswordReset
-);
+export default connect(mapStateToProps, {
+  change_default_password,
+  change_default_password_validation_error,
+})(InitialPasswordReset);

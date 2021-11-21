@@ -336,6 +336,15 @@ export const change_default_password =
       });
     }
   };
+  export const change_default_password_validation_error =
+    (validation_error) => async (dispatch) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: {
+          msg: validation_error,
+        },
+      });
+    };
 
 export const logout = () => (dispatch) => {
 	dispatch({
