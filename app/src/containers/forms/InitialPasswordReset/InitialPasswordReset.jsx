@@ -14,6 +14,9 @@ import {
   Input,
   Wrapper,
 } from '../../../components/styledComponents/index';
+//font awesome:
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 //propTypes:
 import PropTypes from 'prop-types';
 
@@ -41,6 +44,9 @@ const InitialPasswordReset = ({
   const [specialCharacters, setSpecialCharacters] = useState(false);
   const [longEnough, setLongEnough] = useState(false);
   const [changingPassword, setChangingPassword] = useState(false);
+
+  const [oldPasswordShown, setOldPasswordShown] = useState(false);
+  const [newPasswordShown, setNewPasswordShown] = useState(false);
 
   const { fb_name, old_password, new_password } = formData;
 
@@ -76,6 +82,14 @@ const InitialPasswordReset = ({
       //TO DO: check similarity of passwords
     }
   };
+  
+  const toggleOldPasswordShow = () => {
+    setOldPasswordShown(oldPasswordShown ? false : true);
+  };
+  const toggleNewPasswordShow = () => {
+    setNewPasswordShown(newPasswordShown ? false : true);
+  };
+
 
   if (defaultPassowrdChanged) {
     return <Redirect to="/admin_menu" />;
@@ -99,31 +113,47 @@ const InitialPasswordReset = ({
             onChange={(e) => onChange(e)}
             required
           />
-          <Input
-            id="password"
-            type="password"
-            className="mb-3 mb-md-4"
-            placeholder="stare hasło"
-            name="old_password"
-            value={old_password}
-            onChange={(e) => onChange(e)}
-            required
-          />
-          <Input
-            id="new_password"
-            type="password"
-            className="mb-3 mb-md-4"
-            placeholder="nowe hasło"
-            name="new_password"
-            value={new_password}
-            onChange={(e) => {
-              onChange(e);
-              passwordValidation(e);
-            }}
-            onFocus={() => setChangingPassword(true)}
-            onBlur={() => setChangingPassword(false)}
-            required
-          />
+          <div className="position-relative">
+            <Input
+              id="password"
+              type={oldPasswordShown ? "text" : "password"}
+              className="mb-3 mb-md-4"
+              placeholder="stare hasło"
+              name="old_password"
+              value={old_password}
+              onChange={(e) => onChange(e)}
+              required
+            />
+            <i
+              className="position-absolute eye-icon-large"
+              onClick={() => toggleOldPasswordShow()}
+            >
+              {<FontAwesomeIcon icon={oldPasswordShown ? faEyeSlash : faEye} />}
+            </i>
+          </div>
+          <div className="position-relative">
+            <Input
+              id="new_password"
+              type={newPasswordShown ? "text" : "password"}
+              className="mb-3 mb-md-4"
+              placeholder="nowe hasło"
+              name="new_password"
+              value={new_password}
+              onChange={(e) => {
+                onChange(e);
+                passwordValidation(e);
+              }}
+              onFocus={() => setChangingPassword(true)}
+              onBlur={() => setChangingPassword(false)}
+              required
+            />
+            <i
+              className="position-absolute eye-icon-large"
+              onClick={() => toggleNewPasswordShow()}
+            >
+              {<FontAwesomeIcon icon={newPasswordShown ? faEyeSlash : faEye} />}
+            </i>
+          </div>
           <BlueButton className="mt-5" type="submit">
             Zatwierdź
           </BlueButton>

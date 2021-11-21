@@ -77,7 +77,14 @@ body {
   transform: translateY(-50%);
 }
 
-.eye-icon:hover {
+.eye-icon-large{
+  top:25%;
+  right: 7%;
+  font-size: 1.5rem;
+}
+
+.eye-icon:hover .eye-icon-large:hover{
+  cursor: pointer;
   color: #4ea2c9;
 }
 
