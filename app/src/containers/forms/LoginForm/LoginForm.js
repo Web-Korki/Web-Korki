@@ -24,16 +24,12 @@ const LoginForm = ({
   isAuthenticated,
   loginSuccess,
   isSuperuser,
-  defaultPasswordChanged,
-  hasChangedPassword,
 }) => {
   LoginForm.propTypes = {
     login: PropTypes.func,
     isAuthenticated: PropTypes.bool,
     loginSuccess: PropTypes.bool,
     isSuperuser: PropTypes.bool,
-    defaultPasswordChanged: PropTypes.bool.isRequired,
-    hasChangedPassword: PropTypes.bool,
   };
 
   const [formData, setFormData] = useState({
@@ -57,19 +53,11 @@ const LoginForm = ({
     setPasswordShown(passwordShown ? false : true);
   };
 
-  if (isAuthenticated && isSuperuser) {
-    if (defaultPasswordChanged && hasChangedPassword) {
-      return <Redirect push to="/admin_user" />;
-    } else if (!defaultPasswordChanged && !hasChangedPassword) {
-      return <Redirect push to="/initialPasswordReset" />;
-    }
-  } else if (isAuthenticated && !isSuperuser) {
-    if (defaultPasswordChanged && hasChangedPassword) {
+    if (isAuthenticated && isSuperuser) {
+      return <Redirect push to="/admin_menu" />;
+    } else if (isAuthenticated && !isSuperuser) {
       return <Redirect push to="/user_menu" />;
-    } else if (!defaultPasswordChanged && !hasChangedPassword) {
-      return <Redirect push to="/initialPasswordReset" />;
     }
-  }
 
   return (
     <div className="min-h-100 d-flex flex-column justify-content-center align-items-center">
@@ -128,8 +116,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   loginSuccess: state.auth.loginSuccess,
   isSuperuser: state.auth.isSuperuser,
-  defaultPasswordChanged: state.auth.defaultPasswordChanged,
-  hasChangedPassword: state.auth.user?.is_resetpwd,
 });
 
 export default connect(mapStateToProps, { login })(LoginForm);
