@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 //redux
 import { connect } from 'react-redux';
-import auth from '../../../redux/reducers/auth';
+import { change_default_password } from '../../../redux/actions/auth';
 //router
 import { Redirect } from 'react-router-dom';
 //utils
@@ -12,26 +12,31 @@ import {
   Wrapper,
 } from '../../../components/styledComponents/index';
 
-const InitialPasswordReset = ({ id }) => {
+const InitialPasswordReset = ({
+  id,
+  defaultPassowrdChanged,
+  change_default_password,
+}) => {
   const [requestSent, setRequestSent] = useState(false);
   const [formData, setFormData] = useState({
     fb_name: '',
+    old_password: '',
     new_password: '',
-    re_new_password: '',
   });
 
-  const { fb_name, new_password, re_new_password } = formData;
+  const { fb_name, old_password, new_password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
+    change_default_password(id, fb_name, old_password, new_password);
 
     setRequestSent(true);
   };
 
-  if (requestSent) {
+  if (requestSent && defaultPassowrdChanged) {
     return <Redirect to="/admin_menu" />;
   }
 
@@ -57,9 +62,9 @@ const InitialPasswordReset = ({ id }) => {
             id="password"
             type="password"
             className="mb-3 mb-md-4"
-            placeholder="nowe hasło"
-            name="new_password"
-            value={new_password}
+            placeholder="stare hasło"
+            name="old_password"
+            value={old_password}
             onChange={(e) => onChange(e)}
             required
           />
@@ -67,9 +72,9 @@ const InitialPasswordReset = ({ id }) => {
             id="retype_password"
             type="password"
             className="mb-3 mb-md-4"
-            placeholder="potwierdź nowe hasło"
-            name="re_new_password"
-            value={re_new_password}
+            placeholder="nowe hasło"
+            name="new_password"
+            value={new_password}
             onChange={(e) => onChange(e)}
             required
           />
@@ -82,6 +87,9 @@ const InitialPasswordReset = ({ id }) => {
 
 const mapStateToProps = (state) => ({
   id: state.auth.user?.id,
+  defaultPassowrdChanged: state.auth.defaultPassowrdChanged,
 });
 
-export default connect(mapStateToProps)(InitialPasswordReset);
+export default connect(mapStateToProps, { change_default_password })(
+  InitialPasswordReset
+);
