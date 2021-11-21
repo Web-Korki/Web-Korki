@@ -1,13 +1,18 @@
+//react
 import React, { useState } from 'react';
+//redux
+import { connect } from 'react-redux';
+import auth from '../../../redux/reducers/auth';
+//router
+import { Redirect } from 'react-router-dom';
+//utils
 import {
   BlueButton,
   Input,
   Wrapper,
 } from '../../../components/styledComponents/index';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-const InitialPasswordReset = () => {
+const InitialPasswordReset = ({ id }) => {
   const [requestSent, setRequestSent] = useState(false);
   const [formData, setFormData] = useState({
     fb_name: '',
@@ -22,7 +27,7 @@ const InitialPasswordReset = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
+
     setRequestSent(true);
   };
 
@@ -59,7 +64,7 @@ const InitialPasswordReset = () => {
             required
           />
           <Input
-            id="password"
+            id="retype_password"
             type="password"
             className="mb-3 mb-md-4"
             placeholder="potwierdź nowe hasło"
@@ -75,4 +80,8 @@ const InitialPasswordReset = () => {
   );
 };
 
-export default connect(null)(InitialPasswordReset);
+const mapStateToProps = (state) => ({
+  id: state.auth.user?.id,
+});
+
+export default connect(mapStateToProps)(InitialPasswordReset);
