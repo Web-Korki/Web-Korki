@@ -17,26 +17,52 @@ const InitialPasswordReset = ({
   defaultPassowrdChanged,
   change_default_password,
 }) => {
-  const [requestSent, setRequestSent] = useState(false);
   const [formData, setFormData] = useState({
     fb_name: '',
     old_password: '',
     new_password: '',
   });
+  const [lowerCase, setLowerCase] = useState(false);
+  const [upperCase, setUpperCase] = useState(false);
+  const [numbers, setNumbers] = useState(false);
+  const [specialCharacters, setSpecialCharacters] = useState(false);
+  const [longEnough, setLongEnough] = useState(false);
 
   const { fb_name, old_password, new_password } = formData;
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const passwordValidation = (e) => {
+    const lowerCase = /[a-z]/g;
+    const upperCase = /[A-Z]/g;
+    const numbers = /[0-9]/g;
+    const specialCharacters = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/g;
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    change_default_password(id, fb_name, old_password, new_password);
-
-    setRequestSent(true);
+    if (lowerCase.test(e.target.value)) {
+      console.log('lowerCase ok');
+    }
+    if (upperCase.test(e.target.value)) {
+      console.log('upperCase ok');
+    }
+    if (numbers.test(e.target.value)) {
+      console.log('numbers ok');
+    }
+    if (specialCharacters.test(e.target.value)) {
+      console.log('specialCharacters ok');
+    }
+    if (e.target.value.length >= 8) {
+      console.log('passwordLongEnough ok');
+    }
   };
 
-  if (requestSent && defaultPassowrdChanged) {
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    //nowe i stare hasło nie mogą być takie same
+    change_default_password(id, fb_name, old_password, new_password);
+  };
+
+  if (defaultPassowrdChanged) {
     return <Redirect to="/admin_menu" />;
   }
 
@@ -69,13 +95,16 @@ const InitialPasswordReset = ({
             required
           />
           <Input
-            id="retype_password"
+            id="new_password"
             type="password"
             className="mb-3 mb-md-4"
             placeholder="nowe hasło"
             name="new_password"
             value={new_password}
-            onChange={(e) => onChange(e)}
+            onChange={(e) => {
+              onChange(e);
+              passwordValidation(e);
+            }}
             required
           />
           <BlueButton type="submit">Zatwierdź</BlueButton>

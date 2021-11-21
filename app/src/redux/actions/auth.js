@@ -310,7 +310,7 @@ export const change_default_password =
     const body = JSON.stringify({
       fb_name,
       old_password,
-      new_password,
+      new_password, //TO DO: czy backend przyjmie takie same hasła?
     });
 
     try {
@@ -323,8 +323,16 @@ export const change_default_password =
         type: CHANGE_DEFAULT_PASSWORD_SUCCESS,
       });
     } catch (err) {
+      const errors = {
+        msg: err.response.data.detail,
+        status: err.response.status,
+      };
       dispatch({
         type: CHANGE_DEFAULT_PASSWORD_FAIL,
+      });
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors,
       });
     }
   };
