@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Date = styled.input`
-  width: clamp(17rem, 35vw, 30rem);
-  height: clamp(4rem, 3.3vw, 5rem);
+  width: 100%;
+  height: max(2em, 3.6rem);
   background: #ffffff;
   border: 1px solid #ebeff1;
   box-shadow: 0 0 5px rgba(55, 55, 55, 0.09);
@@ -32,8 +32,8 @@ const Date = styled.input`
     display: none;
   }
 
-  @media (max-width: 1199px) {
-    width: 80vw;
+  @media (min-width: 1200px) {
+    width: clamp(17rem, 35vw, 30rem);
   }
 `;
 

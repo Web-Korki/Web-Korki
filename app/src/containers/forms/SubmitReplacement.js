@@ -7,7 +7,6 @@ import {
   Wrapper,
 } from '../../components/styledComponents/index';
 import { BackButton } from '../../components/buttons/BackButton';
-import { SelectField } from '../../components/components/SelectField';
 import {
   get_classes,
   get_subjects,
@@ -15,6 +14,7 @@ import {
 //propTypes
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import Theme from '../../components/data/Theme';
 
 // import Select, { StylesConfig } from 'react-select';
 
@@ -30,40 +30,6 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
 
   const initialState = [{ value: '', label: '' }];
 
-  // const [formData, setFormData] = useState({
-  //   datetime: '',
-  //   last_topics: '',
-  //   planned_topics: '',
-  //   methodology: '',
-  // });
-
-  // const { datetime, last_topics, planned_topics, methodology } = formData;
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   // login(username, password);
-  // };
-
-  // będzie do wyjebania później
-  const theme = (theme) => {
-    console.log(theme);
-    return {
-      ...theme,
-      borderRadius: '1rem',
-      colors: {
-        ...theme.colors,
-        color: 'pink',
-        primary: '#427e90',
-        primary25: '#dff2fb',
-        primary50: '#a3dff1',
-        neutral20: '#ebeff1',
-        neutral30: '#376c7c',
-        neutral50: '#a9a9a9',
-        neutral80: '#195669',
-      },
-    };
-  };
-
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
@@ -72,7 +38,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
           <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
         <form
-          className="d-flex flex-column p-4 mb-4"
+          className="w-100 d-flex flex-column p-4 mb-4"
           // onSubmit={(e) => onSubmit(e)}
         >
           <div className="row mb-4">
@@ -84,7 +50,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                 className="text-select"
                 placeholder="Wybierz klasę"
                 isSearchable
-                theme={theme}
+                theme={Theme}
                 name="class"
                 options={
                   storeData.classes
@@ -120,7 +86,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                 className="text-select"
                 placeholder="Wybierz przedmiot"
                 isSearchable={true}
-                theme={theme}
+                theme={Theme}
                 name="class"
                 options={
                   storeData.subjects
