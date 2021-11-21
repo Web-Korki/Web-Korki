@@ -45,6 +45,7 @@ const InitialPasswordReset = ({
   const [longEnough, setLongEnough] = useState(false);
   const [changingPassword, setChangingPassword] = useState(false);
 
+  const [oldPasswordShown, setOldPasswordShown] = useState(false);
   const [newPasswordShown, setNewPasswordShown] = useState(false);
 
   const { fb_name, old_password, new_password } = formData;
@@ -82,6 +83,10 @@ const InitialPasswordReset = ({
     }
   };
 
+  const toggleOldPasswordShow = () => {
+    setOldPasswordShown(oldPasswordShown ? false : true);
+  };
+
   const toggleNewPasswordShow = () => {
     setNewPasswordShown(newPasswordShown ? false : true);
   };
@@ -111,7 +116,7 @@ const InitialPasswordReset = ({
           <div className="position-relative">
             <Input
               id="password"
-              type="password"
+              type={oldPasswordShown ? 'text' : 'password'}
               className="mb-3 mb-md-4"
               placeholder="stare hasło"
               name="old_password"
@@ -119,6 +124,12 @@ const InitialPasswordReset = ({
               onChange={(e) => onChange(e)}
               required
             />
+            <i
+              className="position-absolute eye-icon-large"
+              onClick={() => toggleOldPasswordShow()}
+            >
+              {<FontAwesomeIcon icon={oldPasswordShown ? faEyeSlash : faEye} />}
+            </i>
           </div>
           <div className="position-relative">
             <Input

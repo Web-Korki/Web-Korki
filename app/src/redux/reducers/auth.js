@@ -31,7 +31,7 @@ const initialState = {
   accountCreated: null,
   user: null,
   isLoading: false,
-  defaultPasswordChanged: null,
+  defaultPasswordChanged: false,
 };
 
 export default function (state = initialState, action) {

@@ -24,6 +24,7 @@ const LoginForm = ({
   isAuthenticated,
   loginSuccess,
   isSuperuser,
+  defaultPasswordChanged,
   hasChangedPassword,
 }) => {
   LoginForm.propTypes = {
@@ -31,6 +32,7 @@ const LoginForm = ({
     isAuthenticated: PropTypes.bool,
     loginSuccess: PropTypes.bool,
     isSuperuser: PropTypes.bool,
+    defaultPasswordChanged: PropTypes.bool.isRequired,
     hasChangedPassword: PropTypes.bool,
   };
 
@@ -55,7 +57,7 @@ const LoginForm = ({
     setPasswordShown(passwordShown ? false : true);
   };
 
-  if (hasChangedPassword !== undefined && !hasChangedPassword) {
+  if (!defaultPasswordChanged && !hasChangedPassword) {
     return <Redirect push to="/initialPasswordReset" />;
   } else {
     if (isAuthenticated && isSuperuser) {
@@ -122,6 +124,7 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   loginSuccess: state.auth.loginSuccess,
   isSuperuser: state.auth.isSuperuser,
+  defaultPasswordChanged: state.auth.defaultPasswordChanged,
   hasChangedPassword: state.auth.user?.is_resetpwd,
 });
 

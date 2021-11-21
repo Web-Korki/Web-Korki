@@ -23,7 +23,7 @@ class Alerts extends Component {
     const {
       accountCreated,
       isAuthenticated,
-      defaultPassowrdChanged,
+      defaultPasswordChanged,
       loginSuccess,
       user,
       error,
@@ -44,11 +44,11 @@ class Alerts extends Component {
       }
     }
 
-    if (defaultPassowrdChanged !== prevProps.defaultPassowrdChanged) {
-      if (defaultPassowrdChanged) {
+    if (defaultPasswordChanged !== prevProps.defaultPasswordChanged) {
+      if (defaultPasswordChanged) {
         alert.success('Hasło zostało zmienione');
       }
-      if (!defaultPassowrdChanged) {
+      if (!defaultPasswordChanged) {
         alert.error('Nie udało się zmienić hasła'); //MOŻE ZWROTKA Z ERR RESPONSE LEPSZA?
       }
     }
@@ -68,7 +68,7 @@ class Alerts extends Component {
 const mapStateToProps = (state) => ({
   accountCreated: state.auth.accountCreated,
   isAuthenticated: state.isAuthenticated,
-  defaultPassowrdChanged: state.auth.defaultPassowrdChanged,
+  defaultPasswordChanged: state.auth.defaultPasswordChanged,
   loginSuccess: state.auth.loginSuccess,
   user: state.auth.user,
   error: state.errors,

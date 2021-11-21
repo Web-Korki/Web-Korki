@@ -3,22 +3,17 @@ import React from "react";
 //redux
 import { connect } from "react-redux";
 //router
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //propTypes
 import PropTypes from 'prop-types';
 //utils
 import Logout from '../forms/Logout';
 import { Box } from '../../components/styledComponents';
 
-const UserMenu = ({ isSuperuser, hasChangedPassword }) => {
+const UserMenu = ({ isSuperuser }) => {
   UserMenu.propTypes = {
     isSuperuser: PropTypes.bool.isRequired,
-    hasChangedPassword: PropTypes.bool,
   };
-
-  if (hasChangedPassword !== undefined && !hasChangedPassword) {
-    return <Redirect push to="/initialPasswordReset" />;
-  }
 
   return (
     <>
@@ -64,7 +59,6 @@ const UserMenu = ({ isSuperuser, hasChangedPassword }) => {
 
 const mapStateToProps = (state) => ({
   isSuperuser: state.auth.isSuperuser,
-  hasChangedPassword: state.auth.user?.is_resetpwd,
 });
 
 export default connect(mapStateToProps)(UserMenu);
