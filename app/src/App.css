@@ -38,6 +38,15 @@ body {
   text-decoration: none;
 }
 
+/* colors */
+.text-green {
+  color: #52c535;
+}
+
+.text-red {
+  color: #e43434;
+}
+
 .link,
 .link:hover {
   text-decoration: none;
@@ -45,7 +54,7 @@ body {
   color: #427e90;
 }
 
-/* Bootstrap like class that is indeed missing from dependency */
+/* Bootstrap-like class that is indeed missing from dependency */
 .min-h-100 {
   min-height: 100%;
 }
@@ -63,12 +72,14 @@ body {
 
 /* Icon used to display password */
 .eye-icon {
-  top: 53%;
-  right: 8%;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  top: 52.5%;
+  right: 6%;
   transform: translateY(-50%);
 }
 
 .eye-icon:hover {
+  cursor: pointer;
   color: #4ea2c9;
 }
 

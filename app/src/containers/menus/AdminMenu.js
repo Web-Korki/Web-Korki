@@ -11,16 +11,24 @@ import PropTypes from "prop-types";
 import { Box } from "../../components/styledComponents/index";
 import Logout from "../forms/Logout";
 
-const AdminMenu = ({ isSuperuser }) => {
-	AdminMenu.propTypes = {
-		isSuperuser: PropTypes.bool.isRequired,
-	};
+const AdminMenu = ({
+  isSuperuser,
+  hasChangedPassword,
+  defaultPasswordChanged,
+}) => {
+  AdminMenu.propTypes = {
+    isSuperuser: PropTypes.bool.isRequired,
+    hasChangedPassword: PropTypes.bool,
+    defaultPasswordChanged: PropTypes.bool.isRequired,
+  };
 
-	if (!isSuperuser) {
-		return <Redirect push to='/user_menu' />;
-	}
+  if (!defaultPasswordChanged && !hasChangedPassword) {
+    return <Redirect push to="/initialPasswordReset" />;
+  } else if (!isSuperuser) {
+    return <Redirect push to="/user_menu" />;
+  }
 
-	return (
+  return (
     <div className="min-h-100 py-5 py-xl-0 d-flex flex-column justify-content-center align-items-center">
       <div className="container-xl container-fluid p-5 p-lg-0">
         <div className="row d-flex justify-content-xl-between justify-content-md-evenly justify-content-center mb-3 mb-xl-5">
@@ -70,6 +78,8 @@ const AdminMenu = ({ isSuperuser }) => {
 
 const mapStateToProps = (state) => ({
   isSuperuser: state.auth.isSuperuser,
+  hasChangedPassword: state.auth.user?.is_resetpwd,
+  defaultPasswordChanged: state.auth.defaultPasswordChanged,
 });
 
 export default connect(mapStateToProps)(AdminMenu);
