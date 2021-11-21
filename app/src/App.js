@@ -33,7 +33,7 @@ import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
 import SubmitReplacement from './containers/forms/SubmitReplacement';
-import InitialPasswordReset from './containers/passwordReset/InitialPasswordReset';
+import DefaultPasswordChange from './containers/passwordReset/DefaultPasswordChange';
 
 function App() {
   useEffect(() => {
@@ -89,18 +89,13 @@ function App() {
         <Route path="/activate/:uid/:token" component={ActivateAccount} />
         <Route path="/reset_password" component={ResetPassword} />
         <Route
-          path="/initial_password_reset"
-          component={InitialPasswordReset}
+          path="/change_default_password/:id"
+          component={DefaultPasswordChange}
         />
         <Route
           path="/password/reset/confirm/:uid/:token"
           component={ResetPasswordConfirm}
         />
-        {/* Place for a new endpoint for the initial pass reset containing fb name field */}
-        {/* <Route
-          path="/password/reset/confirm/:uid/:token"
-          component={ResetPasswordConfirm}
-        /> */}
         <Route path="*" component={Whoops404} />
       </Switch>
       <div className="footer fixed-bottom text-center">© 2021 Web-Korki</div>

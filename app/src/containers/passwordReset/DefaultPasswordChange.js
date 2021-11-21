@@ -6,10 +6,10 @@ import {
 } from '../../components/styledComponents/index';
 // import { Redirect } from 'react-router-dom';
 // import { connect } from 'react-redux';
-// import { initial_password_reset } from '../../redux/actions/auth';
+// import { default_password_change } from '../../redux/actions/auth';
 
-const InitialPasswordReset = () => {
-  // const InitialPasswordReset = ({ match, initial_password_reset }) => {
+const DefaultPasswordChange = () => {
+  // const DefaultPasswordChange = ({ match, default_password_change }) => {
   //   const [requestSent, setRequestSent] = useState(false);
   //   const [formData, setFormData] = useState({
   //     new_password: '',
@@ -28,7 +28,7 @@ const InitialPasswordReset = () => {
   //     const uid = match.params.uid;
   //     const token = match.params.token;
 
-  //     initial_password_reset(uid, token, new_password, re_new_password);
+  //     default_password_change(uid, token, new_password, re_new_password);
   //     setRequestSent(true);
   //   };
 
@@ -84,5 +84,5 @@ const InitialPasswordReset = () => {
   );
 };
 
-// export default connect(null, { initial_password_reset })(InitialPasswordReset);
-export default InitialPasswordReset;
+// export default connect(null, { default_password_change })(DefaultPasswordChange);
+export default DefaultPasswordChange;

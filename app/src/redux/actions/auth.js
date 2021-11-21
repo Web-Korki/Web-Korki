@@ -297,7 +297,7 @@ export const reset_password_confirm =
   };
 
 //template of initial pass reset
-// export const initial_password_reset =
+// export const default_password_change =
 //   (uid, token, new_password, re_new_password, fb_name) => async (dispatch) => {
 //     const config = {
 //       headers: {
