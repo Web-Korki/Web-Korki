@@ -23,8 +23,8 @@ export const BackButton = () => {
           <path
             d="M8 1L2 7L8 13"
             stroke="#195669"
-            stroke-width="2"
-            stroke-linecap="round"
+            strokeWidth="2"
+            strokeLinecap="round"
           />
         </svg>
       </GoBackButton>

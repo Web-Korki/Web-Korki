@@ -11,16 +11,15 @@ import { BackButton } from "../../components/buttons/BackButton";
 
 import PropTypes from "prop-types";
 
-const RegisterForm = ({ register, isAuthenticated }) => {
+const RegisterForm = ({ register, accountCreated }) => {
   RegisterForm.propTypes = {
-    register: PropTypes.func,
-    isAuthenticated: PropTypes.bool,
+    register: PropTypes.func.isRequired,
+    accountCreated: PropTypes.bool.isRequired,
   };
 
-  const [accountCreated, setAccountCreated] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
+    username: '',
+    email: '',
   });
 
   const { username, email } = formData;
@@ -31,12 +30,11 @@ const RegisterForm = ({ register, isAuthenticated }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     register(username, email);
-    setAccountCreated(true);
   };
 
-  //   if (accountCreated) {
-  // 		return <Redirect to='/admin_menu' />;
-  //   }
+  if (accountCreated) {
+    return <Redirect push to="/admin_menu" />;
+  }
 
   return (
     <div className="min-h-100 d-flex justify-content-center align-items-center flex-column">
@@ -76,7 +74,7 @@ const RegisterForm = ({ register, isAuthenticated }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  accountCreated: state.auth.accountCreated,
 });
 
 export default connect(mapStateToProps, { register })(RegisterForm);
