@@ -1,15 +1,15 @@
 //react
-import React from "react";
+import React from 'react';
 //redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 //router
-import { Link } from "react-router-dom";
-import { Redirect } from "react-router";
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 //propTypes
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 //styledComponents
-import { Box } from "../../components/styledComponents/index";
-import Logout from "../forms/Logout";
+import { Box } from '../../components/styledComponents/index';
+import Logout from '../forms/Logout';
 
 const AdminMenu = ({
   isSuperuser,
@@ -63,6 +63,11 @@ const AdminMenu = ({
           <div className="col-12 col-lg-auto g-4">
             <Link to="/admin/active_replacements">
               <Box>Oczekujące zastępstwa</Box>
+            </Link>
+          </div>
+          <div className="col-12 col-lg-auto g-4">
+            <Link to="/taken_substitutions">
+              <Box>Przejęte zastępstwa</Box>
             </Link>
           </div>
           <div className="col-12 col-lg-auto g-4">
