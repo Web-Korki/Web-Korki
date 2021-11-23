@@ -1,7 +1,7 @@
 //react
-import React from "react";
+import React from 'react';
 //redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 //router
 import { Link, Redirect } from 'react-router-dom';
 //propTypes
@@ -51,6 +51,11 @@ const UserMenu = ({
             <div className="col-12 col-lg-auto g-4">
               <Link to="/fill_in_report">
                 <Box>Uzupełnij raport</Box>
+              </Link>
+            </div>
+            <div className="col-12 col-lg-auto g-4">
+              <Link to="/taken_substitutions">
+                <Box>Przejęte zastępstwa</Box>
               </Link>
             </div>
             {isSuperuser ? (

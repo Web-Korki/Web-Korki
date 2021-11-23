@@ -34,6 +34,7 @@ import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
 import SubmitReplacement from './containers/forms/SubmitReplacement';
 import InitialPasswordReset from './containers/forms/InitialPasswordReset/InitialPasswordReset';
+import TakenSubstitutions from './containers/substitutions/TakenSubstitutions';
 
 function App() {
   useEffect(() => {
@@ -59,6 +60,10 @@ function App() {
           exact
           path="/initialPasswordReset"
           component={InitialPasswordReset}
+        />
+        <PrivateRoute
+          path="/taken_substitutions"
+          component={TakenSubstitutions}
         />
         {/* <PrivateRoute 
           path="/fill_in_report"
