@@ -37,10 +37,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
           <BackButton />
           <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
-        <form
-          className="w-100 d-flex flex-column p-4 mb-4"
-          // onSubmit={(e) => onSubmit(e)}
-        >
+        <form className="w-100 d-flex flex-column p-4 mb-3">
           <div className="row mb-4">
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label className="text" for="class">
@@ -49,7 +46,6 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               <Select
                 className="text-select"
                 placeholder="Wybierz klasę"
-                isSearchable
                 theme={Theme}
                 name="class"
                 options={
@@ -85,7 +81,6 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               <Select
                 className="text-select"
                 placeholder="Wybierz przedmiot"
-                isSearchable={true}
                 theme={Theme}
                 name="class"
                 options={

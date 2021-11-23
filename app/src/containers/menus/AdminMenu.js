@@ -11,14 +11,6 @@ import PropTypes from 'prop-types';
 import { Box } from '../../components/styledComponents/index';
 import Logout from '../forms/Logout';
 
-<<<<<<< HEAD
-const AdminMenu = ({ isSuperuser }) => {
-  AdminMenu.propTypes = {
-    isSuperuser: PropTypes.bool.isRequired,
-  };
-
-  if (!isSuperuser) {
-=======
 const AdminMenu = ({
   isSuperuser,
   hasChangedPassword,
@@ -33,7 +25,6 @@ const AdminMenu = ({
   if (!defaultPasswordChanged && !hasChangedPassword) {
     return <Redirect push to="/initialPasswordReset" />;
   } else if (!isSuperuser) {
->>>>>>> master
     return <Redirect push to="/user_menu" />;
   }
 

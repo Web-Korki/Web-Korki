@@ -296,8 +296,6 @@ export const reset_password_confirm =
       });
     }
   };
-<<<<<<< HEAD
-=======
 
 export const change_default_password =
   (id, fb_name, old_password, new_password) => async (dispatch) => {
@@ -331,16 +329,15 @@ export const change_default_password =
       //coś nie halko z errorami - mają inną strukturę niż dotychczas wyciągane z response
     }
   };
-  export const change_default_password_validation_error =
-    (validation_error) => async (dispatch) => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: {
-          msg: validation_error,
-        },
-      });
-    };
->>>>>>> master
+export const change_default_password_validation_error =
+  (validation_error) => async (dispatch) => {
+    dispatch({
+      type: GET_ERRORS,
+      payload: {
+        msg: validation_error,
+      },
+    });
+  };
 
 export const logout = () => (dispatch) => {
   dispatch({

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   background-color: #fbfcfd;
   border-radius: 1rem;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1200px) {
     box-shadow: 0 0 15px 4px rgba(7, 93, 172, 0.12);
     padding: 3em 5em;
     width: auto;
