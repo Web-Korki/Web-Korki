@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_yasg",
     "djoser",
+    "django_filters",
     # Local apps
     "myapp",
     "backend",

@@ -10,7 +10,6 @@ from drf_yasg import openapi
 from backend.views import (
     ActivateUser,
     ChangePasswordAfterRegister,
-    SubstitutionListView,
     index,
 )
 
@@ -47,10 +46,6 @@ urlpatterns = [
     path(
         "api/substitutions",
         ChangePasswordAfterRegister.as_view({"patch": "update"}),
-    ),
-    re_path(
-        r"api/substitutions/list/(?:/(?P<new_teacher_id>[a-zA-Z]+))?(?:/(?P<old_teacher_id>[a-zA-Z]+))",
-        SubstitutionListView.as_view({"get": "list"}),
     ),
     path(r"redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     url(

@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework import status, permissions, viewsets
 
 from django.shortcuts import render
+from django_filters import rest_framework as filters
 
 from djoser.views import UserViewSet
 from djoser import signals
@@ -39,6 +40,8 @@ from .substitutions import (
     cannot_modify_response,
     teacher_already_assigned_response,
 )
+from .filters import SubstitutionFilter
+
 import os
 
 
@@ -154,15 +157,14 @@ def index(request):
 
 
 class SubstitutionsView(viewsets.ModelViewSet):
-    permission_classes = (permissions.AllowAny,)  # Should already be set by default
+    permission_classes = (permissions.IsAuthenticated,)  # Should already be set by default
     serializer_class = SubstitutionSerializer
     http_method_names = ["get", "put", "delete"]
 
     def get_queryset(self):
-        if "only_pending" in self.request.data:
-            if self.request.data["only_pending"].lower() == "true":
-                return Substitution.objects.filter(new_teacher_found=False)
-        return Substitution.objects.all()
+        queryset = Substitution.objects.all()
+        filter_backends = (filters.DjangoFilterBackend,)
+        filterset_class = SubstitutionFilter
 
     def update(self, request, *args, **kwargs):
         self.serializer_class = SubstitutionSerializerUpdate
@@ -222,26 +224,6 @@ class AssignTeacherView(SubstitutionsView):
             substitution._prefetched_objects_cache = {}
 
         return Response(serializer.data)
-
-
-class SubstitutionListView(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = SubstitutionSerializer
-    http_method_names = ["get"]
-    model = Substitution
-
-    @action(detail=False)
-    def list(self, request, new_teacher_id=None, old_teacher_id=None):
-        if new_teacher_id:
-            serializer = self.get_serializer(
-                self.model.objects.filter(new_teacher=new_teacher_id, many=True)
-            )
-            return Response(serializer.data)
-        elif old_teacher_id:
-            serializer = self.get_serializer(
-                self.model.objects.filter(new_teacher=new_teacher_id, many=True)
-            )
-            return Response(serializer.data)
 
 
 class SubjectViewSet(viewsets.ModelViewSet):
