@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework import status, permissions, viewsets
 
 from django.shortcuts import render
@@ -9,7 +10,16 @@ from djoser.compat import get_user_email
 from djoser.conf import settings
 
 from tests.utils import get_random_password
-from .models import Lesson, House, Teacher, Substitution, Subject, Level, CancelReason
+from .models import (
+    Lesson,
+    House,
+    Teacher,
+    Substitution,
+    Subject,
+    Level,
+    CancelReason,
+    Student,
+)
 from .serializers import (
     LessonSerializer,
     HouseSerializer,
@@ -102,6 +112,7 @@ class ActivateUser(UserViewSet):
         super().activation(request, *args, **kwargs)
         return render(request, "activation_confirmed.html")
 
+
 class HouseViewSet(viewsets.ModelViewSet):
 
     permission_classes = (permissions.IsAuthenticated,)
@@ -129,7 +140,7 @@ class StudentViewSet(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
 
     def get_queryset(self):
-        return House.objects.all()
+        return Student.objects.all()
 
 
 def index(request):
@@ -143,9 +154,7 @@ def index(request):
 
 
 class SubstitutionsView(viewsets.ModelViewSet):
-    permission_classes = (
-        permissions.IsAuthenticated,
-    )  # Should already be set by default
+    permission_classes = (permissions.AllowAny,)  # Should already be set by default
     serializer_class = SubstitutionSerializer
     http_method_names = ["get", "put", "delete"]
 
@@ -213,6 +222,26 @@ class AssignTeacherView(SubstitutionsView):
             substitution._prefetched_objects_cache = {}
 
         return Response(serializer.data)
+
+
+class SubstitutionListView(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = SubstitutionSerializer
+    http_method_names = ["get"]
+    model = Substitution
+
+    @action(detail=False)
+    def list(self, request, new_teacher_id=None, old_teacher_id=None):
+        if new_teacher_id:
+            serializer = self.get_serializer(
+                self.model.objects.filter(new_teacher=new_teacher_id, many=True)
+            )
+            return Response(serializer.data)
+        elif old_teacher_id:
+            serializer = self.get_serializer(
+                self.model.objects.filter(new_teacher=new_teacher_id, many=True)
+            )
+            return Response(serializer.data)
 
 
 class SubjectViewSet(viewsets.ModelViewSet):

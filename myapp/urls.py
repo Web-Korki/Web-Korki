@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf.urls import url
 from django.conf import settings
@@ -7,7 +7,12 @@ from routers import router
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from backend.views import ActivateUser, ChangePasswordAfterRegister, index
+from backend.views import (
+    ActivateUser,
+    ChangePasswordAfterRegister,
+    SubstitutionListView,
+    index,
+)
 
 
 schema_view = get_schema_view(
@@ -40,8 +45,12 @@ urlpatterns = [
         name="activation",
     ),
     path(
-        "api/change_default_password/<id>",
+        "api/substitutions",
         ChangePasswordAfterRegister.as_view({"patch": "update"}),
+    ),
+    re_path(
+        r"api/substitutions/list/(?:/(?P<new_teacher_id>[a-zA-Z]+))?(?:/(?P<old_teacher_id>[a-zA-Z]+))",
+        SubstitutionListView.as_view({"get": "list"}),
     ),
     path(r"redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     url(
