@@ -32,11 +32,12 @@ const ResetPassword = ({ reset_password }) => {
   return (
     <div className="min-h-100 py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
+        <h1 className="title mb-4">Zresetuj hasło</h1>
         <form
           className="d-flex flex-column justify-content-center align-items-center"
           onSubmit={(e) => onSubmit(e)}
         >
-          <h1 className="title mb-4">Podaj adres e-mail</h1>
+          <p className="text">Podaj adres email</p>
           <Input
             id="name"
             type="text"
@@ -47,7 +48,7 @@ const ResetPassword = ({ reset_password }) => {
             onChange={(e) => onChange(e)}
             required
           />
-          <BlueButton type="submit">zresetuj hasło</BlueButton>
+          <BlueButton type="submit">wyślij</BlueButton>
         </form>
       </Wrapper>
     </div>
