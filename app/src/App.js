@@ -35,11 +35,17 @@ import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfir
 import SubmitReplacement from './containers/forms/SubmitReplacement';
 import InitialPasswordReset from './containers/forms/InitialPasswordReset/InitialPasswordReset';
 import TakenSubstitutions from './containers/substitutions/TakenSubstitutions';
+import {
+  get_lecture_analysis,
+  get_volunteer_analysis,
+} from './redux/actions/analysis';
 
 function App() {
   useEffect(() => {
     store.dispatch(checkAuthenticated());
     store.dispatch(load_user());
+    store.dispatch(get_lecture_analysis());
+    store.dispatch(get_volunteer_analysis());
   });
 
   return (
