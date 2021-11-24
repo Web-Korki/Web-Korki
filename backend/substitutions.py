@@ -227,7 +227,8 @@ def send_mail_with_substitution_info(substitution_id, substitution_date, request
         for teacher in teachers
         if validate_user_before_email(teacher, request.user)
     ]
-    sub_email.send(to=[], bcc=mail_list)
+    if mail_list:
+        sub_email.send(to=[], bcc=mail_list)
     return True
 
 
@@ -263,7 +264,8 @@ def send_email_to_old_teacher(substitution):
 
     mail_list = [substitution.old_teacher.email]
 
-    sub_email.send(to=[], bcc=mail_list)
+    if mail_list:
+        sub_email.send(to=[], bcc=mail_list)
 
 
 def user_can_modify(request, instance):

@@ -46,12 +46,24 @@ If there is already teacher assigned returns failure.
 
 #### Body
     Nothing
-#### Params
-    only_pending: (string)(optional) true or false. Returns only substitutions where teacher not found yet.
-    Example: /api/substitutions/?only_pending=true
 #### Returns
-    List of all (or only pending) substitutions
+    List of all (or filtered) substitutions
+#### Filters - optional
+    You can filter results by any substitution field.
+    /api/substitutions/?field_name=value
+    
+    Examples:
+    /api/substitutions/?new_teacher_found=false - return only pending substitutions
+    /api/substitutions/?level=1
+    /api/substitutions/?level=1&new_teacher_found=false
 
+**Filter fields formats:**<br>
+`new_teacher: int`<br>
+`old_teacher: int`<br>
+`datetime: str (e.g. "2021-11-23T16:00:55)"`<br>
+`datetime_range: [from_date, to_date] (e.g. ["2021-10-23T14:00:55", "2021-18-23T17:30:34"])`<br>
+`subject: int`<br>
+`new_teacher_found: bool`<br>
 ## GET - get substitution
 **url: /api/substitutions/{substitution_id}**
 #### Body
