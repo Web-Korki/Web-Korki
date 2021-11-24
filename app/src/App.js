@@ -33,6 +33,8 @@ import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
 import SubmitReplacement from './containers/forms/SubmitReplacement';
+import InitialPasswordReset from './containers/forms/InitialPasswordReset/InitialPasswordReset';
+import TakenSubstitutions from './containers/substitutions/TakenSubstitutions';
 
 function App() {
   useEffect(() => {
@@ -50,9 +52,18 @@ function App() {
           component={InactiveReplacement}
         />
         <PrivateRoute
-          path="/submit_replacement"
           exact
+          path="/submit_replacement"
           component={SubmitReplacement}
+        />
+        <PrivateRoute
+          exact
+          path="/initialPasswordReset"
+          component={InitialPasswordReset}
+        />
+        <PrivateRoute
+          path="/taken_substitutions"
+          component={TakenSubstitutions}
         />
         {/* <PrivateRoute 
           path="/fill_in_report"
@@ -85,8 +96,13 @@ function App() {
         {/* COMMON PATHS */}
         <Route exact path="/" component={Home} />
         <Route path="/login_form" component={LoginForm} />
+        {/* <Route path="/activate/{uid}/{token}" component={ActivateAccount} /> */}
         <Route path="/activate/:uid/:token" component={ActivateAccount} />
         <Route path="/reset_password" component={ResetPassword} />
+        {/* <Route
+          path="/password/reset/confirm/{uid}/{token}"
+          component={ResetPasswordConfirm}
+        /> */}
         <Route
           path="/password/reset/confirm/:uid/:token"
           component={ResetPasswordConfirm}
