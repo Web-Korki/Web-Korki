@@ -24,3 +24,9 @@ export const LOGOUT = 'LOGOUT';
 //errors
 export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAN_ERROR_MSG = 'CLEAN_ERROR_MSG';
+
+//createSubstitutions
+export const GET_SUBJECTS_SUCCESS = 'GET_SUBJECTS_SUCCESS';
+export const GET_SUBJECTS_FAIL = 'GET_SUBJECTS_FAIL';
+export const GET_CLASSES_SUCCESS = 'GET_CLASSES_SUCCESS';
+export const GET_CLASSES_FAIL = 'GET_CLASSES_FAIL';

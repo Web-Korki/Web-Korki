@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   Date,
@@ -7,9 +7,29 @@ import {
   Wrapper,
 } from '../../components/styledComponents/index';
 import { BackButton } from '../../components/buttons/BackButton';
-import { SelectField } from '../../components/components/SelectField';
+import {
+  get_classes,
+  get_subjects,
+} from '../../redux/actions/substitutionForm';
+//propTypes
+import PropTypes from 'prop-types';
+import Select from 'react-select';
+import Theme from '../../components/data/Theme';
 
-export const SubmitReplacement = () => {
+// import Select, { StylesConfig } from 'react-select';
+
+const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
+  SubmitReplacement.propTypes = {
+    formSelectData: PropTypes.object.isRequired,
+  };
+
+  useEffect(() => {
+    get_classes();
+    get_subjects();
+  }, []);
+
+  const defaultFormSelectData = [{ value: '', label: '' }];
+
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
@@ -17,21 +37,27 @@ export const SubmitReplacement = () => {
           <BackButton />
           <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
-        <div className="d-flex flex-column p-4 mb-4">
+        <form className="w-100 d-flex flex-column p-4 mb-3">
           <div className="row mb-4">
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label className="text" for="class">
                 Klasa
               </label>
-              <SelectField
-                id="class"
-                required
-                options={[
-                  //przykład wyboru
-                  { value: '', name: '--Wybierz opcję--' },
-                  { value: '1pod', name: '1 szkoły podstawowej' },
-                  { value: '3lic', name: '3 liceum' },
-                ]}
+              <Select
+                className="text-select"
+                placeholder="Wybierz klasę"
+                theme={Theme}
+                name="faculty"
+                options={
+                  formSelectData.faculties
+                    ? formSelectData.faculties.map((e) => {
+                        return {
+                          value: e.id,
+                          label: e.name,
+                        };
+                      })
+                    : defaultFormSelectData
+                }
               />
             </div>
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
@@ -41,7 +67,7 @@ export const SubmitReplacement = () => {
               <div className="d-flex justify-content-center">
                 <Date
                   className="d-flex justify-content-center"
-                  type="date"
+                  type="datetime-local"
                   id="date"
                   required
                 />
@@ -51,15 +77,21 @@ export const SubmitReplacement = () => {
               <label className="text" for="subject">
                 Przedmiot
               </label>
-              <SelectField
-                id="subject"
-                required
-                options={[
-                  //przykład wyboru
-                  { value: '', name: '--Wybierz opcję--' },
-                  { value: 'j.pol', name: 'Język polski' },
-                  { value: 'mat', name: 'Matematyka' },
-                ]}
+              <Select
+                className="text-select"
+                placeholder="Wybierz przedmiot"
+                theme={Theme}
+                name="subject"
+                options={
+                  formSelectData.subjects
+                    ? formSelectData.subjects.map((e) => {
+                        return {
+                          value: e.id,
+                          label: e.name,
+                        };
+                      })
+                    : defaultFormSelectData
+                }
               />
             </div>
           </div>
@@ -69,7 +101,7 @@ export const SubmitReplacement = () => {
             </label>
             <Textarea
               className="align-self-center ps-4"
-              name="last-topics"
+              name="previous-topic"
               placeholder="Temat ostatniej lekcji to..."
             ></Textarea>
           </div>
@@ -93,22 +125,17 @@ export const SubmitReplacement = () => {
               placeholder="Z uczniem pracujemy korzystając z..."
             ></Textarea>
           </div>
-        </div>
+        </form>
         <BlueButton>zgłoś zastępstwo</BlueButton>
       </Wrapper>
     </div>
   );
 };
 
-// const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
+  formSelectData: state.substitutionForm,
+});
 
-// })
+const mapDispatchToProps = { get_classes, get_subjects };
 
-// const mapDispatchToProps = {
-
-// }
-
-export default connect(null, {})(SubmitReplacement);
-
-// Inner content should be limited by the inner padding of StyledBox
-// TextArea and columns of flex content should be limited only by the inner padding of StyledBox
+export default connect(mapStateToProps, mapDispatchToProps)(SubmitReplacement);

@@ -329,24 +329,24 @@ export const change_default_password =
       //coś nie halko z errorami - mają inną strukturę niż dotychczas wyciągane z response
     }
   };
-  export const change_default_password_validation_error =
-    (validation_error) => async (dispatch) => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: {
-          msg: validation_error,
-        },
-      });
-    };
+export const change_default_password_validation_error =
+  (validation_error) => async (dispatch) => {
+    dispatch({
+      type: GET_ERRORS,
+      payload: {
+        msg: validation_error,
+      },
+    });
+  };
 
 export const logout = () => (dispatch) => {
-	dispatch({
-		type: LOGOUT,
-	});
+  dispatch({
+    type: LOGOUT,
+  });
 };
 
-export const reset_state = () => dispatch => {
-	dispatch({
-		type: RESET_STATE,
-	})
-}
+export const reset_state = () => (dispatch) => {
+  dispatch({
+    type: RESET_STATE,
+  });
+};
