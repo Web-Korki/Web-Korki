@@ -28,7 +28,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
     get_subjects();
   }, []);
 
-  const initialState = [{ value: '', label: '' }];
+  const defaultState = [{ value: '', label: '' }];
 
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
@@ -60,7 +60,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                           label: e.name,
                         };
                       })
-                    : initialState
+                    : defaultState
                 }
               />
             </div>
@@ -96,7 +96,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                           label: e.name,
                         };
                       })
-                    : initialState
+                    : defaultState
                 }
               />
             </div>
