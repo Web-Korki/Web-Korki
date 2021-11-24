@@ -15,6 +15,5 @@ class SubstitutionFilter(filters.FilterSet):
             "datetime",
             "datetime_range",
             "subject",
-            "new_teacher",
             "new_teacher_found",
         ]

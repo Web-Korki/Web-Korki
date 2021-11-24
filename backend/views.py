@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework import status, permissions, viewsets
+from rest_framework import status, permissions, viewsets, generics
 
 from django.shortcuts import render
 from django_filters import rest_framework as filters
@@ -160,11 +160,17 @@ class SubstitutionsView(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)  # Should already be set by default
     serializer_class = SubstitutionSerializer
     http_method_names = ["get", "put", "delete"]
+    queryset = Substitution.objects.all()
+    filterset_fields = ["new_teacher"]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = SubstitutionFilter
 
-    def get_queryset(self):
-        queryset = Substitution.objects.all()
-        filter_backends = (filters.DjangoFilterBackend,)
-        filterset_class = SubstitutionFilter
+    def list(self, request, *args, **kwargs):
+
+        filtered_qs = self.filter_queryset(self.get_queryset())
+        context = self.paginate_queryset(filtered_qs)
+        serializer = self.serializer_class(context, many=True)
+        return self.get_paginated_response(serializer.data)
 
     def update(self, request, *args, **kwargs):
         self.serializer_class = SubstitutionSerializerUpdate
