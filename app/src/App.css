@@ -40,9 +40,18 @@ body {
 
 .text-select {
   box-shadow: 0 0 5px rgba(55, 55, 55, 0.09);
-  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
   border-radius: 1rem;
   background-color: transparent;
+}
+
+/* colors */
+.text-green {
+  color: #52c535;
+}
+
+.text-red {
+  color: #e43434;
 }
 
 .link,
@@ -52,7 +61,7 @@ body {
   color: #427e90;
 }
 
-/* Bootstrap like class that is indeed missing from dependency */
+/* Bootstrap-like class that is indeed missing from dependency */
 .min-h-100 {
   min-height: 100%;
 }
@@ -70,12 +79,14 @@ body {
 
 /* Icon used to display password */
 .eye-icon {
-  top: 53%;
-  right: 8%;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  top: 52.5%;
+  right: 6%;
   transform: translateY(-50%);
 }
 
 .eye-icon:hover {
+  cursor: pointer;
   color: #4ea2c9;
 }
 

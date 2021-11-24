@@ -1,5 +1,4 @@
 const Theme = (theme) => {
-  console.log(theme);
   return {
     ...theme,
     borderRadius: '1rem',

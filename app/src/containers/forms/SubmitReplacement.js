@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   Date,
@@ -18,9 +18,9 @@ import Theme from '../../components/data/Theme';
 
 // import Select, { StylesConfig } from 'react-select';
 
-const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
+const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
   SubmitReplacement.propTypes = {
-    storeData: PropTypes.object.isRequired,
+    formSelectData: PropTypes.object.isRequired,
   };
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
     get_subjects();
   }, []);
 
-  const defaultState = [{ value: '', label: '' }];
+  const defaultFormSelectData = [{ value: '', label: '' }];
 
   return (
     <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
@@ -37,10 +37,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
           <BackButton />
           <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
-        <form
-          className="w-100 d-flex flex-column p-4 mb-4"
-          // onSubmit={(e) => onSubmit(e)}
-        >
+        <form className="w-100 d-flex flex-column p-4 mb-3">
           <div className="row mb-4">
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label className="text" for="class">
@@ -49,18 +46,17 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               <Select
                 className="text-select"
                 placeholder="Wybierz klasę"
-                isSearchable
                 theme={Theme}
-                name="class"
+                name="faculty"
                 options={
-                  storeData.classes
-                    ? storeData.classes.map((e) => {
+                  formSelectData.faculties
+                    ? formSelectData.faculties.map((e) => {
                         return {
                           value: e.id,
                           label: e.name,
                         };
                       })
-                    : defaultState
+                    : defaultFormSelectData
                 }
               />
             </div>
@@ -73,7 +69,6 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
                   className="d-flex justify-content-center"
                   type="datetime-local"
                   id="date"
-                  // value={datetime}
                   required
                 />
               </div>
@@ -85,18 +80,17 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               <Select
                 className="text-select"
                 placeholder="Wybierz przedmiot"
-                isSearchable={true}
                 theme={Theme}
-                name="class"
+                name="subject"
                 options={
-                  storeData.subjects
-                    ? storeData.subjects.map((e) => {
+                  formSelectData.subjects
+                    ? formSelectData.subjects.map((e) => {
                         return {
                           value: e.id,
                           label: e.name,
                         };
                       })
-                    : defaultState
+                    : defaultFormSelectData
                 }
               />
             </div>
@@ -107,9 +101,8 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
             </label>
             <Textarea
               className="align-self-center ps-4"
-              name="last-topics"
+              name="previous-topic"
               placeholder="Temat ostatniej lekcji to..."
-              // value={last_topics}
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -120,7 +113,6 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               className="align-self-center ps-4"
               name="planned-topics"
               placeholder="Temat przyszłej lekcji to..."
-              // value={planned_topics}
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -131,7 +123,6 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
               className="align-self-center ps-4"
               name="teaching-methodology"
               placeholder="Z uczniem pracujemy korzystając z..."
-              // value={methodology}
             ></Textarea>
           </div>
         </form>
@@ -142,12 +133,9 @@ const SubmitReplacement = ({ get_classes, get_subjects, storeData }) => {
 };
 
 const mapStateToProps = (state) => ({
-  storeData: state.substitutionForm,
+  formSelectData: state.substitutionForm,
 });
 
 const mapDispatchToProps = { get_classes, get_subjects };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubmitReplacement);
-
-// Inner content should be limited by the inner padding of StyledBox
-// TextArea and columns of flex content should be limited only by the inner padding of StyledBox

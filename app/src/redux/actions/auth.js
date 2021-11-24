@@ -18,6 +18,8 @@ import {
   PASSWORD_RESET_FAIL,
   PASSWORD_RESET_CONFIRM_SUCCESS,
   PASSWORD_RESET_CONFIRM_FAIL,
+  CHANGE_DEFAULT_PASSWORD_SUCCESS,
+  CHANGE_DEFAULT_PASSWORD_FAIL,
   GET_ERRORS,
   RESET_STATE,
 } from './types';
@@ -293,6 +295,48 @@ export const reset_password_confirm =
         payload: errors,
       });
     }
+  };
+
+export const change_default_password =
+  (id, fb_name, old_password, new_password) => async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('access')}`,
+        Accept: 'application/json',
+      },
+    };
+
+    const body = JSON.stringify({
+      fb_name,
+      old_password,
+      new_password, //TO DO: czy backend przyjmie takie same hasła?
+    });
+
+    try {
+      await axios.patch(
+        `${API_URL}/api/change_default_password/${id}`,
+        body,
+        config
+      );
+      dispatch({
+        type: CHANGE_DEFAULT_PASSWORD_SUCCESS,
+      });
+    } catch (err) {
+      dispatch({
+        type: CHANGE_DEFAULT_PASSWORD_FAIL,
+      });
+      //coś nie halko z errorami - mają inną strukturę niż dotychczas wyciągane z response
+    }
+  };
+export const change_default_password_validation_error =
+  (validation_error) => async (dispatch) => {
+    dispatch({
+      type: GET_ERRORS,
+      payload: {
+        msg: validation_error,
+      },
+    });
   };
 
 export const logout = () => (dispatch) => {

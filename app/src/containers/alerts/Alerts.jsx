@@ -12,6 +12,7 @@ class Alerts extends Component {
   static propTypes = {
     accountCreated: PropTypes.bool,
     isAuthenticated: PropTypes.bool,
+    defaultPassowrdChanged: PropTypes.bool,
     loginSuccess: PropTypes.bool,
     user: PropTypes.object,
     error: PropTypes.object.isRequired,
@@ -22,6 +23,7 @@ class Alerts extends Component {
     const {
       accountCreated,
       isAuthenticated,
+      defaultPasswordChanged,
       loginSuccess,
       user,
       error,
@@ -42,6 +44,15 @@ class Alerts extends Component {
       }
     }
 
+    if (defaultPasswordChanged !== prevProps.defaultPasswordChanged) {
+      if (defaultPasswordChanged) {
+        alert.success('Hasło zostało zmienione');
+      }
+      if (!defaultPasswordChanged) {
+        alert.error('Nie udało się zmienić hasła'); //MOŻE ZWROTKA Z ERR RESPONSE LEPSZA?
+      }
+    }
+
     if (error !== prevProps.error && error !== null) {
       error.email !== undefined
         ? alert.error(error.email)
@@ -57,6 +68,7 @@ class Alerts extends Component {
 const mapStateToProps = (state) => ({
   accountCreated: state.auth.accountCreated,
   isAuthenticated: state.isAuthenticated,
+  defaultPasswordChanged: state.auth.defaultPasswordChanged,
   loginSuccess: state.auth.loginSuccess,
   user: state.auth.user,
   error: state.errors,

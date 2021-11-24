@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import {
-  Wrapper,
-  Input,
-  BlueButton,
-} from "../components/styledComponents/index";
-import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { verify } from "../redux/actions/auth";
+import { Wrapper, BlueButton } from '../components/styledComponents/index';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { verify } from '../redux/actions/auth';
 
 const ActivateAccount = ({ verify, match }) => {
   const [verified, setVerified] = useState(false);
+
+  //page matcher regex:
+  //const activateAccountPage = /^http[s]?:\/\/web\-korki\.edu\.pl\/activate\/[a-zA-Z]{3,}\/[\w|\W]{3,}/gm
 
   const verify_account = (e) => {
     const uid = match.params.uid; //działa dobrze?
