@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   subjects: null,
-  classes: null,
+  faculties: null,
 };
 
 export default function substitutionForm(state = initialState, action) {
@@ -21,7 +21,7 @@ export default function substitutionForm(state = initialState, action) {
     case GET_CLASSES_SUCCESS:
       return {
         ...state,
-        classes: payload,
+        faculties: payload,
       };
     case GET_SUBJECTS_FAIL:
     case GET_CLASSES_FAIL:

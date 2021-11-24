@@ -9,7 +9,7 @@ const Date = styled.input`
   border-radius: 10px;
   text-align: center;
   color: #195669;
-  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
 
   &::placeholder {
     color: #eeeeee;
