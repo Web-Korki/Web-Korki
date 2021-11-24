@@ -47,20 +47,15 @@ If there is already teacher assigned returns failure.
 #### Body
     Nothing
 #### Returns
-    List of all (or only pending) substitutions
-
-## GET - get substitution
-**url: /api/substitutions/{substitution_id}**
-#### Body
-    Nothing
-#### Returns
-    Substitution object for given substitution_id
-
-### GET - filter substitution list by model field
-**url: /api/substitutions/?(field_name=value)**<br>
-Examples:<br>
-_/api/url/substitutions/?level=1_<br>
-_/api/url/substitutions/?level=1&new_teacher_found=false_
+    List of all (or filtered) substitutions
+#### Filters - optional
+    You can filter results by any substitution field.
+    /api/substitutions/?field_name=value
+    
+    Examples:
+    /api/substitutions/?new_teacher_found=false - return only pending substitutions
+    /api/substitutions/?level=1
+    /api/substitutions/?level=1&new_teacher_found=false
 
 **Filter fields formats:**<br>
 `new_teacher: int`<br>
@@ -69,12 +64,12 @@ _/api/url/substitutions/?level=1&new_teacher_found=false_
 `datetime_range: [from_date, to_date] (e.g. ["2021-10-23T14:00:55", "2021-18-23T17:30:34"])`<br>
 `subject: int`<br>
 `new_teacher_found: bool`<br>
-
-### Body
+## GET - get substitution
+**url: /api/substitutions/{substitution_id}**
+#### Body
     Nothing
-### Returns
-    Substitution object list for the given URL parameters
-
+#### Returns
+    Substitution object for given substitution_id
 
 # PUT - Modify substitution
 **url: /api/substitutions/{substitution_id}**
