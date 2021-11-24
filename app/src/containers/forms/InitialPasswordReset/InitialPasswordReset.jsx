@@ -22,13 +22,13 @@ import PropTypes from 'prop-types';
 
 const InitialPasswordReset = ({
   id,
-  defaultPasswordChanged,
+  hasChangedPassword,
   change_default_password,
   change_default_password_validation_error,
 }) => {
   InitialPasswordReset.propTypes = {
     id: PropTypes.number.isRequired,
-    defaultPasswordChanged: PropTypes.bool.isRequired,
+    hasChangedPassword: PropTypes.bool,
     change_default_password: PropTypes.func.isRequired,
     change_default_password_validation_error: PropTypes.func.isRequired,
   };
@@ -97,8 +97,8 @@ const InitialPasswordReset = ({
   };
 
   //REDIRECT:
-  if (defaultPasswordChanged) {
-    return <Redirect to="/admin_menu" />;
+  if (hasChangedPassword) {
+    return <Redirect to="/" />;
   }
 
   return (
@@ -219,7 +219,7 @@ const InitialPasswordReset = ({
 
 const mapStateToProps = (state) => ({
   id: state.auth.user?.id,
-  defaultPasswordChanged: state.auth.defaultPasswordChanged,
+  hasChangedPassword: state.auth.user?.is_resetpwd,
 });
 
 export default connect(mapStateToProps, {

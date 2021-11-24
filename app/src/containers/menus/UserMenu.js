@@ -10,18 +10,13 @@ import PropTypes from 'prop-types';
 import Logout from '../forms/Logout';
 import { Box } from '../../components/styledComponents';
 
-const UserMenu = ({
-  isSuperuser,
-  defaultPasswordChanged,
-  hasChangedPassword,
-}) => {
+const UserMenu = ({ isSuperuser, hasChangedPassword }) => {
   UserMenu.propTypes = {
     isSuperuser: PropTypes.bool.isRequired,
-    defaultPasswordChanged: PropTypes.bool.isRequired,
     hasChangedPassword: PropTypes.bool,
   };
 
-  if (!defaultPasswordChanged && !hasChangedPassword) {
+  if (!hasChangedPassword) {
     return <Redirect push to="/initialPasswordReset" />;
   }
 
@@ -74,7 +69,6 @@ const UserMenu = ({
 
 const mapStateToProps = (state) => ({
   isSuperuser: state.auth.isSuperuser,
-  defaultPasswordChanged: state.auth.defaultPasswordChanged,
   hasChangedPassword: state.auth.user?.is_resetpwd,
 });
 
