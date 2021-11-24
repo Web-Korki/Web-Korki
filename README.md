@@ -23,7 +23,7 @@ and
 `pip install -r requirements.txt`
 
 ## Pagination
-As of 24 November, all API responses are paginated. **Pagination** is a process of dividing API responses, (which at some point of time may contain dozens or hundreds of items) into smaller portions that are easier to browse through.<br>
+As of 24 November, all API responses are paginated. **Pagination** is a process of dividing API responses (which, at some point of time, may contain dozens or hundreds of items) into smaller portions that are easier to browse through.<br>
 
 Please consult the following chunk of code:
 ```
@@ -76,4 +76,4 @@ Please consult the following chunk of code:
 }
 ``` 
 
-This is an exemplary API response returning 13 items. With PAGE_SIZE=10, the response was split into two pages. The first one contains only 10 results of 13. The remaining 3 one may be accessed under the link provided under `next`.
+This is an exemplary API response returning 13 items. With PAGE_SIZE=10, the response was split into two pages. The first one contains only 10 of 13 results. The remaining 3 may be accessed under the link provided under `next`.
