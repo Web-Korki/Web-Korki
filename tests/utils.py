@@ -7,13 +7,10 @@ import random, string
 
 Teacher = get_user_model()
 
-# Utils
+
 def register_sample_user(client: Client, username: str, email: str):
     url = reverse("teacher-list")
-    response = client.post(
-        url,
-        data={"username": username, "email": email},
-    )
+    response = client.post(url, data={"username": username, "email": email},)
     return response
 
 
@@ -27,10 +24,7 @@ def activate_sample_user(client: Client, user):
 
 def login_sample_user(client: Client, username: str, password: str):
     url = reverse("jwt-create")
-    response = client.post(
-        url,
-        data={"username": username, "password": password},
-    )
+    response = client.post(url, data={"username": username, "password": password},)
     return response
 
 
@@ -50,15 +44,25 @@ def get_random_password():
     )
 
 
-def get_random_logged_user(client: Client):
-    email = get_random_email()
+def get_random_logged_user(
+    client: Client, generate_email=True, return_user_instance=False, admin=False
+):
+    email = ""
+    if generate_email:
+        email = get_random_email()
     username = get_random_username()
     r = register_sample_user(client, username, email)
     user = Teacher.objects.get(username=username)
+    if admin:
+        user.is_staff = True
+        user.save()
     r2 = activate_sample_user(client, user)
     r3 = set_password(client, user)
     r4 = login_sample_user(client, username, "somestrongpassword123")
-    return r4
+    if return_user_instance:
+        return r4, user
+    else:
+        return r4
 
 
 def get_user_me(client: Client):
@@ -78,3 +82,94 @@ def set_password(client: Client, user):
             "re_new_password": "somestrongpassword123",
         },
     )
+
+
+def get_token(client: Client, admin=False):
+    user_header = get_random_logged_user(client, admin=admin)
+    return user_header.json()["access"]
+
+
+def get_token_without_email(client):
+    """ returns token and user instance """
+    user_header, user = get_random_logged_user(
+        client, generate_email=False, return_user_instance=True
+    )
+    return user_header.json()["access"], user
+
+
+def standard_get_list_test(client, url, token):
+    """ Gets and returns list of objects """
+    response = client.get(url, HTTP_AUTHORIZATION="Bearer {}".format(token),)
+    assert response.status_code == 200 and len(response.json()["results"]) > 0
+    return response.json()["results"]
+
+
+def standard_retrieve_test(client, url, token, obj_id):
+    """ Gets and returns item with specific id """
+    response = client.get(url, HTTP_AUTHORIZATION="Bearer {}".format(token),)
+    assert response.status_code == 200 and response.json()["id"] == obj_id
+
+
+def standard_post_test(client, url, data, token, should_fail=False):
+    """ Creates and returns id of created object """
+    response = client.post(url, HTTP_AUTHORIZATION="Bearer {}".format(token), data=data)
+    if should_fail:
+        assert response.status_code == 403
+        return
+    assert response.status_code == 201 and response.json()["id"]
+    return response.json()["id"]
+
+
+def standard_put_test(client, url, data, token):
+    """ Modifies object. Data should have different values than initial values """
+    response = client.put(
+        url,
+        HTTP_AUTHORIZATION="Bearer {}".format(token),
+        content_type="application/json",
+        data=data,
+    )
+    assert response.status_code == 200
+
+    for key in data.keys():
+        if key == "datetime":
+            assert (
+                response.json()[key][:-6] == data[key]
+            )  # Returned time is in other format
+            continue
+
+        assert response.json()[key] == data[key]
+
+
+def standard_delete_test(client, url, token):
+    """ Deletes object """
+    response = client.delete(url, HTTP_AUTHORIZATION="Bearer {}".format(token),)
+    assert response.status_code in [204, 200]
+
+
+def model_view_set_test(client, url, data, data_changed, admin_required=False):
+    """
+    tests all methods of standard rest_framework.viewsets.ModelViewSet implementation
+    """
+    token = get_token(client, admin=admin_required)
+
+    # POST
+    obj_id = standard_post_test(client, url, data, token)  # Should create object
+
+    # GET LIST
+    standard_get_list_test(client, url, token)
+
+    url_with_id = url + str(obj_id) + "/"
+
+    # RETRIEVE
+    standard_retrieve_test(client, url_with_id, token, obj_id)
+
+    # MODIFY
+    standard_put_test(client, url_with_id, data_changed, token)
+
+    # DELETE
+    standard_delete_test(client, url_with_id, token)
+
+    # Assert user cannot post if admin is required
+    if admin_required:
+        token = get_token(client)
+        standard_post_test(client, url, data, token, should_fail=True)

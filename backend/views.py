@@ -118,7 +118,7 @@ class ActivateUser(UserViewSet):
 
 class HouseViewSet(viewsets.ModelViewSet):
 
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     serializer_class = HouseSerializer
 
     def get_queryset(self):
