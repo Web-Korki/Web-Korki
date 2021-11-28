@@ -39,7 +39,7 @@ const RegisterForm = ({ register, accountCreated }) => {
   return (
     <div className="min-h-100 d-flex justify-content-center align-items-center flex-column">
       <form onSubmit={(e) => onSubmit(e)}>
-        <div class="d-flex justify-content-center align-items-center mb-5">
+        <div className="d-flex justify-content-center align-items-center mb-5">
           <BackButton />
           <h1 className="title">Zarejestruj korepetytora</h1>
         </div>

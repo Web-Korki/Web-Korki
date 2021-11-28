@@ -29,6 +29,7 @@ const initialState = {
   isSuperuser: null,
   loginSuccess: null,
   accountCreated: null,
+  accountActivated: false,
   user: null,
   isLoading: false,
   defaultPasswordChanged: false,
@@ -41,6 +42,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         accountCreated: null,
+        accountActivated: false,
       };
     case AUTHENTICATED_SUCCESS:
       return {
@@ -136,12 +138,20 @@ export default function (state = initialState, action) {
         ...state,
         defaultPasswordChanged: false,
       };
+    case ACTIVATION_SUCCESS:
+      return {
+        ...state,
+        accountActivated: true,
+      };
+    case ACTIVATION_FAIL:
+      return {
+        ...state,
+        accountActivated: false,
+      };
     case PASSWORD_RESET_SUCCESS:
     case PASSWORD_RESET_FAIL:
     case PASSWORD_RESET_CONFIRM_SUCCESS:
     case PASSWORD_RESET_CONFIRM_FAIL:
-    case ACTIVATION_SUCCESS:
-    case ACTIVATION_FAIL:
     case REGISTER_SUCCESS:
       return {
         ...state,
