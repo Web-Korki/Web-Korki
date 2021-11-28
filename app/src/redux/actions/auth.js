@@ -180,9 +180,16 @@ export const register = (username, email) => async (dispatch) => {
     dispatch({
       type: REGISTER_FAIL,
     });
+    let errorMsg = err.response.data.detail
+      ? err.response.data.detail
+      : err.response.data.email
+      ? err.response.data.email
+      : err.response.data.username
+      ? err.response.data.username
+      : err.response.data;
+
     const errors = {
-      msg: err.response.data.detail,
-      email: err.response.data.email,
+      msg: errorMsg,
       status: err.response.status,
     };
     dispatch({
@@ -326,7 +333,15 @@ export const change_default_password =
       dispatch({
         type: CHANGE_DEFAULT_PASSWORD_FAIL,
       });
-      //coś nie halko z errorami - mają inną strukturę niż dotychczas wyciągane z response
+      let errMsg = err.response.messages
+        ? 'Odśwież stronę i spróbuj ponownie.'
+        : null;
+      dispatch({
+        type: GET_ERRORS,
+        payload: {
+          msg: errMsg,
+        },
+      });
     }
   };
 export const change_default_password_validation_error =
