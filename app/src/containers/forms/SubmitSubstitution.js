@@ -18,8 +18,8 @@ import Theme from '../../components/data/Theme';
 
 // import Select, { StylesConfig } from 'react-select';
 
-const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
-  SubmitReplacement.propTypes = {
+const SubmitSubstitution = ({ get_classes, get_subjects, formSelectData }) => {
+  SubmitSubstitution.propTypes = {
     formSelectData: PropTypes.object.isRequired,
   };
 
@@ -138,4 +138,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { get_classes, get_subjects };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubmitReplacement);
+export default connect(mapStateToProps, mapDispatchToProps)(SubmitSubstitution);
