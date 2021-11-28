@@ -10,10 +10,11 @@ export default function (state = initialState, action) {
 	switch (action.type) {
 		case GET_ERRORS:
 			return {
-				msg: action.payload.msg,
-				email: action.payload.email,
-				status: action.payload.status,
-			};
+        ...state,
+        msg: action.payload.msg,
+        email: action.payload.email,
+        status: action.payload.status,
+      };
 		default:
 			return state;
 	}
