@@ -1,14 +1,24 @@
+//react
 import React, { useState } from 'react';
+//redux
+import { connect } from 'react-redux';
+import { reset_password } from '../../redux/actions/auth';
+//router
+import { Redirect } from 'react-router-dom';
+//utils
 import {
   BlueButton,
   Input,
   Wrapper,
 } from '../../components/styledComponents/index';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { reset_password } from '../../redux/actions/auth';
+//propTypes
+import PropTypes from 'prop-types';
 
 const ResetPassword = ({ reset_password }) => {
+  ResetPassword.propTypes = {
+    reset_password: PropTypes.func.isRequired,
+  };
+
   const [requestSent, setRequestSent] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
