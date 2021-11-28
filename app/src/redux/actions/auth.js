@@ -329,7 +329,7 @@ export const change_default_password =
       //coś nie halko z errorami - mają inną strukturę niż dotychczas wyciągane z response
     }
   };
-export const change_default_password_validation_error =
+export const change_password_validation_error =
   (validation_error) => async (dispatch) => {
     dispatch({
       type: GET_ERRORS,

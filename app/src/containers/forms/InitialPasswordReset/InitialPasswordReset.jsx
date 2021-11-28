@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
   change_default_password,
-  change_default_password_validation_error,
+  change_password_validation_error,
 } from '../../../redux/actions/auth';
 //router
 import { Redirect } from 'react-router-dom';
@@ -24,13 +24,13 @@ const InitialPasswordReset = ({
   id,
   hasChangedPassword,
   change_default_password,
-  change_default_password_validation_error,
+  change_password_validation_error,
 }) => {
   InitialPasswordReset.propTypes = {
     id: PropTypes.number.isRequired,
     hasChangedPassword: PropTypes.bool,
     change_default_password: PropTypes.func.isRequired,
-    change_default_password_validation_error: PropTypes.func.isRequired,
+    change_password_validation_error: PropTypes.func.isRequired,
   };
 
   //FORM STATE:
@@ -81,18 +81,17 @@ const InitialPasswordReset = ({
         change_default_password(id, fb_name, old_password, new_password);
         setChangingPassword(false);
       } else {
-        change_default_password_validation_error(
+        change_password_validation_error(
           'Stare i nowe hasło nie mogą być identyczne!'
         );
 
         //TO DO: check similarity of passwords
       }
     } else {
-      change_default_password_validation_error(
+      change_password_validation_error(
         'Nowe hasło nie spełnia kryteriów bezpieczeństwa'
       );
     }
-      
   };
 
   //TOGGLERS:
@@ -230,5 +229,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   change_default_password,
-  change_default_password_validation_error,
+  change_password_validation_error,
 })(InitialPasswordReset);
