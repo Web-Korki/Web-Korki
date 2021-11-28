@@ -182,7 +182,7 @@ export const register = (username, email) => async (dispatch) => {
     });
     const errors = {
       msg: err.response.data.detail,
-      email: err.response.data.email[0],
+      email: err.response.data.email,
       status: err.response.status,
     };
     dispatch({
@@ -320,6 +320,8 @@ export const change_default_password =
       dispatch({
         type: CHANGE_DEFAULT_PASSWORD_SUCCESS,
       });
+      dispatch(checkAuthenticated());
+      dispatch(load_user());
     } catch (err) {
       dispatch({
         type: CHANGE_DEFAULT_PASSWORD_FAIL,

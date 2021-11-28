@@ -1,5 +1,5 @@
 //react
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //redux
 import { connect } from 'react-redux';
 import {
@@ -75,17 +75,24 @@ const InitialPasswordReset = ({
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    setChangingPassword(false);
 
-    if (new_password !== old_password) {
-      change_default_password(id, fb_name, old_password, new_password);
+    if (lowerCase && upperCase && numbers && specialCharacters && longEnough) {
+      if (new_password !== old_password) {
+        change_default_password(id, fb_name, old_password, new_password);
+        setChangingPassword(false);
+      } else {
+        change_default_password_validation_error(
+          'Stare i nowe hasło nie mogą być identyczne!'
+        );
+
+        //TO DO: check similarity of passwords
+      }
     } else {
       change_default_password_validation_error(
-        'Stare i nowe hasło nie mogą być identyczne!'
+        'Nowe hasło nie spełnia kryteriów bezpieczeństwa'
       );
-
-      //TO DO: check similarity of passwords
     }
+      
   };
 
   //TOGGLERS:
@@ -100,7 +107,6 @@ const InitialPasswordReset = ({
   if (hasChangedPassword) {
     return <Redirect to="/" />;
   }
-
   return (
     <div className="min-h-100 py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
