@@ -14,7 +14,7 @@ import PropTypes from "prop-types";
 const RegisterForm = ({ register, accountCreated }) => {
   RegisterForm.propTypes = {
     register: PropTypes.func.isRequired,
-    accountCreated: PropTypes.bool.isRequired,
+    accountCreated: PropTypes.bool,
   };
 
   const [formData, setFormData] = useState({
