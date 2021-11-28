@@ -24,6 +24,7 @@ import { VolunteerAnalysisDetail } from './containers/volunteerAnalysis/Voluntee
 import { Whoops404 } from './containers/Whoops404';
 //default imports
 import Home from './containers/Home';
+import LoginPortlet from './containers/LoginPortlet/LoginPortlet';
 import UserMenu from './containers/menus/UserMenu';
 import AdminMenu from './containers/menus/AdminMenu';
 import LoginForm from './containers/forms/LoginForm/LoginForm';
@@ -36,14 +37,15 @@ import SubmitReplacement from './containers/forms/SubmitReplacement';
 import InitialPasswordReset from './containers/forms/InitialPasswordReset/InitialPasswordReset';
 import TakenSubstitutions from './containers/substitutions/TakenSubstitutions';
 
-function App() {
+function App({ isAuthenticated, checkAuthenticated, load_user }) {
   useEffect(() => {
-    store.dispatch(checkAuthenticated());
-    store.dispatch(load_user());
+    checkAuthenticated();
+    load_user();
   });
 
   return (
     <>
+      {isAuthenticated ? <LoginPortlet /> : null}
       <Switch>
         {/* USER PATHS */}
         <PrivateRoute exact path="/user_menu" component={UserMenu} />
@@ -109,4 +111,8 @@ function App() {
   );
 }
 
-export default connect(null, { checkAuthenticated, load_user })(App);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { checkAuthenticated, load_user })(App);

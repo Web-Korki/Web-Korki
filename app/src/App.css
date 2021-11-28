@@ -132,3 +132,19 @@ body {
     display: none !important;
   }
 }
+
+/* LOGIN PORTLET */
+.login-portlet-wrapper{
+  box-sizing: border-box;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+}
+
+.login-portlet-user-icon{
+  font-size: clamp(2.4rem, 4vw, 4.2rem);
+}
+
+.login-portlet-user{
+  text-transform: capitalize;
+}
