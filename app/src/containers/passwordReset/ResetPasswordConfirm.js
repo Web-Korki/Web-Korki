@@ -101,7 +101,7 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
   }
 
   return (
-    <div className="resetPasswordConfirm d-flex flex-column justify-content-center align-items-center">
+    <div className="resetPasswordConfirm h-100 d-flex flex-column justify-content-center align-items-center">
       <Wrapper className="d-flex flex-column justify-content-center align-items-center">
         <h1 className="title mb-4">Resetuj hasło</h1>
         <form
