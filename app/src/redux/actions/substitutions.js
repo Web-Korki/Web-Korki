@@ -38,7 +38,6 @@ export const get_pending_substitutions = () => async (dispatch) => {
         config,
         body
       );
-      console.log(response.data);
       dispatch({
         type: GET_SUBSTITUTIONS_SUCCESS,
         payload: response.data,

@@ -31,6 +31,7 @@ import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfir
 import SubmitSubstitution from './containers/forms/SubmitSubstitution';
 import InitialPasswordReset from './containers/forms/InitialPasswordReset/InitialPasswordReset';
 import TakenSubstitutions from './containers/substitutions/TakenSubstitution/TakenSubstitutions';
+import AwaitingSubstitutions from './containers/substitutions/AwaitingSubstitution/AwaitingSubstitutions';
 
 function App() {
   useEffect(() => {
@@ -60,6 +61,10 @@ function App() {
         <PrivateRoute
           path="/taken_substitutions"
           component={TakenSubstitutions}
+        />
+        <PrivateRoute
+          path="/awaiting_substitutions"
+          component={AwaitingSubstitutions}
         />
         {/* <PrivateRoute 
           path="/fill_in_report"

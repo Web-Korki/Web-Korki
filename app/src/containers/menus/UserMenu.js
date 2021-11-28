@@ -39,7 +39,7 @@ const UserMenu = ({ isSuperuser, hasChangedPassword }) => {
               </Link>
             </div>
             <div className="col-12 col-lg-auto g-4">
-              <Link to="/substitutions">
+              <Link to="/awaiting_substitutions">
                 <Box>Oczekujące zastępstwa</Box>
               </Link>
             </div>
