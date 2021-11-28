@@ -25,7 +25,6 @@ import {
 } from './types';
 
 const API_URL = 'https://web-korki.edu.pl';
-// const API_URL = 'http://127.0.0.1:8000';
 
 export const refresh_token = () => async (dispatch) => {
   const config = {
@@ -203,11 +202,7 @@ export const verify = (uid, token) => async (dispatch) => {
   const body = JSON.stringify({ uid, token });
 
   try {
-    const res = await axios.post(
-      `${API_URL}/auth/users/activation/`,
-      body,
-      config
-    );
+    await axios.post(`${API_URL}/auth/users/activation/`, body, config);
 
     dispatch({
       type: ACTIVATION_SUCCESS,
@@ -216,8 +211,11 @@ export const verify = (uid, token) => async (dispatch) => {
     dispatch({
       type: ACTIVATION_FAIL,
     });
+    let msgError = err.response.data.uid
+      ? err.response.data.uid
+      : err.response.data.token;
     const errors = {
-      msg: err.response.data.detail,
+      msg: msgError,
       status: err.response.status,
     };
     dispatch({

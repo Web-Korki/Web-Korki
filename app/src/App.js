@@ -96,13 +96,8 @@ function App() {
         {/* COMMON PATHS */}
         <Route exact path="/" component={Home} />
         <Route path="/login_form" component={LoginForm} />
-        {/* <Route path="/activate/{uid}/{token}" component={ActivateAccount} /> */}
         <Route path="/activate/:uid/:token" component={ActivateAccount} />
         <Route path="/reset_password" component={ResetPassword} />
-        {/* <Route
-          path="/password/reset/confirm/{uid}/{token}"
-          component={ResetPasswordConfirm}
-        /> */}
         <Route
           path="/password/reset/confirm/:uid/:token"
           component={ResetPasswordConfirm}

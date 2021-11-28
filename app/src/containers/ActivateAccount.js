@@ -1,25 +1,22 @@
 import React, { useState } from "react";
 import { Wrapper, BlueButton } from '../components/styledComponents/index';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { verify } from '../redux/actions/auth';
+import { verify, reset_state } from '../redux/actions/auth';
 
-const ActivateAccount = ({ verify, match }) => {
+const ActivateAccount = ({ accountActivated, verify, reset_state }) => {
   const [verified, setVerified] = useState(false);
+  const { uid, token } = useParams();
+  //uid + token part in regex (?<uid>^[A-Z]{3,})(?<slash>\/)(?<token>.+) matches for eg.NDY/5w0-488f6ea724cf6edd8023
 
-  //page matcher regex:
-  //const activateAccountPage = /^http[s]?:\/\/web\-korki\.edu\.pl\/activate\/[a-zA-Z]{3,}\/[\w|\W]{3,}/gm
-
-  const verify_account = (e) => {
-    const uid = match.params.uid; //działa dobrze?
-    const token = match.params.token; //dzioła źle?
-
+  const verify_account = () => {
     verify(uid, token);
-    setVerified(true);
+    setVerified(accountActivated);
   };
 
   if (verified) {
-    return <Redirect to="/user_menu" />;
+    reset_state();
+    return <Redirect to="/login_form" />;
   }
 
   return (
@@ -35,4 +32,10 @@ const ActivateAccount = ({ verify, match }) => {
   );
 };
 
-export default connect(null, { verify })(ActivateAccount);
+const mapStateToProps = (state) => ({
+  accountActivated: state.auth.accountActivated,
+});
+
+export default connect(mapStateToProps, { verify, reset_state })(
+  ActivateAccount
+);
