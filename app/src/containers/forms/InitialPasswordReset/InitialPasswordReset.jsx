@@ -1,5 +1,5 @@
 //react
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //redux
 import { connect } from 'react-redux';
 import {
@@ -100,7 +100,6 @@ const InitialPasswordReset = ({
   if (hasChangedPassword) {
     return <Redirect to="/" />;
   }
-
   return (
     <div className="min-h-100 py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
       <Wrapper>

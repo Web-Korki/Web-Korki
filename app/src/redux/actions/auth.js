@@ -320,6 +320,8 @@ export const change_default_password =
       dispatch({
         type: CHANGE_DEFAULT_PASSWORD_SUCCESS,
       });
+      dispatch(checkAuthenticated());
+      dispatch(load_user());
     } catch (err) {
       dispatch({
         type: CHANGE_DEFAULT_PASSWORD_FAIL,
