@@ -182,7 +182,7 @@ export const register = (username, email) => async (dispatch) => {
     });
     const errors = {
       msg: err.response.data.detail,
-      email: err.response.data.email[0],
+      email: err.response.data.email,
       status: err.response.status,
     };
     dispatch({
