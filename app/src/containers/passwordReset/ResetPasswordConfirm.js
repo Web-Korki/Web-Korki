@@ -44,8 +44,8 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
   const [changingPassword, setChangingPassword] = useState(false);
 
   //STATES FOR EYEBALL:
-  const [oldPasswordShown, setOldPasswordShown] = useState(false);
   const [newPasswordShown, setNewPasswordShown] = useState(false);
+  const [repeatPasswordShown, setRepeatPasswordShown] = useState(false);
 
   //FORM:
   const { new_password, re_new_password } = formData;
@@ -89,11 +89,11 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
   };
 
   //TOGGLERS:
-  const toggleOldPasswordShow = () => {
-    setOldPasswordShown(oldPasswordShown ? false : true);
-  };
   const toggleNewPasswordShow = () => {
     setNewPasswordShown(newPasswordShown ? false : true);
+  };
+  const toggleRepeatPasswordShow = () => {
+    setRepeatPasswordShown(repeatPasswordShown ? false : true);
   };
 
   if (requestSent) {
@@ -125,16 +125,16 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
             />
             <i
               className="position-absolute eye-icon"
-              onClick={() => toggleOldPasswordShow()}
+              onClick={() => toggleNewPasswordShow()}
             >
-              {<FontAwesomeIcon icon={oldPasswordShown ? faEyeSlash : faEye} />}
+              {<FontAwesomeIcon icon={newPasswordShown ? faEyeSlash : faEye} />}
             </i>
           </div>
           <p className="text">Powtórz nowe hasło</p>
           <div class="position-relative mb-3 mb-md-4">
             <Input
               id="re_new_password"
-              type={newPasswordShown ? 'text' : 'password'}
+              type={repeatPasswordShown ? 'text' : 'password'}
               className="mb-3 mb-md-4"
               placeholder="potwierdź nowe hasło"
               name="re_new_password"
@@ -144,9 +144,13 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
             />
             <i
               className="position-absolute eye-icon"
-              onClick={() => toggleNewPasswordShow()}
+              onClick={() => toggleRepeatPasswordShow()}
             >
-              {<FontAwesomeIcon icon={newPasswordShown ? faEyeSlash : faEye} />}
+              {
+                <FontAwesomeIcon
+                  icon={repeatPasswordShown ? faEyeSlash : faEye}
+                />
+              }
             </i>
           </div>
           <BlueButton type="submit">ustaw nowe hasło</BlueButton>
