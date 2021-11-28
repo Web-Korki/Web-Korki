@@ -3,36 +3,41 @@ import React, { useState } from 'react';
 //redux
 import { connect } from 'react-redux';
 import {
+  change_default_password,
   change_password_validation_error,
-  reset_password_confirm,
-} from '../../redux/actions/auth';
+} from '../../../redux/actions/auth';
 //router
-import { Redirect, useParams } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 //utils
 import {
   BlueButton,
   Input,
   Wrapper,
-} from '../../components/styledComponents/index';
+} from '../../../components/styledComponents/index';
 //font awesome:
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 //propTypes:
 import PropTypes from 'prop-types';
 
-const ResetPasswordConfirm = ({ reset_password_confirm }) => {
-  ResetPasswordConfirm.propTypes = {
-    reset_password_confirm: PropTypes.func.isRequired,
+const InitialPasswordReset = ({
+  id,
+  hasChangedPassword,
+  change_default_password,
+  change_password_validation_error,
+}) => {
+  InitialPasswordReset.propTypes = {
+    id: PropTypes.number.isRequired,
+    hasChangedPassword: PropTypes.bool,
+    change_default_password: PropTypes.func.isRequired,
+    change_password_validation_error: PropTypes.func.isRequired,
   };
-
-  const { uid, token } = useParams();
-  //REQUEST CONTROL
-  const [requestSent, setRequestSent] = useState(false);
 
   //FORM STATE:
   const [formData, setFormData] = useState({
+    fb_name: '',
+    old_password: '',
     new_password: '',
-    re_new_password: '',
   });
 
   //STATES FOR VALIDATION:
@@ -44,11 +49,11 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
   const [changingPassword, setChangingPassword] = useState(false);
 
   //STATES FOR EYEBALL:
+  const [oldPasswordShown, setOldPasswordShown] = useState(false);
   const [newPasswordShown, setNewPasswordShown] = useState(false);
-  const [repeatPasswordShown, setRepeatPasswordShown] = useState(false);
 
   //FORM:
-  const { new_password, re_new_password } = formData;
+  const { fb_name, old_password, new_password } = formData;
 
   const passwordValidation = (e) => {
     setChangingPassword(true);
@@ -65,20 +70,21 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
       : setSpecialCharacters(false);
     e.target.value.length >= 8 ? setLongEnough(true) : setLongEnough(false);
   };
-
-  const onChange = (e) =>
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
+  };
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (lowerCase && upperCase && numbers && specialCharacters && longEnough) {
-      if (new_password === re_new_password) {
-        reset_password_confirm(uid, token, new_password, re_new_password);
-        setRequestSent(true);
+      if (new_password !== old_password) {
+        change_default_password(id, fb_name, old_password, new_password);
         setChangingPassword(false);
       } else {
-        change_password_validation_error('Hasła muszą być takie same!');
+        change_password_validation_error(
+          'Stare i nowe hasło nie mogą być identyczne!'
+        );
+
         //TO DO: check similarity of passwords
       }
     } else {
@@ -89,31 +95,59 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
   };
 
   //TOGGLERS:
+  const toggleOldPasswordShow = () => {
+    setOldPasswordShown(oldPasswordShown ? false : true);
+  };
   const toggleNewPasswordShow = () => {
     setNewPasswordShown(newPasswordShown ? false : true);
   };
-  const toggleRepeatPasswordShow = () => {
-    setRepeatPasswordShown(repeatPasswordShown ? false : true);
-  };
 
-  if (requestSent) {
-    return <Redirect to="/login_form" />;
+  //REDIRECT:
+  if (hasChangedPassword) {
+    return <Redirect to="/" />;
   }
-
   return (
-    <div className="resetPasswordConfirm min-h-100 d-flex flex-column justify-content-center align-items-center">
-      <Wrapper className="d-flex flex-column justify-content-center align-items-center">
-        <h1 className="title mb-4">Resetuj hasło</h1>
+    <div className="min-h-100 py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
+      <Wrapper>
+        <h1 className="title mb-4">Formularz resetowania hasła</h1>
         <form
           className="d-flex align-items-center flex-column"
           onSubmit={(e) => onSubmit(e)}
         >
+          <p className="text">Wprowadź nazwę z facebook</p>
+          <Input
+            id="fb_name"
+            type="text"
+            className="mb-3 mb-md-4"
+            placeholder="Adam Kowalski"
+            name="fb_name"
+            value={fb_name}
+            onChange={(e) => onChange(e)}
+            required
+          />
+          <p className="text">Podaj hasło tymczasowe</p>
+          <div className="position-relative mb-3 mb-md-4">
+            <Input
+              id="password"
+              type={oldPasswordShown ? 'text' : 'password'}
+              placeholder="stare hasło"
+              name="old_password"
+              value={old_password}
+              onChange={(e) => onChange(e)}
+              required
+            />
+            <i
+              className="position-absolute eye-icon"
+              onClick={() => toggleOldPasswordShow()}
+            >
+              {<FontAwesomeIcon icon={oldPasswordShown ? faEyeSlash : faEye} />}
+            </i>
+          </div>
           <p className="text">Podaj nowe hasło</p>
-          <div class="position-relative mb-3 mb-md-4">
+          <div className="position-relative mb-3 mb-md-4">
             <Input
               id="new_password"
               type={newPasswordShown ? 'text' : 'password'}
-              className="mb-3 mb-md-4"
               placeholder="nowe hasło"
               name="new_password"
               value={new_password}
@@ -130,30 +164,9 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
               {<FontAwesomeIcon icon={newPasswordShown ? faEyeSlash : faEye} />}
             </i>
           </div>
-          <p className="text">Powtórz nowe hasło</p>
-          <div class="position-relative mb-3 mb-md-4">
-            <Input
-              id="re_new_password"
-              type={repeatPasswordShown ? 'text' : 'password'}
-              className="mb-3 mb-md-4"
-              placeholder="potwierdź nowe hasło"
-              name="re_new_password"
-              value={re_new_password}
-              onChange={(e) => onChange(e)}
-              required
-            />
-            <i
-              className="position-absolute eye-icon"
-              onClick={() => toggleRepeatPasswordShow()}
-            >
-              {
-                <FontAwesomeIcon
-                  icon={repeatPasswordShown ? faEyeSlash : faEye}
-                />
-              }
-            </i>
-          </div>
-          <BlueButton type="submit">ustaw nowe hasło</BlueButton>
+          <BlueButton className="mt-5" type="submit">
+            wyślij
+          </BlueButton>
         </form>
       </Wrapper>
 
@@ -209,4 +222,12 @@ const ResetPasswordConfirm = ({ reset_password_confirm }) => {
   );
 };
 
-export default connect(null, { reset_password_confirm })(ResetPasswordConfirm);
+const mapStateToProps = (state) => ({
+  id: state.auth.user?.id,
+  hasChangedPassword: state.auth.user?.is_resetpwd,
+});
+
+export default connect(mapStateToProps, {
+  change_default_password,
+  change_password_validation_error,
+})(InitialPasswordReset);

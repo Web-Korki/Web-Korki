@@ -4,26 +4,12 @@
 {% blocktrans %}{{ site_name }} - aktywacja konta/account activation{% endblocktrans %}
 {% endblock subject %}
 
-{% block text_body %}
-{% blocktrans %}Polski (English below):{% endblocktrans %}
-{% blocktrans %}Niniejsza wiadomość zawiera informacje niezbędne do ukończenia procesu aktywacji konta na stronie {{ site_name }}.{% endblocktrans %}
-{% blocktrans %}Your username: {{ user }}{% endblocktrans %}
-{% trans "Aby aktywować konto, kliknij w poniższy link:" %}
-{{ protocol }}://{{ domain }}/{{ url|safe }}
-
-{% trans "Dzięki, że jesteś częścią naszego projektu!" %}
-
-{% blocktrans %}Fundacja {{ site_name }}{% endblocktrans %}
-
-{% endblock text_body %}
-
 {% block html_body %}
-<p>{% blocktrans %}Polski (English below):{% endblocktrans %}</p>
+<p>{% blocktrans %}Polski:{% endblocktrans %}</p>
 <p>{% blocktrans %}Niniejsza wiadomość zawiera informacje niezbędne do ukończenia procesu aktywacji konta na stronie {{ site_name }}.{% endblocktrans %}</p>
-    <p>{% blocktrans %}Your username: {{ user }}{% endblocktrans %}</p>
-    <p>{% blocktrans %}Your password {{ password }}{% endblocktrans %}</p>
+    <p>{% blocktrans %}Twoje hasło {{ password }}{% endblocktrans %}</p>
 <p>{% trans "Aby aktywować konto, kliknij w poniższy link:" %}</p>
-<p><a href="{{ protocol }}://{{ domain }}/{{ url|safe }}">{{ protocol }}://{{ domain }}/{{ url|safe }}</a></p>
+<p><a href="{{ protocol }}://{{ domain }}/{{ url|safe }}" target="_blank">{{ protocol }}://{{ domain }}/{{ url|safe }}</a></p>
 
 <p>{% trans "Dzięki, że jesteś częścią naszego projektu!" %}</p>
 

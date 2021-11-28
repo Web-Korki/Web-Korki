@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, get_user_model
-from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.password_validation import validate_password, ValidationError
 from djoser.serializers import UserCreateSerializer as DjoserRegisterSerializer
 from rest_framework import serializers
-from .models import House, Lesson, Student, Substitution
+from .models import House, Lesson, Student, Substitution, Subject, Level, CancelReason
 
 
 Teacher = get_user_model()
@@ -140,14 +140,36 @@ class SubstitutionSerializerUpdate(serializers.ModelSerializer):
             },
         }
 
+
 class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
     """
     Serializer for password change endpoint.
     """
+
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
     fb_name = serializers.CharField(required=True)
 
     def validate_new_password(self, value):
+        if self.old_password == self.new_password:
+            return ValidationError("The 'old password' value must not be the same as 'new password'")
         validate_password(value)
         return value
+
+
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = "__all__"
+
+
+class LevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Level
+        fields = "__all__"
+
+
+class CancelReasonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CancelReason
+        fields = "__all__"

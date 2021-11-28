@@ -1,14 +1,24 @@
+//react
 import React, { useState } from 'react';
+//redux
+import { connect } from 'react-redux';
+import { reset_password } from '../../redux/actions/auth';
+//router
+import { Redirect } from 'react-router-dom';
+//utils
 import {
   BlueButton,
   Input,
   Wrapper,
 } from '../../components/styledComponents/index';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { reset_password } from '../../redux/actions/auth';
+//propTypes
+import PropTypes from 'prop-types';
 
 const ResetPassword = ({ reset_password }) => {
+  ResetPassword.propTypes = {
+    reset_password: PropTypes.func.isRequired,
+  };
+
   const [requestSent, setRequestSent] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -32,11 +42,12 @@ const ResetPassword = ({ reset_password }) => {
   return (
     <div className="min-h-100 py-5 py-lg-0 d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
+        <h1 className="title mb-4">Zresetuj hasło</h1>
         <form
           className="d-flex flex-column justify-content-center align-items-center"
           onSubmit={(e) => onSubmit(e)}
         >
-          <h1 className="title mb-4">Podaj adres e-mail</h1>
+          <p className="text">Podaj adres email</p>
           <Input
             id="name"
             type="text"
@@ -47,7 +58,7 @@ const ResetPassword = ({ reset_password }) => {
             onChange={(e) => onChange(e)}
             required
           />
-          <BlueButton type="submit">zresetuj hasło</BlueButton>
+          <BlueButton type="submit">wyślij</BlueButton>
         </form>
       </Wrapper>
     </div>

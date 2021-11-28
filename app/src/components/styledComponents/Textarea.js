@@ -12,7 +12,7 @@ const Textarea = styled.textarea`
 
   @media screen and (max-width: 1199px) {
     min-height: 3.2em;
-    width: 80vw;
+    width: 100%;
   }
 `;
 

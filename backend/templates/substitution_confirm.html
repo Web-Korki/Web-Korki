@@ -1,0 +1,10 @@
+{% load i18n %}
+
+{% block subject %}
+{% blocktrans %}{{ site_name }} Twoje zastępstwo w dniu ({{ date }}) o godzinie {{ time }} zostało przejęte{% endblocktrans %}
+{% endblock subject %}
+
+{% block text_body %}
+    Nowy teacher - {{ new_teacher }}
+{% endblock text_body %}
+

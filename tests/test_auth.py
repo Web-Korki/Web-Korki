@@ -29,7 +29,7 @@ def test_activation(client: Client):
     r = register_sample_user(client, username, email)
     user = Teacher.objects.get(username=username)
     r2 = activate_sample_user(client, user)
-    assert r2.status_code == status.HTTP_204_NO_CONTENT
+    assert r2.status_code == status.HTTP_200_OK
     assert Teacher.objects.get(username=username).is_active == True
 
 

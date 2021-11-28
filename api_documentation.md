@@ -8,9 +8,9 @@ Creates new substitution instance. On success sends notification email to all ac
 IMPORTANT: As for now email will be sent to requesting user as well for easier developement.
 
 #### Body
-    level: (string) shortcut of student level. See LEVEL_CHOICES in values map part of this docs.
+    level: (string) id of level. Get level id from here: /api/levels/
     datetime: (string) date in one of following formats YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z]. Standard ISO format example: 2021-10-28T12:12:00
-    subject: (string) shortcut of subject name. SEE SUBJECT_CHOICES in values map part of this docs.
+    subject: (int) id of subject. Get subject id from here: /api/subjects/
     last_topics: (string)(optional)
     planned_topics: (string)(optional)
     methodology_and_platform: (string)(optional)
@@ -27,6 +27,7 @@ IMPORTANT: As for now email will be sent to requesting user as well for easier d
 **url: /api/substitutions/assign_teacher/{substitution_id}**<br>
 Assigns currently logged-in user as new_teacher.
 Sets new_teacher_found field in substitution to True.
+Sends email to the creator of this substitution with facebook name.
 If there is already teacher assigned returns failure.
 
 #### Body
@@ -44,10 +45,25 @@ If there is already teacher assigned returns failure.
 **url: /api/substitutions/**
 
 #### Body
-    only_pending: (bool)(optional) returns only substitutions where teacher not found yet
+    Nothing
 #### Returns
-    List of all (or only pending) substitutions
+    List of all (or filtered) substitutions
+#### Filters - optional
+    You can filter results by any substitution field.
+    /api/substitutions/?field_name=value
+    
+    Examples:
+    /api/substitutions/?new_teacher_found=false - return only pending substitutions
+    /api/substitutions/?level=1
+    /api/substitutions/?level=1&new_teacher_found=false
 
+**Filter fields formats:**<br>
+`new_teacher: int`<br>
+`old_teacher: int`<br>
+`datetime: str (e.g. "2021-11-23T16:00:55)"`<br>
+`datetime_range: [from_date, to_date] (e.g. ["2021-10-23T14:00:55", "2021-18-23T17:30:34"])`<br>
+`subject: int`<br>
+`new_teacher_found: bool`<br>
 ## GET - get substitution
 **url: /api/substitutions/{substitution_id}**
 #### Body
@@ -72,30 +88,3 @@ If there is already teacher assigned returns failure.
     Nothing
 #### Permissions
     Only substitution creator or admin can delete
-# Values map
-```
-SUBJECT_CHOICES = (
-    ("pol", "j. polski"),
-    ("eng", "j. angielski"),
-    ("ger", "j. niemiecki"),
-    ("math", "matematyka"),
-    ("phi", "fizyka"),
-    ("bio", "biologia"),
-)
-
-LEVEL_CHOICES = (
-    ("1sp", "1. klasa s.p."),
-    ("2sp", "2. klasa s.p."),
-    ("3sp", "3. klasa s.p."),
-    ("4sp", "4. klasa s.p."),
-    ("5sp", "5. klasa s.p."),
-    ("6sp", "6. klasa s.p."),
-    ("7sp", "7. klasa s.p."),
-    ("8sp", "8. klasa s.p."),
-    ("1lic", "1. klasa lic/tech"),
-    ("2lic", "2. klasa lic/tech"),
-    ("3lic", "3. klasa lic/tech"),
-    ("4lic", "4. klasa lic/tech"),
-    ("5tech", "1. klasa tech"),
-)
-```
