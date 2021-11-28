@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_yasg",
     "djoser",
+    "django_filters",
     # Local apps
     "myapp",
     "backend",
@@ -191,12 +192,17 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 10,
 }
 
 # Set expiration for token much longer in developement
 access_token_time = 5
 if "DEVELOP_DEBUG" in os.environ:
     access_token_time = 3600
+# else:
+#     SECURE_SSL_REDIRECT = True
+#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=access_token_time),

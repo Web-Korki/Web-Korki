@@ -175,14 +175,15 @@ def create_substitution(request):
             response_data["reason"] = "Please provide time in the future"
 
     # Assert that this is not duplicate (Same user and exactly the same date)
-    sub_with_same_date_and_user = Substitution.objects.filter(
-        datetime=requested_time, old_teacher=request.user
-    )
-    if sub_with_same_date_and_user:
-        current_status = status_conflict
-        response_data[
-            "reason"
-        ] = "There is already substitution for this user with exactly the same. Substitution not created assuming this is an error"
+    if current_status == status_ok:
+        sub_with_same_date_and_user = Substitution.objects.filter(
+            datetime=requested_time, old_teacher=request.user
+        )
+        if sub_with_same_date_and_user:
+            current_status = status_conflict
+            response_data[
+                "reason"
+            ] = "There is already substitution for this user with exactly the same. Substitution not created assuming this is an error"
 
     # Create substitution
     if current_status == status_ok:
@@ -227,7 +228,9 @@ def send_mail_with_substitution_info(substitution_id, substitution_date, request
         for teacher in teachers
         if validate_user_before_email(teacher, request.user)
     ]
-    sub_email.send(to=[], bcc=mail_list)
+
+    if mail_list:
+        sub_email.send(to=[], bcc=mail_list)
     return True
 
 
@@ -262,8 +265,8 @@ def send_email_to_old_teacher(substitution):
     sub_email = SubstitutionConfirmationEmail(context)
 
     mail_list = [substitution.old_teacher.email]
-
-    sub_email.send(to=[], bcc=mail_list)
+    if mail_list:
+        sub_email.send(to=[], bcc=mail_list)
 
 
 def user_can_modify(request, instance):

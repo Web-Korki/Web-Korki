@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, get_user_model
-from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.password_validation import validate_password, ValidationError
 from djoser.serializers import UserCreateSerializer as DjoserRegisterSerializer
 from rest_framework import serializers
 from .models import House, Lesson, Student, Substitution, Subject, Level, CancelReason
@@ -151,6 +151,8 @@ class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
     fb_name = serializers.CharField(required=True)
 
     def validate_new_password(self, value):
+        if self.old_password == self.new_password:
+            return ValidationError("The 'old password' value must not be the same as 'new password'")
         validate_password(value)
         return value
 

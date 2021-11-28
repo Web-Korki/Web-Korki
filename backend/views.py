@@ -1,7 +1,9 @@
 from rest_framework.response import Response
-from rest_framework import status, permissions, viewsets
+from rest_framework.decorators import action
+from rest_framework import status, permissions, viewsets, generics
 
 from django.shortcuts import render
+from django_filters import rest_framework as filters
 
 from djoser.views import UserViewSet
 from djoser import signals
@@ -9,7 +11,16 @@ from djoser.compat import get_user_email
 from djoser.conf import settings
 
 from tests.utils import get_random_password
-from .models import Lesson, House, Teacher, Substitution, Subject, Level, CancelReason
+from .models import (
+    Lesson,
+    House,
+    Teacher,
+    Substitution,
+    Subject,
+    Level,
+    CancelReason,
+    Student,
+)
 from .serializers import (
     LessonSerializer,
     HouseSerializer,
@@ -29,6 +40,8 @@ from .substitutions import (
     cannot_modify_response,
     teacher_already_assigned_response,
 )
+from .filters import SubstitutionFilter
+
 import os
 
 
@@ -102,9 +115,10 @@ class ActivateUser(UserViewSet):
         super().activation(request, *args, **kwargs)
         return render(request, "activation_confirmed.html")
 
+
 class HouseViewSet(viewsets.ModelViewSet):
 
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, permissions.IsAdminUser)
     serializer_class = HouseSerializer
 
     def get_queryset(self):
@@ -129,7 +143,7 @@ class StudentViewSet(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
 
     def get_queryset(self):
-        return House.objects.all()
+        return Student.objects.all()
 
 
 def index(request):
@@ -143,17 +157,20 @@ def index(request):
 
 
 class SubstitutionsView(viewsets.ModelViewSet):
-    permission_classes = (
-        permissions.IsAuthenticated,
-    )  # Should already be set by default
+    permission_classes = (permissions.IsAuthenticated,)  # Should already be set by default
     serializer_class = SubstitutionSerializer
     http_method_names = ["get", "put", "delete"]
+    queryset = Substitution.objects.all()
+    filterset_fields = ["new_teacher"]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = SubstitutionFilter
 
-    def get_queryset(self):
-        if "only_pending" in self.request.query_params:
-            if self.request.query_params["only_pending"].lower() == "true":
-                return Substitution.objects.filter(new_teacher_found=False)
-        return Substitution.objects.all()
+    def list(self, request, *args, **kwargs):
+
+        filtered_qs = self.filter_queryset(self.get_queryset())
+        context = self.paginate_queryset(filtered_qs)
+        serializer = self.serializer_class(context, many=True)
+        return self.get_paginated_response(serializer.data)
 
     def update(self, request, *args, **kwargs):
         self.serializer_class = SubstitutionSerializerUpdate
