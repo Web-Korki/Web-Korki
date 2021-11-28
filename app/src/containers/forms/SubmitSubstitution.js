@@ -26,7 +26,7 @@ const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
   useEffect(() => {
     get_classes();
     get_subjects();
-  }, []);
+  });
 
   const defaultFormSelectData = [{ value: '', label: '' }];
 

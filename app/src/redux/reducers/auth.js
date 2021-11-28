@@ -152,7 +152,6 @@ export default function (state = initialState, action) {
     case PASSWORD_RESET_FAIL:
     case PASSWORD_RESET_CONFIRM_SUCCESS:
     case PASSWORD_RESET_CONFIRM_FAIL:
-    case REGISTER_SUCCESS:
       return {
         ...state,
       };

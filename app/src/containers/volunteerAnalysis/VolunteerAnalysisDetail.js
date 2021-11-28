@@ -2,7 +2,7 @@ import { BackButton } from '../../components/buttons/BackButton';
 import { VolunteerAnalysisData } from './VolunteerAnalysisData';
 import { WhichMonthFunc } from '../../components/form/WhichMonthFunc';
 
-const baseURL = 'https://web-korki.edu.pl';
+// const baseURL = 'https://web-korki.edu.pl';
 
 export const VolunteerAnalysisDetail = (link) => {
   const link_prop = link.match.params.month;
