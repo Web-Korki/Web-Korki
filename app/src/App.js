@@ -1,22 +1,18 @@
 //react
 import React, { useEffect } from 'react';
-
 //css
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
-
 //redux
 import store from './store';
 import { connect } from 'react-redux';
 import { checkAuthenticated, load_user } from './redux/actions/auth';
-
 //router
 import { Route, Switch } from 'react-router';
-
 //components
 //all styled components are in the same place now. Remember to add them to index.js in the directory src/components/styledComponents
 //named imports
-import { InactiveSubstitution } from './containers/substitutions/InactiveSubstitution';
+import { InactiveSubstitution } from './containers/substitutions/InactiveSubstitution/InactiveSubstitution';
 import { LectureAnalysis } from './containers/lectureAnalysis/LectureAnalysis';
 import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnalysisDetail';
 import { VolunteerAnalysis } from './containers/volunteerAnalysis/VolunteerAnalysis';
@@ -32,9 +28,9 @@ import PrivateRoute from './containers/PrivateRoute';
 import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
-import SubmitReplacement from './containers/forms/SubmitReplacement';
+import SubmitSubstitution from './containers/forms/SubmitSubstitution';
 import InitialPasswordReset from './containers/forms/InitialPasswordReset/InitialPasswordReset';
-import TakenSubstitutions from './containers/substitutions/TakenSubstitutions';
+import TakenSubstitutions from './containers/substitutions/TakenSubstitution/TakenSubstitutions';
 
 function App() {
   useEffect(() => {
@@ -53,8 +49,8 @@ function App() {
         />
         <PrivateRoute
           exact
-          path="/submit_replacement"
-          component={SubmitReplacement}
+          path="/submit_substitution"
+          component={SubmitSubstitution}
         />
         <PrivateRoute
           exact

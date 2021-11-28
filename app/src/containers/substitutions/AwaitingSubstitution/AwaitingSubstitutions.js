@@ -1,13 +1,13 @@
 //react
 import React, { useEffect } from 'react';
 //redux
-import store from '../../store';
+import store from '../../../store';
 import { connect } from 'react-redux';
-import { get_pending_substitutions } from '../../redux/actions/substitutions';
+import { get_pending_substitutions } from '../../../redux/actions/substitutions';
 //subcomponents
 import { AwaitingSubstitutionData } from './AwaitingSubstitutionData';
 //utils
-import { BackButton } from '../../components/buttons/BackButton';
+import { BackButton } from '../../../components/buttons/BackButton';
 //propTypes
 import PropTypes from 'prop-types';
 

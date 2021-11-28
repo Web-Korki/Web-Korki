@@ -3,7 +3,7 @@ import {
   Container,
   GreyButton,
   BlueButton,
-} from '../../components/styledComponents/index';
+} from '../../../components/styledComponents/index';
 
 
 //dane z reduxa trzeba wyciągnąć komponent wyżej i tutaj podać jako propy, ergo ten komponent wgl nie będzie podłączony do reduxa

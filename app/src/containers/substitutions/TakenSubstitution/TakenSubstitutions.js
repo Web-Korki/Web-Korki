@@ -1,7 +1,7 @@
 //subcomponents
 import TakenSubstitutionsData from './TakenSubstitutionsData';
 //utils
-import { BackButton } from '../../components/buttons/BackButton';
+import { BackButton } from '../../../components/buttons/BackButton';
 
 const TakenSubstitutions = () => {
   return (

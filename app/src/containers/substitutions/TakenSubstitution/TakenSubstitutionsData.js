@@ -1,7 +1,10 @@
 //react
 import React from 'react';
 //styles
-import { TextField, Container } from '../../components/styledComponents/index';
+import {
+  TextField,
+  Container,
+} from '../../../components/styledComponents/index';
 //redux
 import { connect } from 'react-redux';
 //propTypes

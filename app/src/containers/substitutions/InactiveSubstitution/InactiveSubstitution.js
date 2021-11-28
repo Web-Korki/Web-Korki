@@ -1,6 +1,6 @@
 import React from 'react';
-import { Wrapper } from '../../components/styledComponents/index';
-import { BackButton } from '../../components/buttons/BackButton';
+import { Wrapper } from '../../../components/styledComponents/index';
+import { BackButton } from '../../../components/buttons/BackButton';
 
 export const InactiveSubstitution = () => {
   return (
