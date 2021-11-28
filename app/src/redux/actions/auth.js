@@ -180,7 +180,6 @@ export const register = (username, email) => async (dispatch) => {
     dispatch({
       type: REGISTER_FAIL,
     });
-    console.log(err.response);
     let errorMsg = err.response.data.detail
       ? err.response.data.detail
       : err.response.data.email
@@ -334,7 +333,6 @@ export const change_default_password =
       dispatch({
         type: CHANGE_DEFAULT_PASSWORD_FAIL,
       });
-      console.log(err.response.messages.message);
       let errMsg = err.response.messages
         ? 'Odśwież stronę i spróbuj ponownie.'
         : null;
