@@ -1,14 +1,18 @@
+//react
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+//redux
 import { connect } from "react-redux";
 import { register } from "../../redux/actions/auth";
+//router
+import { Redirect } from "react-router-dom";
+//utils
 import {
   Input,
   Wrapper,
   BlueButton,
 } from "../../components/styledComponents/index";
 import { BackButton } from "../../components/buttons/BackButton";
-
+//propTypes
 import PropTypes from "prop-types";
 
 const RegisterForm = ({ register, accountCreated }) => {
