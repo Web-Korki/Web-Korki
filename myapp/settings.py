@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "djoser",
     "django_filters",
+    "model_bakery",
     # Local apps
     "myapp",
     "backend",
@@ -200,9 +201,6 @@ REST_FRAMEWORK = {
 access_token_time = 5
 if "DEVELOP_DEBUG" in os.environ:
     access_token_time = 3600
-# else:
-#     SECURE_SSL_REDIRECT = True
-#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=access_token_time),

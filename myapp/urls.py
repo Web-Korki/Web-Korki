@@ -44,7 +44,7 @@ urlpatterns = [
         name="activation",
     ),
     path(
-        "api/change_default_permissions/<id>",
+        "api/change_default_password/<id>",
         ChangePasswordAfterRegister.as_view({"patch": "update"}),
     ),
     path(r"redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
