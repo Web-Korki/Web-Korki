@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "djoser",
     "django_filters",
+    "model_bakery",
     # Local apps
     "myapp",
     "backend",
