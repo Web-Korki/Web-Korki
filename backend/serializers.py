@@ -145,16 +145,18 @@ class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
     """
     Serializer for password change endpoint.
     """
+    model = Teacher
 
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
     fb_name = serializers.CharField(required=True)
 
-    def validate_new_password(self, value):
-        if self.old_password == self.new_password:
-            return ValidationError("The 'old password' value must not be the same as 'new password'")
-        validate_password(value)
-        return value
+    def validate(self, data):
+        if data.get('old_password') == data.get('new_password'):
+            raise ValidationError({"password": "The old and the new password must not be the same"})
+        return data
+
+
 
 
 class SubjectSerializer(serializers.ModelSerializer):
