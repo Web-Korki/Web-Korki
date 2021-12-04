@@ -20,7 +20,6 @@ import Alerts from './containers/alerts/Alerts';
 
 //components
 import App from './App';
-import CookiePopup from './containers/CookiePopup';
 
 //Alert Options:
 const alertOptions = {
@@ -36,7 +35,6 @@ class Index extends Component {
           <AlertProvider template={AlertTemplate} {...alertOptions}>
             <Router>
               <Alerts />
-              {/* <CookiePopup /> */}
               <App />
             </Router>
           </AlertProvider>
