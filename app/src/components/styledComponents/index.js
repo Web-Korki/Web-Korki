@@ -11,3 +11,4 @@ export { default as Textarea } from './Textarea';
 export { default as Date } from './Date';
 export { default as Wrapper } from './Wrapper';
 export { default as CookieOverlay } from './CookieOverlay';
+export { default as CookieContainer } from './CookieContainer';

@@ -9,6 +9,7 @@ import './App.css';
 import store from './store';
 import { connect } from 'react-redux';
 import { checkAuthenticated, load_user } from './redux/actions/auth';
+import { check_cookies } from './redux/actions/cookies';
 
 //router
 import { Route, Switch } from 'react-router';
@@ -41,6 +42,7 @@ function App() {
   useEffect(() => {
     store.dispatch(checkAuthenticated());
     store.dispatch(load_user());
+    store.dispatch(check_cookies());
   });
 
   return (
@@ -110,5 +112,4 @@ function App() {
     </>
   );
 }
-
 export default connect(null, { checkAuthenticated, load_user })(App);

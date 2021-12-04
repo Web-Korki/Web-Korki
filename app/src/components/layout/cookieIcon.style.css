@@ -1,6 +1,6 @@
 .icon {
-  width: 8rem;
-  margin-right: 2rem;
+  width: clamp(6rem, 10vw, 15rem);
+  height: clamp(6rem, 10vw, 15rem);
   fill-rule: evenodd;
   clip-rule: evenodd;
   stroke-linejoin: round;

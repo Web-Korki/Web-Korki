@@ -10,6 +10,7 @@ const CookieOverlay = styled.div`
   align-items: center;
   transition: background-color 0.3s ease-in-out;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10000;
 `;
 
 export default CookieOverlay;
