@@ -52,6 +52,22 @@ class LoginSerializer(serializers.ModelSerializer):
         raise serializers.ValidationError("Incorrent login data")
 
 
+class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
+
+    model = Teacher
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+    fb_name = serializers.CharField(required=True)
+
+    def validate(self, data):
+        if data.get("old_password") == data.get("new_password"):
+            raise ValidationError(
+                {"password": "The old and the new password must not be the same"}
+            )
+        return data
+
+
 class HouseSerializer(serializers.ModelSerializer):
     total_lessons_number = serializers.SerializerMethodField("is_lessons_number")
     canceled_lessons_number = serializers.SerializerMethodField("is_lessons_canceled")
@@ -83,80 +99,68 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class AddSubstitutionSerializer(serializers.ModelSerializer):
-    last_topics = serializers.CharField(required=True)
-    planned_topics = serializers.CharField(required=True)
-    teacher = serializers.IntegerField(required=True)
-    house = serializers.IntegerField(required=True)
-
-    class Meta:
-        model = Lesson
-        exclude = ("is_canceled", "cancel_reason", "substitution")
-
-
-class UpdateSubstitutionSerializer(serializers.ModelSerializer):
-
-    is_canceled = serializers.BooleanField(required=True)
-    cancel_reason = serializers.CharField(required=True)
-    substitution = serializers.CharField(required=True)
-
-    class Meta:
-        model = Lesson
-        fields = [
-            "last_topics",
-            "planned_topics",
-            "is_canceled",
-            "cancel_reason",
-            "substitution",
-        ]
-
-
-class AssignTeacherSerializer(serializers.ModelSerializer):
-    class Meta:
-
-        model = Lesson
-        fields = ["teacher"]
-
-
 class SubstitutionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Substitution
         fields = "__all__"
 
         # Save request.user instead
-        extra_kwargs = {"old_teacher": {"required": False}}
+        extra_kwargs = {
+            "old_teacher": {
+                "required": False,
+            }
+        }
+
+
+class SubstitutionSerializerCreate(serializers.ModelSerializer):
+    class Meta:
+        model = Substitution
+        fields = [
+            "level",
+            "datetime",
+            "subject",
+            "last_topics",
+            "planned_topics",
+            "methodology_and_platform",
+        ]
 
 
 class SubstitutionSerializerUpdate(serializers.ModelSerializer):
     class Meta:
-        model = SubstitutionSerializer.Meta.model
-        fields = SubstitutionSerializer.Meta.fields
-        extra_kwargs = {
-            **SubstitutionSerializer.Meta.extra_kwargs,
-            **{
+        model = Substitution
+        fields = "__all__"
+        extra_kwargs = (
+            {
                 "datetime": {"required": False},
                 "level": {"required": False},
                 "subject": {"required": False},
             },
-        }
+        )
 
 
-class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
-    """
-    Serializer for password change endpoint.
-    """
-    model = Teacher
+class SubstitutionSerializerGet(serializers.ModelSerializer):
+    subject_name = serializers.SerializerMethodField(source="get_subject_name")
+    level_name = serializers.SerializerMethodField(source="get_level_name")
+    old_teacher_fb = serializers.SerializerMethodField(source="get_old_teacher_fb")
+    new_teacher_fb = serializers.SerializerMethodField(source="get_new_teacher_fb")
 
-    old_password = serializers.CharField(required=True)
-    new_password = serializers.CharField(required=True)
-    fb_name = serializers.CharField(required=True)
+    class Meta:
+        model = SubstitutionSerializer.Meta.model
+        fields = SubstitutionSerializer.Meta.fields
 
-    def validate(self, data):
-        if data.get('old_password') == data.get('new_password'):
-            raise ValidationError({"password": "The old and the new password must not be the same"})
-        return data
+        extra_kwargs = {"old_teacher": {"required": False}}
 
+    def get_subject_name(self, obj):
+        return obj.subject.name
 
+    def get_level_name(self, obj):
+        return obj.level.name
+
+    def get_old_teacher_fb(self, obj):
+        return obj.old_teacher.fb_name
+
+    def get_new_teacher_fb(self, obj):
+        return obj.new_teacher.fb_name
 
 
 class SubjectSerializer(serializers.ModelSerializer):

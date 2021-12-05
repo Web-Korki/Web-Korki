@@ -31,6 +31,8 @@ from .serializers import (
     SubjectSerializer,
     LevelSerializer,
     CancelReasonSerializer,
+    SubstitutionSerializerGet,
+    SubstitutionSerializerCreate,
 )
 
 from .substitutions import (
@@ -157,7 +159,9 @@ def index(request):
 
 
 class SubstitutionsView(viewsets.ModelViewSet):
-    permission_classes = (permissions.IsAuthenticated,)  # Should already be set by default
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )  # Should already be set by default
     serializer_class = SubstitutionSerializer
     http_method_names = ["get", "put", "delete"]
     queryset = Substitution.objects.all()
@@ -166,13 +170,43 @@ class SubstitutionsView(viewsets.ModelViewSet):
     filterset_class = SubstitutionFilter
 
     def list(self, request, *args, **kwargs):
+        """
+        #### Body
+            Nothing
+        #### Returns
+            List of all (or filtered) substitutions
+        #### Filters - optional
+            You can filter results by any substitution field.
+            /api/substitutions/?field_name=value
+
+            Examples:
+            /api/substitutions/?new_teacher_found=false - return only pending substitutions
+            /api/substitutions/?level=1
+            /api/substitutions/?level=1&new_teacher_found=false
+
+        **Filter fields formats:**<br>
+        `new_teacher: int`<br>
+        `old_teacher: int`<br>
+        `datetime: str (e.g. "2021-11-23T16:00:55)"`<br>
+        `datetime_range: [from_date, to_date] (e.g. ["2021-10-23T14:00:55", "2021-18-23T17:30:34"])`<br>
+        `subject: int`<br>
+        `new_teacher_found: bool`<br>
+        """
 
         filtered_qs = self.filter_queryset(self.get_queryset())
         context = self.paginate_queryset(filtered_qs)
-        serializer = self.serializer_class(context, many=True)
+        serializer = SubstitutionSerializerGet(context, many=True)
         return self.get_paginated_response(serializer.data)
 
     def update(self, request, *args, **kwargs):
+        """
+        #### Body
+            All substitution object fields are optional (See POST fields)
+        #### Returns
+            Substitution object for given substitution_id
+        #### Permissions
+            Only substitution creator or admin can edit
+        """
         self.serializer_class = SubstitutionSerializerUpdate
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
@@ -193,6 +227,14 @@ class SubstitutionsView(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def destroy(self, request, *args, **kwargs):
+        """
+        #### Body
+            Nothing
+        #### Returns
+            Nothing
+        #### Permissions
+            Only substitution creator or admin can delete
+        """
         instance = self.get_object()
         # Assert substitution belongs to the request user or request user is admin
         if not user_can_modify(request, instance):
@@ -202,7 +244,29 @@ class SubstitutionsView(viewsets.ModelViewSet):
 
 
 class CreateSubstitutionView(SubstitutionsView):
+    """
+    Creates new substitution instance. On success sends notification email to all active teachers except the requesting one.
+    As for now email will be sent to requesting user as well for easier developement.
+
+    #### Body
+        level: (string) id of level. Get level id from here: /api/levels/
+        datetime: (string) date in one of following formats YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z]. Standard ISO format example: 2021-10-28T12:12:00
+        subject: (int) id of subject. Get subject id from here: /api/subjects/
+        last_topics: (string)(optional)
+        planned_topics: (string)(optional)
+        methodology_and_platform: (string)(optional)
+
+    #### Returns
+        body fields +
+        id: (int or None) None or id of created substitution
+        reason: Verbal description of this response
+        old_teacher: currently logged-in user is set in old_teacher field
+        new_teacher_found: false
+        new_teacher: null
+    """
+
     http_method_names = ["post"]
+    serializer_class = SubstitutionSerializerCreate
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -210,8 +274,29 @@ class CreateSubstitutionView(SubstitutionsView):
         return create_substitution(request)
 
 
-class AssignTeacherView(SubstitutionsView):
+class AssignTeacherView(viewsets.ModelViewSet):
+    """
+    Assigns currently logged-in user as new_teacher.
+    Sets new_teacher_found field in substitution to True.
+    Sends email to the creator of this substitution with facebook name.
+    If there is already teacher assigned returns failure.
+
+    #### Body
+        Nothing
+
+    #### Returns
+        ON SUCCESS:
+            Substitution object (See POST)
+        ON FAILURE:
+            reason: (string) Verbal description of this response
+            success: (bool)
+            new_teacher_found: (bool)
+    """
+
     http_method_names = ["patch"]
+
+    def get_serializer(self, *args, **kwargs):
+        pass
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop("partial", False)
