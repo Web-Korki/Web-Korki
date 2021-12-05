@@ -13,9 +13,6 @@ import { checkAuthenticated, load_user } from './redux/actions/auth';
 //router
 import { Route, Switch } from 'react-router';
 
-//cookies
-import Cookies from 'js-cookie';
-
 //components
 //all styled components are in the same place now. Remember to add them to index.js in the directory src/components/styledComponents
 //named imports
@@ -45,8 +42,6 @@ function App() {
     store.dispatch(checkAuthenticated());
     store.dispatch(load_user());
   });
-
-  const cookie = Cookies.get('wk_consent');
 
   return (
     <>
