@@ -3,13 +3,13 @@ import Cookies from 'js-cookie';
 import {
   GET_SUBJECTS_SUCCESS,
   GET_SUBJECTS_FAIL,
-  GET_CLASSES_SUCCESS,
-  GET_CLASSES_FAIL,
+  GET_LEVEL_SUCCESS,
+  GET_LEVEL_FAIL,
 } from '../actions/types';
 
 const API_URL = 'https://web-korki.edu.pl';
 
-export const get_classes = () => async (dispatch) => {
+export const get_levels = () => async (dispatch) => {
   if (Cookies.get('access')) {
     const config = {
       headers: {
@@ -22,12 +22,12 @@ export const get_classes = () => async (dispatch) => {
     try {
       const res = await axios.get(`${API_URL}/api/levels/`, config);
       dispatch({
-        type: GET_CLASSES_SUCCESS,
+        type: GET_LEVEL_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
       dispatch({
-        type: GET_CLASSES_FAIL,
+        type: GET_LEVEL_FAIL,
       });
     }
   }

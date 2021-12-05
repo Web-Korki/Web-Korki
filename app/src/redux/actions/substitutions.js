@@ -14,6 +14,7 @@ import {
   DELETE_SUBSTITUTION_SUCCESS,
   DELETE_SUBSTITUTION_FAIL,
 } from '../actions/types';
+import { refresh_token } from './auth';
 
 const API_URL = 'https://web-korki.edu.pl';
 
@@ -43,23 +44,16 @@ export const get_pending_substitutions = () => async (dispatch) => {
         payload: response.data,
       });
     } catch (err) {
-      //w przypadku przedawnienia tokena będzie potrzebne handle err;
-      //najlepiej byłoby stworzyć sagę, która będzie wywoływać kolejne akcje wg struktury:
-      /*
-       yield(request_get_pending_substitutions)
-       err?{
-          token?
-         yield(refresh_token())
-         yield(request_get_pending_substitutions)
-       }
-        */
-      dispatch({
-        type: GET_SUBSTITUTIONS_FAIL,
-      });
+      get_pending_substitution_token_refresh();
     }
   } else {
     dispatch({
       type: GET_SUBSTITUTIONS_FAIL,
     });
   }
+};
+
+const get_pending_substitution_token_refresh = () => {
+  refresh_token();
+  get_pending_substitutions();
 };

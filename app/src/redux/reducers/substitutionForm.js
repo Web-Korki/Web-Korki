@@ -1,13 +1,13 @@
 import {
   GET_SUBJECTS_SUCCESS,
   GET_SUBJECTS_FAIL,
-  GET_CLASSES_SUCCESS,
-  GET_CLASSES_FAIL,
+  GET_LEVEL_SUCCESS,
+  GET_LEVEL_FAIL,
 } from '../actions/types';
 
 const initialState = {
   subjects: null,
-  faculties: null,
+  levels: null,
 };
 
 export default function substitutionForm(state = initialState, action) {
@@ -18,13 +18,13 @@ export default function substitutionForm(state = initialState, action) {
         ...state,
         subjects: payload.results,
       };
-    case GET_CLASSES_SUCCESS:
+    case GET_LEVEL_SUCCESS:
       return {
         ...state,
-        faculties: payload.results,
+        levels: payload.results,
       };
     case GET_SUBJECTS_FAIL:
-    case GET_CLASSES_FAIL:
+    case GET_LEVEL_FAIL:
       return { ...state };
     default:
       return { ...state };

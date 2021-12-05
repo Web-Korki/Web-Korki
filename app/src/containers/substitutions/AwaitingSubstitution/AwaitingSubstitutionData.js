@@ -27,45 +27,85 @@ export const AwaitingSubstitutionData = ({ pendingSubstitutionsData }) => {
     }),
   }; // what's wrong with propTypes here?
 
+  // odrzuć => add substitution id to an array of filtered values
+
   return (
     <div className="col-12">
       {pendingSubstitutionsData
         ? pendingSubstitutionsData.map((substitution) => {
             return (
-              <Container className="mb-5">
+              <Container
+                className="mb-5"
+                key={substitution.id}
+                id={substitution.id} // in the context of this container it's safe, because even if the user will discard the substitution, the substitutions array is not being refiltered on the BE
+              >
+                <div className="row text mb-4">
+                  <p className="text-center">
+                    {substitution.subject_name
+                      ? substitution.subject_name
+                      : substitution.subject}{' '}
+                    dla klasy {substitution.level}
+                  </p>
+                </div>
                 <div className="row mb-4">
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
                     <p className="text">Klasa</p>
                     <TextField>{substitution.level}</TextField>
                   </div>
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
-                    <p className="text">Data</p>
-                    <TextField>Data</TextField>
+                    <p className="text">Zajęcia zaplanowano na dzień</p>
+                    <TextField>
+                      {substitution.datetime.split('T')[0] +
+                        ' ' +
+                        'o godzinie' +
+                        ' ' +
+                        substitution.datetime
+                          .split('T')[1]
+                          .split('+')[0]
+                          .split(':')[0] +
+                        ':' +
+                        substitution.datetime
+                          .split('T')[1]
+                          .split('+')[0]
+                          .split(':')[1]}
+                    </TextField>
                   </div>
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column">
                     <p className="text" for="subject">
                       Przedmiot
                     </p>
-                    <TextField>Przedmiot</TextField>
+                    <TextField>{substitution.subject}</TextField>
                   </div>
                 </div>
                 <div className="col d-flex flex-column justify-content-center">
                   <p className="text" for="last-topics">
                     Ostatnio przerabiane zagadnienia
                   </p>
-                  <TextField>Dupa na maśle</TextField>
+                  <TextField>
+                    {substitution.last_topics
+                      ? substitution.last_topics
+                      : 'nie podano'}
+                  </TextField>
                 </div>
                 <div className="col d-flex flex-column mt-4 justify-content-center">
                   <p className="text" for="planned-topics">
                     Planowane zagadnienia na lekcję
                   </p>
-                  <TextField>Masło w dupie</TextField>
+                  <TextField>
+                    {substitution.planned_topics
+                      ? substitution.planned_topics
+                      : 'nie podano'}
+                  </TextField>
                 </div>
                 <div className="col d-flex flex-column mt-4 justify-content-center">
                   <p className="text" for="teaching-methodology">
                     Metodyka nauczania oraz platforma
                   </p>
-                  <TextField>Teams ssie, zoom mniej</TextField>
+                  <TextField>
+                    {substitution.methodology_and_platform
+                      ? substitution.methodology_and_platform
+                      : 'brak danych'}
+                  </TextField>
                 </div>
                 <div className="col d-flex mt-4 justify-content-between">
                   <GreyButton>odrzuć</GreyButton>

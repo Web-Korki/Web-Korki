@@ -7,24 +7,19 @@ import {
   Wrapper,
 } from '../../components/styledComponents/index';
 import { BackButton } from '../../components/buttons/BackButton';
-import {
-  get_classes,
-  get_subjects,
-} from '../../redux/actions/substitutionForm';
+import { get_levels, get_subjects } from '../../redux/actions/substitutionForm';
 //propTypes
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import Theme from '../../components/data/Theme';
 
-// import Select, { StylesConfig } from 'react-select';
-
-const SubmitSubstitution = ({ get_classes, get_subjects, formSelectData }) => {
+const SubmitSubstitution = ({ get_levels, get_subjects, formSelectData }) => {
   SubmitSubstitution.propTypes = {
     formSelectData: PropTypes.object.isRequired,
   };
 
   useEffect(() => {
-    get_classes();
+    get_levels();
     get_subjects();
   }, []);
 
@@ -49,8 +44,8 @@ const SubmitSubstitution = ({ get_classes, get_subjects, formSelectData }) => {
                 theme={Theme}
                 name="faculty"
                 options={
-                  formSelectData.faculties
-                    ? formSelectData.faculties.map((e) => {
+                  formSelectData.levels
+                    ? formSelectData.levels.map((e) => {
                         return {
                           value: e.id,
                           label: e.name,
@@ -136,6 +131,6 @@ const mapStateToProps = (state) => ({
   formSelectData: state.substitutionForm,
 });
 
-const mapDispatchToProps = { get_classes, get_subjects };
+const mapDispatchToProps = { get_levels, get_subjects };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubmitSubstitution);
