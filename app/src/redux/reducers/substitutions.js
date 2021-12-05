@@ -11,11 +11,14 @@ import {
   MODIFY_SUBSTITUTION_FAIL,
   DELETE_SUBSTITUTION_SUCCESS,
   DELETE_SUBSTITUTION_FAIL,
+  GET_TAKEN_SUBSTITUTIONS_SUCCESS,
+  GET_TAKEN_SUBSTITUTIONS_FAIL,
 } from '../actions/types';
 
 const initialState = {
   pending_substitutions: null,
   all_substitutions: null,
+  taken_substitutions: null,
 };
 
 export default function (state = initialState, action) {
@@ -45,13 +48,21 @@ export default function (state = initialState, action) {
     case GET_SUBSTITUTIONS_FAIL:
       return {
         ...state,
-        
       };
     case GET_SUBSTITUTION_SUCCESS:
       return {
         ...state,
       };
     case GET_SUBSTITUTION_FAIL:
+      return {
+        ...state,
+      };
+    case GET_TAKEN_SUBSTITUTIONS_SUCCESS:
+      return {
+        ...state,
+        taken_substitutions: payload,
+      };
+    case GET_TAKEN_SUBSTITUTIONS_FAIL:
       return {
         ...state,
       };

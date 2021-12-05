@@ -13,12 +13,12 @@ import {
   MODIFY_SUBSTITUTION_FAIL,
   DELETE_SUBSTITUTION_SUCCESS,
   DELETE_SUBSTITUTION_FAIL,
+  GET_TAKEN_SUBSTITUTIONS_SUCCESS,
+  GET_TAKEN_SUBSTITUTIONS_FAIL,
 } from '../actions/types';
 import { refresh_token } from './auth';
 
 const API_URL = 'https://web-korki.edu.pl';
-
-//export const get_all_substitutions
 
 export const get_pending_substitutions = () => async (dispatch) => {
   if (Cookies.get('access')) {
@@ -29,15 +29,10 @@ export const get_pending_substitutions = () => async (dispatch) => {
         Accept: 'application/json',
       },
     };
-    const body = {
-      only_pending: true,
-    };
-
     try {
       const response = await axios.get(
-        `${API_URL}/api/substitutions/`,
-        config,
-        body
+        `${API_URL}/api/substitutions/?new_teacher_found=false`,
+        config
       );
       dispatch({
         type: GET_SUBSTITUTIONS_SUCCESS,
@@ -56,6 +51,40 @@ export const get_pending_substitutions = () => async (dispatch) => {
 const get_pending_substitution_token_refresh = () => {
   refresh_token();
   get_pending_substitutions();
+};
+
+export const get_taken_substitutions = () => async (dispatch) => {
+  if (Cookies.get('access')) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('access')}`,
+        Accept: 'application/json',
+      },
+    };
+
+    try {
+      const response = await axios.get(
+        `${API_URL}/api/substitutions/?new_teacher_found=true`,
+        config
+      );
+      dispatch({
+        type: GET_TAKEN_SUBSTITUTIONS_SUCCESS,
+        payload: response.data,
+      });
+    } catch (err) {
+      get_taken_substitution_token_refresh();
+    }
+  } else {
+    dispatch({
+      type: GET_TAKEN_SUBSTITUTIONS_FAIL,
+    });
+  }
+};
+
+const get_taken_substitution_token_refresh = () => {
+  refresh_token();
+  get_taken_substitutions();
 };
 
 
