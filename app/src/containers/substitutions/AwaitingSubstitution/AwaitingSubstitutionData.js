@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 export const AwaitingSubstitutionData = ({
   pendingSubstitutionsData,
   takeSubstitution,
+  isSuperuser,
 }) => {
   AwaitingSubstitutionData.propTypes = {
     pendingSubstitutionsData: PropTypes.shape({
@@ -29,6 +30,7 @@ export const AwaitingSubstitutionData = ({
       new_teacher: PropTypes.number,
     }),
     takeSubstitution: PropTypes.func.isRequired,
+    isSuperuser: PropTypes.bool.isRequired,
   }; // what's wrong with propTypes here?
 
   const substitutionData = {
@@ -59,6 +61,12 @@ export const AwaitingSubstitutionData = ({
                       : substitution.subject + ' '}
                     dla klasy {substitution.level}
                   </p>
+                  {isSuperuser && (
+                    <>
+                      <span>Zgłosił </span>
+                      <TextField>NiggaCat {/*fb_name_old_teacher*/}</TextField>
+                    </>
+                  )}
                 </div>
                 <div className="row mb-4">
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">

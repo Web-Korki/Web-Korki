@@ -18,6 +18,7 @@ const AwaitingSubstitutions = ({
   pendingSubstitutionsCount,
   pendingSubstitutionsData,
   take_substitution,
+  isSuperuser,
 }) => {
   AwaitingSubstitutions.propTypes = {
     pendingSubstitutionsCount: PropTypes.number,
@@ -34,6 +35,7 @@ const AwaitingSubstitutions = ({
       new_teacher: PropTypes.number,
     }),
     take_substitution: PropTypes.func,
+    isSuperuser: PropTypes.bool.isRequired,
   };
 
   useEffect(() => {
@@ -56,6 +58,7 @@ const AwaitingSubstitutions = ({
           <AwaitingSubstitutionData
             pendingSubstitutionsData={pendingSubstitutionsData}
             takeSubstitution={take_substitution}
+            isSuperuser
           />
         </div>
       </div>
@@ -66,6 +69,7 @@ const AwaitingSubstitutions = ({
 const mapStateToProps = (state) => ({
   pendingSubstitutionsCount: state.substitutions?.pending_substitutions?.count,
   pendingSubstitutionsData: state.substitutions?.pending_substitutions?.results,
+  isSuperuser: state.auth.user?.is_superuser,
 });
 
 const mapDispatchToProps = {
