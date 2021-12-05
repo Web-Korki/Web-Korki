@@ -11,7 +11,10 @@ import {
 import PropTypes from 'prop-types';
 
 //dane z reduxa trzeba wyciągnąć komponent wyżej i tutaj podać jako propy, ergo ten komponent wgl nie będzie podłączony do reduxa
-export const AwaitingSubstitutionData = ({ pendingSubstitutionsData }) => {
+export const AwaitingSubstitutionData = ({
+  pendingSubstitutionsData,
+  takeSubstitution,
+}) => {
   AwaitingSubstitutionData.propTypes = {
     pendingSubstitutionsData: PropTypes.shape({
       id: PropTypes.number,
@@ -25,7 +28,17 @@ export const AwaitingSubstitutionData = ({ pendingSubstitutionsData }) => {
       subject: PropTypes.number,
       new_teacher: PropTypes.number,
     }),
+    takeSubstitution: PropTypes.func.isRequired,
   }; // what's wrong with propTypes here?
+
+  const substitutionData = {
+    userId: '',
+  };
+
+  const handleSubmit = ({ substitutionData }, id) => {
+    console.log({ substitutionData }, id);
+    // takeSubstitution({ substitutionData }, id);
+  };
 
   // odrzuć => add substitution id to an array of filtered values
 
@@ -109,7 +122,13 @@ export const AwaitingSubstitutionData = ({ pendingSubstitutionsData }) => {
                 </div>
                 <div className="col d-flex mt-4 justify-content-between">
                   <GreyButton>odrzuć</GreyButton>
-                  <BlueButton>akceptuj</BlueButton>
+                  <BlueButton
+                    onClick={() =>
+                      handleSubmit(substitutionData, substitution.id)
+                    }
+                  >
+                    akceptuj
+                  </BlueButton>
                 </div>
               </Container>
             );

@@ -57,3 +57,39 @@ const get_pending_substitution_token_refresh = () => {
   refresh_token();
   get_pending_substitutions();
 };
+
+
+// ASSIGN_TEACHER / TAKE_SUBSTITUTION - think about naming convention
+export const take_substitution = (form_data, id) => async (dispatch) => {
+  if(Cookies.get('access')) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('access')}`,
+        Accept: 'application/json',
+      },
+    };
+    const body = {
+      // wait until api docs will be updated
+    }
+
+    try {
+      const response = await axios.patch(`${API_URL}/api/substitutions/assign_teacher/${id}`, config, body);
+
+      dispatch({
+        type: ASSIGN_TEACHER_SUCCESS,
+        payload: response.data // is there any?
+      })
+    } catch (err) {
+      dispatch({
+        type: ASSIGN_TEACHER_FAIL
+      })
+
+      // error handling, alerts?
+    }
+  } else {
+    dispatch({
+      type: ASSIGN_TEACHER_FAIL
+    })
+  }
+}

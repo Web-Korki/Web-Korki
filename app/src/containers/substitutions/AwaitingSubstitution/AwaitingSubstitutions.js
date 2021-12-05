@@ -2,7 +2,10 @@
 import React, { useEffect } from 'react';
 //redux
 import { connect } from 'react-redux';
-import { get_pending_substitutions } from '../../../redux/actions/substitutions';
+import {
+  get_pending_substitutions,
+  take_substitution,
+} from '../../../redux/actions/substitutions';
 //subcomponents
 import { AwaitingSubstitutionData } from './AwaitingSubstitutionData';
 //utils
@@ -14,6 +17,7 @@ const AwaitingSubstitutions = ({
   get_pending_substitutions,
   pendingSubstitutionsCount,
   pendingSubstitutionsData,
+  take_substitution,
 }) => {
   AwaitingSubstitutions.propTypes = {
     pendingSubstitutionsCount: PropTypes.number,
@@ -29,6 +33,7 @@ const AwaitingSubstitutions = ({
       subject: PropTypes.number,
       new_teacher: PropTypes.number,
     }),
+    take_substitution: PropTypes.func,
   };
 
   useEffect(() => {
@@ -50,6 +55,7 @@ const AwaitingSubstitutions = ({
           {/* mapka =>  */}
           <AwaitingSubstitutionData
             pendingSubstitutionsData={pendingSubstitutionsData}
+            takeSubstitution={take_substitution}
           />
         </div>
       </div>
@@ -62,6 +68,12 @@ const mapStateToProps = (state) => ({
   pendingSubstitutionsData: state.substitutions?.pending_substitutions?.results,
 });
 
-export default connect(mapStateToProps, { get_pending_substitutions })(
-  AwaitingSubstitutions
-);
+const mapDispatchToProps = {
+  get_pending_substitutions,
+  take_substitution,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AwaitingSubstitutions);
