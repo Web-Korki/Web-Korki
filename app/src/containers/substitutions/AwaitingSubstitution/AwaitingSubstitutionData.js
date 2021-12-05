@@ -66,11 +66,11 @@ export const AwaitingSubstitutionData = ({
                     <TextField>{substitution.level}</TextField>
                   </div>
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
-                    <p className="text">Zajęcia zaplanowano na dzień</p>
+                    <p className="text">Data</p>
                     <TextField>
                       {substitution.datetime.split('T')[0] +
                         ' ' +
-                        'o godzinie' +
+                        '/' +
                         ' ' +
                         substitution.datetime
                           .split('T')[1]
@@ -120,8 +120,7 @@ export const AwaitingSubstitutionData = ({
                       : 'brak danych'}
                   </TextField>
                 </div>
-                <div className="col d-flex mt-4 justify-content-between">
-                  <GreyButton>odrzuć</GreyButton>
+                <div className="col d-flex mt-4 justify-content-center">
                   <BlueButton
                     onClick={() =>
                       handleSubmit(substitutionData, substitution.id)
