@@ -43,7 +43,7 @@ export const AwaitingSubstitutionData = ({ pendingSubstitutionsData }) => {
                   <p className="text-center">
                     {substitution.subject_name
                       ? substitution.subject_name
-                      : substitution.subject}{' '}
+                      : substitution.subject + ' '}
                     dla klasy {substitution.level}
                   </p>
                 </div>
