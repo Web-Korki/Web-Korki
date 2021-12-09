@@ -119,12 +119,32 @@ class AssignTeacherSerializer(serializers.ModelSerializer):
 
 
 class SubstitutionSerializer(serializers.ModelSerializer):
+
+    old_teacher_fb = serializers.SerializerMethodField("get_old_teacher_fb")
+    new_teacher_fb = serializers.SerializerMethodField("get_new_teacher_fb")
+    level_name = serializers.SerializerMethodField("get_level_name")
+    subject_name = serializers.SerializerMethodField("get_subject_name")
+
     class Meta:
         model = Substitution
         fields = "__all__"
 
         # Save request.user instead
         extra_kwargs = {"old_teacher": {"required": False}}
+
+    def get_old_teacher_fb(self, obj):
+        return obj.old_teacher.fb_name
+
+    def get_new_teacher_fb(self, obj):
+        if obj.new_teacher:
+            return obj.new_teacher.fb_name
+        pass
+
+    def get_level_name(self, obj):
+        return obj.level.name
+
+    def get_subject_name(self, obj):
+        return obj.subject.name
 
 
 class SubstitutionSerializerUpdate(serializers.ModelSerializer):
@@ -145,6 +165,7 @@ class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
     """
     Serializer for password change endpoint.
     """
+
     model = Teacher
 
     old_password = serializers.CharField(required=True)
@@ -152,11 +173,11 @@ class ChangePasswordAfterRegisterSerializer(serializers.Serializer):
     fb_name = serializers.CharField(required=True)
 
     def validate(self, data):
-        if data.get('old_password') == data.get('new_password'):
-            raise ValidationError({"password": "The old and the new password must not be the same"})
+        if data.get("old_password") == data.get("new_password"):
+            raise ValidationError(
+                {"password": "The old and the new password must not be the same"}
+            )
         return data
-
-
 
 
 class SubjectSerializer(serializers.ModelSerializer):
