@@ -5,13 +5,16 @@ import {
   Textarea,
   BlueButton,
   Wrapper,
-} from '../../components/styledComponents/index';
-import { BackButton } from '../../components/buttons/BackButton';
-import { get_levels, get_subjects } from '../../redux/actions/substitutionForm';
+} from '../../../components/styledComponents/index';
+import { BackButton } from '../../../components/buttons/BackButton';
+import {
+  get_levels,
+  get_subjects,
+} from '../../../redux/actions/substitutionForm';
 //propTypes
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import Theme from '../../components/data/Theme';
+import Theme from '../../../components/data/Theme';
 
 const SubmitSubstitution = ({ get_levels, get_subjects, formSelectData }) => {
   SubmitSubstitution.propTypes = {

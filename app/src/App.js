@@ -28,8 +28,8 @@ import PrivateRoute from './containers/PrivateRoute';
 import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
-import SubmitSubstitution from './containers/forms/SubmitSubstitution';
 import InitialPasswordReset from './containers/forms/InitialPasswordReset/InitialPasswordReset';
+import SubmitSubstitution from './containers/substitutions/SubmitSubstitution/SubmitSubstitution';
 import TakenSubstitutions from './containers/substitutions/TakenSubstitution/TakenSubstitutions';
 import AwaitingSubstitutions from './containers/substitutions/AwaitingSubstitution/AwaitingSubstitutions';
 
