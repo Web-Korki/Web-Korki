@@ -5,8 +5,8 @@ import {
   CREATE_SUBSTITUTION_FAIL,
   ASSIGN_TEACHER_SUCCESS,
   ASSIGN_TEACHER_FAIL,
-  GET_SUBSTITUTIONS_SUCCESS,
-  GET_SUBSTITUTIONS_FAIL,
+  GET_PENDING_SUBSTITUTIONS_SUCCESS,
+  GET_PENDING_SUBSTITUTIONS_FAIL,
   GET_SUBSTITUTION_SUCCESS,
   GET_SUBSTITUTION_FAIL,
   MODIFY_SUBSTITUTION_SUCCESS,
@@ -35,7 +35,7 @@ export const get_pending_substitutions = () => async (dispatch) => {
         config
       );
       dispatch({
-        type: GET_SUBSTITUTIONS_SUCCESS,
+        type: GET_PENDING_SUBSTITUTIONS_SUCCESS,
         payload: response.data,
       });
     } catch (err) {
@@ -43,7 +43,7 @@ export const get_pending_substitutions = () => async (dispatch) => {
     }
   } else {
     dispatch({
-      type: GET_SUBSTITUTIONS_FAIL,
+      type: GET_PENDING_SUBSTITUTIONS_FAIL,
     });
   }
 };
@@ -87,10 +87,9 @@ const get_taken_substitution_token_refresh = () => {
   get_taken_substitutions();
 };
 
-
 // ASSIGN_TEACHER / TAKE_SUBSTITUTION - think about naming convention
-export const take_substitution = (form_data, id) => async (dispatch) => {
-  if(Cookies.get('access')) {
+export const take_substitution = (id) => async (dispatch) => {
+  if (Cookies.get('access')) {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -98,27 +97,28 @@ export const take_substitution = (form_data, id) => async (dispatch) => {
         Accept: 'application/json',
       },
     };
-    const body = {
-      // wait until api docs will be updated
-    }
 
     try {
-      const response = await axios.patch(`${API_URL}/api/substitutions/assign_teacher/${id}`, config, body);
+      const response = await axios.patch(
+        `${API_URL}/api/substitutions/assign_teacher/${id}`,
+        config
+      );
 
+      console.log(response.data);
       dispatch({
         type: ASSIGN_TEACHER_SUCCESS,
-        payload: response.data // is there any?
-      })
+        payload: response.data, // is there any?
+      });
     } catch (err) {
       dispatch({
-        type: ASSIGN_TEACHER_FAIL
-      })
+        type: ASSIGN_TEACHER_FAIL,
+      });
 
       // error handling, alerts?
     }
   } else {
     dispatch({
-      type: ASSIGN_TEACHER_FAIL
-    })
+      type: ASSIGN_TEACHER_FAIL,
+    });
   }
-}
+};

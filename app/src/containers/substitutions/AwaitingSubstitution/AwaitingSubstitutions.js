@@ -54,7 +54,6 @@ const AwaitingSubstitutions = ({
           </div>
         </div>
         <div className="limiter row g-4">
-          {/* mapka =>  */}
           <AwaitingSubstitutionData
             pendingSubstitutionsData={pendingSubstitutionsData}
             takeSubstitution={take_substitution}

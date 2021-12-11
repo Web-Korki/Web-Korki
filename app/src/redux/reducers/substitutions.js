@@ -3,8 +3,8 @@ import {
   CREATE_SUBSTITUTION_FAIL,
   ASSIGN_TEACHER_SUCCESS,
   ASSIGN_TEACHER_FAIL,
-  GET_SUBSTITUTIONS_SUCCESS,
-  GET_SUBSTITUTIONS_FAIL,
+  GET_PENDING_SUBSTITUTIONS_SUCCESS,
+  GET_PENDING_SUBSTITUTIONS_FAIL,
   GET_SUBSTITUTION_SUCCESS,
   GET_SUBSTITUTION_FAIL,
   MODIFY_SUBSTITUTION_SUCCESS,
@@ -17,6 +17,7 @@ import {
 
 const initialState = {
   pending_substitutions: null,
+  substitutions: null,
   all_substitutions: null,
   taken_substitutions: null,
 };
@@ -40,12 +41,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
       };
-    case GET_SUBSTITUTIONS_SUCCESS:
+    case GET_PENDING_SUBSTITUTIONS_SUCCESS:
       return {
         ...state,
         pending_substitutions: payload,
       };
-    case GET_SUBSTITUTIONS_FAIL:
+    case GET_PENDING_SUBSTITUTIONS_FAIL:
       return {
         ...state,
       };

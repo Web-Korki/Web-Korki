@@ -6,6 +6,7 @@ import {
   GET_LEVEL_SUCCESS,
   GET_LEVEL_FAIL,
 } from '../actions/types';
+import { refresh_token } from './auth';
 
 const API_URL = 'https://web-korki.edu.pl';
 
@@ -26,11 +27,18 @@ export const get_levels = () => async (dispatch) => {
         payload: res.data,
       });
     } catch (err) {
-      dispatch({
-        type: GET_LEVEL_FAIL,
-      });
+      get_levels_token_refresh();
     }
+  } else {
+    dispatch({
+      type: GET_LEVEL_FAIL,
+    });
   }
+};
+
+const get_levels_token_refresh = () => {
+  refresh_token();
+  get_levels();
 };
 
 export const get_subjects = () => async (dispatch) => {
@@ -50,9 +58,16 @@ export const get_subjects = () => async (dispatch) => {
         payload: res.data,
       });
     } catch (err) {
-      dispatch({
-        type: GET_SUBJECTS_FAIL,
-      });
+      get_subjects_token_refresh();
     }
+  } else {
+    dispatch({
+      type: GET_SUBJECTS_FAIL,
+    });
   }
+};
+
+const get_subjects_token_refresh = () => {
+  refresh_token();
+  get_subjects();
 };

@@ -4,13 +4,11 @@ import React from 'react';
 import {
   TextField,
   Container,
-  GreyButton,
   BlueButton,
 } from '../../../components/styledComponents/index';
 //propTypes:
 import PropTypes from 'prop-types';
 
-//dane z reduxa trzeba wyciągnąć komponent wyżej i tutaj podać jako propy, ergo ten komponent wgl nie będzie podłączony do reduxa
 export const AwaitingSubstitutionData = ({
   pendingSubstitutionsData,
   takeSubstitution,
@@ -31,18 +29,11 @@ export const AwaitingSubstitutionData = ({
     }),
     takeSubstitution: PropTypes.func.isRequired,
     isSuperuser: PropTypes.bool.isRequired,
-  }; // what's wrong with propTypes here?
-
-  const substitutionData = {
-    userId: '',
   };
 
-  const handleSubmit = ({ substitutionData }, id) => {
-    console.log({ substitutionData }, id);
-    // takeSubstitution({ substitutionData }, id);
+  const handleSubmit = (id) => {
+    takeSubstitution(id);
   };
-
-  // odrzuć => add substitution id to an array of filtered values
 
   return (
     <div className="col-12">
@@ -129,11 +120,7 @@ export const AwaitingSubstitutionData = ({
                   </TextField>
                 </div>
                 <div className="col d-flex mt-4 justify-content-center">
-                  <BlueButton
-                    onClick={() =>
-                      handleSubmit(substitutionData, substitution.id)
-                    }
-                  >
+                  <BlueButton onClick={() => handleSubmit(substitution.id)}>
                     akceptuj
                   </BlueButton>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Date,
@@ -26,6 +26,28 @@ const SubmitSubstitution = ({ get_levels, get_subjects, formSelectData }) => {
     get_subjects();
   }, []);
 
+  const [formData, setFormData] = useState({
+    level: '',
+    datetime: '',
+    subject: '',
+    last_topics: '',
+    planned_topics: '',
+    methodology_and_platform: '',
+  });
+
+  const {
+    level,
+    datetime,
+    subject,
+    last_topics,
+    planned_topics,
+    methodology_and_platform,
+  } = formData;
+
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const defaultFormSelectData = [{ value: '', label: '' }];
 
   return (
@@ -45,7 +67,7 @@ const SubmitSubstitution = ({ get_levels, get_subjects, formSelectData }) => {
                 className="text-select"
                 placeholder="Wybierz klasę"
                 theme={Theme}
-                name="faculty"
+                name="level"
                 options={
                   formSelectData.levels
                     ? formSelectData.levels.map((e) => {
@@ -94,32 +116,32 @@ const SubmitSubstitution = ({ get_levels, get_subjects, formSelectData }) => {
             </div>
           </div>
           <div className="col d-flex flex-column justify-content-center">
-            <label className="text" for="last-topics">
+            <label className="text" for="last_topics">
               Ostatnio przerabiane zagadnienia
             </label>
             <Textarea
               className="align-self-center ps-4"
-              name="previous-topic"
+              name="last_topics"
               placeholder="Temat ostatniej lekcji to..."
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
-            <label className="text" for="planned-topics">
+            <label className="text" for="planned_topics">
               Planowane zagadnienia na lekcję
             </label>
             <Textarea
               className="align-self-center ps-4"
-              name="planned-topics"
+              name="planned_topics"
               placeholder="Temat przyszłej lekcji to..."
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
-            <label className="text" for="teaching-methodology">
+            <label className="text" for="methodology_and_platform">
               Metodyka nauczania oraz platforma
             </label>
             <Textarea
               className="align-self-center ps-4"
-              name="teaching-methodology"
+              name="methodology_and_platform"
               placeholder="Z uczniem pracujemy korzystając z..."
             ></Textarea>
           </div>
