@@ -30,42 +30,41 @@ const SubmitSubstitutionData = ({
 
   const [formData, setFormData] = useState({
     level: '',
-    datetime: '',
     subject: '',
+    datetime: '',
     last_topics: '',
     planned_topics: '',
     methodology_and_platform: '',
   });
 
-  const [selectedLevel, setSelectedLevel] = useState('');
-  const [selectedSubject, setSelectedSubject] = useState('');
-
-  // {...formData, level: selectedLevel, subject: selectedSubject}
-
   const {
     level,
-    datetime,
     subject,
+    datetime,
     last_topics,
     planned_topics,
     methodology_and_platform,
   } = formData;
 
   const onChange = (e) => {
-    setFormData({
-      ...formData,
-      level: selectedLevel,
-      subject: selectedSubject,
-      [e.target.name]: e.target.value,
-    });
-  }; // przechowuje wartość selectedLevel i selectedSubject ale z opóźnieniem do czasu aktualizacji innych pól. Czy należałoby dać e.name: e.label??? coś nie tak ze składnią
+    if (e.target === undefined) {
+      if (/^([a-z]|[A-Z])/g.test(e.label))
+        setFormData({ ...formData, subject: e.label });
+      if (!/^([a-z]|[A-Z])/g.test(e.label))
+        setFormData({ ...formData, level: e.label });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
     // action to create substitution;
   };
 
-  // console.log('levels', levels, 'subjects', subjects);
   console.log(formData);
 
   const defaultFormSelectData = [{ value: '', label: '' }];
@@ -99,7 +98,7 @@ const SubmitSubstitutionData = ({
                     : defaultFormSelectData
                 }
                 onChange={(e) => {
-                  setSelectedLevel(e.label);
+                  onChange(e);
                 }}
               />
             </div>
@@ -112,6 +111,7 @@ const SubmitSubstitutionData = ({
                   className="d-flex justify-content-center"
                   type="datetime-local"
                   id="date"
+                  name="datetime"
                   value={datetime}
                   onChange={(e) => onChange(e)}
                   required
@@ -138,7 +138,7 @@ const SubmitSubstitutionData = ({
                     : defaultFormSelectData
                 }
                 onChange={(e) => {
-                  setSelectedSubject(e.label);
+                  onChange(e);
                 }}
               />
             </div>
