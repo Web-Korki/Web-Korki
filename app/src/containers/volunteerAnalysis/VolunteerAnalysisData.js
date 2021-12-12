@@ -7,27 +7,27 @@ export const VolunteerAnalysisData = (month) => {
         <p className="text">
           Korepetytorzy, którzy najczęściej potrzebowali zastępstw:
         </p>
-        <div className="row row-cols-2 g-4 mt-0">
+        <div className="row row-cols-1 row-cols-lg-2 g-4 mt-0">
           <div className="d-flex justify-content-between">
-            <TextField>Guma Halls</TextField>
-            <TextField>69</TextField>
+            <TextField className="col me-4">Guma Halls</TextField>
+            <TextField className="col-auto">69</TextField>
           </div>
         </div>
         <p className="text">
           Korepetytorzy, którzy przeprowadzili wszystkie lekcje w miesiącu:
         </p>
-        <div className="row row-cols-2 g-4 mt-0">
+        <div className="row row-cols-1 row-cols-lg-2 g-4 mt-0">
           <div className="d-flex justify-content-center">
-            <TextField>Karyna Grażyna</TextField>
+            <TextField className="col">Karyna Grażyna</TextField>
           </div>
         </div>
         <p className="text">
           Korepetytorzy, który przejęli najwięcej zastępstw w miesiącu:
         </p>
-        <div className="row row-cols-2 g-4 mt-0">
+        <div className="row row-cols-1 row-cols-lg-2 g-4 mt-0">
           <div className="d-flex justify-content-between">
-            <TextField>Papaj JP</TextField>
-            <TextField>2137</TextField>
+            <TextField className="col me-4">Papaj JP</TextField>
+            <TextField className="col-auto">2137</TextField>
           </div>
         </div>
       </div>

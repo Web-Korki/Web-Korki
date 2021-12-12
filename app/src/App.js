@@ -17,8 +17,6 @@ import { Route, Switch } from 'react-router';
 //all styled components are in the same place now. Remember to add them to index.js in the directory src/components/styledComponents
 //named imports
 import { InactiveReplacement } from './containers/InactiveReplacement';
-import { LectureAnalysis } from './containers/lectureAnalysis/LectureAnalysis';
-import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnalysisDetail';
 import { VolunteerAnalysis } from './containers/volunteerAnalysis/VolunteerAnalysis';
 import { VolunteerAnalysisDetail } from './containers/volunteerAnalysis/VolunteerAnalysisDetail';
 import { Whoops404 } from './containers/Whoops404';
@@ -74,16 +72,6 @@ function App() {
         <PrivateRoute path="/admin_menu" component={AdminMenu} />
         <PrivateRoute path="/admin/register_form" component={RegisterForm} />
         {/* <PrivateRoute path="/admin/current_report" component={CurrentReport} /> */}
-
-        <PrivateRoute
-          path="/admin/lecture_analysis"
-          exact
-          component={LectureAnalysis}
-        />
-        <PrivateRoute
-          path="/admin/lecture_analysis/:month"
-          component={LectureAnalysisDetail}
-        />
         <PrivateRoute
           path="/admin/volunteer_analysis"
           exact

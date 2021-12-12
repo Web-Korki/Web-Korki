@@ -46,11 +46,6 @@ const AdminMenu = ({ isSuperuser, hasChangedPassword }) => {
             </Link>
           </div>
           <div className="col-12 col-lg-auto g-4">
-            <Link to="/admin/lecture_analysis">
-              <Box>Analiza - zajęcia</Box>
-            </Link>
-          </div>
-          <div className="col-12 col-lg-auto g-4">
             <Link to="/admin/volunteer_analysis">
               <Box>Analiza - wolontariusze</Box>
             </Link>
