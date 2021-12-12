@@ -16,11 +16,13 @@ const SubmitSubstitutionData = ({
   subjects,
   getLevels,
   getSubjects,
+  createSubstitution,
 }) => {
   SubmitSubstitutionData.propTypes = {
     getLevels: PropTypes.func.isRequired,
     getSubjects: PropTypes.func.isRequired,
     formSelectData: PropTypes.object.isRequired,
+    createSubstitution: PropTypes.func.isRequired,
   };
 
   useEffect(() => {
@@ -62,7 +64,8 @@ const SubmitSubstitutionData = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // action to create substitution;
+    console.log('called');
+    createSubstitution(formData);
   };
 
   console.log(formData);
@@ -70,13 +73,16 @@ const SubmitSubstitutionData = ({
   const defaultFormSelectData = [{ value: '', label: '' }];
 
   return (
-    <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
+    <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center submit-substitution-data">
       <Wrapper>
         <div class="d-flex mb-2 mb-xl-5">
           <BackButton />
           <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
-        <form className="w-100 d-flex flex-column p-4 mb-3">
+        <form
+          className="w-100 d-flex flex-column p-4 mb-3"
+          onSubmit={(e) => onSubmit(e)}
+        >
           <div className="row mb-4">
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label className="text" for="class">
@@ -100,6 +106,7 @@ const SubmitSubstitutionData = ({
                 onChange={(e) => {
                   onChange(e);
                 }}
+                required
               />
             </div>
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
@@ -140,6 +147,7 @@ const SubmitSubstitutionData = ({
                 onChange={(e) => {
                   onChange(e);
                 }}
+                required
               />
             </div>
           </div>
@@ -153,6 +161,7 @@ const SubmitSubstitutionData = ({
               value={last_topics}
               onChange={(e) => onChange(e)}
               placeholder="Temat ostatniej lekcji to..."
+              required
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -165,6 +174,7 @@ const SubmitSubstitutionData = ({
               value={planned_topics}
               onChange={(e) => onChange(e)}
               placeholder="Temat przyszłej lekcji to..."
+              required
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -177,10 +187,13 @@ const SubmitSubstitutionData = ({
               value={methodology_and_platform}
               onChange={(e) => onChange(e)}
               placeholder="Z uczniem pracujemy korzystając z..."
+              required
             ></Textarea>
           </div>
+          <BlueButton className="mt-5 submit-button" type="submit">
+            zgłoś zastępstwo
+          </BlueButton>
         </form>
-        <BlueButton>zgłoś zastępstwo</BlueButton>
       </Wrapper>
     </div>
   );

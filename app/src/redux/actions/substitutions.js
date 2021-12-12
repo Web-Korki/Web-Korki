@@ -20,6 +20,24 @@ import { refresh_token } from './auth';
 
 const API_URL = 'https://web-korki.edu.pl';
 
+export const create_substitution = (data) => async (dispatch) => {
+  if (Cookies.get('access')) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('access')}`,
+        Accept: 'application/json',
+      },
+    };
+    console.log('body', data);
+    console.log('stringified', JSON.stringify(data));
+  } else {
+    dispatch({
+      type: CREATE_SUBSTITUTION_FAIL,
+    });
+  }
+};
+
 export const get_pending_substitutions = () => async (dispatch) => {
   if (Cookies.get('access')) {
     const config = {
