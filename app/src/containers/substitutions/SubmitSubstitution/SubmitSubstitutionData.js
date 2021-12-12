@@ -1,4 +1,6 @@
+// react
 import React, { useEffect, useState } from 'react';
+// utils
 import {
   Date,
   Textarea,
@@ -51,9 +53,9 @@ const SubmitSubstitutionData = ({
   const onChange = (e) => {
     if (e.target === undefined) {
       if (/^([a-z]|[A-Z])/g.test(e.label))
-        setFormData({ ...formData, subject: e.label });
+        setFormData({ ...formData, subject: e.value });
       if (!/^([a-z]|[A-Z])/g.test(e.label))
-        setFormData({ ...formData, level: e.label });
+        setFormData({ ...formData, level: e.value });
     } else {
       setFormData({
         ...formData,
@@ -64,11 +66,8 @@ const SubmitSubstitutionData = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('called');
     createSubstitution(formData);
   };
-
-  console.log(formData);
 
   const defaultFormSelectData = [{ value: '', label: '' }];
 

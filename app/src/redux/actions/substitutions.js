@@ -29,13 +29,32 @@ export const create_substitution = (data) => async (dispatch) => {
         Accept: 'application/json',
       },
     };
-    console.log('body', data);
-    console.log('stringified', JSON.stringify(data));
+    const body = data;
+
+    try {
+      const res = await axios.post(
+        `${API_URL}/api/substitutions/create/`,
+        body,
+        config
+      );
+
+      dispatch({
+        type: CREATE_SUBSTITUTION_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      create_substitution_token_refresh();
+    }
   } else {
     dispatch({
       type: CREATE_SUBSTITUTION_FAIL,
     });
   }
+};
+
+const create_substitution_token_refresh = () => {
+  refresh_token();
+  create_substitution();
 };
 
 export const get_pending_substitutions = () => async (dispatch) => {
@@ -118,7 +137,7 @@ export const take_substitution = (id) => async (dispatch) => {
 
     try {
       const response = await axios.patch(
-        `${API_URL}/api/substitutions/assign_teacher/${id}`,
+        `${API_URL}/api/substitutions/assign_teacher/${id}/`,
         config
       );
 
