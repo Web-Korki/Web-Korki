@@ -26,7 +26,6 @@ export const create_substitution = (data) => async (dispatch) => {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Cookies.get('access')}`,
-        Accept: 'application/json',
       },
     };
     const body = data;
