@@ -35,6 +35,7 @@ import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfir
 import SubmitReplacement from './containers/forms/SubmitReplacement';
 import InitialPasswordReset from './containers/forms/InitialPasswordReset/InitialPasswordReset';
 import TakenSubstitutions from './containers/substitutions/TakenSubstitutions';
+import CookiePopup from './containers/CookiePopup';
 
 function App() {
   useEffect(() => {
@@ -104,9 +105,9 @@ function App() {
         />
         <Route path="*" component={Whoops404} />
       </Switch>
+      <CookiePopup />
       <div className="footer fixed-bottom text-center">© 2021 Web-Korki</div>
     </>
   );
 }
-
 export default connect(null, { checkAuthenticated, load_user })(App);
