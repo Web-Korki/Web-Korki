@@ -273,6 +273,24 @@ class CreateSubstitutionView(SubstitutionsView):
 
 
 class AssignTeacherView(SubstitutionsView):
+    """
+    Assigns currently logged-in user as new_teacher.
+    Sets new_teacher_found field in substitution to True.
+    Sends email to the creator of this substitution with facebook name.
+    If there is already teacher assigned returns failure.
+
+    #### Body
+        Nothing
+
+    #### Returns
+        ON SUCCES:
+            Substitution object (See POST)
+        ON FAILURE:
+            reason: (string) Verbal description of this response
+            success: (bool)
+            new_teacher_found: (bool)
+    """
+
     http_method_names = ["patch"]
 
     def update(self, request, *args, **kwargs):

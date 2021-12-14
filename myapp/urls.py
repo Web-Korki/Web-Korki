@@ -30,6 +30,7 @@ app_name = "backend"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("blog/", include("cms.urls")),
     path("api/", include((router.urls, "myapp"), namespace="api")),
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
@@ -39,16 +40,15 @@ urlpatterns = [
         name="schema-swagger-ui",
     ),
     path(
-        "activate/<uid>/<token>",
+        "activate/<uid>/<token>/",
         ActivateUser.as_view({"get": "activation"}),
         name="activation",
     ),
     path(
-        "api/change_default_password/<id>",
+        "api/change_default_password/<id>/",
         ChangePasswordAfterRegister.as_view({"patch": "update"}),
     ),
     path(r"redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
-    url(
-        r"^.*", index, name="index"
-    ),  # All urls not specified in backend will be handled by react app
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(r"^.*", index, name="index"),
+    # All urls not specified in backend will be handled by react app
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

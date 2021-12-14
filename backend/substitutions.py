@@ -102,7 +102,8 @@ def compose_email_from_model(model):
     e += "{% block text_body %}"
     e += model.text
     e += "\n\n"
-    e += model.footer.text
+    if model.footer:
+        e += model.footer.text
     e += "{% endblock text_body %}"
     return e
 
@@ -166,9 +167,7 @@ def create_substitution(request):
     # Assert that date of that lesson is in the future
     if current_status == status_ok:
         current_time = datetime.now()
-        requested_time = datetime.strptime(
-            request.data["datetime"], "%Y-%m-%dT%H:%M:%S"
-        )
+        requested_time = datetime.strptime(request.data["datetime"], "%Y-%m-%d %H:%M")
         if requested_time.timestamp() < current_time.timestamp():
             current_status = status_conflict
             response_data["reason"] = "Please provide time in the future"
