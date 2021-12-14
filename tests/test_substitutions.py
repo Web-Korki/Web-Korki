@@ -26,7 +26,7 @@ assign_teacher_url = reverse("api:assign_teacher-list")
 
 @pytest.mark.django_db
 def test_levels(client):
-    """ Standard rest_framework.viewsets.ModelViewSet test """
+    """Standard rest_framework.viewsets.ModelViewSet test"""
     data = {"name": "test"}
     data_modified = {"name": "test2"}
     model_view_set_test(client, levels_list_url, data, data_modified)
@@ -34,7 +34,7 @@ def test_levels(client):
 
 @pytest.mark.django_db
 def test_subjects(client):
-    """ Standard rest_framework.viewsets.ModelViewSet test """
+    """Standard rest_framework.viewsets.ModelViewSet test"""
     data = {"name": "test"}
     data_modified = {"name": "test2"}
     model_view_set_test(client, subjects_list_url, data, data_modified)
@@ -42,7 +42,7 @@ def test_subjects(client):
 
 @pytest.mark.django_db
 def test_substitution(client):
-    """ All substitutions api calls methods """
+    """All substitutions api calls methods"""
     token, user = get_token_without_email(client)
 
     # Fill database before tests
@@ -59,7 +59,7 @@ def test_substitution(client):
     correct_data = {
         "level": level.id,
         "subject": subject.id,
-        "datetime": d.strftime("%Y-%m-%dT%H:%M:%S"),
+        "datetime": d.strftime("%Y-%m-%d %H:%M"),
     }
     response = client.post(
         substitution_create_url,
@@ -72,7 +72,8 @@ def test_substitution(client):
     new_sub_id = response.json()["id"]
     assign_teacher_url_with_id = assign_teacher_url + str(new_sub_id) + "/"
     response = client.patch(
-        assign_teacher_url_with_id, HTTP_AUTHORIZATION="Bearer {}".format(token),
+        assign_teacher_url_with_id,
+        HTTP_AUTHORIZATION="Bearer {}".format(token),
     )
     assert response.status_code == 200 and response.json()["new_teacher_found"]
     assert response.json()["new_teacher"] == user.id  # user correctly assigned
@@ -106,7 +107,8 @@ def test_substitution(client):
 
     # Assign teacher twice
     response = client.patch(
-        assign_teacher_url_with_id, HTTP_AUTHORIZATION="Bearer {}".format(token),
+        assign_teacher_url_with_id,
+        HTTP_AUTHORIZATION="Bearer {}".format(token),
     )
     assert response.status_code != 200
 

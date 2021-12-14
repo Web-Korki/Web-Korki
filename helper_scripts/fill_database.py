@@ -13,8 +13,16 @@ sys.path.insert(0, project_path)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myapp.settings")
 django.setup()
 
-from backend.models import Lesson, Teacher, House, Student
-from backend.models import SUBJECT_CHOICES, LEVEL_CHOICES, CANCEL_REASONS
+from backend.models import (
+    Substitution,
+    Teacher,
+    House,
+    Student,
+    Level,
+    Subject,
+    Email,
+    EmailFooter,
+)
 
 # random.seed(1) # Change or comment it for different results
 
@@ -51,17 +59,48 @@ cities = [
     "Bydgoszczy",
     "Przemyślu",
 ]
-subjects = [item[0] for item in SUBJECT_CHOICES]
-levels = [item[0] for item in LEVEL_CHOICES]
-cancel_reasons = [item[0] for item in CANCEL_REASONS]
+
+subjects = [
+    "j. polski",
+    "j. angielski",
+    "j. niemiecki",
+    "matematyka",
+    "fizyka",
+    "biologia",
+    "chemia",
+    "informatyka",
+    "plastyka",
+    "geografia",
+    "historia",
+]
+
+levels = [
+    "1. klasa s.p.",
+    "2. klasa s.p.",
+    "3. klasa s.p.",
+    "4. klasa s.p.",
+    "5. klasa s.p.",
+    "6. klasa s.p.",
+    "7. klasa s.p.",
+    "8. klasa s.p.",
+    "1. klasa lic/tech",
+    "2. klasa lic/tech",
+    "3. klasa lic/tech",
+    "4. klasa lic/tech",
+    "5. klasa tech",
+]
 
 
 # Utils
-def get_random_date(start_date, end_date):
-    time_between_dates = end_date - start_date
-    days_between_dates = time_between_dates.days
-    random_number_of_days = random.randrange(days_between_dates)
-    random_date = start_date + dt.timedelta(days=random_number_of_days)
+def get_random_date():
+    raw_date = dt.datetime(
+        year=2022,
+        month=random.randint(2, 12),
+        day=random.randint(1, 28),
+        hour=random.randint(10, 24),
+        minute=random.randint(10, 59),
+    )
+    random_date = dt.datetime.strftime(raw_date, "%Y-%m-%d %H:%M")
     return random_date
 
 
@@ -83,6 +122,44 @@ def find_unique_name_for_student():
 
 
 # Core Functions
+def add_sub_emails():
+    sub_email = Email(
+        name="SubstitutionEmail",
+        title="ZASTĘPSTWO {{ site_name }} - {{ subject }} {{ week_day }} {{ time }} ({{ date }}) {{ level }}",
+        text=""""
+        Hej!
+
+Jest potrzebne zastępstwo, aby dowiedzieć się szczegółów kliknij w poniższy link:
+
+https://{{ domain }}/{{ url|safe }}substitutions/{{ substitution_id }}
+
+Dziękujemy, że jesteś.
+Zespół Web-Korki
+""",
+    )
+    confirm_email = Email(
+        name="SubstitutionConfirmEmail",
+        title="{{ site_name }} Twoje zastępstwo w dniu ({{ date }}) o godzinie {{ time }} zostało przejęte",
+        text="Nowy nauczyciel - {{ new_teacher }}",
+    )
+    sub_email.save()
+    confirm_email.save()
+
+
+def add_levels():
+    print("adding levels....")
+    for level_name in levels:
+        obj = Level(name=level_name)
+        obj.save()
+
+
+def add_subjects():
+    print("adding subjects....")
+    for subject_name in subjects:
+        obj = Subject(name=subject_name)
+        obj.save()
+
+
 def add_random_houses(n=1):
     print("adding {} houses...".format(n))
 
@@ -125,39 +202,26 @@ def add_teachers(n=1):
             if len(u) == 0:
                 is_unique = True
         email = "_".join(username.split()).lower() + "@.gmail.com"
-        t = Teacher(subjects=subs, username=username, email=email)
+        t = Teacher(username=username, email=email)
         t.save()
 
 
-def add_lessons(n=1, start_date=dt.datetime(2021, 1, 1), end_date=dt.datetime.today()):
-    print(
-        "adding {} lessons in interval from {} to {}...".format(
-            n, start_date.strftime("%Y.%m.%d"), end_date.strftime("%Y.%m.%d")
-        )
-    )
+def add_subs(n=1):
+    print("adding {} substitutions...".format(n))
     for i in range(n):
-        teacher = get_random_from_model(Teacher)
-        student = get_random_from_model(Student)
-        lvl = random.choice(levels)
-        date = get_random_date(start_date, end_date)
-        subject = random.choice(subjects)
 
-        cancel_reason = None
-        percent = random.random()
-        is_canceled = percent > 0.75
-        if is_canceled:
-            cancel_reason = random.choice(cancel_reasons)
+        lvl = random.randint(1, len(levels))
+        date = get_random_date()
+        subject = random.randint(1, len(subjects))
+        old_teacher = random.randint(1, 11)
 
-        l = Lesson(
-            teacher=teacher,
-            student=student,
-            level=lvl,
+        s = Substitution(
+            old_teacher=Teacher.objects.get(id=old_teacher),
+            level=Level.objects.get(id=lvl),
             datetime=date,
-            subject=subject,
-            is_canceled=is_canceled,
-            cancel_reason=cancel_reason,
+            subject=Subject.objects.get(id=subject),
         )
-        l.save()
+        s.save()
 
         if i > 0 and i % 1000 == 0:
             print("{} lessons added from {} - {}%".format(i, n, i / n * 100))
@@ -169,10 +233,12 @@ def add_batch(n=1):
     The order in functions is important here!
     """
     for _ in range(n):
+        add_subjects()
+        add_levels()
         add_random_houses(3)
         add_students(100)
         add_teachers(10)
-        add_lessons(10000)
+        add_subs(10000)
 
 
 if __name__ == "__main__":

@@ -4,32 +4,6 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.models import ContentType
 
 
-SUBJECT_CHOICES = (
-    ("pol", "j. polski"),
-    ("eng", "j. angielski"),
-    ("ger", "j. niemiecki"),
-    ("math", "matematyka"),
-    ("phi", "fizyka"),
-    ("bio", "biologia"),
-)
-
-LEVEL_CHOICES = (
-    ("1sp", "1. klasa s.p."),
-    ("2sp", "2. klasa s.p."),
-    ("3sp", "3. klasa s.p."),
-    ("4sp", "4. klasa s.p."),
-    ("5sp", "5. klasa s.p."),
-    ("6sp", "6. klasa s.p."),
-    ("7sp", "7. klasa s.p."),
-    ("8sp", "8. klasa s.p."),
-    ("1lic", "1. klasa lic/tech"),
-    ("2lic", "2. klasa lic/tech"),
-    ("3lic", "3. klasa lic/tech"),
-    ("4lic", "4. klasa lic/tech"),
-    ("5tech", "1. klasa tech"),
-)
-
-
 def get_subject_full_name(id):
     subject = Subject.objects.get(id=id)
     return subject.name
