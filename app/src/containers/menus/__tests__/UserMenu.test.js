@@ -1,16 +1,21 @@
-//react
+// react
 import React from 'react';
-//redux
+// test utils
+import { render, waitFor, screen } from '@testing-library/react';
+// isolated component
+import { UserMenu } from '../UserMenu';
 
-//rtl
-import { screen, render } from '@testing-library/react';
-import '@testing-library/jest-dom';
-//utils
-import UserMenu from '../UserMenu';
+const testProps = {
+  isSuperuser: false,
+  hasChangedPassword: true,
+};
+
+// it should be rendered inside Router
 
 describe('UserMenu', () => {
-  test('should render component for a teacher without error', () => {
-    render(<UserMenu isSuperuser />);
-    expect(screen.getByText('Panel Korepetytora')).toBeInTheDocument();
+  describe('renders UserMenu after initial password has been changed', () => {
+    it('should render UserMenu without error', () => {
+      render(<UserMenu {...testProps} />);
+    });
   });
 });
