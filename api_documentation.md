@@ -24,7 +24,7 @@ IMPORTANT: As for now email will be sent to requesting user as well for easier d
     new_teacher: null
 
 ## PATCH - Assign Teacher
-**url: /api/substitutions/assign_teacher/{substitution_id}**<br>
+**url: /api/substitutions/assign_teacher/{substitution_id}/**<br>
 Assigns currently logged-in user as new_teacher.
 Sets new_teacher_found field in substitution to True.
 Sends email to the creator of this substitution with facebook name.

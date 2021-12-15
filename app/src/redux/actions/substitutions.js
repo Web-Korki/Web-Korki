@@ -26,10 +26,12 @@ export const create_substitution = (data) => async (dispatch) => {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Cookies.get('access')}`,
+        Accept: 'application/json',
       },
     };
-    const body = data;
-
+    const body = JSON.stringify({ ...data });
+    console.log('body', body);
+    console.log('data', data);
     try {
       const res = await axios.post(
         `${API_URL}/api/substitutions/create/`,
