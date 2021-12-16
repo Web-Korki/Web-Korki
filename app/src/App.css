@@ -107,6 +107,18 @@ body {
   transform: rotate(-90deg);
 }
 
+.cookie-overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+}
+
 /* Bootstrap's xl breakpoint */
 @media screen and (max-width: 1199px) {
   .d-arrow {

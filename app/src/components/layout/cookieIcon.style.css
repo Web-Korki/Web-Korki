@@ -1,0 +1,12 @@
+.icon {
+  width: clamp(6rem, 10vw, 15rem);
+  height: clamp(6rem, 10vw, 15rem);
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  stroke-linejoin: round;
+  stroke-miterlimit: 2;
+}
+
+.pathCookie {
+  fill: rgb(66, 126, 144);
+}

@@ -1,4 +1,4 @@
-//react
+// react
 import React from 'react';
 //rtl
 import { screen, render } from '@testing-library/react';
