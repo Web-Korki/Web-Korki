@@ -59,7 +59,7 @@ def test_substitution(client):
     correct_data = {
         "level": level.id,
         "subject": subject.id,
-        "datetime": d.strftime("%Y-%m-%d %H:%M"),
+        "datetime": d.strftime("%Y-%m-%dT%H:%M"),
     }
     response = client.post(
         substitution_create_url,

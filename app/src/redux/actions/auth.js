@@ -320,7 +320,7 @@ export const change_default_password =
 
     try {
       await axios.patch(
-        `${API_URL}/api/change_default_password/${id}`,
+        `${API_URL}/api/change_default_password/${id}/`,
         body,
         config
       );
