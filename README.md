@@ -1,5 +1,7 @@
 ##README
 
+PROD VERSION: 16.12.21
+
 [![codecov](https://codecov.io/gh/Web-Korki/Web-Korki/branch/master/graph/badge.svg?token=OEHMSAP5T3)](https://codecov.io/gh/Web-Korki/Web-Korki)
 
 ## GIT FLOW:
