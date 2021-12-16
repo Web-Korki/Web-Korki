@@ -31,6 +31,7 @@ app_name = "backend"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("blog/", include("cms.urls")),
+    path("taggit_autosuggest/", include("taggit_autosuggest.urls")),
     path("api/", include((router.urls, "myapp"), namespace="api")),
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),

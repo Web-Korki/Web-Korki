@@ -5,8 +5,8 @@ from django.contrib.contenttypes.models import ContentType
 
 
 def get_subject_full_name(id):
-    subject = Subject.objects.get(id=id)
-    return subject.name
+    sb = Subject.objects.get(id=id)
+    return sb.name
 
 
 def get_level_full_name(id):

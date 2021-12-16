@@ -167,7 +167,7 @@ def create_substitution(request):
     # Assert that date of that lesson is in the future
     if current_status == status_ok:
         current_time = datetime.now()
-        requested_time = datetime.strptime(request.data["datetime"], "%Y-%m-%d %H:%M")
+        requested_time = datetime.strptime(request.data["datetime"], "%Y-%m-%dT%H:%M")
         if requested_time.timestamp() < current_time.timestamp():
             current_status = status_conflict
             response_data["reason"] = "Please provide time in the future"
@@ -181,13 +181,12 @@ def create_substitution(request):
             current_status = status_conflict
             response_data[
                 "reason"
-            ] = "There is already substitution for this user with exactly the same. Substitution not created assuming this is an error"
+            ] = "There is already substitution for this user with exactly the same datetime and user. Substitution not created assuming this is an error"
 
     # Create substitution
     if current_status == status_ok:
-        substitution_data = request.data.dict()
+        substitution_data = {k: v for (k, v) in request.data.items()}
         substitution_data["old_teacher"] = request.user
-
         # Already checked if exist in serializer
         substitution_data["subject"] = Subject.objects.get(
             id=substitution_data["subject"]
