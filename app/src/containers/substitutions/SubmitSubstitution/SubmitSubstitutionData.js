@@ -53,9 +53,9 @@ const SubmitSubstitutionData = ({
   const onChange = (e) => {
     if (e.target === undefined) {
       if (/^([a-z]|[A-Z])/g.test(e.label))
-        setFormData({ ...formData, subject: e.value });
+        setFormData({ ...formData, subject: e.value.toString() });
       if (!/^([a-z]|[A-Z])/g.test(e.label))
-        setFormData({ ...formData, level: e.value });
+        setFormData({ ...formData, level: e.value.toString() });
     } else {
       setFormData({
         ...formData,

@@ -29,9 +29,9 @@ export const create_substitution = (data) => async (dispatch) => {
         Accept: 'application/json',
       },
     };
+
     const body = JSON.stringify({ ...data });
-    console.log('body', body);
-    console.log('data', data);
+    console.log(body);
     try {
       const res = await axios.post(
         `${API_URL}/api/substitutions/create/`,
