@@ -36,9 +36,11 @@ from .serializers import (
 from .substitutions import (
     create_substitution,
     assign_teacher,
+    unassign_teacher,
     user_can_modify,
     cannot_modify_response,
     teacher_already_assigned_response,
+    teacher_not_assigned_response,
 )
 from .filters import SubstitutionFilter
 
@@ -305,6 +307,52 @@ class AssignTeacherView(SubstitutionsView):
 
         # Custom perform update
         assign_teacher(self.request, substitution)
+
+        if getattr(substitution, "_prefetched_objects_cache", None):
+            substitution._prefetched_objects_cache = {}
+
+        return Response(serializer.data)
+
+
+class UnassignTeacherView(SubstitutionsView):
+    """
+    Unassigns currently logged-in user as new_teacher.
+    Sets new_teacher_found field in substitution to False.
+    Sends email with substitution notifications to users.
+    If there is no teacher assigned returns failure.
+
+    #### Body
+        Nothing
+
+    #### Returns
+        ON SUCCES:
+            Substitution object (See POST)
+        ON FAILURE:
+            reason: (string) Verbal description of this response
+            success: (bool)
+            new_teacher_found: (bool)
+    """
+
+    http_method_names = ["patch"]
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop("partial", False)
+        substitution = self.get_object()
+
+        user = request.user
+        assigned_teacher = substitution.new_teacher
+        if not substitution.new_teacher_found:
+            return teacher_not_assigned_response
+        elif user != assigned_teacher:
+            return cannot_modify_response
+
+        serializer = self.get_serializer(
+            substitution, data=request.data, partial=partial
+        )
+        serializer.is_valid(raise_exception=True)
+
+        # Custom perform update
+        unassign_teacher(self.request, substitution)
 
         if getattr(substitution, "_prefetched_objects_cache", None):
             substitution._prefetched_objects_cache = {}
