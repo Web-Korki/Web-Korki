@@ -243,6 +243,43 @@ def assign_teacher(request, substitution):
     send_email_to_old_teacher(substitution)
 
 
+def unassign_teacher(request, substitution):
+    new_teacher = None
+
+    substitution.new_teacher = (
+        new_teacher  # new_teacher_found property updates in model.on_save
+    )
+    substitution.new_teacher_found = False
+    substitution.save()
+
+    teachers = Teacher.objects.all()
+    substitution_date = substitution.datetime
+
+    week_day = substitution_date.weekday()
+    time = substitution_date.strftime("%H:%M")
+    date = substitution_date.strftime("%d.%m")
+
+    context = {
+        "subject": substitution.subject.name,
+        "level": substitution.level.name,
+        "week_day": map_number_to_weekday(week_day),
+        "time": time,
+        "date": date,
+        "substitution_id": substitution.id,
+    }
+
+    sub_email = SubstitutionEmail(context)
+    mail_list = [
+        teacher.email
+        for teacher in teachers
+        if validate_user_before_email(teacher, request.user)
+    ]
+
+    if mail_list:
+        sub_email.send(to=[], bcc=mail_list)
+    return True
+
+
 def send_email_to_old_teacher(substitution):
     """ "
     Send email with new teacher contact info to the teacher that applied for substitution
@@ -289,6 +326,14 @@ teacher_already_assigned_response = RestFrameworkResponse(
     data={
         "reason": "New teacher was already assigned to this substitution",
         "new_teacher_found": True,
+        "success": False,
+    },
+)
+teacher_not_assigned_response = RestFrameworkResponse(
+    status=status.HTTP_409_CONFLICT,
+    data={
+        "reason": "No teacher assigned for this lesson",
+        "new_teacher_found": False,
         "success": False,
     },
 )
