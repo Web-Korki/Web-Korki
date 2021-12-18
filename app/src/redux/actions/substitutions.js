@@ -168,3 +168,33 @@ export const take_substitution = (id) => async (dispatch) => {
     });
   }
 };
+
+// GET SINGLE SUBSTITUTION OBJECT FOR ACCEPTSUBSTITUTION COMPONENT
+export const get_substitution = (substitution_id) => async (dispatch) => {
+  if(Cookies.get('access')){
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.get('access')}`,
+        Accept: 'application/json',
+      },
+    };
+
+    try {
+      const response = await axios.get(`${API_URL}/api/substitutions/${substitution_id}`, config);
+      dispatch({
+        type: GET_SUBSTITUTION_SUCCESS,
+        payload: response.data,
+      })
+    } catch (err) {
+      // prepare outdated token handling
+      dispatch({
+        type: GET_SUBSTITUTION_FAIL,
+      })
+    }
+  } else {
+    dispatch({
+      type: GET_SUBSTITUTION_FAIL,
+    })
+  }
+}

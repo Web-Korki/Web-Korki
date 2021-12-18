@@ -18,6 +18,7 @@ import {
 const initialState = {
   pending_substitutions: null,
   substitutions: null,
+  substitution: null,
   all_substitutions: null,
   taken_substitutions: null,
 };
@@ -53,6 +54,7 @@ export default function (state = initialState, action) {
     case GET_SUBSTITUTION_SUCCESS:
       return {
         ...state,
+        substitution: payload,
       };
     case GET_SUBSTITUTION_FAIL:
       return {
