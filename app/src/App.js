@@ -32,7 +32,7 @@ import InitialPasswordReset from './containers/forms/InitialPasswordReset/Initia
 import SubmitSubstitution from './containers/substitutions/SubmitSubstitution/SubmitSubstitution';
 import TakenSubstitutions from './containers/substitutions/TakenSubstitution/TakenSubstitutions';
 import AwaitingSubstitutions from './containers/substitutions/AwaitingSubstitution/AwaitingSubstitutions';
-import AcceptedSubstitution from './containers/substitutions/AcceptedSubstitution/AcceptedSubstitution';
+import AcceptSubstitution from './containers/substitutions/AcceptSubstitution/AcceptSubstitution'
 import CookiePopup from './containers/CookiePopup';
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
         <PrivateRoute exact path="/user_menu" component={UserMenu} />
         <PrivateRoute
           path="/substitutions/:substitution_id"
-          component={AcceptedSubstitution}
+          component={AcceptSubstitution}
         />
         <PrivateRoute
           path="/inactive_substitution"
