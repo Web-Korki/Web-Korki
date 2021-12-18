@@ -31,7 +31,6 @@ export const create_substitution = (data) => async (dispatch) => {
     };
 
     const body = JSON.stringify({ ...data });
-    console.log(body);
     try {
       const res = await axios.post(
         `${API_URL}/api/substitutions/create/`,
@@ -44,6 +43,9 @@ export const create_substitution = (data) => async (dispatch) => {
         payload: res.data,
       });
     } catch (err) {
+      dispatch({
+        type: CREATE_SUBSTITUTION_FAIL,
+      });
       create_substitution_token_refresh();
     }
   } else {
@@ -77,6 +79,9 @@ export const get_pending_substitutions = () => async (dispatch) => {
         payload: response.data,
       });
     } catch (err) {
+      dispatch({
+        type: GET_PENDING_SUBSTITUTIONS_FAIL,
+      });
       get_pending_substitution_token_refresh();
     }
   } else {
@@ -111,6 +116,9 @@ export const get_taken_substitutions = () => async (dispatch) => {
         payload: response.data,
       });
     } catch (err) {
+      dispatch({
+        type: GET_TAKEN_SUBSTITUTIONS_FAIL,
+      });
       get_taken_substitution_token_refresh();
     }
   } else {
@@ -137,12 +145,12 @@ export const take_substitution = (id) => async (dispatch) => {
     };
 
     try {
+      console.log(id);
       const response = await axios.patch(
         `${API_URL}/api/substitutions/assign_teacher/${id}/`,
         config
       );
 
-      console.log(response.data);
       dispatch({
         type: ASSIGN_TEACHER_SUCCESS,
         payload: response.data, // is there any?

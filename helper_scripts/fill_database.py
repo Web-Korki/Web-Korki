@@ -245,6 +245,7 @@ if __name__ == "__main__":
     number = 1
     if len(sys.argv) > 1:
         number = int(sys.argv[1])
+    add_sub_emails()
     add_batch(number)
 
     # add_random_houses(2)

@@ -27,6 +27,9 @@ export const get_levels = () => async (dispatch) => {
         payload: res.data,
       });
     } catch (err) {
+      dispatch({
+        type: GET_LEVEL_FAIL,
+      });
       get_levels_token_refresh();
     }
   } else {
@@ -58,6 +61,9 @@ export const get_subjects = () => async (dispatch) => {
         payload: res.data,
       });
     } catch (err) {
+      dispatch({
+        type: GET_SUBJECTS_FAIL,
+      });
       get_subjects_token_refresh();
     }
   } else {

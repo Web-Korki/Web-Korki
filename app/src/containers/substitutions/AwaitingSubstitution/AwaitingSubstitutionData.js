@@ -32,7 +32,8 @@ export const AwaitingSubstitutionData = ({
   };
 
   const handleSubmit = (id) => {
-    takeSubstitution(id);
+    let sub_id = id.toString();
+    takeSubstitution(sub_id);
   };
 
   return (

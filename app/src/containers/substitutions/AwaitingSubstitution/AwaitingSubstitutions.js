@@ -19,11 +19,11 @@ const AwaitingSubstitutions = ({
   pendingSubstitutionsData,
   take_substitution,
   isSuperuser,
+
 }) => {
   AwaitingSubstitutions.propTypes = {
     pendingSubstitutionsCount: PropTypes.number,
     pendingSubstitutionsData: PropTypes.shape({
-      id: PropTypes.number,
       datetime: PropTypes.string,
       new_teacher_found: PropTypes.bool,
       last_topics: PropTypes.string,
