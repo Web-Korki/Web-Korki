@@ -30,23 +30,31 @@ const TakenSubstitutionsData = ({ isSuperuser, takenSubstitutionsData }) => {
       {takenSubstitutionsData
         ? takenSubstitutionsData.map((substitution) => {
             return (
-              <Container>
+              <Container className="mb-5">
                 <div className="row mb-4">
                   <div className="col-12 col-xl-6 d-flex justify-content-center flex-column mx-auto mb-4 mb-xl-0">
                     <p className="text">Zgłosił</p>
-                    <TextField>{substitution.old_teacher}</TextField>
+                    <TextField>
+                      {substitution.old_teacher_fb
+                        ? substitution.old_teacher_fb
+                        : substitution.old_teacher}
+                    </TextField>
                   </div>
                   {isSuperuser ? (
                     <div className="col-12 col-xl-6 d-flex justify-content-center flex-column mx-auto mb-4 mb-xl-0">
                       <p className="text">Przyjął</p>
-                      <TextField>{substitution.new_teacher}</TextField>
+                      <TextField>
+                        {substitution.new_teacher_fb
+                          ? substitution.new_teacher_fb
+                          : substitution.new_teacher}
+                      </TextField>
                     </div>
                   ) : null}
                 </div>
                 <div className="row mb-4">
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
                     <p className="text">Klasa</p>
-                    <TextField>{substitution.level}</TextField>
+                    <TextField>{substitution.level_name}</TextField>
                   </div>
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
                     <p className="text">Data</p>
@@ -68,7 +76,7 @@ const TakenSubstitutionsData = ({ isSuperuser, takenSubstitutionsData }) => {
                   </div>
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column">
                     <p className="text">Przedmiot</p>
-                    <TextField>{substitution.subject}</TextField>
+                    <TextField>{substitution.subject_name}</TextField>
                   </div>
                 </div>
                 <div className="col d-flex flex-column justify-content-center">

@@ -49,7 +49,7 @@ const TakenSubstitutions = ({
             </h1>
           </div>
         </div>
-        <div className="limiter row g-4">
+        <div className="limiter row">
           <TakenSubstitutionsData
             takenSubstitutionsData={takenSubstitutionsData}
             isSuperuser

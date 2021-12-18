@@ -51,19 +51,26 @@ export const AwaitingSubstitutionData = ({
                     {substitution.subject_name
                       ? substitution.subject_name
                       : substitution.subject + ' '}
-                    dla klasy {substitution.level}
+                    dla klasy{' '}
+                    {substitution.level_name
+                      ? substitution.level_name
+                      : substitution.level}
                   </p>
                   {isSuperuser && (
                     <>
                       <span>Zgłosił </span>
-                      <TextField>NiggaCat {/*fb_name_old_teacher*/}</TextField>
+                      <TextField>
+                        {substitution.old_teacher_fb
+                          ? substitution.old_teacher_fb
+                          : 'Nauczyciel nie podał swojego nicku fb'}
+                      </TextField>
                     </>
                   )}
                 </div>
                 <div className="row mb-4">
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
                     <p className="text">Klasa</p>
-                    <TextField>{substitution.level}</TextField>
+                    <TextField>{substitution.level_name}</TextField>
                   </div>
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
                     <p className="text">Data</p>
@@ -87,7 +94,7 @@ export const AwaitingSubstitutionData = ({
                     <p className="text" for="subject">
                       Przedmiot
                     </p>
-                    <TextField>{substitution.subject}</TextField>
+                    <TextField>{substitution.subject_name}</TextField>
                   </div>
                 </div>
                 <div className="col d-flex flex-column justify-content-center">
