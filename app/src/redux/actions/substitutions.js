@@ -181,7 +181,10 @@ export const get_substitution = (substitution_id) => async (dispatch) => {
     };
 
     try {
-      const response = await axios.get(`${API_URL}/api/substitutions/${substitution_id}`, config);
+      const response = await axios.get(
+        `${API_URL}/api/substitutions/${substitution_id}/`,
+        config
+      );
       dispatch({
         type: GET_SUBSTITUTION_SUCCESS,
         payload: response.data,
