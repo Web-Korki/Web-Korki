@@ -17,4 +17,7 @@ router.register(
 router.register(
     r"substitutions/assign_teacher", AssignTeacherView, basename="assign_teacher"
 )
+router.register(
+    r"substitutions/unassign_teacher", UnassignTeacherView, basename="unassign_teacher"
+)
 router.register(r"substitutions", SubstitutionsView, basename="substitutions")
