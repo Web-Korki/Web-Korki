@@ -35,8 +35,8 @@ export const AcceptSubstitutionData = ({ substitutionData }) => {
   return (
     <div className="min-h-100 py-5 py-xl-0 d-flex justify-content-center align-items-center accepted-substitution">
       <Container>
-        <div className="d-flex justify-conent-center mb-5">
-          <h1 className="title">Potrzebuję zastępstwa!</h1>
+        <div className="d-flex justify-conent-center mb-5 text-center row">
+          <p className="title">Potrzebuję zastępstwa!</p>
         </div>
         <div className="row text mb-4">
           <p className="col-3">Zajęcia: </p>
@@ -72,12 +72,43 @@ export const AcceptSubstitutionData = ({ substitutionData }) => {
             </TextField>
           </p>
         </div>
-
-        <BlueButton>
-          <Link to="/taken_substitutions" className="link">
-            <p className="text-sm mt-3">Sprawdź przyjęte zastępstwa</p>
-          </Link>
-        </BlueButton>
+        <div className="row text mb-4">
+          <p className="col-3">Jak się uczymy?</p>
+          <p className="col">
+            <TextField>
+              Ostatnio przerabialiśmy zagadnienia takie jak{' '}
+              {substitutionData?.last_topics ? (
+                substitutionData?.last_topics
+              ) : (
+                <span class="text-danger">
+                  'ostatnio przerabiane zagadnienia template'
+                </span>
+              )}{' '}
+              i zaplanowaliśmy, że podczas tych zajęć omówimy zagadnienia takie
+              jak{' '}
+              {substitutionData?.planned_topics ? (
+                substitutionData?.planned_topics
+              ) : (
+                <span class="text-danger">
+                  'planowane do przerobienia zagadnienia template.'
+                </span>
+              )}
+              Uczymy się poprzez{' '}
+              {substitutionData?.methodology_and_platform ? (
+                substitutionData?.methodology_and_platform
+              ) : (
+                <span class="text-danger">'coco-jumbo i do przodu'</span>
+              )}
+            </TextField>
+          </p>
+        </div>
+        <div class="row">
+          <BlueButton className="col justify-content-center">
+            <Link to="/taken_substitutions" className="link">
+              <p className="text-sm mt-3">Przyjmij zastępstwo</p>
+            </Link>
+          </BlueButton>
+        </div>
       </Container>
     </div>
   );
