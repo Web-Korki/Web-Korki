@@ -19,8 +19,8 @@ import {
 import { refresh_token } from './auth';
 
 const API_URL =
-  window.location.origin === 'http://127.0.0.1:8000'
-    ? 'http://127.0.0.1:8000'
+  window.location.host === '127.0.0.1:8000'
+    ? '127.0.0.1:8000'
     : 'https://web-korki.edu.pl';
 
 export const create_substitution = (data) => async (dispatch) => {

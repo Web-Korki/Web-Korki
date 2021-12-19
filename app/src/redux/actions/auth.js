@@ -25,8 +25,8 @@ import {
 } from './types';
 
 const API_URL =
-  window.location.origin === 'http://127.0.0.1:8000'
-    ? 'http://127.0.0.1:8000'
+  window.location.host === '127.0.0.1:8000'
+    ? '127.0.0.1:8000'
     : 'https://web-korki.edu.pl';
 
 export const refresh_token = () => async (dispatch) => {
