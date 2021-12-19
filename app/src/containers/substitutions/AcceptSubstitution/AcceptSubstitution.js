@@ -31,10 +31,14 @@ export const AcceptSubstitution = ({
 
   return (
     <div class="min-h-100 py-5 py-xl-0 d-flex justify-content-center align-items-center">
-      <AcceptSubstitutionData
-        substitutionData={substitutionData}
-        takeSubstitution={take_substitution}
-      />
+      <div class="container">
+        <div class="limiter row g-4">
+          <AcceptSubstitutionData
+            substitutionData={substitutionData}
+            takeSubstitution={take_substitution}
+          />
+        </div>
+      </div>
     </div>
   );
 };
