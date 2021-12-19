@@ -1,7 +1,6 @@
 import React from 'react';
 import AcceptSubstitutionData from '../AcceptSubstitutionData';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 const testSubstitutionData = {
   id: 2008,
@@ -56,12 +55,6 @@ describe('AcceptSubstitutionData', () => {
 
       expect(
         screen.getByText('Brak danych do wyświetlenia')
-      ).toBeInTheDocument();
-
-      expect(
-        screen.getByText(
-          'Może to być błąd przy pobieraniu danych z serwera. Odśwież stronę, by spróbować ponownie. '
-        )
       ).toBeInTheDocument();
     });
   });

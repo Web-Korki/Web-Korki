@@ -25,7 +25,7 @@ export const AcceptSubstitutionData = ({
       level: PropTypes.number,
       subject: PropTypes.number,
       new_teacher: PropTypes.number,
-    }).isRequired,
+    }),
     takeSubstitution: PropTypes.func.isRequired,
   };
 
@@ -118,10 +118,10 @@ export const AcceptSubstitutionData = ({
       ) : (
         <div className="col-12">
           <Container>
-            <div class="row">
+            <div className="row">
               <p className="text-center title">Brak danych do wyświetlenia</p>
             </div>
-            <div class="row justify-content-center">
+            <div className="row justify-content-center">
               <p className="text-right text w-50 mt-5">
                 Może to być błąd przy pobieraniu danych z serwera. Odśwież
                 stronę, aby spróbować ponownie.
