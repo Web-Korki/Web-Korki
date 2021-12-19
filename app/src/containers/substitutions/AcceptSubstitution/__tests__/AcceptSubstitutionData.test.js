@@ -60,7 +60,7 @@ describe('AcceptSubstitutionData', () => {
 
       expect(
         screen.getByText(
-          'Może to być błąd przy pobieraniu danych z serwera. Odśwież stronę, by spróbować ponownie.'
+          'Może to być błąd przy pobieraniu danych z serwera. Odśwież stronę, by spróbować ponownie. '
         )
       ).toBeInTheDocument();
     });
