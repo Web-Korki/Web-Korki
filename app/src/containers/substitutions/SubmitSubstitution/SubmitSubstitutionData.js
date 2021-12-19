@@ -1,32 +1,72 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+// react
+import React, { useEffect, useState } from 'react';
+// utils
 import {
   Date,
   Textarea,
   BlueButton,
   Wrapper,
-} from '../../components/styledComponents/index';
-import { BackButton } from '../../components/buttons/BackButton';
-import {
-  get_classes,
-  get_subjects,
-} from '../../redux/actions/substitutionForm';
+} from '../../../components/styledComponents/index';
+import { BackButton } from '../../../components/buttons/BackButton';
 //propTypes
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import Theme from '../../components/data/Theme';
+import Theme from '../../../components/data/Theme';
 
-// import Select, { StylesConfig } from 'react-select';
-
-const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
-  SubmitReplacement.propTypes = {
-    formSelectData: PropTypes.object.isRequired,
+const SubmitSubstitutionData = ({
+  levels,
+  subjects,
+  getLevels,
+  getSubjects,
+  createSubstitution,
+}) => {
+  SubmitSubstitutionData.propTypes = {
+    getLevels: PropTypes.func.isRequired,
+    getSubjects: PropTypes.func.isRequired,
+    createSubstitution: PropTypes.func.isRequired,
   };
 
   useEffect(() => {
-    get_classes();
-    get_subjects();
+    getLevels();
+    getSubjects();
   }, []);
+
+  const [formData, setFormData] = useState({
+    level: '',
+    subject: '',
+    datetime: '',
+    last_topics: '',
+    planned_topics: '',
+    methodology_and_platform: '',
+  });
+
+  const {
+    level,
+    subject,
+    datetime,
+    last_topics,
+    planned_topics,
+    methodology_and_platform,
+  } = formData;
+
+  const onChange = (e) => {
+    if (e.target === undefined) {
+      if (/^([a-z]|[A-Z])/g.test(e.label))
+        setFormData({ ...formData, subject: e.value.toString() });
+      if (!/^([a-z]|[A-Z])/g.test(e.label))
+        setFormData({ ...formData, level: e.value.toString() });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    createSubstitution(formData);
+  };
 
   const defaultFormSelectData = [{ value: '', label: '' }];
 
@@ -37,7 +77,10 @@ const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
           <BackButton />
           <h1 className="title">Formularz zgłaszania zastępstwa</h1>
         </div>
-        <form className="w-100 d-flex flex-column p-4 mb-3">
+        <form
+          className="w-100 d-flex flex-column p-4 mb-3"
+          onSubmit={(e) => onSubmit(e)}
+        >
           <div className="row mb-4">
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
               <label className="text" for="class">
@@ -47,10 +90,10 @@ const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
                 className="text-select"
                 placeholder="Wybierz klasę"
                 theme={Theme}
-                name="faculty"
+                name="level"
                 options={
-                  formSelectData.faculties
-                    ? formSelectData.faculties.map((e) => {
+                  levels
+                    ? levels.map((e) => {
                         return {
                           value: e.id,
                           label: e.name,
@@ -58,6 +101,10 @@ const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
                       })
                     : defaultFormSelectData
                 }
+                onChange={(e) => {
+                  onChange(e);
+                }}
+                required
               />
             </div>
             <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
@@ -69,6 +116,9 @@ const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
                   className="d-flex justify-content-center"
                   type="datetime-local"
                   id="date"
+                  name="datetime"
+                  value={datetime}
+                  onChange={(e) => onChange(e)}
                   required
                 />
               </div>
@@ -83,8 +133,8 @@ const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
                 theme={Theme}
                 name="subject"
                 options={
-                  formSelectData.subjects
-                    ? formSelectData.subjects.map((e) => {
+                  subjects
+                    ? subjects.map((e) => {
                         return {
                           value: e.id,
                           label: e.name,
@@ -92,50 +142,59 @@ const SubmitReplacement = ({ get_classes, get_subjects, formSelectData }) => {
                       })
                     : defaultFormSelectData
                 }
+                onChange={(e) => {
+                  onChange(e);
+                }}
+                required
               />
             </div>
           </div>
           <div className="col d-flex flex-column justify-content-center">
-            <label className="text" for="last-topics">
+            <label className="text" for="last_topics">
               Ostatnio przerabiane zagadnienia
             </label>
             <Textarea
               className="align-self-center ps-4"
-              name="previous-topic"
+              name="last_topics"
+              value={last_topics}
+              onChange={(e) => onChange(e)}
               placeholder="Temat ostatniej lekcji to..."
+              required
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
-            <label className="text" for="planned-topics">
+            <label className="text" for="planned_topics">
               Planowane zagadnienia na lekcję
             </label>
             <Textarea
               className="align-self-center ps-4"
-              name="planned-topics"
+              name="planned_topics"
+              value={planned_topics}
+              onChange={(e) => onChange(e)}
               placeholder="Temat przyszłej lekcji to..."
+              required
             ></Textarea>
           </div>
           <div className="col d-flex flex-column mt-4 justify-content-center">
-            <label className="text" for="teaching-methodology">
+            <label className="text" for="methodology_and_platform">
               Metodyka nauczania oraz platforma
             </label>
             <Textarea
               className="align-self-center ps-4"
-              name="teaching-methodology"
+              name="methodology_and_platform"
+              value={methodology_and_platform}
+              onChange={(e) => onChange(e)}
               placeholder="Z uczniem pracujemy korzystając z..."
+              required
             ></Textarea>
           </div>
+          <BlueButton className="mt-5" type="submit">
+            zgłoś zastępstwo
+          </BlueButton>
         </form>
-        <BlueButton>zgłoś zastępstwo</BlueButton>
       </Wrapper>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  formSelectData: state.substitutionForm,
-});
-
-const mapDispatchToProps = { get_classes, get_subjects };
-
-export default connect(mapStateToProps, mapDispatchToProps)(SubmitReplacement);
+export default SubmitSubstitutionData;

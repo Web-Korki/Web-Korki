@@ -1,9 +1,8 @@
-import React from "react";
-import { Wrapper, BlueButton } from "../components/styledComponents/index";
-import { BackButton } from "../components/buttons/BackButton";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Wrapper } from '../../../components/styledComponents/index';
+import { BackButton } from '../../../components/buttons/BackButton';
 
-export const InactiveReplacement = () => {
+export const InactiveSubstitution = () => {
   return (
     <div className="min-h-100 py-5 py-xl-0 d-flex flex-column justify-content-center align-items-center">
       <div className="d-flex justify-content-center mb-5">

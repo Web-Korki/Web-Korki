@@ -16,8 +16,12 @@ export const UserMenu = ({ isSuperuser, hasChangedPassword }) => {
     hasChangedPassword: PropTypes.bool,
   };
 
-  if (!hasChangedPassword) {
+  const redirect = () => {
     return <Redirect push to="/initialPasswordReset" />;
+  };
+
+  if (!hasChangedPassword) {
+    redirect();
   }
 
   return (
@@ -34,12 +38,12 @@ export const UserMenu = ({ isSuperuser, hasChangedPassword }) => {
           </div>
           <div className="row justify-content-center">
             <div className="col-12 col-lg-auto g-4">
-              <Link to="/submit_replacement">
+              <Link to="/submit_substitution">
                 <Box>Zgłoś zastępstwo</Box>
               </Link>
             </div>
             <div className="col-12 col-lg-auto g-4">
-              <Link to="/active_replacements">
+              <Link to="/awaiting_substitutions">
                 <Box>Oczekujące zastępstwa</Box>
               </Link>
             </div>

@@ -1,22 +1,18 @@
 //react
 import React, { useEffect } from 'react';
-
 //css
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
-
 //redux
 import store from './store';
 import { connect } from 'react-redux';
 import { checkAuthenticated, load_user } from './redux/actions/auth';
-
 //router
 import { Route, Switch } from 'react-router';
-
 //components
 //all styled components are in the same place now. Remember to add them to index.js in the directory src/components/styledComponents
 //named imports
-import { InactiveReplacement } from './containers/InactiveReplacement';
+import { InactiveSubstitution } from './containers/substitutions/InactiveSubstitution/InactiveSubstitution';
 import { LectureAnalysis } from './containers/lectureAnalysis/LectureAnalysis';
 import { LectureAnalysisDetail } from './containers//lectureAnalysis/LectureAnalysisDetail';
 import { VolunteerAnalysis } from './containers/volunteerAnalysis/VolunteerAnalysis';
@@ -32,9 +28,11 @@ import PrivateRoute from './containers/PrivateRoute';
 import ActivateAccount from './containers/ActivateAccount';
 import ResetPassword from './containers/passwordReset/ResetPassword';
 import ResetPasswordConfirm from './containers/passwordReset/ResetPasswordConfirm';
-import SubmitReplacement from './containers/forms/SubmitReplacement';
 import InitialPasswordReset from './containers/forms/InitialPasswordReset/InitialPasswordReset';
-import TakenSubstitutions from './containers/substitutions/TakenSubstitutions';
+import SubmitSubstitution from './containers/substitutions/SubmitSubstitution/SubmitSubstitution';
+import TakenSubstitutions from './containers/substitutions/TakenSubstitution/TakenSubstitutions';
+import AwaitingSubstitutions from './containers/substitutions/AwaitingSubstitution/AwaitingSubstitutions';
+import AcceptSubstitution from './containers/substitutions/AcceptSubstitution/AcceptSubstitution'
 import CookiePopup from './containers/CookiePopup';
 
 function App() {
@@ -49,13 +47,17 @@ function App() {
         {/* USER PATHS */}
         <PrivateRoute exact path="/user_menu" component={UserMenu} />
         <PrivateRoute
-          path="/inactive_replacement"
-          component={InactiveReplacement}
+          path="/substitutions/:substitution_id"
+          component={AcceptSubstitution}
+        />
+        <PrivateRoute
+          path="/inactive_substitution"
+          component={InactiveSubstitution}
         />
         <PrivateRoute
           exact
-          path="/submit_replacement"
-          component={SubmitReplacement}
+          path="/submit_substitution"
+          component={SubmitSubstitution}
         />
         <PrivateRoute
           exact
@@ -65,6 +67,10 @@ function App() {
         <PrivateRoute
           path="/taken_substitutions"
           component={TakenSubstitutions}
+        />
+        <PrivateRoute
+          path="/awaiting_substitutions"
+          component={AwaitingSubstitutions}
         />
         {/* <PrivateRoute 
           path="/fill_in_report"

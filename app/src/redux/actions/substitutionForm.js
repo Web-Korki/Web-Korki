@@ -3,16 +3,17 @@ import Cookies from 'js-cookie';
 import {
   GET_SUBJECTS_SUCCESS,
   GET_SUBJECTS_FAIL,
-  GET_CLASSES_SUCCESS,
-  GET_CLASSES_FAIL,
+  GET_LEVEL_SUCCESS,
+  GET_LEVEL_FAIL,
 } from '../actions/types';
+import { refresh_token } from './auth';
 
 const API_URL =
-  window.location.origin === 'http://127.0.0.1:8000'
-    ? 'http://127.0.0.1:8000'
+  window.location.host === '127.0.0.1:8000'
+    ? '127.0.0.1:8000'
     : 'https://web-korki.edu.pl';
 
-export const get_classes = () => async (dispatch) => {
+export const get_levels = () => async (dispatch) => {
   if (Cookies.get('access')) {
     const config = {
       headers: {
@@ -25,15 +26,25 @@ export const get_classes = () => async (dispatch) => {
     try {
       const res = await axios.get(`${API_URL}/api/levels/`, config);
       dispatch({
-        type: GET_CLASSES_SUCCESS,
+        type: GET_LEVEL_SUCCESS,
         payload: res.data,
       });
     } catch (err) {
       dispatch({
-        type: GET_CLASSES_FAIL,
+        type: GET_LEVEL_FAIL,
       });
+      get_levels_token_refresh();
     }
+  } else {
+    dispatch({
+      type: GET_LEVEL_FAIL,
+    });
   }
+};
+
+const get_levels_token_refresh = () => {
+  refresh_token();
+  get_levels();
 };
 
 export const get_subjects = () => async (dispatch) => {
@@ -56,6 +67,16 @@ export const get_subjects = () => async (dispatch) => {
       dispatch({
         type: GET_SUBJECTS_FAIL,
       });
+      get_subjects_token_refresh();
     }
+  } else {
+    dispatch({
+      type: GET_SUBJECTS_FAIL,
+    });
   }
+};
+
+const get_subjects_token_refresh = () => {
+  refresh_token();
+  get_subjects();
 };
