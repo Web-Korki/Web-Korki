@@ -58,19 +58,19 @@ export const AcceptSubstitutionData = ({
         <div className="row mb-4">
           <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
             <p className="text">Klasa</p>
-            <TextField>{substitutionData.level_name}</TextField>
+            <TextField>{substitutionData?.level_name}</TextField>
           </div>
           <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
             <p className="text">Data</p>
             <TextField>
-              {substitutionData.datetime.split('T')[0].replaceAll('-', '.') +
+              {substitutionData?.datetime.split('T')[0].replaceAll('-', '.') +
                 ' / ' +
-                substitutionData.datetime
+                substitutionData?.datetime
                   .split('T')[1]
                   .split('+')[0]
                   .split(':')[0] +
                 ':' +
-                substitutionData.datetime
+                substitutionData?.datetime
                   .split('T')[1]
                   .split('+')[0]
                   .split(':')[1]}
@@ -80,7 +80,7 @@ export const AcceptSubstitutionData = ({
             <p className="text" for="subject">
               Przedmiot
             </p>
-            <TextField>{substitutionData.subject_name}</TextField>
+            <TextField>{substitutionData?.subject_name}</TextField>
           </div>
         </div>
         <div className="col d-flex flex-column justify-content-center">
@@ -88,8 +88,8 @@ export const AcceptSubstitutionData = ({
             Ostatnio przerabiane zagadnienia
           </p>
           <TextField>
-            {substitutionData.last_topics
-              ? substitutionData.last_topics
+            {substitutionData?.last_topics
+              ? substitutionData?.last_topics
               : 'Nie podano.'}
           </TextField>
         </div>
@@ -98,8 +98,8 @@ export const AcceptSubstitutionData = ({
             Planowane zagadnienia na lekcję
           </p>
           <TextField>
-            {substitutionData.planned_topics
-              ? substitutionData.planned_topics
+            {substitutionData?.planned_topics
+              ? substitutionData?.planned_topics
               : 'Nie podano.'}
           </TextField>
         </div>
@@ -108,8 +108,8 @@ export const AcceptSubstitutionData = ({
             Metodyka nauczania oraz platforma
           </p>
           <TextField>
-            {substitutionData.methodology_and_platform
-              ? substitutionData.methodology_and_platform
+            {substitutionData?.methodology_and_platform
+              ? substitutionData?.methodology_and_platform
               : 'Brak danych.'}
           </TextField>
         </div>
