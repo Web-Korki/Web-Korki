@@ -1,7 +1,5 @@
 // react
 import React from 'react';
-// router
-import { Link } from 'react-router-dom';
 // utils
 import {
   Container,
@@ -11,7 +9,10 @@ import {
 // propTypes
 import PropTypes from 'prop-types';
 
-export const AcceptSubstitutionData = ({ substitutionData }) => {
+export const AcceptSubstitutionData = ({
+  substitutionData,
+  takeSubstitution,
+}) => {
   AcceptSubstitutionData.propTypes = {
     substitutionData: PropTypes.shape({
       id: PropTypes.number,
@@ -28,86 +29,93 @@ export const AcceptSubstitutionData = ({ substitutionData }) => {
     takeSubstitution: PropTypes.func.isRequired,
   };
 
+  const handleSubmit = (id) => {
+    let sub_id = id.toString();
+    takeSubstitution(sub_id);
+  };
+
   const capitalizeName = (name) => {
     return name.charAt(0).toUpperCase() + name.slice(1);
   };
 
   return (
-    <div className="min-h-100 py-5 py-xl-0 d-flex justify-content-center align-items-center accepted-substitution">
+    <div class="col-12">
       <Container>
-        <div className="d-flex justify-conent-center mb-5 text-center row">
-          <p className="title">Potrzebuję zastępstwa!</p>
-        </div>
         <div className="row text mb-4">
-          <p className="col-3">Zajęcia: </p>
-          <p className="text-center col">
-            <TextField>
-              {substitutionData?.subject_name
-                ? capitalizeName(substitutionData?.subject_name)
-                : null}{' '}
-              w dniu{' '}
-              {substitutionData?.datetime
-                .split('T')[0]
-                .replaceAll('-', '.')
-                .split('.')
-                .reverse()
-                .join('.')}
-            </TextField>
+          <p className="text-center">
+            {substitutionData?.subject_name
+              ? capitalizeName(substitutionData?.subject_name)
+              : substitutionData?.subject}{' '}
+            w dniu{' '}
+            {substitutionData?.datetime
+              .split('T')[0]
+              .replaceAll('-', '.')
+              .split('.')
+              .reverse()
+              .join('.')}
           </p>
         </div>
-        <div className="row text mb-4">
-          <p className="col-3">Kiedy: </p>
-          <p className="text-center col">
+        <div className="row mb-4">
+          <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
+            <p className="text">Klasa</p>
+            <TextField>{substitutionData.level_name}</TextField>
+          </div>
+          <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
+            <p className="text">Data</p>
             <TextField>
-              {substitutionData?.datetime.split('T')[0] +
-                ' ' +
-                '/' +
-                ' ' +
-                substitutionData?.datetime
+              {substitutionData.datetime.split('T')[0].replaceAll('-', '.') +
+                ' / ' +
+                substitutionData.datetime
                   .split('T')[1]
                   .split('+')[0]
                   .split(':')[0] +
                 ':' +
-                substitutionData?.datetime
+                substitutionData.datetime
                   .split('T')[1]
                   .split('+')[0]
                   .split(':')[1]}
             </TextField>
-          </p>
+          </div>
+          <div className="col-12 col-xl-4 d-flex justify-content-center flex-column">
+            <p className="text" for="subject">
+              Przedmiot
+            </p>
+            <TextField>{substitutionData.subject_name}</TextField>
+          </div>
         </div>
-        <div className="row text mb-4">
-          <p className="col-3">Jak się uczymy?</p>
-          <p className="col">
-            <TextField>
-              Ostatnio przerabialiśmy zagadnienia takie jak{' '}
-              {substitutionData?.last_topics ? (
-                substitutionData?.last_topics
-              ) : (
-                <span class="text-danger">
-                  'ostatnio przerabiane zagadnienia template'
-                </span>
-              )}{' '}
-              i zaplanowaliśmy, że podczas tych zajęć omówimy zagadnienia takie
-              jak{' '}
-              {substitutionData?.planned_topics ? (
-                substitutionData?.planned_topics
-              ) : (
-                <span class="text-danger">
-                  'planowane do przerobienia zagadnienia template.'
-                </span>
-              )}
-              Uczymy się poprzez{' '}
-              {substitutionData?.methodology_and_platform ? (
-                substitutionData?.methodology_and_platform
-              ) : (
-                <span class="text-danger">'coco-jumbo i do przodu'</span>
-              )}
-            </TextField>
+        <div className="col d-flex flex-column justify-content-center">
+          <p className="text" for="last-topics">
+            Ostatnio przerabiane zagadnienia
           </p>
+          <TextField>
+            {substitutionData.last_topics
+              ? substitutionData.last_topics
+              : 'Nie podano.'}
+          </TextField>
         </div>
-        <div class="row">
-          <BlueButton className="col justify-content-center">
-            Przyjmij zastępstwo
+        <div className="col d-flex flex-column mt-4 justify-content-center">
+          <p className="text" for="planned-topics">
+            Planowane zagadnienia na lekcję
+          </p>
+          <TextField>
+            {substitutionData.planned_topics
+              ? substitutionData.planned_topics
+              : 'Nie podano.'}
+          </TextField>
+        </div>
+        <div className="col d-flex flex-column mt-4 justify-content-center">
+          <p className="text" for="teaching-methodology">
+            Metodyka nauczania oraz platforma
+          </p>
+          <TextField>
+            {substitutionData.methodology_and_platform
+              ? substitutionData.methodology_and_platform
+              : 'Brak danych.'}
+          </TextField>
+        </div>
+        <div className="col d-flex mt-4 justify-content-center">
+          <BlueButton onClick={() => handleSubmit(substitutionData.id)}>
+            akceptuj
           </BlueButton>
         </div>
       </Container>
