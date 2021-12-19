@@ -124,7 +124,7 @@ export const AcceptSubstitutionData = ({
             <div class="row justify-content-center">
               <p className="text-right text w-50 mt-5">
                 Może to być błąd przy pobieraniu danych z serwera. Odśwież
-                stronę, by spróbować ponownie.
+                stronę, aby spróbować ponownie.
               </p>
             </div>
           </Container>
