@@ -50,11 +50,7 @@ export const AwaitingSubstitutionData = ({
                   <p className="text-center">
                     {substitution.subject_name
                       ? substitution.subject_name
-                      : substitution.subject + ' '}
-                    dla klasy{' '}
-                    {substitution.level_name
-                      ? substitution.level_name
-                      : substitution.level}
+                      : substitution.subject}
                   </p>
                   {isSuperuser && (
                     <>
