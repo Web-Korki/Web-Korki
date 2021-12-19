@@ -55,8 +55,12 @@ describe('AcceptSubstitutionData', () => {
       );
 
       expect(
+        screen.getByText('Brak danych do wyświetlenia')
+      ).toBeInTheDocument();
+
+      expect(
         screen.getByText(
-          'Wystąpił problem z ładowaniem danych. Proszę odświeżyć stronę'
+          'Może to być błąd przy pobieraniu danych z serwera. Odśwież stronę, by spróbować ponownie.'
         )
       ).toBeInTheDocument();
     });

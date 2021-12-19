@@ -116,7 +116,19 @@ export const AcceptSubstitutionData = ({
           </div>
         </Container>
       ) : (
-        <div>Wystąpił problem z ładowaniem danych. Proszę odświeżyć stronę</div>
+        <div className="col-12">
+          <Container>
+            <div class="row">
+              <p className="text-center title">Brak danych do wyświetlenia</p>
+            </div>
+            <div class="row justify-content-center">
+              <p className="text-right text w-50 mt-5">
+                Może to być błąd przy pobieraniu danych z serwera. Odśwież
+                stronę, by spróbować ponownie.
+              </p>
+            </div>
+          </Container>
+        </div>
       )}
     </div>
   );

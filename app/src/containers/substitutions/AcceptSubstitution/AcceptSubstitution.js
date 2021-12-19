@@ -34,7 +34,7 @@ export const AcceptSubstitution = ({
       <div className="container">
         <div className="limiter row g-4">
           <AcceptSubstitutionData
-            substitutionData={substitutionData}
+            substitutionData={undefined}
             takeSubstitution={take_substitution}
           />
         </div>
