@@ -107,7 +107,10 @@ export const AcceptSubstitutionData = ({
             </TextField>
           </div>
           <div className="col d-flex mt-4 justify-content-center">
-            <BlueButton onClick={() => handleSubmit(substitutionData.id)}>
+            <BlueButton
+              role="button"
+              onClick={() => handleSubmit(substitutionData.id)}
+            >
               akceptuj
             </BlueButton>
           </div>
