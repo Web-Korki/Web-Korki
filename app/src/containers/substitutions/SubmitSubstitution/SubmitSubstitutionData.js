@@ -23,7 +23,6 @@ const SubmitSubstitutionData = ({
   SubmitSubstitutionData.propTypes = {
     getLevels: PropTypes.func.isRequired,
     getSubjects: PropTypes.func.isRequired,
-    formSelectData: PropTypes.object.isRequired,
     createSubstitution: PropTypes.func.isRequired,
   };
 
@@ -72,7 +71,7 @@ const SubmitSubstitutionData = ({
   const defaultFormSelectData = [{ value: '', label: '' }];
 
   return (
-    <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center submit-substitution-data">
+    <div className="min-h-100 py-5 py-xl-0 container-fluid container-xl d-flex flex-column justify-content-center align-items-center">
       <Wrapper>
         <div class="d-flex mb-2 mb-xl-5">
           <BackButton />
@@ -189,7 +188,7 @@ const SubmitSubstitutionData = ({
               required
             ></Textarea>
           </div>
-          <BlueButton className="mt-5 submit-button" type="submit">
+          <BlueButton className="mt-5" type="submit">
             zgłoś zastępstwo
           </BlueButton>
         </form>

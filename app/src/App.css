@@ -145,16 +145,5 @@ body {
   }
 }
 
-/* SUBMIT SUBSTITUTION */
-.submit-substitution-data{
-  display: flex;
-}
-.submit-substitution-data .submit-button{
-  max-width: 350px;
-  align-self: center;
-}
 
-/* ACCEPTED SUBSTITUTION */
-.accepted-substitution .link {
-  
-}
+

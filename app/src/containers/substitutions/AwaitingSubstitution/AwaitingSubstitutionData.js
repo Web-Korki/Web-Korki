@@ -71,10 +71,10 @@ export const AwaitingSubstitutionData = ({
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
                     <p className="text">Data</p>
                     <TextField>
-                      {substitution.datetime.split('T')[0] +
-                        ' ' +
-                        '/' +
-                        ' ' +
+                      {substitution.datetime
+                        .split('T')[0]
+                        .replaceAll('-', '.') +
+                        ' / ' +
                         substitution.datetime
                           .split('T')[1]
                           .split('+')[0]
@@ -100,7 +100,7 @@ export const AwaitingSubstitutionData = ({
                   <TextField>
                     {substitution.last_topics
                       ? substitution.last_topics
-                      : 'nie podano'}
+                      : 'Nie podano.'}
                   </TextField>
                 </div>
                 <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -110,7 +110,7 @@ export const AwaitingSubstitutionData = ({
                   <TextField>
                     {substitution.planned_topics
                       ? substitution.planned_topics
-                      : 'nie podano'}
+                      : 'Nie podano.'}
                   </TextField>
                 </div>
                 <div className="col d-flex flex-column mt-4 justify-content-center">
@@ -120,7 +120,7 @@ export const AwaitingSubstitutionData = ({
                   <TextField>
                     {substitution.methodology_and_platform
                       ? substitution.methodology_and_platform
-                      : 'brak danych'}
+                      : 'Brak danych.'}
                   </TextField>
                 </div>
                 <div className="col d-flex mt-4 justify-content-center">

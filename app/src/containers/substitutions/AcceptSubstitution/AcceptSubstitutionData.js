@@ -104,9 +104,7 @@ export const AcceptSubstitutionData = ({ substitutionData }) => {
         </div>
         <div class="row">
           <BlueButton className="col justify-content-center">
-            <Link to="/taken_substitutions" className="link">
-              <p className="text-sm mt-3">Przyjmij zastępstwo</p>
-            </Link>
+            Przyjmij zastępstwo
           </BlueButton>
         </div>
       </Container>

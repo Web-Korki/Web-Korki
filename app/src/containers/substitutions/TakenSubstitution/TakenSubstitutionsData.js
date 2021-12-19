@@ -59,10 +59,10 @@ const TakenSubstitutionsData = ({ isSuperuser, takenSubstitutionsData }) => {
                   <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
                     <p className="text">Data</p>
                     <TextField>
-                      {substitution.datetime.split('T')[0] +
-                        ' ' +
-                        '/' +
-                        ' ' +
+                      {substitution.datetime
+                        .split('T')[0]
+                        .replaceAll('-', '.') +
+                        ' / ' +
                         substitution.datetime
                           .split('T')[1]
                           .split('+')[0]

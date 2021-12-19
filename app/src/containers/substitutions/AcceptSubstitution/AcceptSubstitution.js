@@ -30,7 +30,7 @@ export const AcceptSubstitution = ({
   }, [substitution_id]);
 
   return (
-    <div class="min-h-100 py-5 py-xl-0 d-flex justify-content-center align-items-center accepted-substitution">
+    <div class="min-h-100 py-5 py-xl-0 d-flex justify-content-center align-items-center">
       <AcceptSubstitutionData
         substitutionData={substitutionData}
         takeSubstitution={take_substitution}
