@@ -36,6 +36,10 @@ export const AwaitingSubstitutionData = ({
     takeSubstitution(sub_id);
   };
 
+  const capitalizeName = (name) => {
+    return name.charAt(0).toUpperCase() + name.slice(1);
+  };
+
   return (
     <div className="col-12">
       {pendingSubstitutionsData
@@ -48,9 +52,16 @@ export const AwaitingSubstitutionData = ({
               >
                 <div className="row text mb-4">
                   <p className="text-center">
-                    {substitution.subject_name
-                      ? substitution.subject_name
-                      : substitution.subject}
+                    {substitution?.subject_name
+                      ? capitalizeName(substitution?.subject_name)
+                      : substitution?.subject}{' '}
+                    w dniu{' '}
+                    {substitution?.datetime
+                      .split('T')[0]
+                      .replaceAll('-', '.')
+                      .split('.')
+                      .reverse()
+                      .join('.')}
                   </p>
                   {isSuperuser && (
                     <>

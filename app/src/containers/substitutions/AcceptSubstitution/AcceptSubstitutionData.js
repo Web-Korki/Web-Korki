@@ -43,12 +43,15 @@ export const AcceptSubstitutionData = ({ substitutionData }) => {
           <p className="text-center col">
             <TextField>
               {substitutionData?.subject_name
-                ? capitalizeName(substitutionData.subject_name)
+                ? capitalizeName(substitutionData?.subject_name)
                 : null}{' '}
-              dla{' '}
-              {substitutionData?.level_name
-                ? substitutionData?.level_name
-                : null}
+              w dniu{' '}
+              {substitutionData?.datetime
+                .split('T')[0]
+                .replaceAll('-', '.')
+                .split('.')
+                .reverse()
+                .join('.')}
             </TextField>
           </p>
         </div>
