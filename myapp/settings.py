@@ -234,8 +234,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 10,
+    "PAGE_SIZE": 10
 }
 
 # Set expiration for token much longer in developement
@@ -312,7 +311,7 @@ LANGUAGES = [
 ]
 
 CMS_TEMPLATES = [
-    ("home.html", "Home page template"),
+    ("index.html", "Home page template"),
 ]
 
 THUMBNAIL_HIGH_RESOLUTION = True

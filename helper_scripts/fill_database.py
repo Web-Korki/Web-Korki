@@ -20,8 +20,6 @@ from backend.models import (
     Student,
     Level,
     Subject,
-    Email,
-    EmailFooter,
 )
 
 # random.seed(1) # Change or comment it for different results
@@ -97,7 +95,7 @@ def get_random_date():
         year=2022,
         month=random.randint(2, 12),
         day=random.randint(1, 28),
-        hour=random.randint(10, 24),
+        hour=random.randint(10, 22),
         minute=random.randint(10, 59),
     )
     random_date = dt.datetime.strftime(raw_date, "%Y-%m-%d %H:%M")
@@ -122,29 +120,6 @@ def find_unique_name_for_student():
 
 
 # Core Functions
-def add_sub_emails():
-    sub_email = Email(
-        name="SubstitutionEmail",
-        title="ZASTĘPSTWO {{ site_name }} - {{ subject }} {{ week_day }} {{ time }} ({{ date }}) {{ level }}",
-        text=""""
-        Hej!
-
-Jest potrzebne zastępstwo, aby dowiedzieć się szczegółów kliknij w poniższy link:
-
-https://{{ domain }}/{{ url|safe }}substitutions/{{ substitution_id }}
-
-Dziękujemy, że jesteś.
-Zespół Web-Korki
-""",
-    )
-    confirm_email = Email(
-        name="SubstitutionConfirmEmail",
-        title="{{ site_name }} Twoje zastępstwo w dniu ({{ date }}) o godzinie {{ time }} zostało przejęte",
-        text="Nowy nauczyciel - {{ new_teacher }}",
-    )
-    sub_email.save()
-    confirm_email.save()
-
 
 def add_levels():
     print("adding levels....")
@@ -233,19 +208,18 @@ def add_batch(n=1):
     The order in functions is important here!
     """
     for _ in range(n):
-        add_subjects()
-        add_levels()
         add_random_houses(3)
         add_students(100)
         add_teachers(10)
-        add_subs(10000)
+        add_subs(1000)
 
 
 if __name__ == "__main__":
     number = 1
     if len(sys.argv) > 1:
         number = int(sys.argv[1])
-    add_sub_emails()
+    add_subjects()
+    add_levels()
     add_batch(number)
 
     # add_random_houses(2)
