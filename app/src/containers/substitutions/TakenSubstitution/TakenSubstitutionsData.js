@@ -27,86 +27,98 @@ const TakenSubstitutionsData = ({ isSuperuser, takenSubstitutionsData }) => {
 
   return (
     <div className="col-12">
-      {takenSubstitutionsData
-        ? takenSubstitutionsData.map((substitution) => {
-            return (
-              <Container className="mb-5">
-                <div className="row mb-4">
+      {takenSubstitutionsData ? (
+        takenSubstitutionsData.map((substitution) => {
+          return (
+            <Container className="mb-5">
+              <div className="row mb-4">
+                <div className="col-12 col-xl-6 d-flex justify-content-center flex-column mx-auto mb-4 mb-xl-0">
+                  <p className="text">Zgłosił</p>
+                  <TextField>
+                    {substitution.old_teacher_fb
+                      ? substitution.old_teacher_fb
+                      : substitution.old_teacher}
+                  </TextField>
+                </div>
+                {isSuperuser ? (
                   <div className="col-12 col-xl-6 d-flex justify-content-center flex-column mx-auto mb-4 mb-xl-0">
-                    <p className="text">Zgłosił</p>
+                    <p className="text">Przyjął</p>
                     <TextField>
-                      {substitution.old_teacher_fb
-                        ? substitution.old_teacher_fb
-                        : substitution.old_teacher}
+                      {substitution.new_teacher_fb
+                        ? substitution.new_teacher_fb
+                        : substitution.new_teacher}
                     </TextField>
                   </div>
-                  {isSuperuser ? (
-                    <div className="col-12 col-xl-6 d-flex justify-content-center flex-column mx-auto mb-4 mb-xl-0">
-                      <p className="text">Przyjął</p>
-                      <TextField>
-                        {substitution.new_teacher_fb
-                          ? substitution.new_teacher_fb
-                          : substitution.new_teacher}
-                      </TextField>
-                    </div>
-                  ) : null}
+                ) : null}
+              </div>
+              <div className="row mb-4">
+                <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
+                  <p className="text">Klasa</p>
+                  <TextField>{substitution.level_name}</TextField>
                 </div>
-                <div className="row mb-4">
-                  <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
-                    <p className="text">Klasa</p>
-                    <TextField>{substitution.level_name}</TextField>
-                  </div>
-                  <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
-                    <p className="text">Data</p>
-                    <TextField>
-                      {substitution.datetime
-                        .split('T')[0]
-                        .replaceAll('-', '.') +
-                        ' / ' +
-                        substitution.datetime
-                          .split('T')[1]
-                          .split('+')[0]
-                          .split(':')[0] +
-                        ':' +
-                        substitution.datetime
-                          .split('T')[1]
-                          .split('+')[0]
-                          .split(':')[1]}
-                    </TextField>
-                  </div>
-                  <div className="col-12 col-xl-4 d-flex justify-content-center flex-column">
-                    <p className="text">Przedmiot</p>
-                    <TextField>{substitution.subject_name}</TextField>
-                  </div>
-                </div>
-                <div className="col d-flex flex-column justify-content-center">
-                  <p className="text">Ostatnio przerabiane zagadnienia</p>
+                <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
+                  <p className="text">Data</p>
                   <TextField>
-                    {substitution.last_topics
-                      ? substitution.last_topics
-                      : 'nie podano'}
+                    {substitution.datetime.split('T')[0].replaceAll('-', '.') +
+                      ' / ' +
+                      substitution.datetime
+                        .split('T')[1]
+                        .split('+')[0]
+                        .split(':')[0] +
+                      ':' +
+                      substitution.datetime
+                        .split('T')[1]
+                        .split('+')[0]
+                        .split(':')[1]}
                   </TextField>
                 </div>
-                <div className="col d-flex flex-column mt-4 justify-content-center">
-                  <p className="text">Planowane zagadnienia na lekcję</p>
-                  <TextField>
-                    {substitution.planned_topics
-                      ? substitution.planned_topics
-                      : 'nie podano'}
-                  </TextField>
+                <div className="col-12 col-xl-4 d-flex justify-content-center flex-column">
+                  <p className="text">Przedmiot</p>
+                  <TextField>{substitution.subject_name}</TextField>
                 </div>
-                <div className="col d-flex flex-column mt-4 justify-content-center">
-                  <p className="text">Metodyka nauczania oraz platforma</p>
-                  <TextField>
-                    {substitution.methodology_and_platform
-                      ? substitution.methodology_and_platform
-                      : 'brak danych'}
-                  </TextField>
-                </div>
-              </Container>
-            );
-          })
-        : null}
+              </div>
+              <div className="col d-flex flex-column justify-content-center">
+                <p className="text">Ostatnio przerabiane zagadnienia</p>
+                <TextField>
+                  {substitution.last_topics
+                    ? substitution.last_topics
+                    : 'nie podano'}
+                </TextField>
+              </div>
+              <div className="col d-flex flex-column mt-4 justify-content-center">
+                <p className="text">Planowane zagadnienia na lekcję</p>
+                <TextField>
+                  {substitution.planned_topics
+                    ? substitution.planned_topics
+                    : 'nie podano'}
+                </TextField>
+              </div>
+              <div className="col d-flex flex-column mt-4 justify-content-center">
+                <p className="text">Metodyka nauczania oraz platforma</p>
+                <TextField>
+                  {substitution.methodology_and_platform
+                    ? substitution.methodology_and_platform
+                    : 'brak danych'}
+                </TextField>
+              </div>
+            </Container>
+          );
+        })
+      ) : (
+        <div className="col-12">
+          <Container>
+            <div className="row">
+              <p className="text-center title">Brak danych do wyświetlenia</p>
+            </div>
+            <div className="row justify-content-center">
+              <p className="text-right text w-50 mt-5">
+                Może to być błąd przy pobieraniu danych z serwera. Odśwież
+                stronę, aby spróbować ponownie.
+              </p>
+            </div>
+          </Container>
+        </div>
+      )}
     </div>
   );
 };

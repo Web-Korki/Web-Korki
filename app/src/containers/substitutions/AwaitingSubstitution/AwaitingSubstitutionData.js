@@ -42,107 +42,111 @@ export const AwaitingSubstitutionData = ({
 
   return (
     <div className="col-12">
-      {pendingSubstitutionsData
-        ? pendingSubstitutionsData.map((substitution) => {
-            return (
-              <Container
-                className="mb-5"
-                key={substitution.id}
-                id={substitution.id} // in the context of this container it's safe, because even if the user will discard the substitution, the substitutions array is not being refiltered on the BE
-              >
-                <div className="row text mb-4">
-                  <p className="text-center">
-                    {substitution?.subject_name
-                      ? capitalizeName(substitution?.subject_name)
-                      : substitution?.subject}{' '}
-                    w dniu{' '}
-                    {substitution?.datetime
-                      .split('T')[0]
-                      .replaceAll('-', '.')
-                      .split('.')
-                      .reverse()
-                      .join('.')}
-                  </p>
-                  {isSuperuser && (
-                    <>
-                      <span>Zgłosił </span>
-                      <TextField>
-                        {substitution.old_teacher_fb
-                          ? substitution.old_teacher_fb
-                          : 'Nauczyciel nie podał swojego nicku fb'}
-                      </TextField>
-                    </>
-                  )}
-                </div>
-                <div className="row mb-4">
-                  <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
-                    <p className="text">Klasa</p>
-                    <TextField>{substitution.level_name}</TextField>
-                  </div>
-                  <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
-                    <p className="text">Data</p>
+      {pendingSubstitutionsData ? (
+        pendingSubstitutionsData.map((substitution) => {
+          return (
+            <Container
+              className="mb-5"
+              key={substitution.id}
+              id={substitution.id} // in the context of this container it's safe, because even if the user will discard the substitution, the substitutions array is not being refiltered on the BE
+            >
+              <div className="row text mb-4">
+                <p className="text-center">
+                  {substitution?.subject_name
+                    ? capitalizeName(substitution?.subject_name)
+                    : substitution?.subject}{' '}
+                  w dniu{' '}
+                  {substitution?.datetime
+                    .split('T')[0]
+                    .replaceAll('-', '.')
+                    .split('.')
+                    .reverse()
+                    .join('.')}
+                </p>
+                {isSuperuser && (
+                  <>
+                    <span>Zgłosił </span>
                     <TextField>
-                      {substitution.datetime
-                        .split('T')[0]
-                        .replaceAll('-', '.') +
-                        ' / ' +
-                        substitution.datetime
-                          .split('T')[1]
-                          .split('+')[0]
-                          .split(':')[0] +
-                        ':' +
-                        substitution.datetime
-                          .split('T')[1]
-                          .split('+')[0]
-                          .split(':')[1]}
+                      {substitution.old_teacher_fb
+                        ? substitution.old_teacher_fb
+                        : 'Nauczyciel nie podał swojego nicku fb'}
                     </TextField>
-                  </div>
-                  <div className="col-12 col-xl-4 d-flex justify-content-center flex-column">
-                    <p className="text" for="subject">
-                      Przedmiot
-                    </p>
-                    <TextField>{substitution.subject_name}</TextField>
-                  </div>
+                  </>
+                )}
+              </div>
+              <div className="row mb-4">
+                <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
+                  <p className="text">Klasa</p>
+                  <TextField>{substitution.level_name}</TextField>
                 </div>
-                <div className="col d-flex flex-column justify-content-center">
-                  <p className="text" for="last-topics">
-                    Ostatnio przerabiane zagadnienia
-                  </p>
+                <div className="col-12 col-xl-4 d-flex justify-content-center flex-column mb-4 mb-xl-0">
+                  <p className="text">Data</p>
                   <TextField>
-                    {substitution.last_topics
-                      ? substitution.last_topics
-                      : 'Nie podano.'}
+                    {substitution.datetime.split('T')[0].replaceAll('-', '.') +
+                      ' / ' +
+                      substitution.datetime
+                        .split('T')[1]
+                        .split('+')[0]
+                        .split(':')[0] +
+                      ':' +
+                      substitution.datetime
+                        .split('T')[1]
+                        .split('+')[0]
+                        .split(':')[1]}
                   </TextField>
                 </div>
-                <div className="col d-flex flex-column mt-4 justify-content-center">
-                  <p className="text" for="planned-topics">
-                    Planowane zagadnienia na lekcję
-                  </p>
-                  <TextField>
-                    {substitution.planned_topics
-                      ? substitution.planned_topics
-                      : 'Nie podano.'}
-                  </TextField>
+                <div className="col-12 col-xl-4 d-flex justify-content-center flex-column">
+                  <p className="text">Przedmiot</p>
+                  <TextField>{substitution.subject_name}</TextField>
                 </div>
-                <div className="col d-flex flex-column mt-4 justify-content-center">
-                  <p className="text" for="teaching-methodology">
-                    Metodyka nauczania oraz platforma
-                  </p>
-                  <TextField>
-                    {substitution.methodology_and_platform
-                      ? substitution.methodology_and_platform
-                      : 'Brak danych.'}
-                  </TextField>
-                </div>
-                <div className="col d-flex mt-4 justify-content-center">
-                  <BlueButton onClick={() => handleSubmit(substitution.id)}>
-                    akceptuj
-                  </BlueButton>
-                </div>
-              </Container>
-            );
-          })
-        : null}
+              </div>
+              <div className="col d-flex flex-column justify-content-center">
+                <p className="text">Ostatnio przerabiane zagadnienia</p>
+                <TextField>
+                  {substitution.last_topics
+                    ? substitution.last_topics
+                    : 'Nie podano.'}
+                </TextField>
+              </div>
+              <div className="col d-flex flex-column mt-4 justify-content-center">
+                <p className="text">Planowane zagadnienia na lekcję</p>
+                <TextField>
+                  {substitution.planned_topics
+                    ? substitution.planned_topics
+                    : 'Nie podano.'}
+                </TextField>
+              </div>
+              <div className="col d-flex flex-column mt-4 justify-content-center">
+                <p className="text">Metodyka nauczania oraz platforma</p>
+                <TextField>
+                  {substitution.methodology_and_platform
+                    ? substitution.methodology_and_platform
+                    : 'Brak danych.'}
+                </TextField>
+              </div>
+              <div className="col d-flex mt-4 justify-content-center">
+                <BlueButton onClick={() => handleSubmit(substitution.id)}>
+                  akceptuj
+                </BlueButton>
+              </div>
+            </Container>
+          );
+        })
+      ) : (
+        <div className="col-12">
+          <Container>
+            <div className="row">
+              <p className="text-center title">Brak danych do wyświetlenia</p>
+            </div>
+            <div className="row justify-content-center">
+              <p className="text-right text w-50 mt-5">
+                Może to być błąd przy pobieraniu danych z serwera. Odśwież
+                stronę, aby spróbować ponownie.
+              </p>
+            </div>
+          </Container>
+        </div>
+      )}
     </div>
   );
 };
