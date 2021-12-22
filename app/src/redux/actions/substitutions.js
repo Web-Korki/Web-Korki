@@ -18,10 +18,7 @@ import {
 } from '../actions/types';
 import { refresh_token } from './auth';
 
-const API_URL =
-  window.location.host === '127.0.0.1:8000'
-    ? '127.0.0.1:8000'
-    : 'https://web-korki.edu.pl';
+const API_URL = 'https://web-korki.edu.pl';
 
 export const create_substitution = (data) => async (dispatch) => {
   if (Cookies.get('access')) {
@@ -150,7 +147,7 @@ export const take_substitution = (id) => async (dispatch) => {
     try {
       console.log(id);
       const response = await axios.patch(
-        `${API_URL}/api/substitutions/assign_teacher/${id}/`,
+        `${API_URL}/api/substitutions/assign_teacher/${id}/`, {},
         config
       );
 

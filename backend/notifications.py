@@ -8,13 +8,13 @@ from backend.models import Teacher
 import os
 
 
-class NotificationEmail(mail.BaseEmailMessage):
+class SubstitutionEmail(mail.BaseEmailMessage):
     template_name = os.path.join(
         BASE_DIR, "backend", "templates", "substitution_needed.html"
     )
 
-    def get_context_data(self):
-        context = super().get_context_data()
+class SubstitutionConfirmationEmail(mail.BaseEmailMessage):
+    template_name = os.path.join(BASE_DIR, "backend", "templates", "substitution_confirm.html")
 
 
 class ActivationEmail(mail.BaseEmailMessage):

@@ -24,10 +24,7 @@ import {
   RESET_STATE,
 } from './types';
 
-const API_URL =
-  window.location.host === '127.0.0.1:8000'
-    ? '127.0.0.1:8000'
-    : 'https://web-korki.edu.pl';
+const API_URL = 'https://web-korki.edu.pl'
 
 export const refresh_token = () => async (dispatch) => {
   const config = {
