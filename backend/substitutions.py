@@ -1,25 +1,20 @@
+from datetime import datetime
+
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from rest_framework import status
+from rest_framework.response import Response as RestFrameworkResponse
+
 from .models import (
     Substitution,
     Teacher,
     get_subject_full_name,
     get_level_full_name,
-    Email,
     Subject,
     Level,
 )
-from rest_framework.response import Response as RestFrameworkResponse
-from rest_framework import status
-from myapp.settings import URL, BASE_DIR
-from datetime import datetime
-from templated_mail import mail
-import os
-from django.core.validators import validate_email
-from django.core.exceptions import ValidationError
+from .notifications import SubstitutionEmail, SubstitutionConfirmationEmail
 from .serializers import SubstitutionSerializer
-
-from django.template.context import make_context
-from django.template.loader import _engine_list
-from django.template.exceptions import TemplateDoesNotExist
 
 # Possible statuses used in substitutions responses
 status_ok = status.HTTP_200_OK
@@ -30,7 +25,7 @@ status_permission = status.HTTP_401_UNAUTHORIZED
 
 def map_number_to_weekday(number):
     """Returns name of the week for number from 1 to 7"""
-    assert 0 < number <= 7
+    assert 0 <= number < 7
     days = [
         "Poniedziałek",
         "Wtorek",
@@ -40,7 +35,7 @@ def map_number_to_weekday(number):
         "Sobota",
         "Niedziela",
     ]
-    return days[number - 1]
+    return days[number]
 
 
 def validate_user_before_email(teacher, current_user):
@@ -72,83 +67,6 @@ def save_substitution(data):
     new_substitution = Substitution(**data)
     new_substitution.save()
     return new_substitution
-
-
-def get_template_from_string(email_model, using=None):
-    """
-    Overridden get_template from django.template.loader.
-    Loads template from string instead from file.
-    """
-    chain = []
-    for engine in _engine_list(using):
-        try:
-            m = Email.objects.get(name__exact=email_model)
-            return engine.from_string(compose_email_from_model(m))
-        except TemplateDoesNotExist as e:
-            chain.append(e)
-    raise TemplateDoesNotExist(email_model, chain=chain)
-
-
-def compose_email_from_model(model):
-    """
-    Main string builder method for emails. Converts email title, text and footer into final email string.
-    """
-    e = "{% load i18n %}"
-    e += (
-        "{% block subject %}{% blocktrans %}"
-        + model.title
-        + "{% endblocktrans %}{% endblock subject %}"
-    )
-    e += "{% block text_body %}"
-    e += model.text
-    e += "\n\n"
-    if model.footer:
-        e += model.footer.text
-    e += "{% endblock text_body %}"
-    return e
-
-
-class MyEmail(mail.BaseEmailMessage):
-    """
-    Interface for sending substitution emails
-    Initialize it with context dict of parameters that will be passed to email template
-    """
-
-    def __init__(self, additional_context, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.additional_context = additional_context
-
-    def get_context_data(self):
-        context = super().get_context_data()
-        context.update(self.additional_context)
-        return context
-
-    def render(self):
-        context = make_context(self.get_context_data(), request=self.request)
-        assert (
-            self.email_model
-        ), "You have to specify self.email_model (String - name of model) in child class"
-        template = get_template_from_string(self.email_model)
-        with context.bind_template(template.template):
-            for node in template.template.nodelist:
-                self._process_node(node, context)
-        self._attach_body()
-
-
-class SubstitutionEmail(MyEmail):
-    """
-    Class for sending information about new substitution.
-    """
-
-    email_model = "SubstitutionEmail"
-
-
-class SubstitutionConfirmationEmail(MyEmail):
-    """
-    Class for sending confirmation to teacher that applied for substitution.
-    """
-
-    email_model = "SubstitutionConfirmEmail"
 
 
 def create_substitution(request):
@@ -221,7 +139,7 @@ def send_mail_with_substitution_info(substitution_id, substitution_date, request
         "substitution_id": substitution_id,
     }
 
-    sub_email = SubstitutionEmail(context)
+    sub_email = SubstitutionEmail(request, context)
     mail_list = [
         teacher.email
         for teacher in teachers
@@ -240,7 +158,7 @@ def assign_teacher(request, substitution):
         new_teacher  # new_teacher_found property updates in model.on_save
     )
     substitution.save()
-    send_email_to_old_teacher(substitution)
+    send_email_to_old_teacher(request, substitution)
 
 
 def unassign_teacher(request, substitution):
@@ -268,7 +186,7 @@ def unassign_teacher(request, substitution):
         "substitution_id": substitution.id,
     }
 
-    sub_email = SubstitutionEmail(context)
+    sub_email = SubstitutionEmail(request, context)
     mail_list = [
         teacher.email
         for teacher in teachers
@@ -280,7 +198,7 @@ def unassign_teacher(request, substitution):
     return True
 
 
-def send_email_to_old_teacher(substitution):
+def send_email_to_old_teacher(request, substitution):
     """ "
     Send email with new teacher contact info to the teacher that applied for substitution
     """
@@ -298,7 +216,7 @@ def send_email_to_old_teacher(substitution):
         "substitution_id": substitution.id,
     }
 
-    sub_email = SubstitutionConfirmationEmail(context)
+    sub_email = SubstitutionConfirmationEmail(request, context)
 
     mail_list = [substitution.old_teacher.email]
     if mail_list:

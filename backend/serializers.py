@@ -115,7 +115,7 @@ class AssignTeacherSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = Lesson
-        fields = ["teacher"]
+        fields = "__all__"
 
 
 class SubstitutionSerializer(serializers.ModelSerializer):

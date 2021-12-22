@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import status, permissions, viewsets, generics
-
+from rest_framework.pagination import LimitOffsetPagination
 from django.shortcuts import render
 from django_filters import rest_framework as filters
 
@@ -164,6 +164,8 @@ class SubstitutionsView(viewsets.ModelViewSet):
     filterset_fields = ["new_teacher"]
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = SubstitutionFilter
+    pagination_class = LimitOffsetPagination
+
 
     def list(self, request, *args, **kwargs):
 
@@ -189,7 +191,6 @@ class SubstitutionsView(viewsets.ModelViewSet):
         `subject: int`<br>
         `new_teacher_found: bool`<br>
         """
-
         filtered_qs = self.filter_queryset(self.get_queryset())
         context = self.paginate_queryset(filtered_qs)
         serializer = self.serializer_class(context, many=True)
@@ -304,12 +305,8 @@ class AssignTeacherView(SubstitutionsView):
             substitution, data=request.data, partial=partial
         )
         serializer.is_valid(raise_exception=True)
-
         # Custom perform update
         assign_teacher(self.request, substitution)
-
-        if getattr(substitution, "_prefetched_objects_cache", None):
-            substitution._prefetched_objects_cache = {}
 
         return Response(serializer.data)
 
@@ -336,6 +333,7 @@ class UnassignTeacherView(SubstitutionsView):
     http_method_names = ["patch"]
 
     def update(self, request, *args, **kwargs):
+        print(request)
         partial = kwargs.pop("partial", False)
         substitution = self.get_object()
 

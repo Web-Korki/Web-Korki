@@ -191,7 +191,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "pl-pl"
+LANGUAGE_CODE = "en-en"
 
 TIME_ZONE = "Europe/Warsaw"
 
@@ -214,6 +214,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, FRONTEND_DIR, "build", "static"),
     os.path.join(BASE_DIR, FRONTEND_DIR, "build"),
+    os.path.join(BASE_DIR, "static")
 )
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
@@ -234,8 +235,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 10,
+    "PAGE_SIZE": 10
 }
 
 # Set expiration for token much longer in developement
@@ -307,12 +307,11 @@ DJOSER = {
 
 
 LANGUAGES = [
-    ("en", "English"),
-    ("pl-pl", "Polish"),
+    ("en-en", "English"),
 ]
 
 CMS_TEMPLATES = [
-    ("home.html", "Home page template"),
+    ("index.html", "Home page template"),
 ]
 
 THUMBNAIL_HIGH_RESOLUTION = True
