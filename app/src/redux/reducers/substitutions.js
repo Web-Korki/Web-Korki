@@ -13,6 +13,7 @@ import {
   DELETE_SUBSTITUTION_FAIL,
   GET_TAKEN_SUBSTITUTIONS_SUCCESS,
   GET_TAKEN_SUBSTITUTIONS_FAIL,
+  RESET_STATE,
 } from '../actions/types';
 
 const initialState = {
@@ -21,18 +22,26 @@ const initialState = {
   substitution: null,
   all_substitutions: null,
   taken_substitutions: null,
+  create_substitution_success: null,
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case RESET_STATE:
+      return {
+        ...state,
+        create_substitution_success: null,
+      };
     case CREATE_SUBSTITUTION_SUCCESS:
       return {
         ...state,
+        create_substitution_success: true,
       };
     case CREATE_SUBSTITUTION_FAIL:
       return {
         ...state,
+        create_substitution_success: false,
       };
     case ASSIGN_TEACHER_SUCCESS:
       return {

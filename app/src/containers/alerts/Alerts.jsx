@@ -17,6 +17,7 @@ class Alerts extends Component {
     user: PropTypes.object,
     error: PropTypes.object.isRequired,
     reset_state: PropTypes.func.isRequired,
+    create_substitution_success: PropTypes.bool.isRequired,
   };
 
   componentDidUpdate(prevProps) {
@@ -29,7 +30,16 @@ class Alerts extends Component {
       error,
       alert,
       reset_state,
+      create_substitution_success,
     } = this.props;
+
+    if (create_substitution_success !== prevProps.create_substitution_success) {
+      if (create_substitution_success)
+        alert.success('Prośba o zastępstwo została wysłana');
+      if (create_substitution_success)
+        alert.error('Nie udało się zgłosić prośby o zastępstwo');
+      reset_state();
+    }
 
     if (loginSuccess !== prevProps.loginSuccess) {
       if (loginSuccess) alert.success('Pomyślnie zalogowano');
@@ -72,6 +82,9 @@ const mapStateToProps = (state) => ({
   loginSuccess: state.auth.loginSuccess,
   user: state.auth.user,
   error: state.errors,
+
+  //substitutions:
+  create_substitution_success: state.substitutions.create_substitution_success,
 });
 
 export default connect(mapStateToProps, { reset_state })(withAlert()(Alerts));

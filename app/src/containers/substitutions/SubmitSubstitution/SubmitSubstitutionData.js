@@ -40,6 +40,15 @@ const SubmitSubstitutionData = ({
     methodology_and_platform: '',
   });
 
+  const initialState = {
+    level: '',
+    subject: '',
+    datetime: '',
+    last_topics: '',
+    planned_topics: '',
+    methodology_and_platform: '',
+  };
+
   const {
     level,
     subject,
@@ -66,6 +75,7 @@ const SubmitSubstitutionData = ({
   const onSubmit = (e) => {
     e.preventDefault();
     createSubstitution(formData);
+    setFormData(initialState);
   };
 
   const defaultFormSelectData = [{ value: '', label: '' }];

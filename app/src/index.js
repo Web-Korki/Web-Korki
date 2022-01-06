@@ -76,7 +76,6 @@ axios.interceptors.response.use(
       error.config.url == 'https://web-korki.edu.pl/auth/users/me/'
     ) {
       localStorage.clear();
-      window.location.pathname = '/login_form';
 
       return new Promise((resolve, reject) => {
         reject(error);
