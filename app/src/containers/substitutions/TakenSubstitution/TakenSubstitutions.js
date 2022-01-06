@@ -19,7 +19,7 @@ const TakenSubstitutions = ({
   TakenSubstitutions.propTypes = {
     get_taken_substitutions: PropTypes.func.isRequired,
     takenSubstitutionsCount: PropTypes.number,
-    takenSubstitutionsData: PropTypes.shape({
+    takenSubstitutionsData: PropTypes.objectOf({
       id: PropTypes.number,
       datetime: PropTypes.string,
       new_teacher_found: PropTypes.bool,

@@ -46,18 +46,12 @@ export const create_substitution = (data) => async (dispatch) => {
       dispatch({
         type: CREATE_SUBSTITUTION_FAIL,
       });
-      create_substitution_token_refresh();
     }
   } else {
     dispatch({
       type: CREATE_SUBSTITUTION_FAIL,
     });
   }
-};
-
-const create_substitution_token_refresh = () => {
-  refresh_token();
-  create_substitution();
 };
 
 export const get_pending_substitutions = () => async (dispatch) => {
@@ -82,18 +76,12 @@ export const get_pending_substitutions = () => async (dispatch) => {
       dispatch({
         type: GET_PENDING_SUBSTITUTIONS_FAIL,
       });
-      get_pending_substitution_token_refresh();
     }
   } else {
     dispatch({
       type: GET_PENDING_SUBSTITUTIONS_FAIL,
     });
   }
-};
-
-const get_pending_substitution_token_refresh = () => {
-  refresh_token();
-  get_pending_substitutions();
 };
 
 export const get_taken_substitutions = () => async (dispatch) => {
@@ -119,18 +107,12 @@ export const get_taken_substitutions = () => async (dispatch) => {
       dispatch({
         type: GET_TAKEN_SUBSTITUTIONS_FAIL,
       });
-      get_taken_substitution_token_refresh();
     }
   } else {
     dispatch({
       type: GET_TAKEN_SUBSTITUTIONS_FAIL,
     });
   }
-};
-
-const get_taken_substitution_token_refresh = () => {
-  refresh_token();
-  get_taken_substitutions();
 };
 
 // ASSIGN_TEACHER / TAKE_SUBSTITUTION - think about naming convention

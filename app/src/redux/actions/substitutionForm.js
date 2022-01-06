@@ -30,18 +30,12 @@ export const get_levels = () => async (dispatch) => {
       dispatch({
         type: GET_LEVEL_FAIL,
       });
-      get_levels_token_refresh();
     }
   } else {
     dispatch({
       type: GET_LEVEL_FAIL,
     });
   }
-};
-
-const get_levels_token_refresh = () => {
-  refresh_token();
-  get_levels();
 };
 
 export const get_subjects = () => async (dispatch) => {
@@ -64,16 +58,10 @@ export const get_subjects = () => async (dispatch) => {
       dispatch({
         type: GET_SUBJECTS_FAIL,
       });
-      get_subjects_token_refresh();
     }
   } else {
     dispatch({
       type: GET_SUBJECTS_FAIL,
     });
   }
-};
-
-const get_subjects_token_refresh = () => {
-  refresh_token();
-  get_subjects();
 };

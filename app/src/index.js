@@ -21,11 +21,91 @@ import Alerts from './containers/alerts/Alerts';
 //components
 import App from './App';
 
+// utils
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
 //Alert Options:
 const alertOptions = {
   timeout: 3000,
   position: 'top center',
 };
+
+// interceptor
+const refreshToken = () => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const body = JSON.stringify({ refresh: Cookies.get('refresh') });
+
+  return new Promise((resolve, reject) => {
+    axios
+      .post('https://web-korki.edu.pl/auth/jwt/refresh', body, config)
+      .then((response) => {
+        Cookies.set('access', response.data.access);
+        Cookies.set('refresh', response.data.refresh);
+
+        resolve(response.data.access);
+      })
+      .catch((error) => reject(error));
+  });
+};
+
+axios.interceptors.response.use(
+  (response) =>
+    new Promise((resolve, reject) => {
+      // return a successful response
+      // console.log(response); //uncomment for debugging
+      resolve(response);
+    }),
+  async (error) => {
+    // console.log("error occured", error.response.status) //uncomment for debugging
+    // return any error which is due to authentication
+    if (error.response.status !== 401) {
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+
+    // if error occured due to request to refresh token, return it and take the user to login_form
+    if (
+      error.config.url === '/auth/jwt/refresh' ||
+      error.response.message === 'Account is disabled'
+    ) {
+      window.location('/login_form');
+
+      return new Promise((resolve, reject) => {
+        reject(error);
+      });
+    }
+
+    // console.log(Cookies.get('access')); //uncomment for debugging
+    // otherwise refresh token and repeat the original request
+    return refreshToken()
+      .then((access) => {
+        console.log('new access token is ', Cookies.get('access'));
+
+        const config = error.config;
+        config.headers['Authorization'] = `Bearer ${access}`;
+
+        return new Promise((resolve, reject) => {
+          axios
+            .request(config)
+            .then((response) => {
+              resolve(response);
+            })
+            .catch((error) => {
+              reject(error);
+            });
+        });
+      })
+      .catch((error) => {
+        Promise.reject(error);
+      });
+  }
+);
 
 class Index extends Component {
   render() {

@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 const TakenSubstitutionsData = ({ isSuperuser, takenSubstitutionsData }) => {
   TakenSubstitutionsData.propTypes = {
-    takenSubstitutionsData: PropTypes.shape({
+    takenSubstitutionsData: PropTypes.objectOf({
       id: PropTypes.number,
       datetime: PropTypes.string,
       new_teacher_found: PropTypes.bool,
@@ -30,7 +30,7 @@ const TakenSubstitutionsData = ({ isSuperuser, takenSubstitutionsData }) => {
       {takenSubstitutionsData ? (
         takenSubstitutionsData.map((substitution) => {
           return (
-            <Container className="mb-5">
+            <Container key={substitution.id} className="mb-5">
               <div className="row mb-4">
                 <div className="col-12 col-xl-6 d-flex justify-content-center flex-column mx-auto mb-4 mb-xl-0">
                   <p className="text">Zgłosił</p>

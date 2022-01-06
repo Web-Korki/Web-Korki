@@ -14,7 +14,7 @@ export const AcceptSubstitutionData = ({
   takeSubstitution,
 }) => {
   AcceptSubstitutionData.propTypes = {
-    substitutionData: PropTypes.shape({
+    substitutionData: PropTypes.objectOf({
       id: PropTypes.number,
       datetime: PropTypes.string,
       new_teacher_found: PropTypes.bool,

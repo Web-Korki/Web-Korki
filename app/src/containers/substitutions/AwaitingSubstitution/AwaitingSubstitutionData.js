@@ -15,7 +15,7 @@ export const AwaitingSubstitutionData = ({
   isSuperuser,
 }) => {
   AwaitingSubstitutionData.propTypes = {
-    pendingSubstitutionsData: PropTypes.shape({
+    pendingSubstitutionsData: PropTypes.objectOf({
       id: PropTypes.number,
       datetime: PropTypes.string,
       new_teacher_found: PropTypes.bool,
