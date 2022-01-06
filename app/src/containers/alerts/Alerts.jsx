@@ -36,7 +36,7 @@ class Alerts extends Component {
     if (create_substitution_success !== prevProps.create_substitution_success) {
       if (create_substitution_success)
         alert.success('Prośba o zastępstwo została wysłana');
-      if (create_substitution_success)
+      if (!create_substitution_success)
         alert.error('Nie udało się zgłosić prośby o zastępstwo');
       reset_state();
     }
