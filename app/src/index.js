@@ -60,7 +60,7 @@ axios.interceptors.response.use(
       // console.log(response); //uncomment for debugging
       resolve(response);
     }),
-  async (error) => {
+  (error) => {
     // console.log("error occured", error.response.status) //uncomment for debugging
     // return any error which is due to authentication
     if (error.response.status !== 401) {
@@ -71,10 +71,12 @@ axios.interceptors.response.use(
 
     // if error occured due to request to refresh token, return it and take the user to login_form
     if (
-      error.config.url === '/auth/jwt/refresh' ||
-      error.response.message === 'Account is disabled'
+      error.config.url == 'https://web-korki.edu.pl/auth/jwt/refresh' ||
+      error.config.url == 'https://web-korki.edu.pl/auth/jwt/create' ||
+      error.config.url == 'https://web-korki.edu.pl/auth/users/me/'
     ) {
-      window.location('/login_form');
+      localStorage.clear();
+      window.location.pathname = '/login_form';
 
       return new Promise((resolve, reject) => {
         reject(error);
@@ -83,27 +85,31 @@ axios.interceptors.response.use(
 
     // console.log(Cookies.get('access')); //uncomment for debugging
     // otherwise refresh token and repeat the original request
-    return refreshToken()
-      .then((access) => {
-        console.log('new access token is ', Cookies.get('access'));
+    if (Cookies.get('refresh')) {
+      return refreshToken()
+        .then((access) => {
+          // console.log('new access token is ', Cookies.get('access')); //uncomment for debugging
 
-        const config = error.config;
-        config.headers['Authorization'] = `Bearer ${access}`;
+          const config = error.config;
+          config.headers['Authorization'] = `Bearer ${access}`;
 
-        return new Promise((resolve, reject) => {
-          axios
-            .request(config)
-            .then((response) => {
-              resolve(response);
-            })
-            .catch((error) => {
-              reject(error);
-            });
+          return new Promise((resolve, reject) => {
+            axios
+              .request(config)
+              .then((response) => {
+                resolve(response);
+              })
+              .catch((error) => {
+                reject(error);
+              });
+          });
+        })
+        .catch((error) => {
+          Promise.reject(error);
         });
-      })
-      .catch((error) => {
-        Promise.reject(error);
-      });
+    }
+
+    return;
   }
 );
 

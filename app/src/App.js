@@ -39,7 +39,7 @@ function App() {
   useEffect(() => {
     store.dispatch(checkAuthenticated());
     store.dispatch(load_user());
-  });
+  }, []);
 
   return (
     <>

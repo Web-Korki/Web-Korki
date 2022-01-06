@@ -150,8 +150,8 @@ export const login = (username, password) => async (dispatch) => {
       type: LOGIN_FAIL,
     });
     const errors = {
-      msg: err.response.data.detail,
-      status: err.response.status,
+      msg: err.response?.data.detail,
+      status: err.response?.status,
     };
     dispatch({
       type: GET_ERRORS,
