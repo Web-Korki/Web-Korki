@@ -153,7 +153,7 @@ TEMPLATES = [
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.environ["DATABASE_NAME"],
         "USER": os.environ["DATABASE_USER"],
         "PASSWORD": os.environ["DATABASE_PWD"],
@@ -320,5 +320,3 @@ META_USE_OG_PROPERTIES = True
 META_USE_TWITTER_PROPERTIES = True
 META_USE_GOOGLEPLUS_PROPERTIES = True  # django-meta 1.x+
 META_USE_SCHEMAORG_PROPERTIES = True  # django-meta 2.x
-
-django_heroku.settings(locals())
