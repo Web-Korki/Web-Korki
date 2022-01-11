@@ -11,15 +11,16 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
-from datetime import timedelta
+import django_heroku
 import dj_database_url
+from datetime import timedelta
 from dotenv import load_dotenv
 
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FRONTEND_DIR = "app"
+FRONTEND_DIR = "frontend"
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,11 +43,9 @@ if DEBUG:
     URL = "127.0.0.1"
 
 ALLOWED_HOSTS = [
-    "web-korki.edu.pl",
-    "www.web-korki.edu.pl",
     "localhost",
     "127.0.0.1",
-    "nujgoiz.cluster024.hosting.ovh.net",
+    "lessons-planer.herokuapp.com"
 ]
 
 
@@ -68,6 +67,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "djoser",
     "django_filters",
+    "django_inlinecss",
     "model_bakery",
     # Local apps
     "myapp",
@@ -96,7 +96,7 @@ INSTALLED_APPS = [
     "taggit_autosuggest",
     "meta",
     "sortedm2m",
-    "djangocms_blog",
+    "djangocms_blog"
 ]
 
 MIDDLEWARE = [
@@ -150,23 +150,16 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if "DEVELOP_DEBUG" in os.environ:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ["DATABASE_NAME"],
+        "USER": os.environ["DATABASE_USER"],
+        "PASSWORD": os.environ["DATABASE_PWD"],
+        "HOST": os.environ["DATABASE_HOST"],
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.mysql",
-            "NAME": os.environ["DB_NAME"],
-            "USER": os.environ["DB_USER"],
-            "PASSWORD": os.environ["DB_PASSWORD"],
-            "HOST": os.environ["DB_HOST"],
-        }
-    }
+}
 
 
 # Password validation
@@ -263,9 +256,6 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "http://nujgoiz.cluster024.hosting.ovh.net",
-    "https://www.web-korki.edu.pl",
-    "https://web-korki.edu.pl",
 ]
 APPEND_SLASH = False
 
@@ -330,3 +320,5 @@ META_USE_OG_PROPERTIES = True
 META_USE_TWITTER_PROPERTIES = True
 META_USE_GOOGLEPLUS_PROPERTIES = True  # django-meta 1.x+
 META_USE_SCHEMAORG_PROPERTIES = True  # django-meta 2.x
+
+django_heroku.settings(locals())

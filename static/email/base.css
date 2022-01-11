@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap');
+
+body {
+  height: 100%;
+  background-color: #dff2fb;
+  font-family: 'Sen', sans-serif;
+  color: #427e90;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,16 +1,19 @@
 {% load i18n %}
+{% load inlinecss %}
+{% inlinecss "static/email/base.css" %}
 
 {% block subject %}
 {% blocktrans %}ZASTĘPSTWO {{ site_name }} - {{ subject }} {{ week_day }} {{ time }} ({{ date }}) {{ level }}   {% endblocktrans %}
 {% endblock subject %}
 
-{% block text_body %}
-Hej!
+{% block html_body %}
+<p>Hej!</p>
 
-Jest potrzebne zastępstwo, aby dowiedzieć się szczegółów kliknij w poniższy link:
+    <p>Jest potrzebne zastępstwo, aby dowiedzieć się szczegółów kliknij w poniższy link:</p>
 
-https://{{ domain }}/{{ url|safe }}substitutions/{{ substitution_id }}
+<p><a href="https://{{ domain }}/{{ url|safe }}substitutions/{{ substitution_id }}"></a></p>
 
-Dziękujemy, że jesteś.
-Zespół Web-Korki
-{% endblock text_body %}
+<p>Dziękujemy, że jesteś.</p>
+    <p>Zespół Web-Korki</p>
+{% endblock html_body %}
+{% endinlinecss %}

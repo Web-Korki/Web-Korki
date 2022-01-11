@@ -24,7 +24,7 @@ import {
   RESET_STATE,
 } from './types';
 
-const API_URL = 'https://web-korki.edu.pl'
+const API_URL = 'http://localhost:8000'
 
 export const refresh_token = () => async (dispatch) => {
   const config = {

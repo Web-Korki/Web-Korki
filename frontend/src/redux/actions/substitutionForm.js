@@ -8,7 +8,7 @@ import {
 } from '../actions/types';
 import { refresh_token } from './auth';
 
-const API_URL = 'https://web-korki.edu.pl'
+const API_URL = 'http://localhost:8000'
 
 export const get_levels = () => async (dispatch) => {
   if (Cookies.get('access')) {

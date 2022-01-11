@@ -66,7 +66,7 @@ body {
   min-height: 100%;
 }
 
-/* Limiter used to shorten the width to better match layout of the app */
+/* Limiter used to shorten the width to better match layout of the frontend */
 .limiter {
   margin: 0 auto;
   max-width: 85%;
