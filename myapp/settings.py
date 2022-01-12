@@ -206,7 +206,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, FRONTEND_DIR, "build", "static"),
     # os.path.join(BASE_DIR, FRONTEND_DIR, "build"),
-    os.path.join(BASE_DIR, "static")
+    os.path.join(BASE_DIR, "static"),
 )
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
