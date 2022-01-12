@@ -14,7 +14,7 @@ from tests.utils import (
     standard_delete_test,
     standard_retrieve_test,
 )
-from backend.models import Level, Subject, EmailFooter, Email
+from backend.models import Level, Subject
 from datetime import date, timedelta
 
 substitution_list_url = reverse("api:substitutions-list")
@@ -46,11 +46,6 @@ def test_substitution(client):
     token, user = get_token_without_email(client)
 
     # Fill database before tests
-    footer = baker.make(EmailFooter)
-    email_mockup = baker.make(Email, name="SubstitutionEmail", footer=footer)
-    email_mockup_confirm = baker.make(
-        Email, name="SubstitutionConfirmEmail", footer=footer
-    )
     level = baker.make(Level)
     subject = baker.make(Subject)
     d = date.today() + timedelta(5)

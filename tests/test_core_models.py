@@ -7,7 +7,7 @@ django.setup()
 import pytest
 from django.urls import reverse
 from tests.utils import model_view_set_test
-from backend.models import Level, Subject, EmailFooter, Email, Student, House
+from backend.models import Level, Subject, Student, House
 from datetime import date, timedelta
 
 houses_list_url = reverse("api:houses-list")
