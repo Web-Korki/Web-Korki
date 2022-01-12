@@ -15,6 +15,9 @@ import dj_database_url
 from datetime import timedelta
 from dotenv import load_dotenv
 
+if not "DEVELOP_DEBUG" in os.environ:
+    import django_heroku
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -205,7 +208,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATICFILES_DIRS = (
     # os.path.join(BASE_DIR, FRONTEND_DIR, "build", "static"),
-    # os.path.join(BASE_DIR, FRONTEND_DIR, "build"),
+    os.path.join(BASE_DIR, FRONTEND_DIR, "build"),
     os.path.join(BASE_DIR, "static"),
 )
 
@@ -319,3 +322,6 @@ META_USE_OG_PROPERTIES = True
 META_USE_TWITTER_PROPERTIES = True
 META_USE_GOOGLEPLUS_PROPERTIES = True  # django-meta 1.x+
 META_USE_SCHEMAORG_PROPERTIES = True  # django-meta 2.x
+
+if django_heroku:
+    django_heroku.settings(locals())
