@@ -204,8 +204,8 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, FRONTEND_DIR, "build", "static"),
-    os.path.join(BASE_DIR, FRONTEND_DIR, "build"),
+    # os.path.join(BASE_DIR, FRONTEND_DIR, "build", "static"),
+    # os.path.join(BASE_DIR, FRONTEND_DIR, "build"),
     os.path.join(BASE_DIR, "static")
 )
 
@@ -259,17 +259,17 @@ CORS_ORIGIN_WHITELIST = [
 APPEND_SLASH = False
 
 # Emails
-EMAIL_HOST = "ssl0.ovh.net"
-EMAIL_PORT = 465
-EMAIL_HOST_USER = "notifications@web-korki.edu.pl"
+EMAIL_HOST = os.environ["EMAIL_HOST"]
+EMAIL_PORT = os.environ["EMAIL_PORT"]
+EMAIL_HOST_USER = os.environ["EMAIL_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_PWD"]
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 # EMAIL_BACKEND = 'django.myapp.mail.backends.console.EmailBackend' # FOR DEBUGGING MAILS
 
 # Templated mail settings
-DOMAIN = "web-korki.edu.pl"
-SITE_NAME = "Web-Korki"
+DOMAIN = "lessons-planer.herokuapp.com"
+SITE_NAME = "Lessons Planer"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # We have to set login url. This is just placeholder
