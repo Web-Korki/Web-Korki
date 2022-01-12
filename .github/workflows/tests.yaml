@@ -50,7 +50,7 @@ jobs:
         DATABASE_USER: ${{ secrets.DATABASE_USER }}
         DATABASE_PWD: ${{ secrets.DATABASE_PWD }}
       run: |
-        SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG pytest --cache-clear --cov=backend --cov-report xml \
+        SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG EMAIL_HOST=$EMAIL_HOST EMAIL_PORT=$EMAIL_PORT EMAIL_USER=$EMAIL_USER DATABASE_NAME=$DATABASE_NAME DATABASE_URL=$DATABASE_URL DATABASE_HOST=$DATABASE_HOST DATABASE_USER=$DATABASE_USER DATABASE_PWD=$DATABASE_PWD pytest --cache-clear --cov=backend --cov-report xml \
     - uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
