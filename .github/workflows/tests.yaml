@@ -41,6 +41,14 @@ jobs:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         EMAIL_PWD: ${{ secrets.EMAIL_PWD }}
         DEVELOP_DEBUG: ${{ secrets.DEVELOP_DEBUG }}
+        EMAIL_HOST: ${{ secrets.EMAIL_HOST }}
+        EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
+        EMAIL_USER: ${{ secrets.EMAIL_USER }}
+        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+        DATABASE_USER: ${{ secrets.DATABASE_USER }}
+        DATABASE_PWD: ${{ secrets.DATABASE_PWD }}
       run: |
         SECRET_KEY=$SECRET_KEY EMAIL_PWD=$EMAIL_PWD DEVELOP_DEBUG=$DEVELOP_DEBUG pytest --cache-clear --cov=backend --cov-report xml \
     - uses: codecov/codecov-action@v1
