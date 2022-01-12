@@ -32,7 +32,6 @@ app.py
 mysite.log
 
 #migrations and cache
-**/migrations
 **/__pycache__
 *.pyc
 staticfiles
