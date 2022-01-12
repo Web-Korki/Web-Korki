@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf.urls.static import static
-from django.conf.urls import url
 from django.conf import settings
 from routers import router
 from rest_framework import permissions
@@ -50,6 +49,6 @@ urlpatterns = [
         ChangePasswordAfterRegister.as_view({"patch": "update"}),
     ),
     path(r"redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
-    url(r"^.*", index, name="index"),
+    re_path(r"^.*", index, name="index"),
     # All urls not specified in backend will be handled by react frontend
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

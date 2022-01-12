@@ -7,6 +7,7 @@ frontend/.pnp
 env
 venv
 venv35
+venv38
 venv39
 venv_wk
 .python-version
@@ -25,6 +26,7 @@ frontend/build
 .env.test.local
 .env.production.local
 db.sqlite3
+postgresql-trapezoidal-54586
 app.py
 .env
 mysite.log
