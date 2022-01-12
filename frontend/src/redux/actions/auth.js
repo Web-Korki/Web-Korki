@@ -24,7 +24,7 @@ import {
   RESET_STATE,
 } from './types';
 
-const API_URL = 'http://localhost:8000'
+const API_URL = 'https://lessons-planer.herokuapp.com/'
 
 export const refresh_token = () => async (dispatch) => {
   const config = {
