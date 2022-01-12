@@ -10,9 +10,9 @@ from tests.utils import model_view_set_test
 from backend.models import Level, Subject, Student, House
 from datetime import date, timedelta
 
-houses_list_url = reverse("api:houses-list")
-lessons_list_url = reverse("api:lessons-list")
-students_list_url = reverse("api:students-list")
+houses_list_url = reverse("houses-list")
+lessons_list_url = reverse("lessons-list")
+students_list_url = reverse("students-list")
 
 
 @pytest.mark.django_db
