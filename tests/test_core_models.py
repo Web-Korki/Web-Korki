@@ -11,8 +11,8 @@ from backend.models import Level, Subject, Student, House
 from datetime import date, timedelta
 
 houses_list_url = reverse_lazy("api:houses-list")
-lessons_list_url = reverse_lazy("lessons-list")
-students_list_url = reverse_lazy("students-list")
+lessons_list_url = reverse_lazy("api:lessons-list")
+students_list_url = reverse_lazy("api:students-list")
 
 
 @pytest.mark.django_db
@@ -35,13 +35,13 @@ def test_lessons(client):
     date_modified = d + timedelta(5)
 
     data = {
-        "datetime": d.strftime("%Y-%m-%dT%H:%M:%S"),
+        "datetime": d.strftime("%Y-%m-%dT%H:%M"),
         "student": student.id,
         "level": level.id,
         "subject": subject.id,
     }
     data_modified = data.copy()
-    data_modified["datetime"] = date_modified.strftime("%Y-%m-%dT%H:%M:%S")
+    data_modified["datetime"] = date_modified.strftime("%Y-%m-%dT%H:%M")
 
     model_view_set_test(client, lessons_list_url, data, data_modified)
 

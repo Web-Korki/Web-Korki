@@ -17,11 +17,11 @@ from tests.utils import (
 from backend.models import Level, Subject
 from datetime import date, timedelta
 
-substitution_list_url = reverse_lazy("substitutions-list")
-levels_list_url = reverse_lazy("levels-list")
-subjects_list_url = reverse_lazy("subjects-list")
-substitution_create_url = reverse_lazy("create_substitution-list")
-assign_teacher_url = reverse_lazy("assign_teacher-list")
+substitution_list_url = reverse_lazy("api:substitutions-list")
+levels_list_url = reverse_lazy("api:levels-list")
+subjects_list_url = reverse_lazy("api:subjects-list")
+substitution_create_url = reverse_lazy("api:create_substitution-list")
+assign_teacher_url = reverse_lazy("api:assign_teacher-list")
 
 
 @pytest.mark.django_db
