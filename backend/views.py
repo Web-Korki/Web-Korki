@@ -1,6 +1,5 @@
 from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework import status, permissions, viewsets, generics
+from rest_framework import status, permissions, viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from django.shortcuts import render
 from django_filters import rest_framework as filters

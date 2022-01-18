@@ -5,7 +5,7 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "myapp.settings"
 django.setup()
 
 import pytest
-from django.urls import reverse
+from django.urls import reverse_lazy
 from tests.utils import (
     model_view_set_test,
     get_token_without_email,
@@ -14,14 +14,14 @@ from tests.utils import (
     standard_delete_test,
     standard_retrieve_test,
 )
-from backend.models import Level, Subject, EmailFooter, Email
+from backend.models import Level, Subject
 from datetime import date, timedelta
 
-substitution_list_url = reverse("api:substitutions-list")
-levels_list_url = reverse("api:levels-list")
-subjects_list_url = reverse("api:subjects-list")
-substitution_create_url = reverse("api:create_substitution-list")
-assign_teacher_url = reverse("api:assign_teacher-list")
+substitution_list_url = reverse_lazy("api:substitutions-list")
+levels_list_url = reverse_lazy("api:levels-list")
+subjects_list_url = reverse_lazy("api:subjects-list")
+substitution_create_url = reverse_lazy("api:create_substitution-list")
+assign_teacher_url = reverse_lazy("api:assign_teacher-list")
 
 
 @pytest.mark.django_db
@@ -46,11 +46,6 @@ def test_substitution(client):
     token, user = get_token_without_email(client)
 
     # Fill database before tests
-    footer = baker.make(EmailFooter)
-    email_mockup = baker.make(Email, name="SubstitutionEmail", footer=footer)
-    email_mockup_confirm = baker.make(
-        Email, name="SubstitutionConfirmEmail", footer=footer
-    )
     level = baker.make(Level)
     subject = baker.make(Subject)
     d = date.today() + timedelta(5)

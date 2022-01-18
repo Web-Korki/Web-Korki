@@ -18,7 +18,7 @@ import {
 } from '../actions/types';
 import { refresh_token } from './auth';
 
-const API_URL = 'https://web-korki.edu.pl';
+const API_URL = 'https://lessons-planer.herokuapp.com/';
 
 export const create_substitution = (data) => async (dispatch) => {
   if (Cookies.get('access')) {

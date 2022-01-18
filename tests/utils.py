@@ -100,8 +100,8 @@ def get_token_without_email(client):
 def standard_get_list_test(client, url, token):
     """ Gets and returns list of objects """
     response = client.get(url, HTTP_AUTHORIZATION="Bearer {}".format(token),)
-    assert response.status_code == 200 and len(response.json()["results"]) > 0
-    return response.json()["results"]
+    assert response.status_code == 200 and len(response.json()) > 0
+    return response.json()
 
 
 def standard_retrieve_test(client, url, token, obj_id):
@@ -133,7 +133,7 @@ def standard_put_test(client, url, data, token):
     for key in data.keys():
         if key == "datetime":
             assert (
-                response.json()[key][:-6] == data[key]
+                response.json()[key][:-9] == data[key]
             )  # Returned time is in other format
             continue
 

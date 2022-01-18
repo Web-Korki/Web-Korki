@@ -16,12 +16,12 @@ export default function substitutionForm(state = initialState, action) {
     case GET_SUBJECTS_SUCCESS:
       return {
         ...state,
-        subjects: payload.results,
+        subjects: payload,
       };
     case GET_LEVEL_SUCCESS:
       return {
         ...state,
-        levels: payload.results,
+        levels: payload,
       };
     case GET_SUBJECTS_FAIL:
     case GET_LEVEL_FAIL:

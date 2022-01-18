@@ -24,7 +24,7 @@ import {
   RESET_STATE,
 } from './types';
 
-const API_URL = 'https://web-korki.edu.pl'
+const API_URL = 'https://lessons-planer.herokuapp.com/'
 
 export const refresh_token = () => async (dispatch) => {
   const config = {

@@ -117,7 +117,7 @@ class Lesson(models.Model):
 
 class Substitution(models.Model):
     """
-    In this moment the Lesson model is not going to be used in the app.
+    In this moment the Lesson model is not going to be used in the frontend.
     Thus the substitution has to inherit all its field instead just to refer to it.
     """
 

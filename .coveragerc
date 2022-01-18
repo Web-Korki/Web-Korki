@@ -1,0 +1,4 @@
+[run]
+omit =
+    backend/apps.py
+    backend/admin.py

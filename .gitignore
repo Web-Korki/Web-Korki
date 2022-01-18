@@ -1,20 +1,21 @@
 # dependencies
-app/node_modules
-app/.pnp
+frontend/node_modules
+frontend/.pnp
 .pnp.js
 
 # venvs
 env
 venv
 venv35
+venv38
+venv39
 venv_wk
 .python-version
 
 # testing
-app/coverage
+frontend/coverage
 
 # production
-app/build
 
 # misc
 .DS_Store
@@ -24,12 +25,12 @@ app/build
 .env.test.local
 .env.production.local
 db.sqlite3
+postgresql-trapezoidal-54586
 app.py
 .env
 mysite.log
 
 #migrations and cache
-**/migrations
 **/__pycache__
 *.pyc
 staticfiles
